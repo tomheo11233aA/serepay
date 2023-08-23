@@ -20,6 +20,8 @@ const Input = ({
     iconOne,
     iconTwo,
     onPress,
+    tintColor,
+    sizeIcon = 25,
     onFocus,
     onBlur,
     color = 'black',
@@ -170,24 +172,42 @@ const Input = ({
     ];
 
     return (
-        <Box width={width} height={height} marginBottom={marginBottom} marginTop={marginTop}>
+        <Box
+            row
+            width={width}
+            height={height}
+            marginTop={marginTop}
+            paddingHorizontal={10}
+            marginBottom={marginBottom}
+            style={blockStyles} {...rest}
+        >
             {iconOne &&
-                <Box height={'100%'} justifyCenter absolute left={12}>
+                <Box
+                    height={'100%'}
+                    alignCenter
+                    justifyCenter
+                >
                     <Image
                         source={iconOne}
                         style={{
-                            width: 25,
-                            height: 25,
+                            width: sizeIcon,
+                            height: sizeIcon,
                         }}
+                        tintColor={tintColor}
                     />
                 </Box>
             }
             <TextInput
+                style={{
+                    flex: 1,
+                    fontSize: 16,
+                    color: 'black',
+                    marginHorizontal: 10,
+                }}
                 value={value}
                 onChangeText={onChangeText}
                 placeholder={hint}
                 placeholderTextColor={hintColor}
-                style={blockStyles} {...rest}
                 secureTextEntry={security ? true : false}
                 keyboardType={keyboardType}
                 editable={disabled}
@@ -198,15 +218,15 @@ const Input = ({
             />
             {iconTwo &&
                 <Btn
-                    absolute
                     onPress={onPress}
                     height={'100%'}
-                    right={12}
                 >
-                    <Img source={iconTwo}
+                    <Img
+                        source={iconTwo}
+                        tintColor={tintColor}
                         style={{
-                            width: 25,
-                            height: 25,
+                            width: sizeIcon,
+                            height: sizeIcon,
                         }}
                     />
                 </Btn>
@@ -232,6 +252,7 @@ interface Props {
     onFocus?: any,
     onBlur?: any,
     color?: any,
+    sizeIcon?: any,
     textAlign?: any,
     keyboardType?: any,
     autoCapitalize?: any,
@@ -264,6 +285,7 @@ interface Props {
     marginRight?: any,
     marginTop?: any,
     paddingVertical?: any,
+    tintColor?: any,
     paddingHorizontal?: any,
     marginVertical?: any,
     marginHorizontal?: any,

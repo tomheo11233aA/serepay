@@ -39,13 +39,13 @@
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = Swaptobe/main.m; sourceTree = "<group>"; };
 		19F6CBCC0A4E27FBF8BF4A61 /* libPods-Swaptobe-SwaptobeTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Swaptobe-SwaptobeTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		3B4392A12AC88292D35C810B /* Pods-Swaptobe.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Swaptobe.debug.xcconfig"; path = "Target Support Files/Pods-Swaptobe/Pods-Swaptobe.debug.xcconfig"; sourceTree = "<group>"; };
+		4557FE927F1E43FFB5BE05AC /* Fontlogo-Regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Fontlogo-Regular.ttf"; path = "../src/assets/fonts/Fontlogo-Regular.ttf"; sourceTree = "<group>"; };
 		5709B34CF0A7D63546082F79 /* Pods-Swaptobe.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Swaptobe.release.xcconfig"; path = "Target Support Files/Pods-Swaptobe/Pods-Swaptobe.release.xcconfig"; sourceTree = "<group>"; };
 		5B7EB9410499542E8C5724F5 /* Pods-Swaptobe-SwaptobeTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Swaptobe-SwaptobeTests.debug.xcconfig"; path = "Target Support Files/Pods-Swaptobe-SwaptobeTests/Pods-Swaptobe-SwaptobeTests.debug.xcconfig"; sourceTree = "<group>"; };
 		5DCACB8F33CDC322A6C60F78 /* libPods-Swaptobe.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Swaptobe.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = Swaptobe/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		89C6BE57DB24E9ADA2F236DE /* Pods-Swaptobe-SwaptobeTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Swaptobe-SwaptobeTests.release.xcconfig"; path = "Target Support Files/Pods-Swaptobe-SwaptobeTests/Pods-Swaptobe-SwaptobeTests.release.xcconfig"; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
-		4557FE927F1E43FFB5BE05AC /* Fontlogo-Regular.ttf */ = {isa = PBXFileReference; name = "Fontlogo-Regular.ttf"; path = "../src/assets/fonts/Fontlogo-Regular.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -152,13 +152,12 @@
 			sourceTree = "<group>";
 		};
 		C8FE752722B44374B5AB151C /* Resources */ = {
-			isa = "PBXGroup";
+			isa = PBXGroup;
 			children = (
 				4557FE927F1E43FFB5BE05AC /* Fontlogo-Regular.ttf */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
-			path = "";
 		};
 /* End PBXGroup section */
 

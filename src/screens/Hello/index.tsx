@@ -1,9 +1,10 @@
+import Box from '@commom/Box'
 import Icon from '@commom/Icon'
 import { screens } from '@contants/screens'
-import TextLogo from '@reuse/TextLogo'
+import { colors } from '@themes/colors'
 import { navigate } from '@utils/navigationRef'
+import { width } from '@utils/responsive'
 import React, { useEffect } from 'react'
-import LinearGradient from 'react-native-linear-gradient'
 
 const Hello = () => {
   useEffect(() => {
@@ -15,25 +16,18 @@ const Hello = () => {
   }, [])
 
   return (
-    <LinearGradient
-      colors={['#0a717a', '#047f7c', '#02a579']}
-      start={{ x: 0, y: 0.5 }}
-      end={{ x: 1, y: 0.5 }}
-      style={{
-        height: '100%',
-        width: '100%',
-        alignItems: 'center',
-        justifyContent: 'center',
-      }}
+    <Box
+      flex={1}
+      alignCenter
+      justifyCenter
+      backgroundColor={colors.darkViolet}
     >
-      <Icon
-        size={90}
+      <Icon 
         resizeMode={'contain'}
         source={require('@images/logo.png')}
-        marginBottom={-10}
+        size={width * 40 / 100}
       />
-      <TextLogo />
-    </LinearGradient>
+    </Box>
   )
 }
 
