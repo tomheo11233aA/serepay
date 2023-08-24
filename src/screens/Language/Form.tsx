@@ -18,9 +18,9 @@ const Form = () => {
         row
         radius={7}
         alignCenter
+        padding={10}
         width={'100%'}
         justifySpaceBetween
-        padding={10}
         backgroundColor={'white'}
       >
         <Box row alignCenter>

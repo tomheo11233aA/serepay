@@ -1,13 +1,12 @@
 import Box from '@commom/Box'
-import Safe from '@reuse/Safe'
-import { styled } from '@themes/styled'
-import React from 'react'
-import Header from './Header'
-import { colors } from '@themes/colors'
-import Scroll from '@commom/Scroll'
 import Icon from '@commom/Icon'
+import Scroll from '@commom/Scroll'
+import Safe from '@reuse/Safe'
+import { colors } from '@themes/colors'
 import { width } from '@utils/responsive'
+import React from 'react'
 import Form from './Form'
+import Header from './Header'
 
 const Login = () => {
   return (

@@ -3,11 +3,14 @@ import Btn from '@commom/Btn'
 import Input from '@commom/Input'
 import Txt from '@commom/Txt'
 import { screens } from '@contants/screens'
+import { useAppDispatch } from '@hooks/redux'
+import { setLogin } from '@redux/slice/userSlice'
 import { colors } from '@themes/colors'
 import { navigate } from '@utils/navigationRef'
 import React, { useState } from 'react'
 
 const Form = () => {
+    const dispatch = useAppDispatch()
     const [security, setSecurity] = useState<boolean>(true)
 
     return (
@@ -45,6 +48,7 @@ const Form = () => {
                 marginTop={20}
                 width={'100%'}
                 backgroundColor={colors.darkViolet}
+                onPress={() => dispatch(setLogin(true))}
             >
                 <Txt color={'white'} bold>
                     LOG IN

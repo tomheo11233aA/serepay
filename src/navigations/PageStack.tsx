@@ -1,16 +1,16 @@
 import { screens } from '@contants/screens'
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
-import TopTabWallet from '@screens/TopTabWallet'
+import Page from '@screens/Page'
 import React from 'react'
 
 const Stack = createNativeStackNavigator()
 
-const WalletStack = () => {
+const PageStack = () => {
     return (
         <Stack.Navigator screenOptions={{ headerShown: false }}>
-            <Stack.Screen name={screens.TOP_TAB_WALLET} component={TopTabWallet} />
+            <Stack.Screen name={screens.PAGE} component={Page} />
         </Stack.Navigator>
     )
 }
 
-export default WalletStack
+export default PageStack

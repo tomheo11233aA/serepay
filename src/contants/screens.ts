@@ -1,9 +1,16 @@
 export const screens = {
     MAIN: 'Main',
+    SWAP: 'Swap',
+    PAGE: 'Page',
     HELLO: 'Hello',
     LOGIN: 'Login',
     WALLET: 'Wallet',
+    SETTING: 'Setting',
     LANGUAGE: 'Language',
     REGISTER: 'Register',
+    PAGE_STACK: 'PageStack',
+    SWAP_STACK: 'SwapStack',
     WALLET_STACK: 'WalletStack',
+    SETTING_STACK: 'SettingStack',
+    TOP_TAB_WALLET: 'TopTabWallet',
 }
