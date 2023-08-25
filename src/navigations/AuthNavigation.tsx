@@ -2,41 +2,49 @@ import { screens } from '@contants/screens'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import React from 'react'
 import WalletStack from './WalletStack'
-import PageStack from './PageStack'
 import SwapStack from './SwapStack'
 import SettingStack from './SettingStack'
 import Box from '@commom/Box'
 import Icon from '@commom/Icon'
 import { colors } from '@themes/colors'
 import Txt from '@commom/Txt'
+import ADStack from './ADStack'
 
 const Tab = createBottomTabNavigator()
 
 const AuthNavigation = () => {
   const tabs = [
     {
+      sizeIcon: 25,
       title: 'Wallet',
       component: WalletStack,
       name: screens.WALLET_STACK,
       icon: require('@images/tab/wallet.png'),
+      icon2: require('@images/tab/wallet2.png'),
     },
     {
-      title: 'Page',
-      component: PageStack,
-      name: screens.PAGE_STACK,
-      icon: require('@images/tab/page.png'),
+      sizeIcon: 20,
+      title: 'Tobe Ads',
+      component: ADStack,
+      name: screens.AD_STACK,
+      icon: require('@images/tab/menu.png'),
+      icon2: require('@images/tab/menu2.png'),
     },
     {
+      sizeIcon: 20,
       title: 'Swap',
       component: SwapStack,
       name: screens.SWAP_STACK,
-      icon: require('@images/tab/arrow.png'),
+      icon: require('@images/tab/swap.png'),
+      icon2: require('@images/tab/swap2.png'),
     },
     {
+      sizeIcon: 20,
       title: 'Setting',
       component: SettingStack,
       name: screens.SETTING_STACK,
-      icon: require('@images/tab/settings.png'),
+      icon: require('@images/tab/setting.png'),
+      icon2: require('@images/tab/setting2.png'),
     },
   ]
 
@@ -48,8 +56,8 @@ const AuthNavigation = () => {
         tabBarStyle: {
           height: 90,
           paddingTop: 10,
-          borderTopWidth: 0,
-          backgroundColor: colors.darkViolet,
+          borderTopWidth: 1,
+          backgroundColor: '#f8f8f8',
         }
       }}
     >
@@ -64,12 +72,17 @@ const AuthNavigation = () => {
                 return (
                   <Box alignCenter>
                     <Icon
-                      size={20}
                       marginBottom={5}
-                      source={tab.icon}
-                      tintColor={'white'}
+                      size={tab.sizeIcon}
+                      source={focused ? tab.icon : tab.icon2}
+                      resizeMode={'contain'}
                     />
-                    {focused && <Txt color={'white'}>{tab.title}</Txt>}
+                    <Txt
+                      size={12}
+                      color={focused ? colors.violet : 'black'}
+                    >
+                      {tab.title}
+                    </Txt>
                   </Box>
                 )
               }
@@ -77,10 +90,6 @@ const AuthNavigation = () => {
           />
         )
       })}
-      {/* <Tab.Screen name={screens.WALLET_STACK} component={WalletStack} />
-        <Tab.Screen name={screens.PAGE_STACK} component={PageStack} />
-        <Tab.Screen name={screens.SWAP_STACK} component={SwapStack} />
-        <Tab.Screen name={screens.SETTING_STACK} component={SettingStack} /> */}
     </Tab.Navigator>
   )
 }

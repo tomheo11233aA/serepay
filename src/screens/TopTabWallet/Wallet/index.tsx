@@ -1,69 +1,34 @@
 import Box from '@commom/Box'
-import Btn from '@commom/Btn'
-import Icon from '@commom/Icon'
 import Txt from '@commom/Txt'
-import { colors } from '@themes/colors'
 import React from 'react'
 import Coins from './Coins'
+import Options from './Options'
 
 const Wallet = () => {
-  const options = [
-    {
-      title: 'Send',
-      icon: require('@images/wallet/upload.png'),
-    },
-    {
-      title: 'Receive',
-      icon: require('@images/wallet/download.png'),
-    },
-    {
-      title: 'Swap',
-      icon: require('@images/wallet/swap.png'),
-    },
-  ]
-
   return (
     <Box flex={1}>
       <Box alignCenter>
-        <Txt color={'white'} bold size={25}>0 $</Txt>
         <Txt
-          bold
-          marginTop={30}
+          size={16}
+          marginTop={10}
           color={'white'}
         >
-          Vipfeeen
+          Davidpham
         </Txt>
-        <Box
-          row
-          alignCenter
-          width={'90%'}
-          marginTop={30}
-          justifySpaceAround
-        >
-          {options.map((option) =>
-            <Btn key={option.title}>
-              <Box
-                width={40}
-                height={40}
-                radius={50}
-                alignCenter
-                justifyCenter
-                backgroundColor={colors.violet}
-              >
-                <Icon
-                  size={20}
-                  tintColor={'white'}
-                  source={option.icon}
-                />
-              </Box>
-              <Txt color={'white'} marginTop={10}>
-                {option.title}
-              </Txt>
-            </Btn>
-          )}
-        </Box>
+        <Txt color={'white'} size={30} marginTop={10}>
+          $1.147.500
+        </Txt>
       </Box>
-      <Coins />
+      <Box
+        flex={1}
+        marginTop={30}
+        borderTopLeftRadius={20}
+        borderTopRightRadius={20}
+        backgroundColor={'white'}
+      >
+        <Options />
+        <Coins />
+      </Box>
     </Box>
   )
 }

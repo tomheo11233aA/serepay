@@ -7,31 +7,41 @@ import React from 'react'
 
 const ChooseCoin = () => {
     return (
-        <Box
-            row
-            radius={5}
-            alignCenter
-            padding={15}
-            marginTop={40}
-            justifySpaceBetween
-            backgroundColor={colors.darkViolet}
-        >
-            <Box row alignCenter>
-                <Icon
-                    size={35}
-                    marginRight={10}
-                    source={require('@images/wallet/bitcoin.png')}
-                />
-                <Txt color={'white'} bold size={16}>
-                    BTC
-                </Txt>
-            </Box>
+        <Box paddingHorizontal={15} marginTop={20}>
+            <Box
+                row
+                radius={5}
+                alignCenter
+                paddingLeft={10}
+                justifySpaceBetween
+                backgroundColor={colors.violet}
+            >
+                <Box row alignCenter>
+                    <Icon
+                        size={25}
+                        marginRight={10}
+                        source={require('@images/wallet/bitcoin.png')}
+                    />
+                    <Txt color={'white'} bold size={16}>
+                        BITCOIN
+                    </Txt>
+                </Box>
 
-            <Btn backgroundColor={colors.violet} padding={10} radius={5}>
-                <Txt color={'white'}>
-                    Choose another coin
-                </Txt>
-            </Btn>
+                <Btn
+                    radius={5}
+                    padding={10}
+                    backgroundColor={colors.darkViolet}
+                >
+                    <Txt color={'white'}>
+                        {'Choose another coin '}
+                        <Icon 
+                            size={12}
+                            tintColor={'white'}
+                            source={require('@images/wallet/more.png')}
+                        />
+                    </Txt>
+                </Btn>
+            </Box>
         </Box>
     )
 }

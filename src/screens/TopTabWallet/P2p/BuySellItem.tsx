@@ -24,7 +24,7 @@ const BuySellItem = ({
             alignCenter
             width={'48%'}
             paddingVertical={15}
-            backgroundColor={colors.darkViolet}
+            backgroundColor={colors.violet}
         >
             <Box
                 row
@@ -33,9 +33,10 @@ const BuySellItem = ({
                 alignSelf={'flex-start'}
             >
                 <Icon
-                    size={22}
+                    size={18}
+                    marginRight={10}
                     tintColor={'white'}
-                    source={require('@images/wallet/flag.png')}
+                    source={require('@images/wallet/uploadarrow.png')}
                 />
                 <Txt color={'white'}>
                     {title}

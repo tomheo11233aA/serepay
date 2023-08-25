@@ -16,7 +16,7 @@ const Input = ({
     hintColor = '#6666',
     security,
     font,
-    fontSize,
+    fontSize = 16,
     iconOne,
     iconTwo,
     onPress,
@@ -28,6 +28,7 @@ const Input = ({
     textAlign = 'left',
     keyboardType = 'default',
     autoCapitalize = 'none',
+    fontWeight,
     disabled = true,
     flex,
     flexShrink,
@@ -91,6 +92,7 @@ const Input = ({
     zIndex,
     borderTopLeftRadius,
     borderTopRightRadius,
+    borderBottomLeftRadius,
     ...rest
 }: Props) => {
     const insets = useSafeAreaInsets();
@@ -166,6 +168,7 @@ const Input = ({
         borderBottomWidth && { borderBottomWidth },
         borderLeftWidth && { borderLeftWidth },
         zIndex && { zIndex },
+        borderBottomLeftRadius && { borderBottomLeftRadius },
         borderTopLeftRadius && { borderTopLeftRadius },
         borderTopRightRadius && { borderTopRightRadius },
         { ...StyleSheet.flatten(style) },
@@ -183,9 +186,9 @@ const Input = ({
         >
             {iconOne &&
                 <Box
-                    height={'100%'}
                     alignCenter
                     justifyCenter
+                    height={'100%'}
                 >
                     <Image
                         source={iconOne}
@@ -200,9 +203,10 @@ const Input = ({
             <TextInput
                 style={{
                     flex: 1,
-                    fontSize: 16,
                     color: 'black',
+                    fontSize: fontSize,
                     marginHorizontal: 10,
+                    fontWeight: fontWeight,
                 }}
                 value={value}
                 onChangeText={onChangeText}
@@ -276,7 +280,9 @@ interface Props {
     justifyStart?: any,
     justifySpaceAround?: any,
     justifySpaceBetween?: any,
+    borderBottomLeftRadius?: any,
     paddingTop?: any,
+    fontWeight?: any,
     paddingBottom?: any,
     paddingLeft?: any,
     paddingRight?: any,

@@ -10,8 +10,8 @@ import Wallet from './Wallet'
 import P2p from './P2p'
 
 const TopTabWallet = () => {
-    const [tabChoosed, setTabChoosed] = useState<string>('Wallet')
-    const tabs = ['Wallet', 'P2P', 'Staking', 'Lending']
+    const [tabChoosed, setTabChoosed] = useState<string>('WALLET')
+    const tabs = ['WALLET', 'P2P', 'STAKING', 'LENDING']
 
     return (
         <LinearGradient
@@ -35,26 +35,25 @@ const TopTabWallet = () => {
                     <Box
                         row
                         flex={1}
-                        radius={5}
+                        radius={15}
                         alignCenter
                         borderWidth={0.5}
-                        justifySpaceAround
-                        paddingVertical={5}
-                        borderColor={'#DF9BFF'}
+                        justifySpaceBetween
+                        borderColor={colors.violet2}
                         backgroundColor={colors.violet}
                     >
                         {tabs.map((tab) =>
                             <Btn
                                 key={tab}
-                                radius={5}
-                                paddingVertical={5}
-                                borderColor={'white'}
-                                paddingHorizontal={10}
+                                radius={15}
+                                paddingVertical={7}
+                                paddingHorizontal={12}
                                 onPress={() => setTabChoosed(tab)}
-                                borderWidth={tab === tabChoosed && 0.5}
-                                backgroundColor={tab === tabChoosed && colors.darkViolet}
+                                backgroundColor={tab === tabChoosed && colors.violet2}
                             >
-                                <Txt color={'white'}>{tab}</Txt>
+                                <Txt color={'white'} size={12} bold>
+                                    {tab}
+                                </Txt>
                             </Btn>
                         )}
                     </Box>
@@ -66,7 +65,7 @@ const TopTabWallet = () => {
                     />
                 </Box>
             </Safe>
-            {tabChoosed === 'Wallet' ?
+            {tabChoosed === 'WALLET' ?
                 <Wallet /> : <P2p />
             }
         </LinearGradient>
