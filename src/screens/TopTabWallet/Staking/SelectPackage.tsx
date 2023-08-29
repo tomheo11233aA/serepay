@@ -12,6 +12,7 @@ const SelectPackage = () => {
                 style={{
                     marginTop: 20,
                     borderRadius: 5,
+                    overflow: 'hidden',
                     backgroundColor: colors.violet,
                 }}
             >

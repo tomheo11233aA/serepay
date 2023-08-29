@@ -9,6 +9,7 @@ import LinearGradient from 'react-native-linear-gradient'
 import Wallet from './Wallet'
 import P2p from './P2p'
 import Staking from './Staking'
+import Lending from './Lending'
 
 const TopTabWallet = () => {
     const [tabChoosed, setTabChoosed] = useState<string>('WALLET')
@@ -68,7 +69,8 @@ const TopTabWallet = () => {
             </Safe>
             {tabChoosed === 'WALLET' ?
                 <Wallet /> : tabChoosed === 'P2P' ?
-                    <P2p /> : <Staking />
+                    <P2p /> : tabChoosed === 'STAKING' ?
+                        <Staking /> : <Lending />
             }
         </LinearGradient>
     )

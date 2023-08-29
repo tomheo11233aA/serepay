@@ -1,17 +1,14 @@
 import Box from '@commom/Box'
-import React from 'react'
-import ChooseCoin from '../P2p/ChooseCoin'
-import SelectPackage from './SelectPackage'
-import Amount from './Amount'
-import Statistical from './Statistical'
 import Scroll from '@commom/Scroll'
+import React from 'react'
+import Credit from './Credit'
+import Statistical from './Statistical'
 
-const Staking = () => {
+const Lending = () => {
     return (
         <Box flex={1} backgroundColor={'#edebf0'} marginTop={-20}>
             <Scroll flex={1}>
-                <ChooseCoin />
-                <SelectPackage />
+                <Credit />
                 <Box
                     flex={1}
                     padding={20}
@@ -20,7 +17,6 @@ const Staking = () => {
                     borderTopRightRadius={20}
                     backgroundColor={'white'}
                 >
-                    <Amount />
                     <Statistical />
                 </Box>
             </Scroll>
@@ -28,4 +24,4 @@ const Staking = () => {
     )
 }
 
-export default Staking
+export default Lending
