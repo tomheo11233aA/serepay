@@ -17,7 +17,7 @@ const ItemBuyCoin = ({ user }: Props) => {
             row
             padding={20}
             marginVertical={7}
-            backgroundColor={'#fafafa'}
+            backgroundColor={colors.gray6}
             style={[styled.shadow, { shadowColor: '#f6f6f6' }]}
         >
             <Box flex={1}>
