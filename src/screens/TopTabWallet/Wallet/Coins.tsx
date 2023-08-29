@@ -51,7 +51,7 @@ const Coins = () => {
 
     return (
         <Box>
-            <Scroll>
+            <Scroll paddingBottom={100}>
                 {coins.map((coin) => {
                     let [percent, colorPercent] = ['', 'red']
                     if (coin.percent) {

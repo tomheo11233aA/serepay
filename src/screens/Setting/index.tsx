@@ -1,13 +1,14 @@
+import Box from '@commom/Box'
+import Txt from '@commom/Txt'
 import KeyBoardSafe from '@reuse/KeyBoardSafe'
 import { colors } from '@themes/colors'
 import React from 'react'
 import LinearGradient from 'react-native-linear-gradient'
-import User from './User'
-import Txt from '@commom/Txt'
-import Box from '@commom/Box'
-import ReferralItem from './ReferralItem'
 import List from './List'
-// '#edebf0'
+import ReferralItem from './ReferralItem'
+import User from './User'
+import SocialNetwork from './SocialNetwork'
+
 const Setting = () => {
   return (
     <LinearGradient
@@ -33,6 +34,7 @@ const Setting = () => {
             />
           </Box>
           <List />
+          <SocialNetwork />
         </Box>
       </KeyBoardSafe>
     </LinearGradient>

@@ -3,6 +3,9 @@ import Txt from '@commom/Txt'
 import React from 'react'
 import Coins from './Coins'
 import Options from './Options'
+import { Button } from 'react-native'
+import { navigate } from '@utils/navigationRef'
+import { screens } from '@contants/screens'
 
 const Wallet = () => {
   return (
@@ -28,6 +31,7 @@ const Wallet = () => {
       >
         <Options />
         <Coins />
+        <Button title='abc' onPress={() => navigate(screens.SETTING)} />
       </Box>
     </Box>
   )
