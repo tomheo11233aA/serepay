@@ -9,10 +9,12 @@ import Icon from '@commom/Icon'
 import { colors } from '@themes/colors'
 import Txt from '@commom/Txt'
 import ADStack from './ADStack'
+import { useTranslation } from 'react-i18next'
 
 const Tab = createBottomTabNavigator()
 
 const AuthNavigation = () => {
+  const { t } = useTranslation()
   const tabs = [
     {
       sizeIcon: 25,
@@ -81,7 +83,7 @@ const AuthNavigation = () => {
                       size={12}
                       color={focused ? colors.violet : 'black'}
                     >
-                      {tab.title}
+                      {t(tab.title)}
                     </Txt>
                   </Box>
                 )

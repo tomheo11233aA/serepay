@@ -2,8 +2,52 @@
   "migIndex": 1,
   "data": [
     {
+      "path": "src/assets/fonts/Anuphan-SemiBold.ttf",
+      "sha1": "bc7b4290d931fe97dbe26b4d0b88c518b7344ac3"
+    },
+    {
+      "path": "src/assets/fonts/FiraSansCondensed-Regular.ttf",
+      "sha1": "19d3cd19f26cf12bfbd639640024a7deb4c12074"
+    },
+    {
       "path": "src/assets/fonts/Fontlogo-Regular.ttf",
       "sha1": "845df60be76d94aeff196827a540d17aa89cd8b0"
+    },
+    {
+      "path": "src/assets/fonts/IBMPlexSans-Medium.ttf",
+      "sha1": "dcb6474ece3ff65b0cd9d371812cf15a69f1e9af"
+    },
+    {
+      "path": "src/assets/fonts/IBMPlexSans-Regular.ttf",
+      "sha1": "07ab3106205f5d285fc010ea00ab86df8ac8411a"
+    },
+    {
+      "path": "src/assets/fonts/Jost-Regular.ttf",
+      "sha1": "a6b7f9966c98479af15400ac41a867b12c1b6e2c"
+    },
+    {
+      "path": "src/assets/fonts/Lato-Regular.ttf",
+      "sha1": "06775847c3ad5bdc4525009f41aaf585bfcba4c2"
+    },
+    {
+      "path": "src/assets/fonts/Oswald-SemiBold.ttf",
+      "sha1": "840a320f347d0918bd3a3638dbde42729e732113"
+    },
+    {
+      "path": "src/assets/fonts/Outfit-Light.ttf",
+      "sha1": "854302f72eba5dd11615ae8ed2ab8311e12fe1df"
+    },
+    {
+      "path": "src/assets/fonts/Outfit-SemiBold.ttf",
+      "sha1": "c0b14d5b4659df8a9d84efbd9f290a78dfc16f45"
+    },
+    {
+      "path": "src/assets/fonts/Roboto-Medium.ttf",
+      "sha1": "b5ba3632933756e9f7e8a0f83bfe90c215a768e2"
+    },
+    {
+      "path": "src/assets/fonts/SchibstedGrotesk-Medium.ttf",
+      "sha1": "dd252e03de7ce961ca3c7dbe98736b41f0052bb0"
     }
   ]
 }

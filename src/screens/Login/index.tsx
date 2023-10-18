@@ -7,22 +7,25 @@ import { width } from '@utils/responsive'
 import React from 'react'
 import Form from './Form'
 import Header from './Header'
+import { useTranslation } from 'react-i18next'
 
 const Login = () => {
+  const { t } = useTranslation()
+
   return (
     <Box flex={1} backgroundColor={colors.darkViolet}>
       <Safe>
-        <Header title={'Login'} />
+        <Header title={t('Login')} />
       </Safe>
       <Scroll flex={1} backgroundColor={'white'}>
         <Box alignCenter>
-            <Icon 
-              resizeMode={'contain'}
-              size={width * 40 / 100}
-              tintColor={colors.darkViolet}
-              source={require('@images/logo.png')}
-            />
-            <Form />
+          <Icon
+            resizeMode={'contain'}
+            size={width * 40 / 100}
+            tintColor={colors.darkViolet}
+            source={require('@images/logo.png')}
+          />
+          <Form t={t} />
         </Box>
       </Scroll>
     </Box>

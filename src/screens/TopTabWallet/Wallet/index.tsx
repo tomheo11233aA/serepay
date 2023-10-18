@@ -3,11 +3,11 @@ import Txt from '@commom/Txt'
 import React from 'react'
 import Coins from './Coins'
 import Options from './Options'
-import { Button } from 'react-native'
-import { navigate } from '@utils/navigationRef'
-import { screens } from '@contants/screens'
+import { useTranslation } from 'react-i18next'
 
 const Wallet = () => {
+  const { t } = useTranslation()
+
   return (
     <Box flex={1}>
       <Box alignCenter>
@@ -29,9 +29,8 @@ const Wallet = () => {
         borderTopRightRadius={20}
         backgroundColor={'white'}
       >
-        <Options />
+        <Options t={t} />
         <Coins />
-        <Button title='abc' onPress={() => navigate(screens.SETTING)} />
       </Box>
     </Box>
   )

@@ -2,9 +2,14 @@ import Box from '@commom/Box'
 import Icon from '@commom/Icon'
 import Txt from '@commom/Txt'
 import { colors } from '@themes/colors'
+import { TFunction } from 'i18next'
 import React from 'react'
 
-const SelectCountry = () => {
+interface Props {
+    t: TFunction<"translation", undefined>
+}
+
+const SelectCountry = ({ t }: Props) => {
     return (
         <Box
             row
@@ -18,7 +23,7 @@ const SelectCountry = () => {
             paddingHorizontal={10}
             borderColor={colors.gray}
         >
-            <Txt>Select Country</Txt>
+            <Txt>{t('Select Country')}</Txt>
             <Box rotateZ={'-90deg'}>
                 <Icon
                     size={25}

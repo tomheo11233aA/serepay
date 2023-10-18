@@ -7,12 +7,15 @@ import Icon from '@commom/Icon'
 import { width } from '@utils/responsive'
 import Header from '@screens/Login/Header'
 import Form from './Form'
+import { useTranslation } from 'react-i18next'
 
 const Register = () => {
+  const { t } = useTranslation()
+
   return (
     <Box flex={1} backgroundColor={colors.darkViolet}>
       <Safe>
-        <Header title={'Register'} />
+        <Header title={t('Register')} />
       </Safe>
       <Scroll flex={1} backgroundColor={'white'}>
         <Box alignCenter>
@@ -22,7 +25,7 @@ const Register = () => {
             tintColor={colors.darkViolet}
             source={require('@images/logo.png')}
           />
-          <Form />
+          <Form t={t} />
         </Box>
       </Scroll>
     </Box>

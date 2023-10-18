@@ -3,9 +3,15 @@ import Btn from '@commom/Btn'
 import Icon from '@commom/Icon'
 import Txt from '@commom/Txt'
 import { colors } from '@themes/colors'
+import { fonts } from '@themes/fonts'
+import { TFunction } from 'i18next'
 import React from 'react'
 
-const Options = () => {
+interface Props {
+    t: TFunction<"translation", undefined>
+}
+
+const Options = ({ t }: Props) => {
     const options = [
         {
             title: 'Send',
@@ -41,8 +47,8 @@ const Options = () => {
                             size={25}
                             source={option.icon}
                         />
-                        <Txt marginTop={10}>
-                            {option.title}
+                        <Txt marginTop={10} fontFamily={fonts.IBMPM}>
+                            {t(option.title)}
                         </Txt>
                     </Btn>
                 )}

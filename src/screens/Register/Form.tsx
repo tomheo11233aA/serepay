@@ -1,16 +1,20 @@
 import Box from '@commom/Box'
 import Btn from '@commom/Btn'
-import Icon from '@commom/Icon'
 import Input from '@commom/Input'
 import Txt from '@commom/Txt'
 import { screens } from '@contants/screens'
 import { colors } from '@themes/colors'
 import { navigate } from '@utils/navigationRef'
+import { TFunction } from 'i18next'
 import React, { useState } from 'react'
 import SelectCountry from './SelectCountry'
 import Terms from './Terms'
 
-const Form = () => {
+interface Props {
+    t: TFunction<"translation", undefined>
+}
+
+const Form = ({ t }: Props) => {
     const [security, setSecurity] = useState<boolean>(true)
 
     return (
@@ -19,7 +23,7 @@ const Form = () => {
                 radius={5}
                 height={45}
                 width={'100%'}
-                hint={'Email'}
+                hint={t('Email')}
                 borderWidth={1}
                 tintColor={colors.gray2}
                 borderColor={colors.gray}
@@ -31,7 +35,7 @@ const Form = () => {
                 width={'100%'}
                 marginTop={15}
                 borderWidth={1}
-                hint={'Username'}
+                hint={t('Username')}
                 tintColor={colors.gray2}
                 borderColor={colors.gray}
                 iconOne={require('@images/unAuth/user.png')}
@@ -42,7 +46,7 @@ const Form = () => {
                 width={'100%'}
                 marginTop={15}
                 borderWidth={1}
-                hint={'Password'}
+                hint={t('Password')}
                 security={security}
                 tintColor={colors.gray2}
                 borderColor={colors.gray}
@@ -59,7 +63,7 @@ const Form = () => {
                 width={'100%'}
                 marginTop={15}
                 borderWidth={1}
-                hint={'Password'}
+                hint={t('Password')}
                 security={security}
                 tintColor={colors.gray2}
                 borderColor={colors.gray}
@@ -81,8 +85,8 @@ const Form = () => {
                 borderColor={colors.gray}
                 iconOne={require('@images/unAuth/message.png')}
             />
-            <SelectCountry />
-            <Terms />
+            <SelectCountry t={t} />
+            <Terms t={t} />
             <Box>
                 <Box
                     width={20}
@@ -96,7 +100,7 @@ const Form = () => {
                 backgroundColor={colors.darkViolet}
             >
                 <Txt color={'white'} bold>
-                    REGISTER
+                    {t('REGISTER')}
                 </Txt>
             </Btn>
             <Btn
@@ -104,8 +108,8 @@ const Form = () => {
                 marginVertical={20}
             >
                 <Txt>
-                    Do you already have an account ?
-                    <Txt color={colors.violet} bold> LOGIN </Txt> right !
+                    {t('Do you already have an account')} ?
+                    <Txt color={colors.violet} bold> {t('LOGIN')} </Txt> {t('right')} !
                 </Txt>
             </Btn>
         </Box>

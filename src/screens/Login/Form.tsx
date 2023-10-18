@@ -7,9 +7,14 @@ import { useAppDispatch } from '@hooks/redux'
 import { setLogin } from '@redux/slice/userSlice'
 import { colors } from '@themes/colors'
 import { navigate } from '@utils/navigationRef'
+import { TFunction } from 'i18next'
 import React, { useState } from 'react'
 
-const Form = () => {
+interface Props {
+    t: TFunction<"translation", undefined>
+}
+
+const Form = ({ t }: Props) => {
     const dispatch = useAppDispatch()
     const [security, setSecurity] = useState<boolean>(true)
 
@@ -20,7 +25,7 @@ const Form = () => {
                 height={45}
                 width={'100%'}
                 borderWidth={1}
-                hint={'Username'}
+                hint={t('Username')}
                 tintColor={colors.gray2}
                 borderColor={colors.gray}
                 iconOne={require('@images/unAuth/user.png')}
@@ -31,7 +36,7 @@ const Form = () => {
                 width={'100%'}
                 marginTop={15}
                 borderWidth={1}
-                hint={'Password'}
+                hint={t('Password')}
                 security={security}
                 tintColor={colors.gray2}
                 borderColor={colors.gray}
@@ -51,17 +56,17 @@ const Form = () => {
                 onPress={() => dispatch(setLogin(true))}
             >
                 <Txt color={'white'} bold>
-                    LOG IN
+                    {t('LOGIN')}
                 </Txt>
             </Btn>
             <Btn marginVertical={20}>
                 <Txt color={colors.violet}>
-                    Forgot password ?
+                    {t('Forgot password ?')}
                 </Txt>
             </Btn>
             <Btn onPress={() => navigate(screens.REGISTER)}>
                 <Txt color={colors.violet}>
-                    Do not have an account? <Txt bold color={colors.darkViolet}>REGISTER</Txt>
+                    {t('Do not have an account?')} <Txt bold color={colors.darkViolet}>{t('REGISTER')}</Txt>
                 </Txt>
             </Btn>
         </Box>

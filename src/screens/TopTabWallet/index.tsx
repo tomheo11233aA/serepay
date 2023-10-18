@@ -10,8 +10,10 @@ import Wallet from './Wallet'
 import P2p from './P2p'
 import Staking from './Staking'
 import Lending from './Lending'
+import { useTranslation } from 'react-i18next'
 
 const TopTabWallet = () => {
+    const { t } = useTranslation()
     const [tabChoosed, setTabChoosed] = useState<string>('WALLET')
     const tabs = ['WALLET', 'P2P', 'STAKING', 'LENDING']
 
@@ -54,7 +56,7 @@ const TopTabWallet = () => {
                                 backgroundColor={tab === tabChoosed && colors.violet2}
                             >
                                 <Txt color={'white'} size={12} bold>
-                                    {tab}
+                                    {t(tab)}
                                 </Txt>
                             </Btn>
                         )}

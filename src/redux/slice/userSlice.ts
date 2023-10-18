@@ -2,7 +2,7 @@ import { ILanguage, IUserSlice } from "@models/user";
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 
 const initialState: IUserSlice = {
-    isLogin: true,
+    isLogin: false,
     language: {
         title: 'English',
         value: 'en',
@@ -25,6 +25,7 @@ const userSlice = createSlice({
 
 export const {
     setLogin,
+    setLanguage,
 } = userSlice.actions
 
 export default userSlice
