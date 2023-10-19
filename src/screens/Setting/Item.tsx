@@ -6,10 +6,11 @@ import React from 'react'
 import { IOption } from './List'
 
 interface Props {
-    item: IOption
+    item: IOption;
+    t: any;
 }
 
-const Item = ({item}: Props) => {
+const Item = ({ item, t }: Props) => {
     return (
         <Box
             row
@@ -27,7 +28,7 @@ const Item = ({item}: Props) => {
                     marginRight={10}
                     source={item.icon}
                 />
-                <Txt size={16}>{item.title}</Txt>
+                <Txt size={16}>{t(item.title)}</Txt>
             </Box>
             <Box rotateZ={'180deg'}>
                 <Icon

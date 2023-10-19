@@ -12,7 +12,11 @@ export interface IOption {
   icon: ImageSourcePropType;
 }
 
-const List = () => {
+interface Props {
+  t: any;
+}
+
+const List = ({ t }: Props) => {
   const data: IOption[] = [
     {
       title: 'Ecosystem',
@@ -61,7 +65,11 @@ const List = () => {
       }}
     >
       {data.map((item) =>
-        <Item key={item.title} item={item} />
+        <Item
+          t={t}
+          item={item}
+          key={item.title}
+        />
       )}
     </Animated.View>
   )

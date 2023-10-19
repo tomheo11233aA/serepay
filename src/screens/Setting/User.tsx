@@ -4,7 +4,11 @@ import Txt from '@commom/Txt'
 import { colors } from '@themes/colors'
 import React from 'react'
 
-const User = () => {
+interface Props {
+    t: any;
+}
+
+const User = ({ t }: Props) => {
     return (
         <Box
             row

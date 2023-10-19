@@ -24,7 +24,7 @@ const TopTabWallet = () => {
             start={{ x: 0, y: 0.5 }}
             colors={[colors.darkViolet, colors.violet]}
         >
-            <Safe>
+            <Safe flex={1}>
                 <Box
                     row
                     alignCenter
@@ -68,12 +68,13 @@ const TopTabWallet = () => {
                         source={require('@images/wallet/scanner.png')}
                     />
                 </Box>
+
+                {tabChoosed === 'WALLET' ?
+                    <Wallet /> : tabChoosed === 'P2P' ?
+                        <P2p /> : tabChoosed === 'STAKING' ?
+                            <Staking /> : <Lending />
+                }
             </Safe>
-            {tabChoosed === 'WALLET' ?
-                <Wallet /> : tabChoosed === 'P2P' ?
-                    <P2p /> : tabChoosed === 'STAKING' ?
-                        <Staking /> : <Lending />
-            }
         </LinearGradient>
     )
 }

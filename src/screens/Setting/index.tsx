@@ -8,8 +8,11 @@ import List from './List'
 import ReferralItem from './ReferralItem'
 import User from './User'
 import SocialNetwork from './SocialNetwork'
+import { useTranslation } from 'react-i18next'
 
 const Setting = () => {
+  const { t } = useTranslation()
+
   return (
     <LinearGradient
       style={{ flex: 1 }}
@@ -20,21 +23,21 @@ const Setting = () => {
       <KeyBoardSafe>
         <Box paddingHorizontal={15} marginBottom={10}>
           <Txt color={'white'} bold size={20}>
-            Setting
+            {t('Setting')}
           </Txt>
         </Box>
         <Box flex={1} backgroundColor={colors.gray5} paddingHorizontal={15}>
-          <User />
+          <User t={t} />
           <Box row justifySpaceBetween>
             <ReferralItem
-              title={'Referral link'}
+              title={t('Referral link')}
             />
             <ReferralItem
-              title={'Referral code'}
+              title={t('Referral code')}
             />
           </Box>
-          <List />
-          <SocialNetwork />
+          <List t={t} />
+          <SocialNetwork t={t} />
         </Box>
       </KeyBoardSafe>
     </LinearGradient>

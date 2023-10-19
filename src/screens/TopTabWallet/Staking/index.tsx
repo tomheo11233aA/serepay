@@ -11,7 +11,11 @@ const Staking = () => {
     const { t } = useTranslation()
 
     return (
-        <Box flex={1} backgroundColor={'#edebf0'} marginTop={-20}>
+        <Box
+            flex={1}
+            marginTop={10}
+            backgroundColor={'#edebf0'}
+        >
             <Scroll flex={1}>
                 <ChooseCoin />
                 <SelectPackage t={t} />

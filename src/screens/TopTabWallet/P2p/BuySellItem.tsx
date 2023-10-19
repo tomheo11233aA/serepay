@@ -3,6 +3,7 @@ import Btn from '@commom/Btn'
 import Icon from '@commom/Icon'
 import Txt from '@commom/Txt'
 import { colors } from '@themes/colors'
+import { fonts } from '@themes/fonts'
 import React from 'react'
 
 interface Props {
@@ -21,31 +22,23 @@ const BuySellItem = ({
     return (
         <Box
             radius={5}
-            alignCenter
             width={'48%'}
             paddingVertical={15}
-            backgroundColor={colors.violet}
+            paddingHorizontal={10}
+            backgroundColor={'white'}
         >
             <Box
                 row
                 alignEnd
-                paddingHorizontal={5}
                 alignSelf={'flex-start'}
             >
-                <Icon
-                    size={18}
-                    marginRight={10}
-                    tintColor={'white'}
-                    source={require('@images/wallet/uploadarrow.png')}
-                />
-                <Txt color={'white'}>
+                <Txt fontFamily={fonts.IBMPM}>
                     {title}
                 </Txt>
             </Box>
             <Txt
                 bold
                 size={15}
-                color={'white'}
                 marginVertical={15}
             >
                 {price} VND
@@ -55,6 +48,7 @@ const BuySellItem = ({
                 paddingVertical={7}
                 paddingHorizontal={10}
                 backgroundColor={buttonColor}
+                alignSelf={'flex-start'}
             >
                 <Txt color={'white'} bold>{buttonText}</Txt>
             </Btn>

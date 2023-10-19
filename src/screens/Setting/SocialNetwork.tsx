@@ -5,7 +5,11 @@ import { IOption } from './List'
 import Item from './Item'
 import { colors } from '@themes/colors'
 
-const SocialNetwork = () => {
+interface Props {
+  t: any;
+}
+
+const SocialNetwork = ({ t }: Props) => {
   const data: IOption[] = [
     {
       title: 'Help Center',
@@ -39,7 +43,11 @@ const SocialNetwork = () => {
         }}
       >
         {data.map((item) =>
-          <Item key={item.title} item={item} />
+          <Item
+            t={t}
+            item={item}
+            key={item.title}
+          />
         )}
       </Box>
     </Box>

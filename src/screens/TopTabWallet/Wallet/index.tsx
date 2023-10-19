@@ -1,16 +1,15 @@
 import Box from '@commom/Box'
 import Txt from '@commom/Txt'
 import React from 'react'
+import { useTranslation } from 'react-i18next'
 import Coins from './Coins'
 import Options from './Options'
-import { useTranslation } from 'react-i18next'
-import { fonts } from '@themes/fonts'
 
 const Wallet = () => {
   const { t } = useTranslation()
 
   return (
-    <Box flex={1}>
+    <Box flex={1} marginTop={50}>
       <Box alignCenter>
         <Txt
           size={16}
