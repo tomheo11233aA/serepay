@@ -5,7 +5,7 @@ import { colors } from '@themes/colors'
 import { styled } from '@themes/styled'
 import React from 'react'
 
-const Statistical = () => {
+const Statistical = ({ t }: any) => {
     return (
         <Box marginTop={40}>
             <Box
@@ -16,13 +16,13 @@ const Statistical = () => {
                 backgroundColor={colors.violet2}
             >
                 <Box width={'40%'}>
-                    <Txt>Commission</Txt>
+                    <Txt>{t('Commission')}</Txt>
                 </Box>
                 <Box width={'30%'}>
-                    <Txt>History</Txt>
+                    <Txt>{t('History')}</Txt>
                 </Box>
                 <Box width={'30%'}>
-                    <Txt>Interest</Txt>
+                    <Txt>{t('Interest')}</Txt>
                 </Box>
             </Box>
             <Box
@@ -44,7 +44,7 @@ const Statistical = () => {
                         paddingHorizontal={20}
                         backgroundColor={'white'}
                     >
-                        <Txt color={colors.gray2}>Next Page</Txt>
+                        <Txt color={colors.gray2}>{t('Next Page')}</Txt>
                     </Box>
                     <Box rotateZ={'180deg'}>
                         <Icon

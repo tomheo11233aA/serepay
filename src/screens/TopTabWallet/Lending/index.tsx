@@ -3,12 +3,15 @@ import Scroll from '@commom/Scroll'
 import React from 'react'
 import Credit from './Credit'
 import Statistical from './Statistical'
+import { useTranslation } from 'react-i18next'
 
 const Lending = () => {
+    const { t } = useTranslation()
+
     return (
         <Box flex={1} backgroundColor={'#edebf0'} marginTop={-20}>
             <Scroll flex={1}>
-                <Credit />
+                <Credit t={t} />
                 <Box
                     flex={1}
                     padding={20}
@@ -17,7 +20,7 @@ const Lending = () => {
                     borderTopRightRadius={20}
                     backgroundColor={'white'}
                 >
-                    <Statistical />
+                    <Statistical t={t} />
                 </Box>
             </Scroll>
         </Box>

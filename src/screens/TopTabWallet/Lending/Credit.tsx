@@ -6,7 +6,11 @@ import { colors } from '@themes/colors'
 import React from 'react'
 import Animated from 'react-native-reanimated'
 
-const Credit = () => {
+interface Props {
+    t: any;
+}
+
+const Credit = ({ t }: Props) => {
     return (
         <Box paddingHorizontal={15}>
             <Animated.View
@@ -25,12 +29,12 @@ const Credit = () => {
                     backgroundColor={colors.darkViolet}
                 >
                     <Txt color={'white'} bold size={16}>
-                        TOBE CREDIT
+                        {t('TOBE CREDIT')}
                     </Txt>
                 </Box>
                 <Box row alignCenter paddingVertical={20}>
                     <Box alignCenter flex={1}>
-                        <Txt color={'white'}>Bonus/month</Txt>
+                        <Txt color={'white'}>{t('Bonus')}/{('month')}</Txt>
                         <Txt color={'white'} bold>1%</Txt>
                     </Box>
                     <Box alignCenter flex={1}>
@@ -48,7 +52,7 @@ const Credit = () => {
                                 opacity={0}
                                 source={require('@images/wallet/more.png')}
                             />
-                            <Txt>{'   6 MONTH   '}</Txt>
+                            <Txt>{`   6 ${t('MONTH')}   `}</Txt>
                             <Icon
                                 size={13}
                                 source={require('@images/wallet/more.png')}
@@ -64,7 +68,7 @@ const Credit = () => {
                     backgroundColor={'white'}
                 >
                     <Txt bold color={colors.darkViolet}>
-                        ACTIVATED
+                        {t('ACTIVATED')}
                     </Txt>
                 </Btn>
             </Animated.View>

@@ -1,17 +1,17 @@
-import { View, Text } from 'react-native'
-import React from 'react'
-import { IUser } from './BuyCoin'
 import Box from '@commom/Box';
-import Txt from '@commom/Txt';
 import Btn from '@commom/Btn';
-import { styled } from '@themes/styled';
+import Txt from '@commom/Txt';
 import { colors } from '@themes/colors';
+import { styled } from '@themes/styled';
+import React from 'react';
+import { IUser } from './BuyCoin';
 
 interface Props {
+    t: any;
     user: IUser;
 }
 
-const ItemBuyCoin = ({ user }: Props) => {
+const ItemBuyCoin = ({ user, t }: Props) => {
     return (
         <Box
             row
@@ -31,13 +31,13 @@ const ItemBuyCoin = ({ user }: Props) => {
                     marginTop={5}
                     color={colors.gray4}
                 >
-                    {`Maximum: ${user.max} ${user.symbol}`}
+                    {`${t('Maximum')}: ${user.max} ${user.symbol}`}
                 </Txt>
                 <Txt marginTop={10} color={colors.gray4}>
-                    Swaptobe Wallet
+                    {t('Swaptobe Wallet')}
                 </Txt>
                 <Txt marginTop={5} color={colors.gray4} bold>
-                    Completion time: {user.time}
+                    {t('Completion time')}: {user.time}
                 </Txt>
                 <Txt marginTop={10} color={'#72f7af'}>
                     {'● '}
@@ -55,7 +55,7 @@ const ItemBuyCoin = ({ user }: Props) => {
                 backgroundColor={colors.green}
             >
                 <Txt color={'white'}>
-                    Buy
+                    {t('Buy')}
                 </Txt>
             </Btn>
         </Box>

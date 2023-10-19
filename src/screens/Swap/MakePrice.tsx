@@ -3,7 +3,11 @@ import React from 'react'
 import ItemConver from './ItemConver'
 import Warn from './Warn'
 
-const MakePrice = () => {
+interface Props {
+    t: any;
+}
+
+const MakePrice = ({ t }: Props) => {
     return (
         <Box>
             <ItemConver
@@ -18,10 +22,10 @@ const MakePrice = () => {
                 icon={require('@images/wallet/eth.png')}
             />
             <Warn
-                title={'The final ETH amount you receive may be slightly different due to market volatility'}
+                title={t('The final ETH amount you receive may be slightly different due to market volatility')}
             />
             <Warn
-                title={'Swap Fee 0.25% implementation and has been deducted from the estimate above'}
+                title={t('Swap Fee 0.25% implementation and has been deducted from the estimate above')}
             />
         </Box>
     )

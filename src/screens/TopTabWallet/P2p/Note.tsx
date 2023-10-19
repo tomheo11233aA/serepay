@@ -4,7 +4,7 @@ import Txt from '@commom/Txt'
 import { colors } from '@themes/colors'
 import React from 'react'
 
-const Note = () => {
+const Note = ({ t }: any) => {
     return (
         <Box
             row
@@ -25,12 +25,12 @@ const Note = () => {
 
             <Box>
                 <Txt italic color={colors.darkGreen}>
-                    Promotion January 15 to January 31, 2022:
+                    {t('Promotion January 15 to January 31, 2022:')}
                 </Txt>
                 <Txt italic color={colors.darkGreen}>
-                    DOUBLE DEPOSIT + DOUBLE ICO
+                    {t('DOUBLE DEPOSIT + DOUBLE ICO')}
                     <Txt bold color={colors.darkViolet}>
-                        {' More details'}
+                        {` ${t('More details')}`}
                     </Txt>
                 </Txt>
             </Box>

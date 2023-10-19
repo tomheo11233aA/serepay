@@ -5,13 +5,16 @@ import SelectPackage from './SelectPackage'
 import Amount from './Amount'
 import Statistical from './Statistical'
 import Scroll from '@commom/Scroll'
+import { useTranslation } from 'react-i18next'
 
 const Staking = () => {
+    const { t } = useTranslation()
+
     return (
         <Box flex={1} backgroundColor={'#edebf0'} marginTop={-20}>
             <Scroll flex={1}>
                 <ChooseCoin />
-                <SelectPackage />
+                <SelectPackage t={t} />
                 <Box
                     flex={1}
                     padding={20}
@@ -20,8 +23,8 @@ const Staking = () => {
                     borderTopRightRadius={20}
                     backgroundColor={'white'}
                 >
-                    <Amount />
-                    <Statistical />
+                    <Amount t={t} />
+                    <Statistical t={t} />
                 </Box>
             </Scroll>
         </Box>

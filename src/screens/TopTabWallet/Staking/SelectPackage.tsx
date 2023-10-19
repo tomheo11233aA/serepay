@@ -5,7 +5,7 @@ import { colors } from '@themes/colors'
 import React from 'react'
 import Animated from 'react-native-reanimated'
 
-const SelectPackage = () => {
+const SelectPackage = ({ t }: any) => {
     return (
         <Box paddingHorizontal={15}>
             <Animated.View
@@ -23,7 +23,7 @@ const SelectPackage = () => {
                     backgroundColor={colors.darkViolet}
                 >
                     <Txt color={'white'} bold size={16}>
-                        Select Package Staking
+                        {t('Select Package Staking')}
                     </Txt>
                 </Box>
                 <Box paddingHorizontal={30} paddingVertical={20}>

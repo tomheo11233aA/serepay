@@ -15,7 +15,7 @@ export interface IUser {
     symbol: string;
 }
 
-const BuyCoin = () => {
+const BuyCoin = ({ t }: any) => {
     const users: IUser[] = [
         {
             time: '0s',
@@ -45,9 +45,9 @@ const BuyCoin = () => {
                     source={require('@images/wallet/down.png')}
                 />
                 <Txt>
-                    You want to
+                    {t('You want to')}
                     <Txt color={colors.green} bold>
-                        {' Buy '}
+                        {` ${t('Buy')} `}
                     </Txt>
                     BTC?
                 </Txt>
@@ -58,6 +58,7 @@ const BuyCoin = () => {
                     <ItemBuyCoin
                         key={Math.random()}
                         user={user}
+                        t={t}
                     />
                 )}
             </Scroll>

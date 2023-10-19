@@ -6,7 +6,7 @@ import Icon from '@commom/Icon'
 import Btn from '@commom/Btn'
 import { styled } from '@themes/styled'
 
-const Amount = () => {
+const Amount = ({ t }: any) => {
     return (
         <Box
             radius={5}
@@ -36,8 +36,8 @@ const Amount = () => {
 
             <Box row marginTop={15}>
                 <Box marginRight={20}>
-                    <Txt color={colors.gray4}>Interest</Txt>
-                    <Txt color={colors.gray4} marginVertical={3}>Total</Txt>
+                    <Txt color={colors.gray4}>{t('Interest')}</Txt>
+                    <Txt color={colors.gray4} marginVertical={3}>{t('Total')}</Txt>
                     <Txt color={colors.gray4}>USD</Txt>
                 </Box>
                 <Box>
@@ -55,7 +55,7 @@ const Amount = () => {
                 alignSelf={'center'}
                 backgroundColor={colors.violet}
             >
-                <Txt color={'white'}>STAKING NOW</Txt>
+                <Txt color={'white'}>{t('STAKING NOW')}</Txt>
             </Btn>
         </Box>
     )

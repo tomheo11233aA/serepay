@@ -5,8 +5,11 @@ import BuySellItem from './BuySellItem'
 import ChooseCoin from './ChooseCoin'
 import Note from './Note'
 import BuyCoin from './BuyCoin'
+import { useTranslation } from 'react-i18next'
 
 const P2p = () => {
+  const { t } = useTranslation()
+
   return (
     <Box flex={1} backgroundColor={'#edebf0'} marginTop={-20}>
       <ChooseCoin />
@@ -19,15 +22,15 @@ const P2p = () => {
 
         <BuySellItem
           price={'897,004,995'}
-          buttonText={'Buy now'}
-          title={'Selling price'}
+          buttonText={t('Buy now')}
+          title={t('Selling price')}
           buttonColor={colors.green}
         />
         <BuySellItem
           buttonColor={'red'}
           price={'897,004,995'}
-          title={'Buying price'}
-          buttonText={'Sell now'}
+          title={t('Buying price')}
+          buttonText={t('Sell now')}
         />
       </Box>
       <Box
@@ -37,8 +40,8 @@ const P2p = () => {
         borderTopRightRadius={20}
         backgroundColor={'white'}
       >
-        <Note />
-        <BuyCoin />
+        <Note t={t} />
+        <BuyCoin t={t} />
       </Box>
     </Box>
   )

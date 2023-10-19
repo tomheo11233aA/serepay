@@ -4,6 +4,7 @@ import React from 'react'
 import Coins from './Coins'
 import Options from './Options'
 import { useTranslation } from 'react-i18next'
+import { fonts } from '@themes/fonts'
 
 const Wallet = () => {
   const { t } = useTranslation()

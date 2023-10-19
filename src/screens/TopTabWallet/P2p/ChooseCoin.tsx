@@ -4,8 +4,11 @@ import Icon from '@commom/Icon'
 import Txt from '@commom/Txt'
 import { colors } from '@themes/colors'
 import React from 'react'
+import { useTranslation } from 'react-i18next'
 
 const ChooseCoin = () => {
+    const { t } = useTranslation()
+
     return (
         <Box paddingHorizontal={15} marginTop={20}>
             <Box
@@ -33,8 +36,8 @@ const ChooseCoin = () => {
                     backgroundColor={colors.darkViolet}
                 >
                     <Txt color={'white'}>
-                        {'Choose another coin '}
-                        <Icon 
+                        {`${t('Choose another coin')} `}
+                        <Icon
                             size={12}
                             tintColor={'white'}
                             source={require('@images/wallet/more.png')}

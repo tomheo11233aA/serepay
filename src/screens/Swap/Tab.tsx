@@ -3,7 +3,11 @@ import Txt from '@commom/Txt'
 import { colors } from '@themes/colors'
 import React from 'react'
 
-const Tab = () => {
+interface Props {
+    t: any;
+}
+
+const Tab = ({ t }: Props) => {
     return (
         <Box row alignStart marginTop={40}>
             <Box
@@ -14,7 +18,7 @@ const Tab = () => {
                 borderColor={colors.violet}
             >
                 <Txt bold color={colors.darkGreen} size={16}>
-                    Make price
+                    {t('Make price')}
                 </Txt>
             </Box>
             <Box
@@ -23,7 +27,7 @@ const Tab = () => {
                 borderColor={colors.violet}
             >
                 <Txt color={colors.darkGreen} size={16}>
-                    Your Price
+                    {t('Your Price')}
                 </Txt>
             </Box>
         </Box>

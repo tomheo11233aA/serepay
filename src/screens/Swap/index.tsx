@@ -6,8 +6,11 @@ import React from 'react'
 import LinearGradient from 'react-native-linear-gradient'
 import Tab from './Tab'
 import MakePrice from './MakePrice'
+import { useTranslation } from 'react-i18next'
 
 const Swap = () => {
+  const { t } = useTranslation()
+
   return (
     <LinearGradient
       style={{ flex: 1 }}
@@ -33,12 +36,12 @@ const Swap = () => {
             source={require('@images/unAuth/left.png')}
           />
           <Txt bold color={colors.violet} size={18}>
-            {'  SWAP'}
+            {`  ${t('SWAP')}`}
           </Txt>
         </Box>
         <Box paddingHorizontal={10}>
-          <Tab />
-          <MakePrice />
+          <Tab t={t} />
+          <MakePrice t={t} />
         </Box>
       </Box>
     </LinearGradient>
