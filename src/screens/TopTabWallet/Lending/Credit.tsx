@@ -3,6 +3,7 @@ import Btn from '@commom/Btn'
 import Icon from '@commom/Icon'
 import Txt from '@commom/Txt'
 import { colors } from '@themes/colors'
+import { fonts } from '@themes/fonts'
 import React from 'react'
 import Animated from 'react-native-reanimated'
 
@@ -19,23 +20,23 @@ const Credit = ({ t }: Props) => {
                     borderRadius: 5,
                     paddingBottom: 20,
                     overflow: 'hidden',
-                    backgroundColor: colors.violet,
+                    backgroundColor: 'white',
                 }}
             >
                 <Box
                     height={40}
                     alignCenter
                     justifyCenter
-                    backgroundColor={colors.darkViolet}
+                    backgroundColor={colors.gray}
                 >
-                    <Txt color={'white'} bold size={16}>
+                    <Txt color={'black'} bold>
                         {t('TOBE CREDIT')}
                     </Txt>
                 </Box>
                 <Box row alignCenter paddingVertical={20}>
                     <Box alignCenter flex={1}>
-                        <Txt color={'white'}>{t('Bonus')}/{('month')}</Txt>
-                        <Txt color={'white'} bold>1%</Txt>
+                        <Txt fontFamily={fonts.IBMPR} color={colors.gray4}>{t('Bonus')}/{('month')}</Txt>
+                        <Txt>1%</Txt>
                     </Box>
                     <Box alignCenter flex={1}>
                         <Box
@@ -45,16 +46,17 @@ const Credit = ({ t }: Props) => {
                             justifySpaceBetween
                             paddingVertical={5}
                             paddingHorizontal={5}
-                            backgroundColor={colors.violet2}
+                            backgroundColor={colors.violet}
                         >
                             <Icon
                                 size={13}
                                 opacity={0}
                                 source={require('@images/wallet/more.png')}
                             />
-                            <Txt>{`   6 ${t('MONTH')}   `}</Txt>
+                            <Txt color={'white'}>{` 6 ${t('MONTH')}   `}</Txt>
                             <Icon
                                 size={13}
+                                tintColor={'white'}
                                 source={require('@images/wallet/more.png')}
                             />
                         </Box>
@@ -65,9 +67,9 @@ const Credit = ({ t }: Props) => {
                     width={'70%'}
                     paddingVertical={8}
                     alignSelf={'center'}
-                    backgroundColor={'white'}
+                    backgroundColor={colors.violet}
                 >
-                    <Txt bold color={colors.darkViolet}>
+                    <Txt bold color={'white'}>
                         {t('ACTIVATED')}
                     </Txt>
                 </Btn>

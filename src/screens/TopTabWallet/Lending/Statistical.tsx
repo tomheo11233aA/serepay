@@ -16,9 +16,9 @@ const Statistical = ({ t }: Props) => {
                 alignCenter
                 paddingVertical={10}
                 paddingHorizontal={20}
-                backgroundColor={colors.violet2}
+                backgroundColor={colors.gray}
             >
-                <Txt bold>{t('History Lending')}</Txt>
+                <Txt>{t('History Lending')}</Txt>
             </Box>
             <Box
                 row

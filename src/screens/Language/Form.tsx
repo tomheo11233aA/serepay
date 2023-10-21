@@ -11,7 +11,7 @@ import { setLanguage } from '@redux/slice/userSlice'
 import { colors } from '@themes/colors'
 import { convertLanguage } from '@utils/convert'
 import { navigate } from '@utils/navigationRef'
-import React, { useState } from 'react'
+import React from 'react'
 import { useTranslation } from 'react-i18next'
 import { StyleSheet } from 'react-native'
 

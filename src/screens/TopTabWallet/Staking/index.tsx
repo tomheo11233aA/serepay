@@ -1,11 +1,11 @@
 import Box from '@commom/Box'
-import React from 'react'
-import ChooseCoin from '../P2p/ChooseCoin'
-import SelectPackage from './SelectPackage'
-import Amount from './Amount'
-import Statistical from './Statistical'
 import Scroll from '@commom/Scroll'
+import React from 'react'
 import { useTranslation } from 'react-i18next'
+import CoinChoosed from '../P2p/CoinChoosed'
+import Amount from './Amount'
+import SelectPackage from './SelectPackage'
+import Statistical from './Statistical'
 
 const Staking = () => {
     const { t } = useTranslation()
@@ -14,10 +14,9 @@ const Staking = () => {
         <Box
             flex={1}
             marginTop={10}
-            backgroundColor={'#edebf0'}
         >
             <Scroll flex={1}>
-                <ChooseCoin />
+                <CoinChoosed />
                 <SelectPackage t={t} />
                 <Box
                     flex={1}

@@ -13,7 +13,7 @@ const Statistical = ({ t }: any) => {
                 alignCenter
                 paddingVertical={10}
                 paddingHorizontal={20}
-                backgroundColor={colors.violet2}
+                backgroundColor={colors.gray}
             >
                 <Box width={'40%'}>
                     <Txt>{t('Commission')}</Txt>

@@ -2,6 +2,7 @@ import Box from '@commom/Box'
 import Icon from '@commom/Icon'
 import Txt from '@commom/Txt'
 import { colors } from '@themes/colors'
+import { fonts } from '@themes/fonts'
 import React from 'react'
 import Animated from 'react-native-reanimated'
 
@@ -13,20 +14,23 @@ const SelectPackage = ({ t }: any) => {
                     marginTop: 20,
                     borderRadius: 5,
                     overflow: 'hidden',
-                    backgroundColor: colors.violet,
                 }}
             >
                 <Box
                     height={40}
                     alignCenter
                     justifyCenter
-                    backgroundColor={colors.darkViolet}
+                    backgroundColor={colors.gray}
                 >
-                    <Txt color={'white'} bold size={16}>
+                    <Txt color={'black'} bold fontFamily={fonts.AS}>
                         {t('Select Package Staking')}
                     </Txt>
                 </Box>
-                <Box paddingHorizontal={30} paddingVertical={20}>
+                <Box
+                    paddingHorizontal={30}
+                    paddingVertical={20}
+                    backgroundColor={'white'}
+                >
                     <Box
                         row
                         radius={5}
@@ -34,7 +38,7 @@ const SelectPackage = ({ t }: any) => {
                         justifySpaceBetween
                         paddingVertical={10}
                         paddingHorizontal={10}
-                        backgroundColor={'white'}
+                        backgroundColor={colors.violet3}
                     >
                         <Icon
                             size={18}

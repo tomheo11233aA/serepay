@@ -12,7 +12,6 @@ const Lending = () => {
         <Box
             flex={1}
             marginTop={10}
-            backgroundColor={'#edebf0'}
         >
             <Scroll flex={1}>
                 <Credit t={t} />

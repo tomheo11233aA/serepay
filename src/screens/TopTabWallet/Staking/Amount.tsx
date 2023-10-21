@@ -5,6 +5,7 @@ import Txt from '@commom/Txt'
 import Icon from '@commom/Icon'
 import Btn from '@commom/Btn'
 import { styled } from '@themes/styled'
+import { fonts } from '@themes/fonts'
 
 const Amount = ({ t }: any) => {
     return (
@@ -16,7 +17,7 @@ const Amount = ({ t }: any) => {
             style={[styled.shadow, { shadowColor: colors.gray2 }]}
         >
             <Box row justifySpaceBetween>
-                <Txt size={20} color={colors.violet}>$500</Txt>
+                <Txt size={20} fontFamily={fonts.IBMPM}>$500</Txt>
                 <Box
                     row
                     radius={3}
@@ -24,10 +25,13 @@ const Amount = ({ t }: any) => {
                     justifyCenter
                     paddingVertical={5}
                     paddingHorizontal={10}
-                    backgroundColor={colors.violet2}
+                    backgroundColor={colors.violet}
                 >
-                    <Txt>3 month (1%/month)</Txt>
+                    <Txt color={'white'} fontFamily={fonts.IBMPM}>
+                        3 month (1%/month)
+                    </Txt>
                     <Icon
+                        tintColor={'white'}
                         size={15}
                         source={require('@images/wallet/more.png')}
                     />
@@ -55,7 +59,9 @@ const Amount = ({ t }: any) => {
                 alignSelf={'center'}
                 backgroundColor={colors.violet}
             >
-                <Txt color={'white'}>{t('STAKING NOW')}</Txt>
+                <Txt color={'white'} fontFamily={fonts.AS}>
+                    {t('STAKING NOW')}
+                </Txt>
             </Btn>
         </Box>
     )

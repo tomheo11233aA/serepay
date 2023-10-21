@@ -1,4 +1,10 @@
 export const colors = {
+  light: {
+    black: 'black',
+  },
+  dark: {
+    black: 'white',
+  },
   gray: '#e5e5e5',
   green: '#31bb86',
   red2: '#e75559',
@@ -9,6 +15,7 @@ export const colors = {
   gray6: '#fafafa',
   violet: '#9b59b6',
   black2: '#484a4d',
+  black3: '#5e5861',
   violet2: '#DF9BFF',
   violet3: '#ebe5ee',
   darkGreen: '#284b5f',

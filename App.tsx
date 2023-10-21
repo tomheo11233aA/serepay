@@ -5,7 +5,7 @@ import { SafeAreaProvider } from 'react-native-safe-area-context'
 
 const App = () => {
   return (
-    <Animated.View style={{flex: 1}}>
+    <Animated.View style={{ flex: 1 }}>
       <SafeAreaProvider>
         <Container />
       </SafeAreaProvider>
