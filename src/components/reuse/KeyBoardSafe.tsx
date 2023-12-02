@@ -2,6 +2,7 @@ import { KeyboardAvoidingView, Platform, SafeAreaView } from 'react-native'
 import React from 'react'
 import Box from '@commom/Box'
 import Scroll from '@commom/Scroll'
+import { BOTTOM_TAB_HEIGHT } from '@utils/responsive'
 
 interface Props {
     bg?: string,
@@ -36,7 +37,7 @@ const KeyBoardSafe = ({
                 >
                     <Scroll
                         flexGrow={1}
-                        paddingBottom={paddingBottom}
+                        paddingBottom={paddingBottom || BOTTOM_TAB_HEIGHT / 2}
                         paddingHorizontal={paddingHorizontal}
                         showsVerticalScrollIndicator={false}
                         showsHorizontalScrollIndicator={false}

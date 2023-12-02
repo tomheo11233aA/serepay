@@ -2,6 +2,8 @@ import { Dimensions } from 'react-native';
 
 export const { width, height } = Dimensions.get('screen');
 
+export const BOTTOM_TAB_HEIGHT = 90
+
 //iPhone 12
 const DESIGN_WIDTH: number = 390;
 const DESIGN_HEIGHT: number = 844;
