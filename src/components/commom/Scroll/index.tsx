@@ -164,7 +164,7 @@ const Scroll = ({
     );
 };
 
-export default Scroll;
+export default React.memo(Scroll);
 
 interface Props {
     showsVerticalScrollIndicator?: any,

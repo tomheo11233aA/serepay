@@ -157,7 +157,7 @@ const Icon = ({
     );
 };
 
-export default Icon;
+export default React.memo(Icon);
 
 interface Props {
     tintColor?: any,

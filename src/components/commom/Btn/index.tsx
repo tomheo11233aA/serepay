@@ -164,7 +164,7 @@ const Btn = ({
     );
 };
 
-export default Btn;
+export default React.memo(Btn);
 
 interface Props {
     onPress?: any,

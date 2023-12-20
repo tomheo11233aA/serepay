@@ -2,7 +2,7 @@ import Box from '@commom/Box'
 import Icon from '@commom/Icon'
 import Txt from '@commom/Txt'
 import { colors } from '@themes/colors'
-import React from 'react'
+import React, {useState} from 'react'
 import LinearGradient from 'react-native-linear-gradient'
 import Tab from './Tab'
 import MakePrice from './MakePrice'
@@ -10,7 +10,6 @@ import { useTranslation } from 'react-i18next'
 
 const Swap = () => {
   const { t } = useTranslation()
-
   return (
     <LinearGradient
       style={{ flex: 1 }}
@@ -41,7 +40,6 @@ const Swap = () => {
         </Box>
         <Box paddingHorizontal={10}>
           <Tab t={t} />
-          <MakePrice t={t} />
         </Box>
       </Box>
     </LinearGradient>

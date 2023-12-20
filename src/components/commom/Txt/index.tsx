@@ -96,7 +96,7 @@ const Txt = ({
     );
 };
 
-export default Txt;
+export default React.memo(Txt);
 
 interface Props {
     onPress?: any,

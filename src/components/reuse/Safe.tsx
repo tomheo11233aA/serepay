@@ -35,4 +35,4 @@ const Safe = ({
     )
 }
 
-export default Safe
+export default React.memo(Safe)

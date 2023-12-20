@@ -158,7 +158,7 @@ const Img = ({
     );
 };
 
-export default Img;
+export default React.memo(Img);
 
 interface Props {
     source?: any,

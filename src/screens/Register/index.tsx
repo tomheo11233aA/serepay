@@ -21,7 +21,7 @@ const Register = () => {
         <Box alignCenter>
           <Icon
             resizeMode={'contain'}
-            size={width * 40 / 100}
+            size={width * 30 / 100}
             tintColor={colors.darkViolet}
             source={require('@images/logo.png')}
           />

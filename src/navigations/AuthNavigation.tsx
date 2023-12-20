@@ -11,8 +11,8 @@ import Txt from '@commom/Txt'
 import ADStack from './ADStack'
 import { useTranslation } from 'react-i18next'
 
-const Tab = createBottomTabNavigator()
 
+const Tab = createBottomTabNavigator()
 const AuthNavigation = () => {
   const { t } = useTranslation()
   const tabs = [

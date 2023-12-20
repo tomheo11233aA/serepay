@@ -4,14 +4,17 @@ import Txt from '@commom/Txt'
 import { colors } from '@themes/colors'
 import React from 'react'
 import { IOption } from './List'
+import { TouchableOpacity } from 'react-native'
 
 interface Props {
     item: IOption;
     t: any;
+    onClick?: () => void;
 }
 
-const Item = ({ item, t }: Props) => {
+const Item = ({ item, t, onClick }: Props) => {
     return (
+        <TouchableOpacity onPress={onClick}>
         <Box
             row
             alignCenter
@@ -38,6 +41,7 @@ const Item = ({ item, t }: Props) => {
                 />
             </Box>
         </Box>
+        </TouchableOpacity>
     )
 }
 

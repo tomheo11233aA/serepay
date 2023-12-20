@@ -51,4 +51,4 @@ const KeyBoardSafe = ({
     )
 }
 
-export default KeyBoardSafe
+export default React.memo(KeyBoardSafe)

@@ -8,22 +8,37 @@ import { width } from '@utils/responsive'
 import React from 'react'
 import { ImageSourcePropType } from 'react-native'
 import LinearGradient from 'react-native-linear-gradient'
+import { useTranslation } from 'react-i18next'
 
 interface IAD {
+  id?: number;
   title: string;
   image: ImageSourcePropType;
 }
 
 const AD = () => {
+  const { t } = useTranslation()
   const ads: IAD[] = [
-    {
+    { 
+      id: 1,
       title: 'Welcome to swaptobe',
       image: require('@images/ads/banner.png'),
     },
     {
+      id: 2,
       title: 'Swaptobe - Crypto Exchange',
       image: require('@images/ads/banner2.png'),
     },
+    {
+      id: 3,
+      title: 'Swaptobe - Crypto Exchange',
+      image: require('@images/ads/banner.png'),
+    },
+    {
+      id: 4,
+      title: 'Swaptobe - Crypto Exchange',
+      image: require('@images/ads/banner2.png'),
+    }
   ]
 
   return (
@@ -51,7 +66,7 @@ const AD = () => {
             source={require('@images/unAuth/left.png')}
           />
           <Txt bold color={colors.violet} size={18}>
-            {'  TOBE ADS'}
+            {t('TOBE ADS')}
           </Txt>
         </Box>
         <Scroll>
@@ -60,7 +75,7 @@ const AD = () => {
               <ADItem
                 ad={ad}
                 index={index}
-                key={ad.title}
+                key={ad.id}
               />
             )
           })}
@@ -102,4 +117,4 @@ const ADItem = ({ ad }: Props) => {
   )
 }
 
-export default AD
+export default React.memo(AD)

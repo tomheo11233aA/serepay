@@ -6,12 +6,40 @@ import { colors } from '@themes/colors'
 import { fonts } from '@themes/fonts'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
+import { Modal, Portal, Button } from 'react-native-paper';
+import Coins from '../Wallet/Coins'
+import { ICoin } from '@models/coin'
+import { set } from 'lodash'
+import { keys } from '@contants/keys'
 
 const CoinChoosed = () => {
     const { t } = useTranslation()
+    const [visible, setVisible] = React.useState(false);
+    const [selectedCoin, setSelectedCoin] = React.useState<ICoin | null>(null);
+    const showModal = () => setVisible(true);
+    const hideModal = () => setVisible(false);
+    const handleChooseCoin = (coin : ICoin) => {
+        setSelectedCoin(coin);
+        hideModal();
+    }
 
     return (
         <Box paddingHorizontal={15} marginTop={20}>
+            <Portal>
+                <Modal
+                    visible={visible}
+                    onDismiss={hideModal}
+                    contentContainerStyle=
+                    {{
+                        backgroundColor: 'white',
+                        marginHorizontal: 20,
+                        marginVertical: 10,
+                        borderRadius: 5,
+                    }}>
+                    
+                    <Coins t={t} isShowHeader onCoinSelected={handleChooseCoin} />
+                </Modal>
+            </Portal>
             <Box
                 row
                 radius={5}
@@ -24,10 +52,10 @@ const CoinChoosed = () => {
                     <Icon
                         size={25}
                         marginRight={10}
-                        source={require('@images/wallet/bitcoin.png')}
+                            source={selectedCoin ? { uri: `${keys.HOSTING_API}${selectedCoin.image}` } : require('@images/wallet/bitcoin.png')}
                     />
                     <Txt fontFamily={fonts.IBMPM}>
-                        Bitcoin
+                        {selectedCoin ? selectedCoin.token_key : 'Bitcoin'}
                     </Txt>
                 </Box>
 
@@ -35,6 +63,7 @@ const CoinChoosed = () => {
                     radius={5}
                     padding={10}
                     backgroundColor={colors.violet3}
+                    onPress={showModal}
                 >
                     <Txt>
                         {`${t('Change coin')} `}
@@ -45,4 +74,4 @@ const CoinChoosed = () => {
     )
 }
 
-export default CoinChoosed
+export default React.memo(CoinChoosed)

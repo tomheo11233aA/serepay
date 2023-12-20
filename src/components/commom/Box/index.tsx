@@ -163,7 +163,7 @@ const Box = ({
     );
 };
 
-export default Box;
+export default React.memo(Box);
 
 interface Props {
     flex?: any,

@@ -8,6 +8,7 @@ import BuyCoin from './BuyCoin'
 import { useTranslation } from 'react-i18next'
 import CoinChoosed from './CoinChoosed'
 
+
 const P2p = () => {
   const { t } = useTranslation()
 
@@ -18,6 +19,7 @@ const P2p = () => {
     // backgroundColor={'#edebf0'}
     >
       <CoinChoosed />
+      {/* <ChooseCoin />  */}
       <Box
         row
         marginTop={20}

@@ -4,38 +4,48 @@ import Input from '@commom/Input'
 import Txt from '@commom/Txt'
 import { colors } from '@themes/colors'
 import React from 'react'
-import { ImageSourcePropType } from 'react-native'
+import { ImageSourcePropType, TouchableOpacity } from 'react-native'
+import { useTranslation } from 'react-i18next'
 
 interface Props {
     title: string;
     symbol: string;
     icon: ImageSourcePropType;
     iconConvert?: boolean;
+    amount?: any;
+    onAmountChange?: any;
+    onSymbolClick?: any;
 }
 
 const ItemConver = ({
     icon,
     title,
     symbol,
+    amount,
     iconConvert = false,
+    onAmountChange,
+    onSymbolClick,
 }: Props) => {
+    const { t } = useTranslation()
     return (
         <Box marginTop={20}>
             <Box row alignCenter justifySpaceBetween>
                 <Txt color={colors.black2} size={15}>
-                    {title}
+                    {t(title)}
                 </Txt>
                 {iconConvert &&
-                    <Box
-                        marginRight={50}
-                        rotateZ={'90deg'}
-                    >
-                        <Icon
-                            size={20}
-                            tintColor={colors.violet}
-                            source={require('@images/swap/convert.png')}
-                        />
-                    </Box>
+                    <TouchableOpacity>
+                        <Box
+                            marginRight={50}
+                            rotateZ={'90deg'}
+                        >
+                            <Icon
+                                size={20}
+                                tintColor={colors.violet}
+                                source={require('@images/swap/convert.png')}
+                            />
+                        </Box>
+                    </TouchableOpacity>
                 }
             </Box>
             <Box
@@ -54,34 +64,39 @@ const ItemConver = ({
                     borderTopLeftRadius={5}
                     backgroundColor={'white'}
                     borderBottomLeftRadius={5}
+                    value={amount}
+                    onChangeText={onAmountChange}
                 />
-                <Box
-                    row
-                    radius={5}
-                    alignCenter
-                    justifyCenter
-                    paddingVertical={10}
-                    paddingHorizontal={15}
-                    backgroundColor={'#eaeaea'}
-                >
-                    <Icon
-                        size={25}
-                        source={icon}
-                    />
-                    <Txt
-                        bold
-                        size={16}
-                        color={colors.darkGreen}
+                <TouchableOpacity onPress={onSymbolClick}>
+                    <Box
+                        row
+                        radius={5}
+                        alignCenter
+                        justifyCenter
+                        paddingVertical={10}
+                        paddingHorizontal={15}
+                        backgroundColor={'#eaeaea'}
                     >
-                        {`  ${symbol}  `}
-                    </Txt>
-                    <Icon
-                        size={15}
-                        tintColor={'#a9abaa'}
-                        source={require('@images/wallet/more.png')}
-                    />
-                </Box>
+                        <Icon
+                            size={25}
+                            source={icon}
+                        />
+                        <Txt
+                            bold
+                            size={16}
+                            color={colors.darkGreen}
+                        >
+                            {`  ${symbol}  `}
+                        </Txt>
+                        <Icon
+                            size={15}
+                            tintColor={'#a9abaa'}
+                            source={require('@images/wallet/more.png')}
+                        />
+                    </Box>
+                </TouchableOpacity>
             </Box>
+
         </Box>
     )
 }

@@ -20,4 +20,4 @@ const TextLogo = ({ size = 35 }) => {
     )
 }
 
-export default TextLogo
+export default React.memo(TextLogo)

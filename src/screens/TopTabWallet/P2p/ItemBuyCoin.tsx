@@ -5,6 +5,7 @@ import { colors } from '@themes/colors';
 import { styled } from '@themes/styled';
 import React from 'react';
 import { IUser } from './BuyCoin';
+import ButtonBuyCoin from './ButtonBuyCoin';
 
 interface Props {
     t: any;
@@ -12,14 +13,17 @@ interface Props {
 }
 
 const ItemBuyCoin = ({ user, t }: Props) => {
+    // const typeUser = 1;
+    // const userId = 2;
+    // const loggedInUserId = 1;
+    // const typeP2P = 1;
     return (
         <Box
             row
             padding={20}
             marginVertical={7}
             backgroundColor={colors.gray6}
-            style={[styled.shadow, { shadowColor: '#f6f6f6' }]}
-        >
+            style={[styled.shadow, { shadowColor: '#f6f6f6' }]}>
             <Box flex={1}>
                 <Txt color={colors.green} bold>
                     {user.price}
@@ -46,20 +50,14 @@ const ItemBuyCoin = ({ user, t }: Props) => {
                     </Txt>
                 </Txt>
             </Box>
-
-            <Btn
-                radius={5}
-                alignSelf={'center'}
-                paddingVertical={7}
-                paddingHorizontal={25}
-                backgroundColor={colors.green}
-            >
+            <Btn radius={5} alignSelf={'center'} paddingVertical={7} paddingHorizontal={25} maxWidth={150} backgroundColor={colors.green}> 
                 <Txt color={'white'}>
                     {t('Buy')}
                 </Txt>
             </Btn>
+            {/* <ButtonBuyCoin typeUser={typeUser} userId={userId} loggedInUserId={loggedInUserId} typeP2P={typeP2P} /> */}
         </Box>
     )
 }
 
-export default ItemBuyCoin
+export default React.memo(ItemBuyCoin)
