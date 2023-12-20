@@ -10,6 +10,7 @@ import CoinChoosed from './CoinChoosed'
 import { ICoin } from '@models/coin'
 import { useSelector } from 'react-redux'
 import { coinListSelector } from '@redux/selector/userSelector'
+//
 
 const P2p = () => {
   const { t } = useTranslation()
