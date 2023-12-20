@@ -4,91 +4,87 @@ import Scroll from '@commom/Scroll'
 import Txt from '@commom/Txt'
 import { colors } from '@themes/colors'
 import React from 'react'
+import { socket } from '../../../helper/AxiosInstance'
+import { useDispatch, useSelector } from 'react-redux';
+import { AppDispatch } from '@redux/store/store'
+import { setListCoinRealtime } from '@redux/slice/coinSlice'
+import { coinListSelector } from '@redux/selector/userSelector'
+import { keys } from '@contants/keys' 
+import { ICoin } from '@models/coin'
+import Btn from '@commom/Btn'
 
-const Coins = () => {
-    const coins = [
-        {
-            price: 10,
-            USDT: 0.5,
-            percent: 33,
-            symbol: 'SWB',
-            title: 'SWB Coin',
-            icon: require('@images/wallet/swb.png'),
-        },
-        {
-            price: 0,
-            percent: 1,
-            USDT: 0.001,
-            symbol: 'STF',
-            title: 'Swap Tobe Coin',
-            icon: require('@images/wallet/swb.png'),
-        },
-        {
-            price: 200,
-            symbol: 'BTC',
-            percent: -8.201,
-            USDT: 38_590.45,
-            title: 'Bitcoin',
-            icon: require('@images/wallet/bitcoin.png'),
-        },
-        {
-            price: 25,
-            symbol: 'ETH',
-            USDT: 2_844.44,
-            percent: -9.603,
-            title: 'Ethereum',
-            icon: require('@images/wallet/eth.png'),
-        },
-        {
-            price: 0,
-            USDT: 0.5,
-            percent: 33,
-            symbol: 'SWBS',
-            title: 'SWB Coin',
-            icon: require('@images/wallet/swb.png'),
-        },
-    ]
+type Props = {
+    t?: any
+    style?: any
+    isShowHeader?: boolean
+    onCoinSelected?: (coin: ICoin) => void
+}
+const Coins:React.FC<Props> = ({t, style, isShowHeader, onCoinSelected}) => {
+    const dispatch: AppDispatch = useDispatch()
+    const coins = useSelector(coinListSelector)
+    React.useEffect(() => {
+        socket.connect();
+        socket.on("listCoin", (resp) => {
+            dispatch(setListCoinRealtime(resp));
+
+        });
+        return () => {
+            socket.off("listCoin");
+            socket.disconnect();
+        }
+    }, [])
 
     return (
         <Box>
-            <Scroll paddingBottom={100}>
+            <Scroll style={style} showsVerticalScrollIndicator={false}>
+                {isShowHeader && (
+                    <Box
+                        row
+                        alignCenter
+                        padding={20}
+                        justifySpaceBetween
+                    >
+                        <Txt bold size={16} color={colors.darkGreen}>
+                            {t('Coin')}
+                        </Txt>
+                        <Txt bold size={16} color={colors.darkGreen}>
+                            {t('24h Volume')}
+                        </Txt>
+                    </Box>
+                )}
                 {coins.map((coin) => {
-                    let [percent, colorPercent] = ['', 'red']
-                    if (coin.percent) {
-                        percent = coin.percent >= 0 ? `+${coin.percent}%` : `${coin.percent}%`
-                        colorPercent = coin.percent >= 0 ? '#75c1a8' : '#c94d4d'
-                    }
                     return (
-                        <Box
+                        <Btn
                             row
                             alignCenter
                             padding={20}
-                            key={coin.symbol}
+                            key={coin.id}
                             justifySpaceBetween
+                            onPress={() => onCoinSelected && onCoinSelected(coin)}
                         >
                             <Box row alignCenter>
                                 <Icon
                                     size={35}
                                     marginRight={10}
-                                    source={coin.icon}
+                                    source={{ uri: `${keys.HOSTING_API}${coin.image}` }}
                                 />
                                 <Box>
                                     <Txt bold size={16} color={colors.darkGreen}>
-                                        {coin.title}
+                                        {coin.name}
                                     </Txt>
                                     <Txt marginTop={9} size={14} color={colors.darkGreen}>
-                                        {`$${coin.USDT}  `}
-                                        <Txt color={colorPercent}>
-                                            {percent}
+                                        {`$${coin.price}  `}
+                                        <Txt color={coin.percent >= 0 ? '#75c1a8' : '#c94d4d'}>
+                                            {coin.percent >= 0 ? `+${coin.percent}%` : `${coin.percent}%`}
                                         </Txt>
                                     </Txt>
 
                                 </Box>
                             </Box>
                             <Txt bold color={colors.darkGreen}>
-                                {`${coin.price} ${coin.symbol}`}
+                                {`${coin.volume} ${coin.symbolWallet}`}
                             </Txt>
-                        </Box>
+                        </Btn>
                     )
                 })}
             </Scroll>
@@ -96,4 +92,4 @@ const Coins = () => {
     )
 }
 
-export default Coins
+export default React.memo(Coins)

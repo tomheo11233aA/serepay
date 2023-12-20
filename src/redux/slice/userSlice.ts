@@ -42,7 +42,6 @@ export const fetchUserInfo = createAsyncThunk('user/fetchUserInfo', async () => 
 
 export const fetchUserWallet = createAsyncThunk('user/fetchUserWallet', async () => {
     const response = await getWalletApi();
-    console.log(response?.data);
     return response?.data;
 });
 

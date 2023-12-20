@@ -5,20 +5,21 @@ import Txt from '@commom/Txt'
 import { colors } from '@themes/colors'
 import { fonts } from '@themes/fonts'
 import React from 'react'
+import { ICoin } from '@models/coin'
 
 interface Props {
     title: string;
-    price: number | string;
     buttonText: string;
     buttonColor: string;
+    selectedCoin: ICoin | null;
 }
-
 const BuySellItem = ({
     title,
-    price,
     buttonText,
     buttonColor,
+    selectedCoin
 }: Props) => {
+    const price = selectedCoin ? selectedCoin.price : 0;
     return (
         <Box
             radius={5}
@@ -41,7 +42,7 @@ const BuySellItem = ({
                 size={15}
                 marginVertical={15}
             >
-                {price} VND
+                {price ? price.toLocaleString() : 0} USD
             </Txt>
             <Btn
                 radius={5}
@@ -56,4 +57,4 @@ const BuySellItem = ({
     )
 }
 
-export default BuySellItem
+export default React.memo(BuySellItem)

@@ -9,16 +9,18 @@ import { useTranslation } from 'react-i18next'
 import { Modal, Portal, Button } from 'react-native-paper';
 import Coins from '../Wallet/Coins'
 import { ICoin } from '@models/coin'
-import { set } from 'lodash'
 import { keys } from '@contants/keys'
 
-const CoinChoosed = () => {
+interface Props {
+    setSelectedCoin: (coin: ICoin) => void
+    selectedCoin: any | null
+}
+const CoinChoosed: React.FC<Props> = ({ setSelectedCoin, selectedCoin}) => {
     const { t } = useTranslation()
     const [visible, setVisible] = React.useState(false);
-    const [selectedCoin, setSelectedCoin] = React.useState<ICoin | null>(null);
     const showModal = () => setVisible(true);
     const hideModal = () => setVisible(false);
-    const handleChooseCoin = (coin : ICoin) => {
+    const handleChooseCoin = (coin: ICoin) => {
         setSelectedCoin(coin);
         hideModal();
     }
@@ -36,7 +38,7 @@ const CoinChoosed = () => {
                         marginVertical: 10,
                         borderRadius: 5,
                     }}>
-                    
+
                     <Coins t={t} isShowHeader onCoinSelected={handleChooseCoin} />
                 </Modal>
             </Portal>
@@ -52,7 +54,7 @@ const CoinChoosed = () => {
                     <Icon
                         size={25}
                         marginRight={10}
-                            source={selectedCoin ? { uri: `${keys.HOSTING_API}${selectedCoin.image}` } : require('@images/wallet/bitcoin.png')}
+                        source={selectedCoin ? { uri: `${keys.HOSTING_API}${selectedCoin.image}` } : require('@images/wallet/bitcoin.png')}
                     />
                     <Txt fontFamily={fonts.IBMPM}>
                         {selectedCoin ? selectedCoin.token_key : 'Bitcoin'}

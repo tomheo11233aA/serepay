@@ -19,7 +19,6 @@ const Main = () => {
     const isEnebleTwoFA = useCallback(async () => {
         const isTwoFA = userInfo?.enabled_twofa
         await AsyncStorage.setItem('isTwoFA', (isTwoFA ?? 0).toString())
-        console.log('isTwoFA', isTwoFA)
         if (isTwoFA == 1) {
             dispatch(setLogin(false))
         } else if (isTwoFA == 0) {

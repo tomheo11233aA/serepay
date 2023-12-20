@@ -16,13 +16,11 @@ const coinSlice = createSlice({
     initialState,
     reducers: {
         setListCoinRealtime: (state, action: PayloadAction<ICoin[]>) => {
-            // state = action.payload
             return [...action.payload]
         },
     },
     extraReducers: (builder) => {
         builder.addCase(fetchListCoin.fulfilled, (state, action: PayloadAction<ICoin[]>) => {
-            // state = action.payload
             return [...action.payload]
         })
     }
