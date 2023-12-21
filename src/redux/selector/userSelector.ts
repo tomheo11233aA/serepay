@@ -11,3 +11,5 @@ export const userWalletUserSelector = (state: RootState) => state.user.userWalle
 export const coinListSelector = (state: RootState) => state.coin
 
 export const exchangeRateSelector = (state: RootState) => state.exchangeRate
+
+export const historySelector = (state: RootState) => state.history

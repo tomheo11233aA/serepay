@@ -1,8 +1,7 @@
 import Box from '@commom/Box'
 import { colors } from '@themes/colors'
-import React, {useEffect, useState} from 'react'
+import React, { useEffect, useState } from 'react'
 import BuySellItem from './BuySellItem'
-import ChooseCoin from './ChooseCoin'
 import Note from './Note'
 import BuyCoin from './BuyCoin'
 import { useTranslation } from 'react-i18next'
@@ -10,13 +9,13 @@ import CoinChoosed from './CoinChoosed'
 import { ICoin } from '@models/coin'
 import { useSelector } from 'react-redux'
 import { coinListSelector } from '@redux/selector/userSelector'
-//test commitihasihduasdgi
-
+import { ScrollView, View } from 'react-native'
+import { useCoinSocket } from '../../../helper/useCoinSocket'
 const P2p = () => {
   const { t } = useTranslation()
+  useCoinSocket()
   const coins = useSelector(coinListSelector)
   const [selectedCoin, setSelectedCoin] = React.useState<ICoin | null>(null)
-
   useEffect(() => {
     const btc = coins.find((coin: ICoin) => coin.name === 'BTC')
     if (btc) {
@@ -29,7 +28,7 @@ const P2p = () => {
       flex={1}
       marginTop={10}
     >
-      <CoinChoosed setSelectedCoin={setSelectedCoin} selectedCoin={selectedCoin}  />
+      <CoinChoosed setSelectedCoin={setSelectedCoin} selectedCoin={selectedCoin} />
       <Box
         row
         marginTop={20}
@@ -50,16 +49,24 @@ const P2p = () => {
           selectedCoin={selectedCoin}
         />
       </Box>
-      <Box
-        flex={1}
-        marginTop={20}
-        borderTopLeftRadius={20}
-        borderTopRightRadius={20}
-        backgroundColor={'white'}
+      <View
+        style={{
+          marginTop: 20,
+          borderTopLeftRadius: 20,
+          borderTopRightRadius: 20,
+          backgroundColor: 'white',
+          marginBottom: 50,
+          flex: 1
+        }}
+
       >
         <Note t={t} />
-        <BuyCoin t={t} />
-      </Box>
+        <ScrollView>
+          <BuyCoin t={t} type={'buy'} />
+          <BuyCoin t={t} />
+        </ScrollView>
+
+      </View>
     </Box>
   )
 }

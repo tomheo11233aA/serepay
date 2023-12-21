@@ -21,20 +21,8 @@ type Props = {
     onCoinSelected?: (coin: ICoin) => void
 }
 const Coins:React.FC<Props> = ({t, style, isShowHeader, onCoinSelected}) => {
-    // const dispatch: AppDispatch = useDispatch()
-    const coins = useSelector(coinListSelector)
-    // React.useEffect(() => {
-    //     socket.connect();
-    //     socket.on("listCoin", (resp) => {
-    //         dispatch(setListCoinRealtime(resp));
-    //     });
-    //     return () => {
-    //         socket.off("listCoin");
-    //         socket.disconnect();
-    //     }
-    // }, [])
     useCoinSocket()
-
+    const coins = useSelector(coinListSelector)
     return (
         <Box>
             <Scroll style={style} showsVerticalScrollIndicator={false}>

@@ -2,38 +2,27 @@ import Box from '@commom/Box'
 import Icon from '@commom/Icon'
 import Txt from '@commom/Txt'
 import { colors } from '@themes/colors'
-import React from 'react'
+import React, { useEffect } from 'react'
 import ItemBuyCoin from './ItemBuyCoin'
 import Scroll from '@commom/Scroll'
+import { useSelector, useDispatch } from 'react-redux'
+import { fetchListAdsBuy } from '@redux/slice/historySlice'
+import { historySelector } from '@redux/selector/userSelector'
+import { AppDispatch } from '@redux/store/store'
+import { IGetListAdsBuy } from '@models/P2P/USER/getListAdsBuy'
+import { setListAdsBuy } from '@redux/slice/historySlice'
+import { IResponse } from '@redux/slice/historySlice'
 
-export interface IUser {
-    max: string;
-    time: string;
-    USDT: string;
-    name: string;
-    price: string;
-    symbol: string;
-}
-
-const BuyCoin = ({ t }: any) => {
-    const users: IUser[] = [
-        {
-            time: '0s',
-            USDT: 'VNDR',
-            symbol: 'BTC',
-            max: '0.0000936',
-            name: 'davidpham',
-            price: '835,069,199',
-        },
-        {
-            time: '0s',
-            USDT: 'VNDR',
-            symbol: 'BTC',
-            max: '0.0000936',
-            name: 'davidpham',
-            price: '835,069,199',
-        },
-    ]
+const BuyCoin = ({ t , type}: any) => {
+    const dispatch: AppDispatch = useDispatch()
+    const users: IResponse[] = useSelector(historySelector)
+    useEffect(() => {
+            dispatch(fetchListAdsBuy({
+                page: 1,
+                limit: 10,
+                symbol: 'ETH'
+            }))        
+    }, [dispatch, type])
 
     return (
         <Box paddingHorizontal={15}>
@@ -56,7 +45,7 @@ const BuyCoin = ({ t }: any) => {
             <Scroll>
                 {users.map((user) =>
                     <ItemBuyCoin
-                        key={Math.random()}
+                        key={user.id}
                         user={user}
                         t={t}
                     />
