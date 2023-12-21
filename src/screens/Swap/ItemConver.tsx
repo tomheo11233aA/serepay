@@ -12,19 +12,21 @@ interface Props {
     symbol: string;
     icon: ImageSourcePropType;
     iconConvert?: boolean;
-    amount?: any;
-    onAmountChange?: any;
-    onSymbolClick?: any;
+    value?: string;
+    setValue?: (value: string) => void;
+    changeCoin?: () => void;    
+    readonly?: boolean;
 }
 
 const ItemConver = ({
     icon,
     title,
     symbol,
-    amount,
     iconConvert = false,
-    onAmountChange,
-    onSymbolClick,
+    value,
+    changeCoin,
+    setValue,
+    readonly = false,
 }: Props) => {
     const { t } = useTranslation()
     return (
@@ -64,10 +66,11 @@ const ItemConver = ({
                     borderTopLeftRadius={5}
                     backgroundColor={'white'}
                     borderBottomLeftRadius={5}
-                    value={amount}
-                    onChangeText={onAmountChange}
+                    value={value}
+                    onChangeText={setValue}
+                    readonly={readonly}
                 />
-                <TouchableOpacity onPress={onSymbolClick}>
+                <TouchableOpacity onPress={changeCoin}>
                     <Box
                         row
                         radius={5}

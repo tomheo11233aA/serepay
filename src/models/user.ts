@@ -26,13 +26,15 @@ export interface IUserInfo {
 }
 
 export interface IUserWallet {
-    bnb_balance: number;
-    usdt_balance: number;
-    block_token_balance: number;
-    stf_trc20_balance: number;
-    vnd_balance: number;
-    usd_balance: number;
     btc_balance: number;
     eth_balance: number;
+    usdt_balance: number;
+    bch_balance: number;
     ltc_balance: number;
+    xrp_balance: number;
+    bnb_balance: number;
+    doge_balance: number;
+    dot_balance: number;
+    uni_balance: number;
+    win_balance: number;
 }

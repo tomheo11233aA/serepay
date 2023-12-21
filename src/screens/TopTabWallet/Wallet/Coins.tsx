@@ -26,7 +26,7 @@ const Coins:React.FC<Props> = ({t, style, isShowHeader, onCoinSelected}) => {
         socket.connect();
         socket.on("listCoin", (resp) => {
             dispatch(setListCoinRealtime(resp));
-
+            // console.log(resp)
         });
         return () => {
             socket.off("listCoin");
@@ -37,7 +37,7 @@ const Coins:React.FC<Props> = ({t, style, isShowHeader, onCoinSelected}) => {
     return (
         <Box>
             <Scroll style={style} showsVerticalScrollIndicator={false}>
-                {isShowHeader && (
+                {/* {isShowHeader && (
                     <Box
                         row
                         alignCenter
@@ -51,7 +51,7 @@ const Coins:React.FC<Props> = ({t, style, isShowHeader, onCoinSelected}) => {
                             {t('24h Volume')}
                         </Txt>
                     </Box>
-                )}
+                )} */}
                 {coins.map((coin) => {
                     return (
                         <Btn

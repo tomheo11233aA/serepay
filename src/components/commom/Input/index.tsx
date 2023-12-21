@@ -10,6 +10,7 @@ import Btn from '@commom/Btn';
 import Img from '@commom/Img';
 
 const Input = ({
+    readonly,
     value,
     onChangeText,
     hint,
@@ -214,7 +215,8 @@ const Input = ({
                 placeholderTextColor={hintColor}
                 secureTextEntry={security ? true : false}
                 keyboardType={keyboardType}
-                editable={disabled}
+                // editable={disabled}
+                editable={readonly ? false : true}
                 autoCapitalize={autoCapitalize}
                 textAlign={textAlign}
                 onFocus={onFocus}
@@ -326,6 +328,7 @@ interface Props {
     zIndex?: any,
     borderTopLeftRadius?: any,
     borderTopRightRadius?: any,
+    readonly?: boolean,
 }
 
 

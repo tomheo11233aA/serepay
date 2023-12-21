@@ -6,10 +6,9 @@ import { colors } from '@themes/colors'
 import { fonts } from '@themes/fonts'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
-import { Modal, Portal, Button } from 'react-native-paper';
-import Coins from '../Wallet/Coins'
 import { ICoin } from '@models/coin'
 import { keys } from '@contants/keys'
+import CoinModal from '@commom/Modal/CoinModal'
 
 interface Props {
     setSelectedCoin: (coin: ICoin) => void
@@ -27,21 +26,7 @@ const CoinChoosed: React.FC<Props> = ({ setSelectedCoin, selectedCoin}) => {
 
     return (
         <Box paddingHorizontal={15} marginTop={20}>
-            <Portal>
-                <Modal
-                    visible={visible}
-                    onDismiss={hideModal}
-                    contentContainerStyle=
-                    {{
-                        backgroundColor: 'white',
-                        marginHorizontal: 20,
-                        marginVertical: 10,
-                        borderRadius: 5,
-                    }}>
-
-                    <Coins t={t} isShowHeader onCoinSelected={handleChooseCoin} />
-                </Modal>
-            </Portal>
+            <CoinModal visible={visible} hideModal={hideModal} handleChooseCoin={handleChooseCoin} t={t} />
             <Box
                 row
                 radius={5}

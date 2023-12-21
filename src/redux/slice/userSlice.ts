@@ -23,15 +23,17 @@ const initialState: IUserSlice = {
         enabled_twofa: 1,
     },
     userWallet: {
-        bnb_balance: 0,
-        usdt_balance: 0,
-        block_token_balance: 0,
-        stf_trc20_balance: 0,
-        vnd_balance: 0,
-        usd_balance: 0,
         btc_balance: 0,
         eth_balance: 0,
+        usdt_balance: 0,
+        bch_balance: 0,
         ltc_balance: 0,
+        xrp_balance: 0,
+        bnb_balance: 0,
+        doge_balance: 0,
+        dot_balance: 0,
+        uni_balance: 0,
+        win_balance: 0
     },
 }
 
