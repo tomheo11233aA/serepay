@@ -3,29 +3,13 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 import AxiosInstance from "../../helper/AxiosInstance";
 import { IGetListAdsBuy } from "@models/P2P/USER/getListAdsBuy";
 import { IGetListAdsSell } from "@models/P2P/USER/getListAdsSell";
+import { IHistory } from "@models/history";
+import { IType } from "@models/history";
 
-// const initialState: IGetListAdsBuy[] = [];
-
-// reponse là mảng các ads
-export interface IResponse {
-    id: number;
-    side: string;
-    amount: number;
-    amountMinimum: number;
-    userName: string;
-    email: string;
-    type: number;
-    userid: number;
-    created_at: string;
-    addressWallet: string;
-    bankName: string;
-    ownerAccount: string;
-    numberBank: string;
-    symbol: string;
-    amountSuccess: number;
-}
-
-const initialState: IResponse[] = [];
+const initialState: IType = {
+    buy: [],
+    sell: []
+};
 
 export const fetchListAdsBuy = createAsyncThunk('adsBuy/fetchListAdsBuy', async (data: IGetListAdsBuy) => {
     const axiosInstance = AxiosInstance();
@@ -42,34 +26,21 @@ export const fetchListAdsSell = createAsyncThunk('adsSell/fetchListAdsSell', asy
 const historySlice = createSlice({
     name: 'history',
     initialState,
-    reducers: {
-        setListAdsBuy: (state, action: PayloadAction<IResponse[]>) => {
-            return Array.isArray(action.payload) ? action.payload : initialState
-        },
-        setListAdsSell: (state, action: PayloadAction<IResponse[]>) => {
-            return Array.isArray(action.payload) ? action.payload : initialState
-        }
-    },
+    reducers: {},
     extraReducers: (builder) => {
-        builder.addCase(fetchListAdsBuy.fulfilled, (state, action: PayloadAction<{ array: IResponse[], total: number }>) => {
-            if (Array.isArray(action.payload.array)) {
-                state.length = 0;
-                state.push(...action.payload.array);
+        builder.addCase(fetchListAdsBuy.fulfilled, (state, { payload: { array } }) => {
+            if (Array.isArray(array)) {
+                state.buy.length = 0;
+                state.buy.push(...array);
             }
         })
-        builder.addCase(fetchListAdsSell.fulfilled, (state, action: PayloadAction<{ array: IResponse[], total: number }>) => {
-            if (Array.isArray(action.payload.array)) {
-                state.length = 0;
-                state.push(...action.payload.array);
+        builder.addCase(fetchListAdsSell.fulfilled, (state, { payload: { array } }) => {
+            if (Array.isArray(array)) {
+                state.sell.length = 0;
+                state.sell.push(...array);
             }
         })
     }
 })
 
-export const {
-    setListAdsBuy,
-    setListAdsSell
-} = historySlice.actions
-
 export default historySlice
-

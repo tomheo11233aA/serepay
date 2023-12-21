@@ -13,3 +13,7 @@ export const coinListSelector = (state: RootState) => state.coin
 export const exchangeRateSelector = (state: RootState) => state.exchangeRate
 
 export const historySelector = (state: RootState) => state.history
+
+export const adsBuySelector = (state: RootState) => state.history.buy
+
+export const adsSellSelector = (state: RootState) => state.history.sell
