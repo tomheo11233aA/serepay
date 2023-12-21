@@ -7,6 +7,7 @@ const initialState: ExChangeRate[] = [];
 
 export const fetchListExchange = createAsyncThunk('exchange/fetchListExchange', async () => {
     const response = await getExchange();
+    console.log(response?.data)
     return response?.data;
 });
 

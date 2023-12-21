@@ -23,6 +23,7 @@ type Props = {
 const Coins:React.FC<Props> = ({t, style, isShowHeader, onCoinSelected}) => {
     useCoinSocket()
     const coins = useSelector(coinListSelector)
+    // console.log('coins', coins)
     return (
         <Box>
             <Scroll style={style} showsVerticalScrollIndicator={false}>

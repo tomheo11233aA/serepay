@@ -17,3 +17,5 @@ export const historySelector = (state: RootState) => state.history
 export const adsBuySelector = (state: RootState) => state.history.buy
 
 export const adsSellSelector = (state: RootState) => state.history.sell
+
+export const configSelector = (state: RootState) => state.config.data

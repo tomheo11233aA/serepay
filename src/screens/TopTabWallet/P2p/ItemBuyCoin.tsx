@@ -6,11 +6,10 @@ import { styled } from '@themes/styled';
 import React from 'react';
 // import { IUser } from './BuyCoin';
 import ButtonBuyCoin from './ButtonBuyCoin';
-import { IResponse } from '@redux/slice/historySlice';
-
+import { IHistory } from '@models/history';
 interface Props {
     t: any;
-    user: IResponse;
+    user: IHistory;
 }
 
 const ItemBuyCoin = ({ user, t }: Props) => {

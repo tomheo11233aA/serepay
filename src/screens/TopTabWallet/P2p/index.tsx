@@ -37,12 +37,14 @@ const P2p = () => {
       >
 
         <BuySellItem
+        type={'buy'}
           buttonText={t('Buy now')}
           title={t('Selling price')}
           buttonColor={colors.green}
           selectedCoin={selectedCoin}
         />
         <BuySellItem
+        type={'sell'}
           buttonColor={colors.red2}
           title={t('Buying price')}
           buttonText={t('Sell now')}
