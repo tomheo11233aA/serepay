@@ -7,7 +7,7 @@ import ItemBuyCoin from './ItemBuyCoin'
 import Scroll from '@commom/Scroll'
 import { useSelector, useDispatch } from 'react-redux'
 import { fetchListAdsBuy, fetchListAdsSell } from '@redux/slice/historySlice'
-import { historySelector, adsBuySelector, adsSellSelector } from '@redux/selector/userSelector'
+import { adsBuySelector, adsSellSelector } from '@redux/selector/userSelector'
 import { AppDispatch } from '@redux/store/store'
 import { IHistory } from '@models/history'
 import { Image } from 'react-native'
@@ -19,7 +19,7 @@ const BuyCoin = ({ t, type }: any) => {
         type === 'buy' ? dispatch(fetchListAdsBuy({
             page: 1,
             limit: 5,
-            symbol: 'BTC'
+            symbol: 'eth'
         })) : dispatch(fetchListAdsSell({
             page: 1,
             limit: 5,
@@ -59,7 +59,7 @@ const BuyCoin = ({ t, type }: any) => {
                         />
                     )
                 ) : (
-                    <Box marginTop={20} alignCenter>
+                    <Box marginVertical={20} alignCenter>
                         <Image
                             source={require('@images/tab/nodata.png')}
                             style={{
