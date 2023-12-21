@@ -15,23 +15,56 @@ import { ISwap } from '@models/SWAP/swap'
 import { keys } from '@contants/keys'
 import { getBalanceOfChoosedCoin } from '../../helper/function/getBalanceOfChoosedCoin'
 import { userWalletUserSelector } from '@redux/selector/userSelector'
+import { useCoinSocket } from '../../helper/useCoinSocket'
+import { calculateConversionRate } from '../../helper/function/calculateConversionRate'
 
 interface Props {
     t: any;
 }
 
 const MakePrice = ({ t }: Props) => {
+    useCoinSocket()
     const coins = useSelector(coinListSelector)
     const userWallet = useSelector(userWalletUserSelector)
     const [symbolForm, setSymbolForm] = useState<string>('BTC')
     const [symbolTo, setSymbolTo] = useState<string>('ETH')
-    const balance = useMemo(() =>  getBalanceOfChoosedCoin(symbolForm, userWallet), [symbolForm, userWallet])
+    const balance = useMemo(() => getBalanceOfChoosedCoin(symbolForm, userWallet), [symbolForm, userWallet])
     const [amountForm, setAmountForm] = useState<string>('0')
+    const [amountTo, setAmountTo] = useState<string>('0')
     const [iconForm, setIconForm] = useState<string>('')
     const [selectedCoin, setSelectedCoin] = useState<ICoin | null>(null)
     const [visible, setVisible] = useState(false);
     const showModal = useCallback(() => setVisible(true), [])
     const hideModal = useCallback(() => setVisible(false), [])
+    const [iconTo, setIconTo] = useState<string>('')
+    const [isChoosingForSymbolTo, setIsChoosingForSymbolTo] = useState(false);
+
+    useEffect(() => {
+        const conversionRate = calculateConversionRate(symbolForm, symbolTo, coins)
+        const amountTo = parseFloat(amountForm) * Number(conversionRate);
+        setAmountTo(amountTo.toFixed(8))
+    }, [amountForm, symbolForm, symbolTo, coins])
+    
+    const showModalForSymbolForm = useCallback(() => {
+        setIsChoosingForSymbolTo(false);
+        showModal();
+    }, [showModal]);
+
+    const showModalForSymbolTo = useCallback(() => {
+        setIsChoosingForSymbolTo(true);
+        showModal();
+    }, [showModal]);
+
+    const changeCoin = useCallback((coin: ICoin) => {
+        if (isChoosingForSymbolTo) {
+            setSymbolTo(coin?.name ?? 'ETH')
+            setIconTo(coin?.image ?? '')
+        } else {
+            setSymbolForm(coin?.name ?? 'BTC')
+            setIconForm(coin?.image ?? '')
+        }
+        hideModal()
+    }, [hideModal, isChoosingForSymbolTo])
 
     useEffect(() => {
         const btc = coins.find((coin: ICoin) => coin.name === 'BTC')
@@ -39,13 +72,6 @@ const MakePrice = ({ t }: Props) => {
             setSelectedCoin(btc)
         }
     }, [coins])
-
-    const changeCoin = useCallback((coin: ICoin) => {
-        setSelectedCoin(coin)
-        setSymbolForm(coin?.name ?? 'BTC')
-        setIconForm(coin?.image ?? '')
-        hideModal()
-    }, [hideModal])
 
     const swapCoin = useCallback(async (swapData: ISwap) => {
         try {
@@ -67,7 +93,7 @@ const MakePrice = ({ t }: Props) => {
                 icon={iconForm ? { uri: `${keys.HOSTING_API}${iconForm}` } : require('@images/wallet/bitcoin.png')}
                 value={amountForm}
                 setValue={setAmountForm}
-                changeCoin={showModal}
+                changeCoin={showModalForSymbolForm}
             />
             <Box
                 top={3}
@@ -91,13 +117,24 @@ const MakePrice = ({ t }: Props) => {
             </Box>
 
             <ItemConver
-                symbol={'ETH'}
+                symbol={symbolTo}
                 iconConvert={true}
-                title={'Amount of ETH'}
-                icon={require('@images/wallet/eth.png')}
+                title={`Amount of ${symbolTo}`}
+                icon={iconTo ? { uri: `${keys.HOSTING_API}${iconTo}` } : require('@images/wallet/eth.png')}
                 readonly={true}
-                
+                changeCoin={showModalForSymbolTo}
+                value={amountTo}
             />
+             <Box
+                top={3}
+                row
+                justifySpaceBetween>
+                <Txt
+                    marginTop={10}
+                    color={'#999999'}>
+                    {`1 ${symbolForm} = ${calculateConversionRate(symbolForm, symbolTo, coins)} ${symbolTo}`}
+                </Txt>
+            </Box>
 
             <Btn
                 radius={5}

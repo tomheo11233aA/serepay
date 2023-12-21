@@ -12,6 +12,7 @@ import { coinListSelector } from '@redux/selector/userSelector'
 import { keys } from '@contants/keys' 
 import { ICoin } from '@models/coin'
 import Btn from '@commom/Btn'
+import { useCoinSocket } from '../../../helper/useCoinSocket'
 
 type Props = {
     t?: any
@@ -20,19 +21,19 @@ type Props = {
     onCoinSelected?: (coin: ICoin) => void
 }
 const Coins:React.FC<Props> = ({t, style, isShowHeader, onCoinSelected}) => {
-    const dispatch: AppDispatch = useDispatch()
+    // const dispatch: AppDispatch = useDispatch()
     const coins = useSelector(coinListSelector)
-    React.useEffect(() => {
-        socket.connect();
-        socket.on("listCoin", (resp) => {
-            dispatch(setListCoinRealtime(resp));
-            // console.log(resp)
-        });
-        return () => {
-            socket.off("listCoin");
-            socket.disconnect();
-        }
-    }, [])
+    // React.useEffect(() => {
+    //     socket.connect();
+    //     socket.on("listCoin", (resp) => {
+    //         dispatch(setListCoinRealtime(resp));
+    //     });
+    //     return () => {
+    //         socket.off("listCoin");
+    //         socket.disconnect();
+    //     }
+    // }, [])
+    useCoinSocket()
 
     return (
         <Box>
