@@ -3,7 +3,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack'
 import Setting from '@screens/Setting'
 import React from 'react'
 import TurnOn2FA from '@screens/Setting/TwoFactorAuth/TurnOn2FA'
-import TestKYC from '@screens/Setting/KYC/TestKYC'
+import TestKYC from '@screens/Setting/KYC'
 
 const Stack = createNativeStackNavigator()
 

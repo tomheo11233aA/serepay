@@ -12,7 +12,7 @@ interface Props {
 
 const Warn = ({ title }: Props) => {
     return (
-        <Box row marginVertical={20} paddingRight={20}>
+        <Box row marginVertical={10} paddingRight={20}>
             <Icon
                 size={25}
                 marginRight={10}
