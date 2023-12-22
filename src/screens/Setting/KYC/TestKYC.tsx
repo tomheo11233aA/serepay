@@ -1,73 +1,96 @@
-import { SafeAreaView, StyleSheet, Text, View } from 'react-native'
+import { StyleSheet, SafeAreaView } from 'react-native'
 import React from 'react'
-import Warn from '@screens/Swap/Warn'
-import { useTranslation } from 'react-i18next'
-import Input from '@commom/Input'
-import { colors } from '@themes/colors'
+import { useForm, Controller } from 'react-hook-form'
+import { yupResolver } from '@hookform/resolvers/yup'
+import * as yup from "yup"
+import { TextInput, Button, View, Text } from 'react-native'
+
+let schema = yup.object().shape({
+    fullName: yup.string().required("Full name is required"),
+    address: yup.string().required("Address is required"),
+    phone: yup.string().matches(/(84|0[3|5|7|8|9])+([0-9]{8})\b/g, "Phone number is not valid").required("Phone is required"),
+    company: yup.string().required("Company is required"),
+    passport: yup.string().required("Passport is required"),
+})
 
 const TestKYC = () => {
-    const { t } = useTranslation()
+    const { control, handleSubmit, formState: { errors } } = useForm({
+        resolver: yupResolver(schema)
+    })
+    const onSubmit = (data: any) => console.log(data)
     return (
         <SafeAreaView>
-            <Text>Update Infomation</Text>
-            <Warn title={t('To keep your assets safe, we need to verify your identity.')} />
-            <Warn title={t('Please fill in the information correctly. Once the identity verification is complete, the information cannot be edited anymore.')} />
-
-            <Input
-                radius={5}
-                height={45}
-                width={'100%'}
-                hint={t('Full Name')}
-                borderWidth={1}
-                tintColor={colors.gray2}
-                borderColor={colors.gray}
-                iconOne={require('@images/unAuth/user.png')}
+            <Controller
+                control={control}
+                render={({ field: { onChange, onBlur, value } }) => (
+                    <TextInput
+                        onBlur={onBlur}
+                        onChangeText={value => onChange(value)}
+                        value={value}
+                        placeholder="Full Name"
+                    />
+                )}
+                name="fullName"
+                defaultValue=""
             />
-
-            <Input
-                radius={5}
-                height={45}
-                width={'100%'}
-                borderWidth={1}
-                hint={t('Address')}
-                tintColor={colors.gray2}
-                borderColor={colors.gray}
-                iconOne={require('@images/unAuth/user.png')}
+            {errors.fullName && <Text>{errors.fullName.message}</Text>}
+            <Controller
+                control={control}
+                render={({ field: { onChange, onBlur, value } }) => (
+                    <TextInput
+                        onBlur={onBlur}
+                        onChangeText={value => onChange(value)}
+                        value={value}
+                        placeholder="Address"
+                    />
+                )}
+                name="address"
+                defaultValue=""
             />
-
-<Input
-                radius={5}
-                height={45}
-                width={'100%'}
-                borderWidth={1}
-                hint={t('Phone')}
-                tintColor={colors.gray2}
-                borderColor={colors.gray}
-                iconOne={require('@images/unAuth/user.png')}
+            {errors.address && <Text>{errors.address.message}</Text>}
+            <Controller
+                control={control}
+                render={({ field: { onChange, onBlur, value } }) => (
+                    <TextInput
+                        onBlur={onBlur}
+                        onChangeText={value => onChange(value)}
+                        value={value}
+                        placeholder="Phone"
+                    />
+                )}
+                name="phone"
+                defaultValue=""
             />
-
-<Input
-                radius={5}
-                height={45}
-                width={'100%'}
-                borderWidth={1}
-                hint={t('Company')}
-                tintColor={colors.gray2}
-                borderColor={colors.gray}
-                iconOne={require('@images/unAuth/user.png')}
+            {errors.phone && <Text>{errors.phone.message}</Text>}
+            <Controller
+                control={control}
+                render={({ field: { onChange, onBlur, value } }) => (
+                    <TextInput
+                        onBlur={onBlur}
+                        onChangeText={value => onChange(value)}
+                        value={value}
+                        placeholder="Company"
+                    />
+                )}
+                name="company"
+                defaultValue=""
             />
-
-<Input
-                radius={5}
-                height={45}
-                width={'100%'}
-                borderWidth={1}
-                hint={t('Passport')}
-                tintColor={colors.gray2}
-                borderColor={colors.gray}
-                iconOne={require('@images/unAuth/user.png')}
+            {errors.company && <Text>{errors.company.message}</Text>}
+            <Controller
+                control={control}
+                render={({ field: { onChange, onBlur, value } }) => (
+                    <TextInput
+                        onBlur={onBlur}
+                        onChangeText={value => onChange(value)}
+                        value={value}
+                        placeholder="Passport"
+                    />
+                )}
+                name="passport"
+                defaultValue=""
             />
-        <Text>Front Image of Citizen Identification Card or Identity Card</Text>
+            {errors.passport && <Text>{errors.passport.message}</Text>}
+            <Button title="Submit" onPress={handleSubmit(onSubmit)} />
         </SafeAreaView>
     )
 }
