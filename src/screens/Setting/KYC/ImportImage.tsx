@@ -6,6 +6,7 @@ import { colors } from '@themes/colors'
 import Btn from '@commom/Btn'
 import { useTranslation } from 'react-i18next'
 import * as ImagePicker from 'react-native-image-picker'
+import { set } from 'lodash'
 
 interface Props {
     title?: string
@@ -13,6 +14,7 @@ interface Props {
 
 const ImportImage:React.FC<Props> = ({title}) => {
     const { t } = useTranslation()
+    const [selectedName, setSelectedName] = React.useState<string | null>(null)
     return (
         <Box marginHorizontal={20} marginBottom={15}>
             <Txt color={colors.black2}>
@@ -33,14 +35,13 @@ const ImportImage:React.FC<Props> = ({title}) => {
                             maxWidth: 200,
                         },
                         (response) => {
-                            console.log('Response = ', response);
                             if (response.didCancel) {
                                 console.log('User cancelled image picker');
                             } else if (response.errorCode) {
                                 console.log('ImagePicker Error: ', response.errorMessage);
                             } else {
-                                // const source = { uri: response?.assets[0]?.uri ?? ''};
-                                // console.log("tomheo", source)
+                                const source = { uri: 'data:image/jpeg;base64,' + (response?.assets?.[0]?.base64 ?? '') };
+                                setSelectedName(response?.assets?.[0]?.fileName ?? 'khong co anh')
                             }
                         },
                     );
@@ -49,6 +50,7 @@ const ImportImage:React.FC<Props> = ({title}) => {
                     {t('Choose file')}
                 </Txt>
             </Btn>
+            {selectedName && <Txt> {selectedName} </Txt>}
         </Box>
     )
 }

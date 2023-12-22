@@ -1,24 +1,19 @@
-import React from 'react';
-import { useForm } from 'react-hook-form';
-import { yupResolver } from '@hookform/resolvers/yup';
-import InputField from './InputField';
-import { FormData, schema } from './formValidation';
+import React, { useState } from 'react';
+import { ScrollView, TouchableOpacity } from 'react-native';
+import { useTranslation } from 'react-i18next';
 import { colors } from '@themes/colors';
 import LinearGradient from 'react-native-linear-gradient';
 import Box from '@commom/Box';
 import Icon from '@commom/Icon';
 import Txt from '@commom/Txt';
-import { useTranslation } from 'react-i18next';
 import Scroll from '@commom/Scroll';
 import { goBack } from '@utils/navigationRef';
-import { TouchableOpacity } from 'react-native';
 import Btn from '@commom/Btn';
 import { fonts } from '@themes/fonts';
-import Warn from '@screens/Swap/Warn';
-import { ScrollView } from 'react-native';
 import ImportImage from './ImportImage';
 import { uploadKyc } from '@utils/userCallApi';
-import { IUploadKYC } from '@models/USER/uploadKYC';
+import Input from '@commom/Input';
+import AxiosInstance from '../../../helper/AxiosInstance';
 import { fetchUserInfo } from '@redux/slice/userSlice'
 import { useDispatch, useSelector } from 'react-redux'
 import { AppDispatch } from '@redux/store/store'
@@ -26,20 +21,17 @@ import { userInfoUserSelector } from '@redux/selector/userSelector'
 
 const FormKYC = () => {
     const { t } = useTranslation()
-    const { control, handleSubmit, formState: { errors } } = useForm<FormData>({
-        resolver: yupResolver(schema)
-    });
-    const onSubmit = (data: FormData) => console.log(data);
-    const [fullname, setFullname] = React.useState<string>('');
-    const [isVerify, setIsVerify] = React.useState<number | null>(null);
-    const [address, setAddress] = React.useState<string>('');
-    const [phone, setPhone] = React.useState<string>('');
-    const [company, setCompany] = React.useState<string>('');
-    const [passport, setPassport] = React.useState<string>('');
-    const [frontIdImage, setFrontIdImage] = React.useState<any>(null);
-    const [backIdImage, setBackIdImage] = React.useState<any>(null);
-    const [selfieImage, setSelfieImage] = React.useState<any>(null);
-    const [userId, setUserId] = React.useState<number | null>(null);
+
+    const [fullName, setFullName] = useState('');
+    // const [isVerify, setIsVerify] = React.useState<number | null>(null);
+    const [address, setAddress] = useState('');
+    const [phone, setPhone] = useState('');
+    const [company, setCompany] = useState('');
+    const [passport, setPassport] = useState('');
+    const [frontIdImage, setFrontIdImage] = useState(null);
+    const [backIdImage, setBackIdImage] = useState(null);
+    const [selfieImage, setSelfieImage] = useState(null);
+    const [userId, setUserId] = useState<number | null>(null);
 
     const dispatch: AppDispatch = useDispatch()
     const userInfo = useSelector(userInfoUserSelector)
@@ -49,21 +41,46 @@ const FormKYC = () => {
 
     React.useEffect(() => {
         if (userInfo) {
-            setUserId(userInfo.id)   
-            setIsVerify(userInfo?.verified)
+            setUserId(userInfo.id)
+            // setIsVerify(userInfo?.verified)
         }
     }, [userInfo]);
 
-
-    const uploadKYC = async () => {
-        const data: IUploadKYC = {
-            // photo: frontIdImage,
-            // backIdImage: backIdImage,
-            // selfieImage: selfieImage
-            fullname
+    const customUploadKyc = async () => {
+        try {
+            const axios = AxiosInstance();
+            const data = new FormData();
+            data.append('fullname', fullName);
+            data.append('address', address);
+            data.append('phone', phone);
+            data.append('company', company);
+            data.append('passport', passport);
+            data.append('photo', frontIdImage);
+            data.append('photo', backIdImage);
+            data.append('photo', selfieImage);
+            data.append('userid', userId)
+            axios.post("/api/uploadKyc", data, {
+                headers: {
+                    "Content-Type": "multipart/form-data",
+                },
+            });
+        } catch (error) {
+            console.log("error", error?.response);
         }
-        const res = await uploadKyc(data)
-        console.log(res)
+    };
+    const onSubmit = async () => {
+        const data = new FormData();
+        data.append('fullName', fullName);
+        data.append('address', address);
+        data.append('phone', phone);
+        data.append('company', company);
+        data.append('passport', passport);
+        data.append('photo', frontIdImage);
+        data.append('photo', backIdImage);
+        data.append('photo', selfieImage);
+
+        const res = await uploadKyc(data);
+        console.log("uploadKYC", res);
     }
 
     return (
@@ -96,30 +113,38 @@ const FormKYC = () => {
                         {t('Update Infomation')}
                     </Txt>
                 </Box>
-                {/* <Box
-                    paddingHorizontal={15}
-                    marginRight={15}
-                >
-                    <Warn title={t('To keep your assets safe, we need to verify your identity.')} />
-                    <Warn title={t('Please fill in the information correctly. Once the identity verification is complete, the information cannot be edited anymore.')} />
-                </Box> */}
                 <Scroll paddingHorizontal={15}>
-                    <InputField control={control} name="fullName" placeholder="Full Name" errors={errors} icon={require('@images/unAuth/user.png')} />
-                    <InputField control={control} name="address" placeholder="Address" errors={errors} icon={require('@images/unAuth/user.png')} />
-                    <InputField control={control} name="phone" placeholder="Phone" errors={errors} icon={require('@images/unAuth/user.png')} />
-                    <InputField control={control} name="company" placeholder="Company" errors={errors} icon={require('@images/unAuth/user.png')} />
-                    <InputField control={control} name="passport" placeholder="Passport" errors={errors} icon={require('@images/unAuth/user.png')} />
+                    <Input
+                        value={fullName}
+                        hint="Full Name"
+                        onChangeText={(value: string) => setFullName(value)}
+                    />
+                    <Input
+                        value={address}
+                        hint="Address"
+                        onChangeText={(value: string) => setAddress(value)}
+                    />
+                    <Input
+                        value={phone}
+                        hint="Phone"
+                        onChangeText={(value: string) => setPhone(value)}
+                    />
+                    <Input
+                        value={company}
+                        hint="Company"
+                        onChangeText={(value: string) => setCompany(value)}
+                    />
+                    <Input
+                        value={passport}
+                        hint="Passport"
+                        onChangeText={(value: string) => setPassport(value)}
+                    />
                 </Scroll>
-                {/* <Box row justifySpaceBetween>
-                    <ImportImage title='Front Image of Citizen Identification Card or Identity Card' />
-                    <ImportImage title='Back Image of Citizen Identification Card or Identity Card' />
-                    <ImportImage title='Portrait' />
-                </Box> */}
                 <ImportImage title='Front Image of Citizen Identification Card or Identity Card' />
                 <ImportImage title='Back Image of Citizen Identification Card or Identity Card' />
                 <ImportImage title='Portrait' />
                 <Btn
-                    onPress={handleSubmit(onSubmit)}
+                    onPress={customUploadKyc}
                     radius={5}
                     width={'90%'}
                     paddingVertical={7}
@@ -129,7 +154,6 @@ const FormKYC = () => {
                         {t('Update')}
                     </Txt>
                 </Btn>
-
             </ScrollView>
         </LinearGradient>
     );

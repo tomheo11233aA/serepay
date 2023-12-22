@@ -65,6 +65,8 @@
         "24h Volume": "Khối lượng 24h",
         "Amount of": "Số lượng của",
         "Please fill in the information correctly. Once the identity verification is complete, the information cannot be edited anymore.": "Vui lòng điền thông tin đúng. Sau khi xác minh danh tính hoàn tất thì thông tin không thể chỉnh sửa nữa.",  
-        "To keep your assets safe, we need to verify your identity.": "Để đảm bảo an toàn cho tài sản của bạn, chúng tôi cần xác minh danh tính của bạn."
+        "To keep your assets safe, we need to verify your identity.": "Để đảm bảo an toàn cho tài sản của bạn, chúng tôi cần xác minh danh tính của bạn.",
+        "Congratulation! Your account has been verified!": "Xin chúc mừng! Tài khoản của bạn đã được xác minh!",
+        "Please wait for admin to verify your account!": "Vui lòng chờ admin xác minh tài khoản của bạn!"
     }
 }

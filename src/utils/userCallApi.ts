@@ -100,7 +100,7 @@ export const getExchange = function () {
     console.log(error);
   }
 };
-export const uploadKyc = function (data: IUploadKYC) {
+export const uploadKyc = function (data: IUploadKYC | any) {
   try {
     return axiosService.post("/api/uploadKyc", data, {
       headers: {

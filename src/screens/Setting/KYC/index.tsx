@@ -24,7 +24,6 @@ const KYCScreen = () => {
   }, [userInfo]);
   return (
     <>
-    {/* if isVerify is 1 will render success, 2 is waiting, if !=1 and !=2 will render form */}
       {isVerify === 1 ? <Success /> : isVerify === 2 ? <Waiting /> : <Form />}
     </>
   )
