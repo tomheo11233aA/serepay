@@ -14,22 +14,35 @@ import { useCallback } from 'react'
 
 const Main = () => {
     const isLogin = useAppSelector(isLoginUserSelector)
-    const userInfo = useSelector(userInfoUserSelector)
+    
+    // const userInfo = useSelector(userInfoUserSelector)
     const dispatch: AppDispatch = useDispatch()
-    const isEnebleTwoFA = useCallback(async () => {
-        const isTwoFA = userInfo?.enabled_twofa
-        await AsyncStorage.setItem('isTwoFA', (isTwoFA ?? 0).toString())
-        if (isTwoFA == 1) {
-            dispatch(setLogin(false))
-        } else if (isTwoFA == 0) {
-            dispatch(setLogin(true))
-        }
-    }, [userInfo?.enabled_twofa, dispatch])
+    // const isEnebleTwoFA = useCallback(async () => {
+    //     const isTwoFA = userInfo?.enabled_twofa
+    //     await AsyncStorage.setItem('isTwoFA', (isTwoFA ?? 0).toString())
+    //     if (isTwoFA == 1) {
+    //         dispatch(setLogin(false))
+    //     } else if (isTwoFA == 0) {
+    //         dispatch(setLogin(true))
+    //     }
+    // }, [userInfo?.enabled_twofa, dispatch])
+
+    // useEffect(() => {
+    //     dispatch(fetchUserInfo())
+    //     isEnebleTwoFA()
+    // }, [isEnebleTwoFA]);
+    // get
+    // get isLogin from AsyncStorage
 
     useEffect(() => {
-        dispatch(fetchUserInfo())
-        isEnebleTwoFA()
-    }, [isEnebleTwoFA]);
+        const fetchIsLogin = async () => {
+            const isLogin = await AsyncStorage.getItem('isLogin')
+            dispatch(setLogin(isLogin == 'true' ? true : false))
+        }
+        fetchIsLogin()
+    }, [])
+
+
     return (
         <>
             { isLogin ? <AuthNavigation /> : <UnAuthNavigation />}

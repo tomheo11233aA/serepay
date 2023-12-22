@@ -36,7 +36,7 @@ const Wallet = () => {
           {t('HELLO')} {userInfo?.username}
         </Txt>
         <Txt color={'white'} size={30} marginTop={10}>
-          BTC: {userWallet?.btc_balance.toFixed(8)} coins
+          BTC: {userWallet?.btc_balance ? userWallet.btc_balance.toFixed(8) : 0} coins
         </Txt>
         <Txt color={'white'} size={30} marginTop={10}>
           {selectedRate?.title}: {transferPrice.toFixed(3)} 

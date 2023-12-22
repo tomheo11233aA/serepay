@@ -101,7 +101,6 @@ export const getExchange = function () {
   }
 };
 export const uploadKyc = function (data: IUploadKYC) {
-  // chưa biết data là cái gì
   try {
     return axiosService.post("/api/uploadKyc", data, {
       headers: {

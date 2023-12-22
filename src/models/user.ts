@@ -23,6 +23,7 @@ export interface IUserInfo {
     last_name: string;
     address: string;
     enabled_twofa: number;
+    verified: number | null;
 }
 
 export interface IUserWallet {

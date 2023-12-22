@@ -21,6 +21,7 @@ const initialState: IUserSlice = {
         last_name: '',
         address: '',
         enabled_twofa: 1,
+        verified: null,
     },
     userWallet: {
         btc_balance: 0,
