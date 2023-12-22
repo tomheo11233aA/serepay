@@ -16,6 +16,7 @@ interface Props {
     setValue?: (value: string) => void;
     changeCoin?: () => void;    
     readonly?: boolean;
+    swapSymbol?: () => void;
 }
 
 const ItemConver = ({
@@ -27,6 +28,7 @@ const ItemConver = ({
     changeCoin,
     setValue,
     readonly = false,
+    swapSymbol
 }: Props) => {
     const { t } = useTranslation()
     return (
@@ -36,7 +38,7 @@ const ItemConver = ({
                     {t(title)}
                 </Txt>
                 {iconConvert &&
-                    <TouchableOpacity>
+                    <TouchableOpacity onPress={swapSymbol}>
                         <Box
                             marginRight={50}
                             rotateZ={'90deg'}

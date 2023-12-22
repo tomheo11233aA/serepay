@@ -31,20 +31,29 @@ const MakePrice = ({ t }: Props) => {
     const balance = useMemo(() => getBalanceOfChoosedCoin(symbolForm, userWallet), [symbolForm, userWallet])
     const [amountForm, setAmountForm] = useState<string>('0')
     const [amountTo, setAmountTo] = useState<string>('0')
-    const [iconForm, setIconForm] = useState<string>('')
-    const [selectedCoin, setSelectedCoin] = useState<ICoin | null>(null)
+    const [iconForm, setIconForm] = useState<string>('images/BTC.png')
+    const [iconTo, setIconTo] = useState<string>('images/ETH.png')
     const [visible, setVisible] = useState(false);
     const showModal = useCallback(() => setVisible(true), [])
     const hideModal = useCallback(() => setVisible(false), [])
-    const [iconTo, setIconTo] = useState<string>('')
-    const [isChoosingForSymbolTo, setIsChoosingForSymbolTo] = useState(false);
-
+    const [isChoosingForSymbolTo, setIsChoosingForSymbolTo] = useState(false)
     useEffect(() => {
         const conversionRate = calculateConversionRate(symbolForm, symbolTo, coins)
         const amountTo = parseFloat(amountForm) * Number(conversionRate);
         setAmountTo(amountTo.toFixed(8))
     }, [amountForm, symbolForm, symbolTo, coins])
     
+    const swapSymbol = useCallback(() => {
+        const currentFrom = symbolForm
+        const currentTo = symbolTo
+        const currentIconForm = iconForm
+        const currentIconTo = iconTo
+        setIconForm(currentIconTo)
+        setIconTo(currentIconForm)
+        setSymbolForm(currentTo)
+        setSymbolTo(currentFrom)
+    }, [symbolForm, symbolTo])
+
     const showModalForSymbolForm = useCallback(() => {
         setIsChoosingForSymbolTo(false);
         showModal();
@@ -65,14 +74,6 @@ const MakePrice = ({ t }: Props) => {
         }
         hideModal()
     }, [hideModal, isChoosingForSymbolTo])
-
-    useEffect(() => {
-        const btc = coins.find((coin: ICoin) => coin.name === 'BTC')
-        if (btc) {
-            setSelectedCoin(btc)
-        }
-    }, [coins])
-
     const swapCoin = useCallback(async (swapData: ISwap) => {
         try {
             const res = await swapCoinApi(swapData)
@@ -124,6 +125,7 @@ const MakePrice = ({ t }: Props) => {
                 readonly={true}
                 changeCoin={showModalForSymbolTo}
                 value={amountTo}
+                swapSymbol={swapSymbol}
             />
              <Box
                 top={3}

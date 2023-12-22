@@ -5,8 +5,9 @@ import { colors } from '@themes/colors'
 import React, {useState} from 'react'
 import LinearGradient from 'react-native-linear-gradient'
 import Tab from './Tab'
-import MakePrice from './MakePrice'
 import { useTranslation } from 'react-i18next'
+import { goBack } from '@utils/navigationRef'
+import { TouchableOpacity } from 'react-native'
 
 
 const Swap = () => {
@@ -31,10 +32,12 @@ const Swap = () => {
           alignCenter
           paddingTop={10}
         >
-          <Icon
-            size={25}
-            source={require('@images/unAuth/left.png')}
-          />
+          <TouchableOpacity onPress={() => goBack()}>
+            <Icon
+              size={25}
+              source={require('@images/unAuth/left.png')}
+            />
+          </TouchableOpacity>
           <Txt bold color={colors.violet} size={18}>
             {`  ${t('SWAP')}`}
           </Txt>

@@ -73,7 +73,8 @@ const List = ({ t }: Props) => {
     },
     {
       title: 'KYC',
-      icon: require('@images/setting/security.png')
+      icon: require('@images/setting/security.png'),
+      onClick: () => navigate(screens.KYC)
     },
     {
       title: 'Change Language',
