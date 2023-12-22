@@ -30,12 +30,12 @@ const Options = ({ t, setSelectedRate }: Props) => {
         {
             title: 'Send',
             icon: require('@images/wallet/upload.png'),
-            onPress: () => console.log('send'),
+            // onPress: () => console.log('send'),
         },
         {
             title: 'Receive',
             icon: require('@images/wallet/download.png'),
-            onPress: () => console.log('receive'),
+            // onPress: () => console.log('receive'),
         },
         {
             title: 'Swap',

@@ -25,7 +25,6 @@ const initialState: IConfigState = {
 
 export const fetchConfig = createAsyncThunk('config/fetchConfig', async (data: IExchangeRateDisparity) => {
     const response = await exchangeRateDisparity(data);
-    console.log("qibdasbd", response);
     return response?.data;
 });
 
