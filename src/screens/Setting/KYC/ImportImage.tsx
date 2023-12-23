@@ -6,13 +6,12 @@ import { colors } from '@themes/colors'
 import Btn from '@commom/Btn'
 import { useTranslation } from 'react-i18next'
 import * as ImagePicker from 'react-native-image-picker'
-import { set } from 'lodash'
-
 interface Props {
     title?: string
+    onImageSelected?: (image: string) => void
 }
 
-const ImportImage:React.FC<Props> = ({title}) => {
+const ImportImage:React.FC<Props> = ({title, onImageSelected}) => {
     const { t } = useTranslation()
     const [selectedName, setSelectedName] = React.useState<string | null>(null)
     return (
@@ -40,8 +39,9 @@ const ImportImage:React.FC<Props> = ({title}) => {
                             } else if (response.errorCode) {
                                 console.log('ImagePicker Error: ', response.errorMessage);
                             } else {
-                                const source = { uri: 'data:image/jpeg;base64,' + (response?.assets?.[0]?.base64 ?? '') };
+                                const source = {uri : response?.assets?.[0]?.uri ?? 'Anh bi null'}
                                 setSelectedName(response?.assets?.[0]?.fileName ?? 'khong co anh')
+                                onImageSelected?.(source.uri)
                             }
                         },
                     );
@@ -55,6 +55,6 @@ const ImportImage:React.FC<Props> = ({title}) => {
     )
 }
 
-export default ImportImage
+export default React.memo(ImportImage)
 
 const styles = StyleSheet.create({})

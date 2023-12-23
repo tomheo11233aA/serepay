@@ -100,13 +100,10 @@ export const getExchange = function () {
     console.log(error);
   }
 };
-export const uploadKyc = function (data: IUploadKYC | any) {
+export const uploadKyc = function (data: any) {
+  const axiosService = AxiosInstance('multipart/form-data');
   try {
-    return axiosService.post("/api/uploadKyc", data, {
-      headers: {
-        "Content-Type": "multipart/form-data",
-      },
-    });
+    return axiosService.post("/api/uploadKyc", data);
   } catch (error) {
     console.log(error);
   }

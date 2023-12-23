@@ -8,6 +8,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { fetchUserInfo } from '@redux/slice/userSlice'
 import { userInfoUserSelector } from '@redux/selector/userSelector'
 import { AppDispatch } from '@redux/store/store'
+import AsyncStorage from '@react-native-async-storage/async-storage'
 interface Props {
     t: any;
 }
@@ -17,6 +18,7 @@ const User = ({ t }: Props) => {
     useEffect(() => {
         dispatch(fetchUserInfo())
     }, [dispatch]);
+    AsyncStorage.setItem('verified', userInfo?.verified?.toString() || '')
     return (
         <TouchableOpacity
             onPress={() => { }}

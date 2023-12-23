@@ -44,4 +44,4 @@ const InputField: React.FC<InputFieldProps> = ({ control, name, placeholder, err
     </Box>
 );
 
-export default InputField;
+export default React.memo(InputField);

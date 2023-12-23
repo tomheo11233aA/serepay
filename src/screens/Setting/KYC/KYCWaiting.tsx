@@ -29,6 +29,6 @@ const Waiting = () => {
   )
 }
 
-export default Waiting
+export default React.memo(Waiting)
 
 const styles = StyleSheet.create({})

@@ -7,28 +7,29 @@ import { AppDispatch } from '@redux/store/store'
 import { useDispatch, useSelector } from 'react-redux'
 import { fetchUserInfo } from '@redux/slice/userSlice'
 import { userInfoUserSelector } from '@redux/selector/userSelector'
-
+import AsyncStorage from '@react-native-async-storage/async-storage'
+import Spinner from 'react-native-loading-spinner-overlay'
 
 const KYCScreen = () => {
-  const dispatch: AppDispatch = useDispatch()
   const [isVerify, setIsVerify] = React.useState<number | null>(null);
-  const userInfo = useSelector(userInfoUserSelector)
-  React.useEffect(() => {
-    dispatch(fetchUserInfo())
-  }, [dispatch]);
+  const [isLoading, setIsLoading] = React.useState(true);
 
   React.useEffect(() => {
-    if (userInfo) {
-      setIsVerify(userInfo?.verified)
-    }
-  }, [userInfo]);
+    AsyncStorage.getItem('verified').then((value) => {
+      setIsVerify(Number(value))
+      setIsLoading(false);
+    })
+  }, []);
   return (
     <>
-      {isVerify === 1 ? <Success /> : isVerify === 2 ? <Waiting /> : <Form />}
+    <Spinner
+        visible={isLoading}
+        textContent={'Loading...'}
+        textStyle={{ color: '#FFF' }}
+      />
+      {!isLoading && (isVerify === 1 ? <Success /> : isVerify === 2 ? <Waiting /> : <Form />)}
     </>
   )
 }
 
-export default KYCScreen
-
-const styles = StyleSheet.create({})
+export default React.memo(KYCScreen)

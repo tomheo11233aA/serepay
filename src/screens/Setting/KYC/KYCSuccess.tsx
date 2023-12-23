@@ -29,6 +29,6 @@ const Success = () => {
   )
 }
 
-export default Success
+export default React.memo(Success)
 
 const styles = StyleSheet.create({})
