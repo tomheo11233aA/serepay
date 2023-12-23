@@ -16,4 +16,5 @@ export const screens = {
     TURN_ON_2FA: 'TurnOn2FA',
     TWO_FACTOR_AUTHENTICATION: 'TwoFactorAuthentication',
     KYC: 'KYC',
+    VERIFY2FA: 'Verify2FA',
 }

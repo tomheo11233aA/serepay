@@ -7,34 +7,41 @@ import Txt from '@commom/Txt'
 import { colors } from '@themes/colors'
 import Btn from '@commom/Btn'
 import { navigate } from '@utils/navigationRef'
+import { screens } from '@contants/screens'
+import Clipboard from '@react-native-clipboard/clipboard';
+import Icon from '@commom/Icon'
+import { TouchableOpacity } from 'react-native'
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const TurnOn2FA = () => {
     const [otp, setOtp] = useState('')
     const [otpAuthUrl, setOtpAuthUrl] = useState('')
     useEffect(() => {
         const fetchOtpAuth = async () => {
-            try {
-                const response = await generateOTPToken()
-                setOtp(response?.data.secret)
-                setOtpAuthUrl(response?.data.otpAuth)
+          try {
+            const storedOtp = await AsyncStorage.getItem('otp');
+            const storedOtpAuthUrl = await AsyncStorage.getItem('otpAuthUrl');
+      
+            if (storedOtp && storedOtpAuthUrl) {
+              setOtp(storedOtp);
+              setOtpAuthUrl(storedOtpAuthUrl);
+            } else {
+              const response = await generateOTPToken();
+              setOtp(response?.data.secret);
+              setOtpAuthUrl(response?.data.otpAuth);
+              AsyncStorage.setItem('otp', response?.data.secret);
+              AsyncStorage.setItem('otpAuthUrl', response?.data.otpAuth);
             }
-            catch (error) {
-                console.log(error)
-            }
-        }
-        fetchOtpAuth()
-    }, [])
+          } catch (error) {
+            console.log(error);
+          }
+        };
+        fetchOtpAuth();
+      }, []);
 
-    const handleTurnOn2FA = async () => {
-        try {
-            const response = await turnOn2FA({ otp })
-            console.log(response?.data)
-        }
-        catch (error) {
-            console.log(error)
-        }
-    }
-
+    const handleCopy = () => {
+        Clipboard.setString(otp);
+    };
 
     return (
         <Safe>
@@ -44,11 +51,23 @@ const TurnOn2FA = () => {
             <Box alignCenter marginVertical={30}>
                 {otpAuthUrl && <QRCode size={200} value={otpAuthUrl} />}
             </Box>
+            <Box row justifyCenter>
+                <Txt color={colors.darkGreen} bold size={18} center>
+                    {otp}
+                </Txt>
+                <TouchableOpacity onPress={handleCopy} style={{marginLeft: 10}}>
+                    <Icon size={20} source={require('../../../assets/images/setting/copy.png')} />
+                </TouchableOpacity>
+            </Box>
 
-            <Txt color={colors.darkGreen} bold size={18} center>
-                {otp}
-            </Txt>
-            <Btn backgroundColor={colors.darkViolet}>
+            <Btn
+                onPress={() => navigate(screens.VERIFY2FA)}
+                radius={5}
+                height={45}
+                marginTop={20}
+                width={'100%'}
+                backgroundColor={colors.darkViolet}
+            >
                 <Txt bold size={18} color={'white'}>
                     Next
                 </Txt>
@@ -57,5 +76,5 @@ const TurnOn2FA = () => {
     )
 }
 
-export default TurnOn2FA
+export default React.memo(TurnOn2FA)
 

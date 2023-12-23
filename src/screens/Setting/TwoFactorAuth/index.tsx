@@ -5,21 +5,24 @@ import { colors } from '@themes/colors'
 import React from 'react'
 import LinearGradient from 'react-native-linear-gradient'
 import TurnOn2FA from './TurnOn2FA'
-import { goBack } from '@utils/navigationRef'
 import { useTranslation } from 'react-i18next'
 import AsyncStorage from '@react-native-async-storage/async-storage'
-import { use } from 'i18next'
 import TurnOff2FA from './TurnOff2FA'
 import { TouchableOpacity } from 'react-native'
+import Spinner from 'react-native-loading-spinner-overlay'
+import { navigate } from '@utils/navigationRef'
+import { screens } from '@contants/screens'
 
 const TwoFactorAuth = () => {
     const { t } = useTranslation()
+    const [isLoading, setIsLoading] = React.useState(true)
     const [isTwoFA, setIsTwoFA] = React.useState(0)
     React.useEffect(() => {
+        console.log(isLoading)
         const fetchTwoFA = async () => {
             const isTwoFA = await AsyncStorage.getItem('isTwoFA')
             setIsTwoFA(Number(isTwoFA))
-            console.log(isTwoFA)
+            setIsLoading(false)
         }
         fetchTwoFA()
     }, [])
@@ -31,6 +34,10 @@ const TwoFactorAuth = () => {
             start={{ x: 0, y: 0.5 }}
             colors={[colors.darkViolet, colors.violet]}
         >
+            <Spinner
+                visible={isLoading}
+                textContent={'Loading...'}
+                textStyle={{ color: '#FFF' }} />
             <Box
                 flex={1}
                 marginTop={60}
@@ -44,7 +51,9 @@ const TwoFactorAuth = () => {
                     alignCenter
                     paddingTop={10}
                 >
-                    <TouchableOpacity onPress={() => goBack()}>
+                    <TouchableOpacity onPress={() => {
+                        navigate(screens.SETTING)
+                    }}>
                         <Icon
                             size={25}
                             source={require('@images/unAuth/left.png')}
@@ -58,7 +67,7 @@ const TwoFactorAuth = () => {
                     marginTop={30}
                     paddingHorizontal={15}
                 >
-                    {isTwoFA == 0 ? <TurnOn2FA /> : <TurnOff2FA />}
+                    {!isLoading && (isTwoFA === 1 ? <TurnOff2FA /> : <TurnOn2FA />)}
                 </Box>
             </Box>
         </LinearGradient>

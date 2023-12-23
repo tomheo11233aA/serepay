@@ -4,7 +4,8 @@ import Setting from '@screens/Setting'
 import React from 'react'
 import TurnOn2FA from '@screens/Setting/TwoFactorAuth/TurnOn2FA'
 import KYCScreen from '@screens/Setting/KYC'
-import Form from '@screens/Setting/KYC/Form'
+import Verify2FA from '@screens/Setting/TwoFactorAuth/Verify2FA'
+
 const Stack = createNativeStackNavigator()
 
 const SettingStack = () => {
@@ -12,6 +13,7 @@ const SettingStack = () => {
         <Stack.Navigator screenOptions={{ headerShown: false }}>
             <Stack.Screen name={screens.SETTING} component={Setting} />
             <Stack.Screen name={screens.TURN_ON_2FA} component={TurnOn2FA} />
+            <Stack.Screen name={screens.VERIFY2FA} component={Verify2FA} />
             <Stack.Screen name={screens.KYC} component={KYCScreen} />
         </Stack.Navigator>
     )
