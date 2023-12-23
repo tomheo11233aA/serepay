@@ -17,4 +17,5 @@ export const screens = {
     TWO_FACTOR_AUTHENTICATION: 'TwoFactorAuthentication',
     KYC: 'KYC',
     VERIFY2FA: 'Verify2FA',
+    ECOSYSTEM: 'Ecosystem',
 }

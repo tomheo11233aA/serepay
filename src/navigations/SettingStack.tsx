@@ -5,6 +5,7 @@ import React from 'react'
 import TurnOn2FA from '@screens/Setting/TwoFactorAuth/TurnOn2FA'
 import KYCScreen from '@screens/Setting/KYC'
 import Verify2FA from '@screens/Setting/TwoFactorAuth/Verify2FA'
+import Ecosystem from '@screens/Setting/Ecosystem/Ecosystem'
 
 const Stack = createNativeStackNavigator()
 
@@ -15,6 +16,7 @@ const SettingStack = () => {
             <Stack.Screen name={screens.TURN_ON_2FA} component={TurnOn2FA} />
             <Stack.Screen name={screens.VERIFY2FA} component={Verify2FA} />
             <Stack.Screen name={screens.KYC} component={KYCScreen} />
+            <Stack.Screen name={screens.ECOSYSTEM} component={Ecosystem} />
         </Stack.Navigator>
     )
 }

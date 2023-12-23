@@ -44,7 +44,8 @@ const List = ({ t }: Props) => {
   const data: IOption[] = [
     {
       title: 'Ecosystem',
-      icon: require('@images/setting/menu.png')
+      icon: require('@images/setting/menu.png'),
+      onClick: () => navigate(screens.ECOSYSTEM)
     },
     {
       title: 'Promotion',
