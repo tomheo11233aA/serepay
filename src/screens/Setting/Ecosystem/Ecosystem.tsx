@@ -7,7 +7,6 @@ import { screens } from '@contants/screens'
 import { navigate } from '@utils/navigationRef'
 import Dropdown from './Dropdown'
 import Txt from '@commom/Txt'
-import Scroll from '@commom/Scroll'
 import Input from '@commom/Input'
 import { IAddListBanking } from '@models/BANKING/addListBanking';
 import { addListBanking } from '@utils/userCallApi';
@@ -92,10 +91,6 @@ const Ecosystem = () => {
                     </Txt>
                 </Btn>
             </Box>
-
-
-
-
         </Safe>
     )
 }

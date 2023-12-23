@@ -10,7 +10,6 @@ const ChooseCoin = () => {
     const { t } = useTranslation()
 
     return (
-        // khong biet dung vao dau
         <Box paddingHorizontal={15} marginTop={20}>
             <Box
                 row
