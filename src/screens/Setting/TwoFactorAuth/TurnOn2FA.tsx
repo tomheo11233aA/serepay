@@ -1,10 +1,12 @@
-import { StyleSheet, Text, TextInput, View, TouchableOpacity } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import QRCode from 'react-native-qrcode-svg'
-import AxiosInstance from '../../../helper/AxiosInstance'
 import Safe from '@reuse/Safe'
 import Box from '@commom/Box'
 import { generateOTPToken, turnOn2FA } from '@utils/userCallApi'
+import Txt from '@commom/Txt'
+import { colors } from '@themes/colors'
+import Btn from '@commom/Btn'
+import { navigate } from '@utils/navigationRef'
 
 const TurnOn2FA = () => {
     const [otp, setOtp] = useState('')
@@ -13,7 +15,7 @@ const TurnOn2FA = () => {
         const fetchOtpAuth = async () => {
             try {
                 const response = await generateOTPToken()
-                setOtp(response?.data.otp)
+                setOtp(response?.data.secret)
                 setOtpAuthUrl(response?.data.otpAuth)
             }
             catch (error) {
@@ -21,11 +23,9 @@ const TurnOn2FA = () => {
             }
         }
         fetchOtpAuth()
-    }
-        , [])
+    }, [])
 
     const handleTurnOn2FA = async () => {
-        const axiosInstance = AxiosInstance()
         try {
             const response = await turnOn2FA({ otp })
             console.log(response?.data)
@@ -38,24 +38,24 @@ const TurnOn2FA = () => {
 
     return (
         <Safe>
-            <Box>
-                {otpAuthUrl && <QRCode value={otpAuthUrl} />}
+            <Txt color={colors.darkGreen} bold size={18} >
+                Scan this QR code in the authenticator app, or enter the code below manually into the app
+            </Txt>
+            <Box alignCenter marginVertical={30}>
+                {otpAuthUrl && <QRCode size={200} value={otpAuthUrl} />}
             </Box>
-            <TextInput
-                placeholder="OTP"
-                onChangeText={(text) => setOtp(text)}
-                value={otp}
-            />
-            <TouchableOpacity
-                onPress={handleTurnOn2FA}
-            >
-                <Text>Turn on 2FA</Text>
-            </TouchableOpacity>
 
+            <Txt color={colors.darkGreen} bold size={18} center>
+                {otp}
+            </Txt>
+            <Btn backgroundColor={colors.darkViolet}>
+                <Txt bold size={18} color={'white'}>
+                    Next
+                </Txt>
+            </Btn>
         </Safe>
     )
 }
 
 export default TurnOn2FA
 
-const styles = StyleSheet.create({})

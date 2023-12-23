@@ -19,6 +19,7 @@ const TwoFactorAuth = () => {
         const fetchTwoFA = async () => {
             const isTwoFA = await AsyncStorage.getItem('isTwoFA')
             setIsTwoFA(Number(isTwoFA))
+            console.log(isTwoFA)
         }
         fetchTwoFA()
     }, [])
@@ -57,7 +58,7 @@ const TwoFactorAuth = () => {
                     marginTop={30}
                     paddingHorizontal={15}
                 >
-                    {isTwoFA == 1 ? <TurnOn2FA /> : <TurnOff2FA />}
+                    {isTwoFA == 0 ? <TurnOn2FA /> : <TurnOff2FA />}
                 </Box>
             </Box>
         </LinearGradient>

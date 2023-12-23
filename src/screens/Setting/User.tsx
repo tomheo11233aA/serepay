@@ -19,6 +19,7 @@ const User = ({ t }: Props) => {
         dispatch(fetchUserInfo())
     }, [dispatch]);
     AsyncStorage.setItem('verified', userInfo?.verified?.toString() || '')
+    AsyncStorage.setItem('isTwoFA', userInfo?.enabled_twofa?.toString() || '')
     return (
         <TouchableOpacity
             onPress={() => { }}
