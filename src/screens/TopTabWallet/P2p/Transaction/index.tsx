@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, StyleSheet, Alert } from 'react-native';
+import { View, Text, StyleSheet, Alert, ScrollView } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { colors } from '@themes/colors';
 import Input from '@commom/Input';
@@ -47,7 +47,7 @@ const Transaction = () => {
     }
 
     return (
-        <View style={styles.container}>
+        <ScrollView style={styles.container}>
             <View style={{ padding: 10, backgroundColor: colors.gray8, borderRadius: 5 }}>
                 <Text style={{ color: colors.black2, fontWeight: 'bold', fontSize: 16 }}>
                     <Text style={{ color: item.side === 'buy' ? 'green' : 'red' }}>
@@ -102,10 +102,59 @@ const Transaction = () => {
                     <Text style={{ textAlign: 'center', color: 'white', fontWeight: 'bold' }}>Buy now</Text>
                 </TouchableOpacity>
             </View>
-            <View>
-                <Text style={{ fontFamily: fonts.AS, marginTop: 15 }}>{coin.price}</Text>
+            <View style={{ marginTop: 10 }}>
+                <Text style={{ color: colors.black2, fontWeight: 'bold', fontSize: 16 }}>Advertisement Informations</Text>
+                <View style={{ padding: 10, backgroundColor: colors.gray8, borderRadius: 5, marginTop: 10, justifyContent: 'center' }}>
+                    <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+                        <Text style={{ fontFamily: fonts.AS }}> Price</Text>
+                        <Text style={{ fontFamily: fonts.AS }}>{coin.price?.toFixed(3)} USD</Text>
+                    </View>
+                    <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginTop: 10 }}>
+                        <Text style={{ fontFamily: fonts.AS }}> Amount limits</Text>
+                        <View style={{ flexDirection: 'row' }}>
+                            <View style={{ padding: 5, backgroundColor: colors.darkGreen, borderRadius: 3 }}>
+                                <Text style={{ fontFamily: fonts.AS, color: 'white' }}>{item.amountMinimum} {item.symbol}</Text>
+                            </View>
+                            <Text style={{ fontFamily: fonts.AS, color: 'black', textAlign: 'center', alignSelf: 'center', padding: 5 }}>-</Text>
+                            <View style={{ padding: 5, backgroundColor: colors.darkGreen, borderRadius: 3 }}>
+                                <Text style={{ fontFamily: fonts.AS, color: 'white' }}>{item.amount} {item.symbol}</Text>
+                            </View>
+                        </View>
+                    </View>
+                    <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginTop: 10 }}>
+                        <Text style={{ fontFamily: fonts.AS }}> Payment method</Text>
+                        <View style={{ flexDirection: 'row' }}>
+                            <Text style={{ fontFamily: fonts.AS, color: 'white' }}>{item.bankName}</Text>
+                        </View>
+                    </View>
+                    <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginTop: 10 }}>
+                        <Text style={{ fontFamily: fonts.AS }}> Payment Window</Text>
+                        <Text style={{ fontFamily: fonts.AS, color: colors.black3 }}>15 minutes</Text>
+                    </View>
+                </View>
             </View>
-        </View>
+            <View style={{ marginTop: 10 }}>
+                <Text style={{ color: colors.black2, fontWeight: 'bold', fontSize: 16 }}>Partner Informations</Text>
+                <View style={{ padding: 10, backgroundColor: colors.gray8, borderRadius: 5, marginTop: 10, justifyContent: 'center' }}>
+                    <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+                        <Text style={{ fontFamily: fonts.AS }}> Username</Text>
+                        <Text style={{ fontFamily: fonts.AS, color: colors.green }}>{item.userName}</Text>
+                    </View>
+                    <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginTop: 10 }}>
+                        <Text style={{ fontFamily: fonts.AS }}> Status</Text>
+                        <View style={{ flexDirection: 'row' }}>
+                            <Text style={{ fontFamily: fonts.AS, color: colors.black3 }}>Online</Text>
+                        </View>
+                    </View>
+                    <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginTop: 10 }}>
+                        <Text style={{ fontFamily: fonts.AS }}> Country</Text>
+                        <View style={{ flexDirection: 'row' }}>
+                            <Text style={{ fontFamily: fonts.AS, color: colors.black3 }}>Vietnam</Text>
+                        </View>
+                    </View>
+                </View>
+            </View>
+        </ScrollView>
     );
 };
 
