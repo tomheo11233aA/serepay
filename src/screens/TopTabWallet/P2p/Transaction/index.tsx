@@ -8,40 +8,64 @@ import BouncyCheckbox from "react-native-bouncy-checkbox";
 import LottieView from 'lottie-react-native';
 import { TouchableOpacity } from 'react-native';
 import { useCoinSocket } from '../../../../helper/useCoinSocket';
-import { useSelector } from 'react-redux';
 import { coinListSelector } from '@redux/selector/userSelector';
 import { ScrollView } from 'react-native';
 import { getListBanking } from '@utils/userCallApi';
 import { SelectList } from 'react-native-dropdown-select-list'
 import Safe from '@reuse/Safe';
+import { useDispatch, useSelector } from 'react-redux';
+import { AppDispatch } from '@redux/store/store';
+import { exchangeRateSelector } from '@redux/selector/userSelector';
+import { fetchListExchange } from '@redux/slice/exchangeRateSlice';
+
 
 const Transaction = () => {
     useCoinSocket();
     const coins = useSelector(coinListSelector)
-    const [item, setItem] = useState<any>(null);
+    const [item, setItem] = useState<any>();
     const [payment, setPayment] = useState('');
     const [amount, setAmount] = useState('');
     const [isChecked, setIsChecked] = useState(false);
     const [bankList, setBankList] = useState([]);
     const [selected, setSelected] = React.useState("");
+    const [receiveAmount, setReceiveAmount] = useState('');
+    const [coin, setCoin] = useState<any>();
+    const dispatch = useDispatch<AppDispatch>();
+    const exchangeRate = useSelector(exchangeRateSelector);
+    const [loading, setLoading] = useState(true);
     const handleBuyNow = () => {
         if (!payment || !amount || !isChecked) {
             Alert.alert('Error', 'Please fill all fields and agree to the terms');
             return;
         }
-
-        // Handle the buy now action here
     };
     useEffect(() => {
-        const fetchItem = async () => {
+        dispatch(fetchListExchange());
+    }, [dispatch]);
+    useEffect(() => {
+        const fetchData = async () => {
             const itemString = await AsyncStorage.getItem('adsItem');
             if (itemString) {
                 setItem(JSON.parse(itemString));
             }
-        };
-
-        fetchItem();
+            setLoading(false);
+        }
+        fetchData();
     }, []);
+
+    useEffect(() => {
+        if (item) {
+            const coin = coins.find(coin => coin?.name === item.symbol);
+            if (coin) {
+                const amountNumber = Number(amount);
+                const rateDollar = exchangeRate.find((item) => item.title === 'VND')?.rate ?? 1;
+                const inputValueDollar = amountNumber / rateDollar;
+                const coinPrice = coin.price ?? 0;
+                const amountCoin = inputValueDollar / coinPrice;
+                setReceiveAmount(amountCoin.toFixed(8));
+            }
+        }
+    }, [item, coins, exchangeRate]);
 
     useEffect(() => {
         const fetchBanking = async () => {
@@ -62,26 +86,34 @@ const Transaction = () => {
         };
         fetchBanking();
     }, []);
-
-
-    if (!item) {
-        return <LottieView style={{ flex: 1 }} source={require('../../../../assets/lottie/loading.json')} autoPlay loop />;
-    }
-
-    const coin = coins.find(coin => coin?.name === item.symbol);
-    if (!coin) {
-        return <LottieView style={{ flex: 1 }} source={require('../../../../assets/lottie/loading.json')} autoPlay loop />;
+    // const coin = coins.find(coin => coin?.name === item.symbol);
+    useEffect(() => {
+        if (item) {
+            const coin = coins.find(coin => coin?.name === item.symbol);
+            if (coin) {
+                setCoin(coin);
+            }
+        }
+    }, [item, coins]);
+    if (loading) {
+        return (
+            <Safe flex={1} backgroundColor='white'>
+                <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+                    <LottieView source={require('../../../../assets/lottie/loading.json')} autoPlay loop />
+                </View>
+            </Safe>
+        );
     }
 
     return (
         <Safe flex={1} backgroundColor='white'>
-            <ScrollView showsVerticalScrollIndicator={false} style={{padding: 20}}>
+            <ScrollView showsVerticalScrollIndicator={false} style={{ padding: 20 }}>
                 <View style={{ padding: 10, backgroundColor: colors.gray8, borderRadius: 5 }}>
                     <Text style={{ color: colors.black2, fontWeight: 'bold', fontSize: 16 }}>
                         <Text style={{ color: item.side === 'buy' ? 'green' : 'red' }}>
                             {item.side.charAt(0).toUpperCase() + item.side.slice(1) + ' '}
                         </Text>
-                        {item.symbol} via Bank transfer (VND)
+                        {item?.symbol} via Bank transfer (VND)
                     </Text>
                 </View>
 
@@ -101,6 +133,7 @@ const Transaction = () => {
                         <View style={{ flex: 1 }}>
                             <Text style={{ fontFamily: fonts.AS }}> To receive</Text>
                             <Input
+                                value={receiveAmount}
                                 height={40}
                                 backgroundColor={colors.gray7}
                                 readonly
@@ -110,7 +143,7 @@ const Transaction = () => {
                     </View>
                     <View style={{ marginTop: 10 }}>
                         <Text style={{ fontFamily: fonts.AS }}> Choose your payment</Text>
-                        <SelectList fontFamily={fonts.AS} boxStyles={{ marginTop: 5 }} inputStyles={{ color: colors.black3, fontFamily: fonts.AS }} setSelected={setSelected} data={bankList} />
+                        <SelectList placeholder='Choose your bank' fontFamily={fonts.AS} boxStyles={{ marginTop: 5 }} inputStyles={{ color: colors.black3, fontFamily: fonts.AS }} setSelected={setSelected} data={bankList} />
 
                     </View>
                     <View style={{ marginTop: 15 }}>
@@ -134,7 +167,7 @@ const Transaction = () => {
                     <View style={{ padding: 10, backgroundColor: colors.gray8, borderRadius: 5, marginTop: 10, justifyContent: 'center' }}>
                         <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
                             <Text style={{ fontFamily: fonts.AS }}> Price</Text>
-                            <Text style={{ fontFamily: fonts.AS }}>{coin.price?.toFixed(3)} USD</Text>
+                            <Text style={{ fontFamily: fonts.AS }}>{coin?.price?.toFixed(3)} USD</Text>
                         </View>
                         <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginTop: 10 }}>
                             <Text style={{ fontFamily: fonts.AS }}> Amount limits</Text>

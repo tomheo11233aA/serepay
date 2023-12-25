@@ -58,6 +58,7 @@ const SearchBox: React.FC<Props> = ({ coin, type }) => {
     return (
         <View style={{ width: '92%', backgroundColor: 'white', alignSelf: 'center', marginTop: 10, borderRadius: 5 }}>
             <Input
+                height={40}
                 hint={t(`Search ${coin} amount to ${type === 'buy' ? 'buy' : 'sell'}`)}
                 onChangeText={setAmount}
                 value={amount}
