@@ -78,7 +78,6 @@ const MakePrice = ({ t }: Props) => {
         try {
             const res = await swapCoinApi(swapData)
             Alert.alert(res?.data?.message ?? 'Successful coin conversion!')
-            console.log(res)
         } catch (error) {
             Alert.alert('Insufficient balance! ')
             console.log(error)

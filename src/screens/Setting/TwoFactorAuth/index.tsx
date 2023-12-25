@@ -18,7 +18,6 @@ const TwoFactorAuth = () => {
     const [isLoading, setIsLoading] = React.useState(true)
     const [isTwoFA, setIsTwoFA] = React.useState(0)
     React.useEffect(() => {
-        console.log(isLoading)
         const fetchTwoFA = async () => {
             const isTwoFA = await AsyncStorage.getItem('isTwoFA')
             setIsTwoFA(Number(isTwoFA))

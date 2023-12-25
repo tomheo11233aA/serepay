@@ -49,7 +49,6 @@ const SearchBox: React.FC<Props> = ({ coin, type }) => {
     const handleItemClick = async (item: any) => {
         try {
             await AsyncStorage.setItem('adsItem', JSON.stringify(item))
-            console.log('item', item)
             navigate(screens.TRANSACTION)
         } catch (error) {
             console.log(error)
