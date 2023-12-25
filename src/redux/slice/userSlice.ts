@@ -1,4 +1,4 @@
-import { ILanguage, IUserSlice, IUserInfo, IUserWallet } from "@models/user";
+import { ILanguage, IUserSlice, IUserInfo, IUserWallet, IRate } from "@models/user";
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import AxiosInstance from "../../helper/AxiosInstance";
@@ -36,6 +36,7 @@ const initialState: IUserSlice = {
         uni_balance: 0,
         win_balance: 0
     },
+    selectedRate: {title: 'USD', rate: 1},
 }
 
 export const fetchUserInfo = createAsyncThunk('user/fetchUserInfo', async () => {
@@ -58,6 +59,9 @@ const userSlice = createSlice({
         setLanguage: (state, action: PayloadAction<ILanguage>) => {
             state.language = action.payload
         },
+        setSelectedRate: (state, action: PayloadAction<IRate>) => {
+            state.selectedRate = action.payload
+        }
     },
     extraReducers: (builder) => {
         builder
@@ -74,6 +78,7 @@ const userSlice = createSlice({
 export const {
     setLogin,
     setLanguage,
+    setSelectedRate
 } = userSlice.actions
 
 export default userSlice

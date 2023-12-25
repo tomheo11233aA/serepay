@@ -68,6 +68,8 @@
         "To keep your assets safe, we need to verify your identity.": "Để đảm bảo an toàn cho tài sản của bạn, chúng tôi cần xác minh danh tính của bạn.",
         "Congratulation! Your account has been verified!": "Xin chúc mừng! Tài khoản của bạn đã được xác minh!",
         "Please wait for admin to verify your account!": "Vui lòng chờ admin xác minh tài khoản của bạn!",
-        "Choose your bank": "Chọn ngân hàng của bạn"
+        "Choose your bank": "Chọn ngân hàng của bạn",
+        "Buyer": "Người mua",
+        "Seller": "Người bán"
     }
 }

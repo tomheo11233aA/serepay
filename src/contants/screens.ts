@@ -18,4 +18,5 @@ export const screens = {
     KYC: 'KYC',
     VERIFY2FA: 'Verify2FA',
     ECOSYSTEM: 'Ecosystem',
+    TRANSACTION: 'Transaction',
 }

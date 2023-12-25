@@ -5,6 +5,7 @@ export interface IUserSlice {
     language: ILanguage;
     userInfo?: IUserInfo;
     userWallet?: IUserWallet;
+    selectedRate: IRate;
 }
 
 export interface ILanguage {
@@ -38,4 +39,9 @@ export interface IUserWallet {
     dot_balance: number;
     uni_balance: number;
     win_balance: number;
+}
+
+export interface IRate {
+    title: string;
+    rate: number;
 }
