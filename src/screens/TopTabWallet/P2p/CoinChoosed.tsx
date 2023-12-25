@@ -9,7 +9,6 @@ import { useTranslation } from 'react-i18next'
 import { ICoin } from '@models/coin'
 import { keys } from '@contants/keys'
 import CoinModal from '@commom/Modal/CoinModal'
-import Spinner from 'react-native-loading-spinner-overlay'
 
 interface Props {
     setSelectedCoin: (coin: ICoin) => void
@@ -20,7 +19,6 @@ const CoinChoosed: React.FC<Props> = ({ setSelectedCoin, selectedCoin}) => {
     const [visible, setVisible] = React.useState(false);
     const showModal = () => setVisible(true);
     const hideModal = () => setVisible(false);
-    const [isLoading, setIsLoading] = React.useState(false);
     const handleChooseCoin = (coin: ICoin) => {
         setSelectedCoin(coin);
         hideModal();
@@ -28,11 +26,6 @@ const CoinChoosed: React.FC<Props> = ({ setSelectedCoin, selectedCoin}) => {
 
     return (
         <Box paddingHorizontal={15} marginTop={20}>
-            <Spinner
-                visible={isLoading}
-                textContent={'Loading...'}
-                textStyle={{ color: '#FFF' }}
-            />
             <CoinModal visible={visible} hideModal={hideModal} handleChooseCoin={handleChooseCoin} t={t} />
             <Box
                 row
@@ -58,10 +51,8 @@ const CoinChoosed: React.FC<Props> = ({ setSelectedCoin, selectedCoin}) => {
                     padding={10}
                     backgroundColor={colors.violet3}
                     onPress={() => {
-                        setIsLoading(true);
                         showModal();
-                        setIsLoading(false);
-                    }}                >
+                    }}>
                     <Txt>
                         {`${t('Change coin')} `}
                     </Txt>

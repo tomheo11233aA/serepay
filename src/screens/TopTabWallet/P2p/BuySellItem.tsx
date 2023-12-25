@@ -17,13 +17,15 @@ interface Props {
     buttonColor: string;
     selectedCoin: ICoin | null;
     type?: 'buy' | 'sell';
+    onPress?: () => void;
 }
 const BuySellItem = ({
     title,
     buttonText,
     buttonColor,
     selectedCoin,
-    type
+    type,
+    onPress
 }: Props) => {
     const config = useSelector(configSelector);
     const dispatch = useDispatch<AppDispatch>();
@@ -76,6 +78,7 @@ const BuySellItem = ({
                 paddingHorizontal={10}
                 backgroundColor={buttonColor}
                 alignSelf={'flex-start'}
+                onPress={onPress}
             >
                 <Txt color={'white'} bold>{buttonText}</Txt>
             </Btn>

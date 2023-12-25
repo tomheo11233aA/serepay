@@ -11,23 +11,29 @@ import { useSelector } from 'react-redux'
 import { coinListSelector } from '@redux/selector/userSelector'
 import { ScrollView, View } from 'react-native'
 import { useCoinSocket } from '../../../helper/useCoinSocket'
+import SearchBox from './SearchBox'
+import Scroll from '@commom/Scroll'
 const P2p = () => {
   const { t } = useTranslation()
   useCoinSocket()
   const coins = useSelector(coinListSelector)
   const [selectedCoin, setSelectedCoin] = React.useState<ICoin | null>(null)
+  const [searchType, setSearchType] = useState<'buy' | 'sell' | null>(null)
   useEffect(() => {
-    const btc = coins.find((coin: ICoin) => coin.name === 'BTC')
-    if (btc) {
-      setSelectedCoin(btc)
+    if (!selectedCoin) {
+      const btc = coins.find((coin: ICoin) => coin.name === 'BTC')
+      if (btc) {
+        setSelectedCoin(btc)
+      }
     }
-  }, [coins])
+  }, [coins, selectedCoin])
 
   return (
-    <Box
-      flex={1}
-      marginTop={10}
-    >
+    <ScrollView
+      // flex={1}
+      // marginTop={10}
+      showsVerticalScrollIndicator={false}
+      style={{ flex: 1, marginTop: 10 }}>
       <CoinChoosed setSelectedCoin={setSelectedCoin} selectedCoin={selectedCoin} />
       <Box
         row
@@ -35,22 +41,24 @@ const P2p = () => {
         justifySpaceBetween
         paddingHorizontal={15}
       >
-
         <BuySellItem
-        type={'buy'}
+          type={'buy'}
           buttonText={t('Buy now')}
           title={t('Selling price')}
           buttonColor={colors.green}
           selectedCoin={selectedCoin}
+          onPress={() => setSearchType('buy')}
         />
         <BuySellItem
-        type={'sell'}
+          type={'sell'}
           buttonColor={colors.red2}
           title={t('Buying price')}
           buttonText={t('Sell now')}
           selectedCoin={selectedCoin}
+          onPress={() => setSearchType('sell')}
         />
       </Box>
+      {searchType && <SearchBox coin={selectedCoin?.name || ''} type={searchType} />}
       <View
         style={{
           marginTop: 20,
@@ -60,17 +68,15 @@ const P2p = () => {
           marginBottom: 50,
           flex: 1
         }}
-
       >
         <Note t={t} />
-        <ScrollView 
-        showsVerticalScrollIndicator={false}>
-          <BuyCoin t={t} type={'buy'} />
-          <BuyCoin t={t} type={'sell'}/>
+        <ScrollView
+          showsVerticalScrollIndicator={false}>
+          <BuyCoin t={t} type={'buy'} selectedCoin={selectedCoin} />
+          <BuyCoin t={t} type={'sell'} selectedCoin={selectedCoin} />
         </ScrollView>
-
       </View>
-    </Box>
+    </ScrollView>
   )
 }
 

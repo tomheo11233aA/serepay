@@ -11,25 +11,34 @@ import { adsBuySelector, adsSellSelector } from '@redux/selector/userSelector'
 import { AppDispatch } from '@redux/store/store'
 import { IHistory } from '@models/history'
 import { Image } from 'react-native'
-
-const BuyCoin = ({ t, type }: any) => {
+import Spinner from 'react-native-loading-spinner-overlay'
+const BuyCoin = ({ t, type, selectedCoin }: any) => {
     const dispatch: AppDispatch = useDispatch()
     const users: IHistory[] = type === 'buy' ? useSelector(adsBuySelector) : useSelector(adsSellSelector)
+    const symbol = selectedCoin ? selectedCoin.name : 'BTC';
+    const [loading, setLoading] = React.useState(false);
+
     useEffect(() => {
+        setLoading(true);
         type === 'buy' ? dispatch(fetchListAdsBuy({
             page: 1,
             limit: 5,
-            symbol: 'eth'
-        })) : dispatch(fetchListAdsSell({
+            symbol: symbol
+        })).finally(() => setLoading(false)) : dispatch(fetchListAdsSell({
             page: 1,
             limit: 5,
-            symbol: 'BTC'
-        }))
-    }, [dispatch, type])
+            symbol: symbol
+        })).finally(() => setLoading(false))
+    }, [dispatch, type, selectedCoin])
 
     return (
         <Box paddingHorizontal={15}>
             <Box row alignCenter >
+            <Spinner
+                visible={loading}
+                textContent={t('Loading...')}
+                textStyle={{ color: '#FFF' }}
+            />
                 <Icon
                     size={25}
                     marginRight={10}
@@ -78,4 +87,4 @@ const BuyCoin = ({ t, type }: any) => {
     )
 }
 
-export default BuyCoin
+export default React.memo(BuyCoin)
