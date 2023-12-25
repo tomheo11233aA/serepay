@@ -8,6 +8,7 @@ import styles from '@commom/Box/styles';
 import Box from '@commom/Box';
 import Btn from '@commom/Btn';
 import Img from '@commom/Img';
+import Txt from '@commom/Txt';
 
 const Input = ({
     readonly,
@@ -94,6 +95,7 @@ const Input = ({
     borderTopLeftRadius,
     borderTopRightRadius,
     borderBottomLeftRadius,
+    coin,
     ...rest
 }: Props) => {
     const insets = useSafeAreaInsets();
@@ -237,6 +239,15 @@ const Input = ({
                     />
                 </Btn>
             }
+            {coin &&
+                <Txt
+                    center
+                    justify={'center'}
+                    alignSelf={'center'}
+                >
+                    {coin}
+                </Txt>
+            }
         </Box>
     );
 };
@@ -329,6 +340,7 @@ interface Props {
     borderTopLeftRadius?: any,
     borderTopRightRadius?: any,
     readonly?: boolean,
+    coin?: any,
 }
 
 

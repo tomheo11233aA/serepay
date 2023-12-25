@@ -17,7 +17,12 @@ import { useDispatch, useSelector } from 'react-redux';
 import { AppDispatch } from '@redux/store/store';
 import { exchangeRateSelector } from '@redux/selector/userSelector';
 import { fetchListExchange } from '@redux/slice/exchangeRateSlice';
-
+import { createP2p } from '@utils/userCallApi';
+import { ICreateP2p } from '@models/P2P/USER/Operation/createP2p';
+import Loading from './Loading';
+import TransactionForm from './TransactionForm';
+import AdvertisementInfo from './AdvertisementInfo';
+import PartnerInfo from './PartnerInfo';
 
 const Transaction = () => {
     useCoinSocket();
@@ -27,17 +32,53 @@ const Transaction = () => {
     const [amount, setAmount] = useState('');
     const [isChecked, setIsChecked] = useState(false);
     const [bankList, setBankList] = useState([]);
-    const [selected, setSelected] = React.useState("");
+    const [selected, setSelected] = React.useState();
     const [receiveAmount, setReceiveAmount] = useState('');
     const [coin, setCoin] = useState<any>();
     const dispatch = useDispatch<AppDispatch>();
     const exchangeRate = useSelector(exchangeRateSelector);
     const [loading, setLoading] = useState(true);
-    const handleBuyNow = () => {
-        if (!payment || !amount || !isChecked) {
+    const [bankListId, setBankListId] = useState<number | null>(null);
+    useEffect(() => {
+        const fetchBanking = async () => {
+            const data = {
+                "page": 1,
+                "limit": 1000,
+            }
+            const res = await getListBanking(data);
+            const formattedData = res?.data.array.map((bank: any) => {
+                const label = `${bank.name_banking} (${bank.owner_banking}: ${bank.number_banking.toString()})`;
+                return {
+                    label,
+                    value: label,
+                    key: bank.id,
+                };
+            });
+            setBankList(formattedData);
+        };
+        fetchBanking();
+    }, []);
+
+    const handleBuyNow = async () => {
+        if (!amount || !isChecked) {
             Alert.alert('Error', 'Please fill all fields and agree to the terms');
             return;
         }
+        const data: ICreateP2p = {
+            amount: Number(receiveAmount),
+            idP2p: item.id,
+            idBankingUser: bankListId,
+        }
+        setLoading(true);
+        await createP2p(data)?.then((res) => {
+            Alert.alert('Success', 'Your transaction has been created');
+            setLoading(false);
+        }).catch((err: any) => {
+            Alert.alert('Error', err?.response?.data?.message);
+            setLoading(false);
+        }).finally(() => {
+            setLoading(false);
+        });
     };
     useEffect(() => {
         dispatch(fetchListExchange());
@@ -59,34 +100,21 @@ const Transaction = () => {
             if (coin) {
                 const amountNumber = Number(amount);
                 const rateDollar = exchangeRate.find((item) => item.title === 'VND')?.rate ?? 1;
-                const inputValueDollar = amountNumber / rateDollar;
-                const coinPrice = coin.price ?? 0;
-                const amountCoin = inputValueDollar / coinPrice;
-                setReceiveAmount(amountCoin.toFixed(8));
+                if (item.side === 'buy') {
+                    const coinPrice = coin.price ?? 0;
+                    const amountCoin = amountNumber * coinPrice * rateDollar;
+                    setReceiveAmount(amountCoin.toFixed(3));
+                } else {
+                    const inputValueDollar = amountNumber / rateDollar;
+                    const coinPrice = coin.price ?? 0;
+                    const amountCoin = inputValueDollar / coinPrice;
+                    setReceiveAmount(amountCoin.toFixed(8));
+                }
             }
         }
     }, [item, coins, exchangeRate]);
 
-    useEffect(() => {
-        const fetchBanking = async () => {
-            const data = {
-                "page": 1,
-                "limit": 1000,
-            }
-            const res = await getListBanking(data);
-            const formattedData = res?.data.array.map((bank: any) => {
-                const label = `${bank.name_banking} (${bank.owner_banking}: ${bank.number_banking.toString()})`;
-                return {
-                    label,
-                    value: label,
-                    key: bank.id,
-                };
-            });
-            setBankList(formattedData);
-        };
-        fetchBanking();
-    }, []);
-    // const coin = coins.find(coin => coin?.name === item.symbol);
+
     useEffect(() => {
         if (item) {
             const coin = coins.find(coin => coin?.name === item.symbol);
@@ -97,123 +125,28 @@ const Transaction = () => {
     }, [item, coins]);
     if (loading) {
         return (
-            <Safe flex={1} backgroundColor='white'>
-                <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-                    <LottieView source={require('../../../../assets/lottie/loading.json')} autoPlay loop />
-                </View>
-            </Safe>
+            <Loading />
         );
     }
 
     return (
         <Safe flex={1} backgroundColor='white'>
             <ScrollView showsVerticalScrollIndicator={false} style={{ padding: 20 }}>
-                <View style={{ padding: 10, backgroundColor: colors.gray8, borderRadius: 5 }}>
-                    <Text style={{ color: colors.black2, fontWeight: 'bold', fontSize: 16 }}>
-                        <Text style={{ color: item.side === 'buy' ? 'green' : 'red' }}>
-                            {item.side.charAt(0).toUpperCase() + item.side.slice(1) + ' '}
-                        </Text>
-                        {item?.symbol} via Bank transfer (VND)
-                    </Text>
-                </View>
-
-                <View style={{ padding: 10, backgroundColor: colors.gray8, borderRadius: 5, marginTop: 10 }}>
-                    <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
-                        <View style={{ flex: 1 }}>
-                            <Text style={{ fontFamily: fonts.AS }}> I will pay</Text>
-                            <Input
-                                height={40}
-                                backgroundColor={'white'}
-                                value={amount}
-                                onChangeText={setAmount}
-                                radius={3}
-                            />
-                        </View>
-                        <View style={{ padding: 5 }}></View>
-                        <View style={{ flex: 1 }}>
-                            <Text style={{ fontFamily: fonts.AS }}> To receive</Text>
-                            <Input
-                                value={receiveAmount}
-                                height={40}
-                                backgroundColor={colors.gray7}
-                                readonly
-                                radius={3}
-                            />
-                        </View>
-                    </View>
-                    <View style={{ marginTop: 10 }}>
-                        <Text style={{ fontFamily: fonts.AS }}> Choose your payment</Text>
-                        <SelectList placeholder='Choose your bank' fontFamily={fonts.AS} boxStyles={{ marginTop: 5 }} inputStyles={{ color: colors.black3, fontFamily: fonts.AS }} setSelected={setSelected} data={bankList} />
-
-                    </View>
-                    <View style={{ marginTop: 15 }}>
-                        <BouncyCheckbox
-                            size={25}
-                            fillColor="green"
-                            unfillColor="#FFFFFF"
-                            text="By Clicking Continue, You Agree to Sereso's P2P Terms of Service"
-                            style={{ width: '90%' }}
-                            textStyle={{ textDecorationLine: "none" }}
-                            onPress={setIsChecked}
-                            isChecked={isChecked} />
-                    </View>
-
-                    <TouchableOpacity onPress={handleBuyNow} style={{ marginTop: 15, backgroundColor: colors.violet, padding: 10, borderRadius: 5 }}>
-                        <Text style={{ textAlign: 'center', color: 'white', fontWeight: 'bold' }}>Buy now</Text>
-                    </TouchableOpacity>
-                </View>
-                <View style={{ marginTop: 10 }}>
-                    <Text style={{ color: colors.black2, fontWeight: 'bold', fontSize: 16 }}>Advertisement Informations</Text>
-                    <View style={{ padding: 10, backgroundColor: colors.gray8, borderRadius: 5, marginTop: 10, justifyContent: 'center' }}>
-                        <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
-                            <Text style={{ fontFamily: fonts.AS }}> Price</Text>
-                            <Text style={{ fontFamily: fonts.AS }}>{coin?.price?.toFixed(3)} USD</Text>
-                        </View>
-                        <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginTop: 10 }}>
-                            <Text style={{ fontFamily: fonts.AS }}> Amount limits</Text>
-                            <View style={{ flexDirection: 'row' }}>
-                                <View style={{ padding: 5, backgroundColor: colors.darkGreen, borderRadius: 3 }}>
-                                    <Text style={{ fontFamily: fonts.AS, color: 'white' }}>{item.amountMinimum} {item.symbol}</Text>
-                                </View>
-                                <Text style={{ fontFamily: fonts.AS, color: 'black', textAlign: 'center', alignSelf: 'center', padding: 5 }}>-</Text>
-                                <View style={{ padding: 5, backgroundColor: colors.darkGreen, borderRadius: 3 }}>
-                                    <Text style={{ fontFamily: fonts.AS, color: 'white' }}>{item.amount} {item.symbol}</Text>
-                                </View>
-                            </View>
-                        </View>
-                        <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginTop: 10 }}>
-                            <Text style={{ fontFamily: fonts.AS }}> Payment method</Text>
-                            <View style={{ flexDirection: 'row' }}>
-                                <Text style={{ fontFamily: fonts.AS, color: 'white' }}>{item.bankName}</Text>
-                            </View>
-                        </View>
-                        <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginTop: 10 }}>
-                            <Text style={{ fontFamily: fonts.AS }}> Payment Window</Text>
-                            <Text style={{ fontFamily: fonts.AS, color: colors.black3 }}>15 minutes</Text>
-                        </View>
-                    </View>
-                </View>
-                <View style={{ marginTop: 10 }}>
-                    <Text style={{ color: colors.black2, fontWeight: 'bold', fontSize: 16 }}>Partner Informations</Text>
-                    <View style={{ padding: 10, backgroundColor: colors.gray8, borderRadius: 5, marginTop: 10, justifyContent: 'center' }}>
-                        <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
-                            <Text style={{ fontFamily: fonts.AS }}> Username</Text>
-                            <Text style={{ fontFamily: fonts.AS, color: colors.green }}>{item.userName}</Text>
-                        </View>
-                        <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginTop: 10 }}>
-                            <Text style={{ fontFamily: fonts.AS }}> Status</Text>
-                            <View style={{ flexDirection: 'row' }}>
-                                <Text style={{ fontFamily: fonts.AS, color: colors.black3 }}>Online</Text>
-                            </View>
-                        </View>
-                        <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginTop: 10 }}>
-                            <Text style={{ fontFamily: fonts.AS }}> Country</Text>
-                            <View style={{ flexDirection: 'row' }}>
-                                <Text style={{ fontFamily: fonts.AS, color: colors.black3 }}>Vietnam</Text>
-                            </View>
-                        </View>
-                    </View>
-                </View>
+                <TransactionForm 
+                    amount={amount}
+                    setAmount={setAmount}
+                    receiveAmount={receiveAmount}
+                    bankList={bankList}
+                    setSelected={setSelected}
+                    setBankListId={setBankListId}
+                    isChecked={isChecked}
+                    setIsChecked={setIsChecked}
+                    handleBuyNow={handleBuyNow}
+                    item={item}
+                    coin={coin}
+                />
+                <AdvertisementInfo item={item} coin={coin} />
+                <PartnerInfo item={item} />
             </ScrollView>
         </Safe>
     );
