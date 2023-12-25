@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, StyleSheet, Alert, ScrollView } from 'react-native';
+import { View, Text, StyleSheet, Alert } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { colors } from '@themes/colors';
 import Input from '@commom/Input';
@@ -10,6 +10,9 @@ import { TouchableOpacity } from 'react-native';
 import { useCoinSocket } from '../../../../helper/useCoinSocket';
 import { useSelector } from 'react-redux';
 import { coinListSelector } from '@redux/selector/userSelector';
+import { ScrollView } from 'react-native';
+import { getListBanking } from '@utils/userCallApi';
+import { SelectList } from 'react-native-dropdown-select-list'
 
 const Transaction = () => {
     useCoinSocket();
@@ -18,6 +21,8 @@ const Transaction = () => {
     const [payment, setPayment] = useState('');
     const [amount, setAmount] = useState('');
     const [isChecked, setIsChecked] = useState(false);
+    const [bankList, setBankList] = useState([]);
+    const [selected, setSelected] = React.useState("");
     const handleBuyNow = () => {
         if (!payment || !amount || !isChecked) {
             Alert.alert('Error', 'Please fill all fields and agree to the terms');
@@ -37,6 +42,27 @@ const Transaction = () => {
         fetchItem();
     }, []);
 
+    useEffect(() => {
+        const fetchBanking = async () => {
+            const data = {
+                "page": 1,
+                "limit": 1000,
+            }
+            const res = await getListBanking(data);
+            const formattedData = res?.data.array.map((bank: any) => {
+                const label = `${bank.name_banking} (${bank.owner_banking}: ${bank.number_banking.toString()})`;
+                return {
+                    label,
+                    value: label,
+                    key: bank.id,
+                };
+            });
+            setBankList(formattedData);
+        };
+        fetchBanking();
+    }, []);
+
+
     if (!item) {
         return <LottieView style={{ flex: 1 }} source={require('../../../../assets/lottie/loading.json')} autoPlay loop />;
     }
@@ -47,7 +73,7 @@ const Transaction = () => {
     }
 
     return (
-        <ScrollView style={styles.container}>
+        <ScrollView showsVerticalScrollIndicator={false} style={styles.container}>
             <View style={{ padding: 10, backgroundColor: colors.gray8, borderRadius: 5 }}>
                 <Text style={{ color: colors.black2, fontWeight: 'bold', fontSize: 16 }}>
                     <Text style={{ color: item.side === 'buy' ? 'green' : 'red' }}>
@@ -80,12 +106,8 @@ const Transaction = () => {
                 </View>
                 <View style={{ marginTop: 10 }}>
                     <Text style={{ fontFamily: fonts.AS }}> Choose your payment</Text>
-                    <Input
-                        backgroundColor={'white'}
-                        value={payment}
-                        onChangeText={setPayment}
-                        radius={3}
-                    />
+                    <SelectList fontFamily={fonts.AS} boxStyles={{ marginTop: 5 }} inputStyles={{color: colors.black3, fontFamily: fonts.AS}} setSelected={setSelected} data={bankList} />
+
                 </View>
                 <View style={{ marginTop: 15 }}>
                     <BouncyCheckbox
