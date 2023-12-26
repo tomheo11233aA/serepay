@@ -2,7 +2,6 @@ import { StyleSheet, Text, View, Dimensions } from 'react-native'
 import React from 'react'
 import Safe from '@reuse/Safe'
 import Scroll from '@commom/Scroll'
-import { Table, Row } from 'react-native-table-component';
 import { colors } from '@themes/colors'
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { getInfoP2p } from '@utils/userCallApi';
@@ -16,7 +15,6 @@ import { userInfoUserSelector } from '@redux/selector/userSelector'
 import FooterButtons from './Footer';
 import PaymentModal from './PaymentModal';
 import TransactionTable from './TransactionTable';
-import { set } from 'lodash';
 import { RouteProp } from '@react-navigation/native';
 
 interface IResponse {
@@ -80,8 +78,9 @@ const ConfirmTransaction:React.FC<ConfirmTransactionProps> = ({route}) => {
                     setIdP2p(adsItemParse.id);
                 }
             } catch (error) {
-                console.log(error);
+                console.log("lỗi 1", error);
             } finally {
+                await AsyncStorage.removeItem('adsItem');
                 setLoading(false);
             }
         }
@@ -131,7 +130,7 @@ const ConfirmTransaction:React.FC<ConfirmTransactionProps> = ({route}) => {
                             {new Date(item.created_at).toLocaleString()}
                         </Text>,
                         <View style={{ alignItems: 'center', paddingVertical: 15, paddingHorizontal: 10 }}>
-                            <Text style={{ flexShrink: 1, textAlign: 'justify' }}>
+                            {/* <Text style={{ flexShrink: 1, textAlign: 'justify' }}>
                                 • Vui lòng thanh toán đúng thông tin tại màn hình
                                 thanh toán trong thời gian quy định. Nếu bạn đã thanh
                                 toán có thể nhắn tin cho người bán ngay để họ kiểm tra.{`\n`}
@@ -142,13 +141,13 @@ const ConfirmTransaction:React.FC<ConfirmTransactionProps> = ({route}) => {
                                 nhiệm. {`\n`}
                                 • Nếu khách hàng thanh toán bị chậm, lỗi ngân hàng ...
                                 vui lòng liên hệ người bán để được hỗ trợ
-                            </Text>
+                            </Text> */}
                         </View>,
                     ]);
                     setTableData(formattedData);
                 }
             } catch (error) {
-                console.log(error);
+                console.log("lỗi 2", error);
             } finally {
                 setLoading(false);
             }
