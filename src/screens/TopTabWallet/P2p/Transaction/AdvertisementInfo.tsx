@@ -29,9 +29,9 @@ const AdvertisementInfo: React.FC<AdvertisementInfoProps> = ({ item, coin }) => 
                 </View>
             </View>
             <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginTop: 10 }}>
-                <Text style={{ fontFamily: fonts.AS }}> Payment method</Text>
+                <Text style={{ fontFamily: fonts.AS}}> Payment method</Text>
                 <View style={{ flexDirection: 'row' }}>
-                    <Text style={{ fontFamily: fonts.AS, color: 'white' }}>{item.bankName}</Text>
+                    <Text style={{ fontFamily: fonts.AS, color: colors.black3 }}>{item.bankName}</Text>
                 </View>
             </View>
             <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginTop: 10 }}>

@@ -1,17 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, StyleSheet, Alert } from 'react-native';
+import { StyleSheet, Alert } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { colors } from '@themes/colors';
-import Input from '@commom/Input';
-import { fonts } from '@themes/fonts';
-import BouncyCheckbox from "react-native-bouncy-checkbox";
-import LottieView from 'lottie-react-native';
-import { TouchableOpacity } from 'react-native';
 import { useCoinSocket } from '../../../../helper/useCoinSocket';
 import { coinListSelector } from '@redux/selector/userSelector';
 import { ScrollView } from 'react-native';
 import { getListBanking } from '@utils/userCallApi';
-import { SelectList } from 'react-native-dropdown-select-list'
 import Safe from '@reuse/Safe';
 import { useDispatch, useSelector } from 'react-redux';
 import { AppDispatch } from '@redux/store/store';
@@ -23,6 +16,8 @@ import Loading from './Loading';
 import TransactionForm from './TransactionForm';
 import AdvertisementInfo from './AdvertisementInfo';
 import PartnerInfo from './PartnerInfo';
+import { navigate } from '@utils/navigationRef';
+import { screens } from '@contants/screens';
 
 const Transaction = () => {
     useCoinSocket();
@@ -72,6 +67,7 @@ const Transaction = () => {
         setLoading(true);
         await createP2p(data)?.then((res) => {
             Alert.alert('Success', 'Your transaction has been created');
+            navigate(screens.CONFIRM_TRANSACTION);
             setLoading(false);
         }).catch((err: any) => {
             Alert.alert('Error', err?.response?.data?.message);

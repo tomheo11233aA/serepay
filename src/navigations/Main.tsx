@@ -7,10 +7,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage'
 import { setLogin } from '@redux/slice/userSlice'
 import { useDispatch } from 'react-redux'
 import { AppDispatch } from '@redux/store/store'
-import { fetchUserInfo } from '@redux/slice/userSlice'
-import { userInfoUserSelector } from '@redux/selector/userSelector'
-import { useSelector } from 'react-redux'
-import { useCallback } from 'react'
+
 
 const Main = () => {
     const isLogin = useAppSelector(isLoginUserSelector)

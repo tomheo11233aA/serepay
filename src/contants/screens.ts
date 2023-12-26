@@ -19,4 +19,5 @@ export const screens = {
     VERIFY2FA: 'Verify2FA',
     ECOSYSTEM: 'Ecosystem',
     TRANSACTION: 'Transaction',
+    CONFIRM_TRANSACTION: 'ConfirmTransaction',
 }

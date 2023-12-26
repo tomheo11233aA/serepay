@@ -2405,6 +2405,15 @@
   resolved "https://registry.npmjs.org/@types/prop-types/-/prop-types-15.7.5.tgz"
   integrity sha512-JCB8C6SnDoQf0cNycqd/35A7MjcnK+ZTqE7judS6o7utxUCg6imJg3QK2qzHKszlTjcj2cn+NwMB2i96ubpj7w==
 
+"@types/react-native-table-component@^1.2.8":
+  version "1.2.8"
+  resolved "https://registry.npmjs.org/@types/react-native-table-component/-/react-native-table-component-1.2.8.tgz"
+  integrity sha512-ZhWnoW3LpzXx+fCyosNBVasVCuaWNCMDMcP0mO9FSSK8eRE4ihLTqKiit6zjpph9ot4LQ/mD8hmbhV0YpRLvOQ==
+  dependencies:
+    "@types/react" "*"
+    csstype "^3.0.3"
+    react-native "*"
+
 "@types/react-test-renderer@^18.0.0":
   version "18.0.0"
   resolved "https://registry.npmjs.org/@types/react-test-renderer/-/react-test-renderer-18.0.0.tgz"
@@ -4980,7 +4989,7 @@ csso@^5.0.5:
   dependencies:
     css-tree "~2.2.0"
 
-csstype@^3.0.2, csstype@3.1.2:
+csstype@^3.0.2, csstype@^3.0.3, csstype@3.1.2:
   version "3.1.2"
   resolved "https://registry.npmjs.org/csstype/-/csstype-3.1.2.tgz"
   integrity sha512-I7K1Uu0MBPzaFKg4nI5Q7Vs2t+3gWWW648spaF+Rg7pI9ds18Ugn+lvg4SHczUdKlHI5LWBXyqfS8+DufyBsgQ==
@@ -11075,6 +11084,11 @@ react-native-switch@^1.5.1:
   dependencies:
     prop-types "^15.6.0"
 
+react-native-table-component@^1.2.2:
+  version "1.2.2"
+  resolved "https://registry.npmjs.org/react-native-table-component/-/react-native-table-component-1.2.2.tgz"
+  integrity sha512-7bbsi5431iWcjj3toASh8lFHGi6AG/+MTd4M7GuksXKxx/CFs/Qwv1Ys7D2wgyuYKe3hxWNfSVrteFj0tOYXYw==
+
 react-native-vector-icons@*:
   version "10.0.3"
   resolved "https://registry.npmjs.org/react-native-vector-icons/-/react-native-vector-icons-10.0.3.tgz"
@@ -13001,7 +13015,7 @@ typescript@>=4.9.5:
   resolved "https://registry.npmjs.org/typescript/-/typescript-5.3.3.tgz"
   integrity sha512-pXWcraxM0uxAS+tN0AG/BF2TyqmHO014Z070UsJ+pFvYuRSq8KH8DmWpnbXe0pEPDHXZV3FcAbJkijJ5oNEnWw==
 
-ua-parser-js@^0.7.30, ua-parser-js@^0.7.9:
+ua-parser-js@^0.7.9:
   version "0.7.37"
   resolved "https://registry.npmjs.org/ua-parser-js/-/ua-parser-js-0.7.37.tgz"
   integrity sha512-xV8kqRKM+jhMvcHWUKthV9fNebIzrNy//2O9ZwWcfiBFR5f25XVZPLlEajk/sf3Ra15V92isyQqnIEXRDaZWEA==
