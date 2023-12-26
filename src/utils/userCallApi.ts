@@ -7,7 +7,6 @@ import { IHistoryRecharge } from "@models/WALLET/historyRecharge";
 import { IHistoryWidthdraw } from "@models/WALLET/gethHstoryWidthDraw";
 import { ITransferToUserName } from "@models/TRANSFER/transferToUsername";
 import { IHistoryTransfer } from "@models/TRANSFER/historyTransfer";
-import { IUploadKYC } from "@models/USER/uploadKYC";
 import { ITurnOff2FA } from "@models/USER/turnOff2FA";
 import { IExchangeRateDisparity } from "@models/P2P/ADMIN/CONFIG/exchangeRateDisparity";
 import { IUpdateExchangeRateDisparity } from "@models/P2P/ADMIN/CONFIG/updateExchangeRateDisparity";
@@ -271,3 +270,26 @@ export const companyCancelP2pCommand = function (data : ICompanyCancelF2pCommand
     console.log(error);
   }
 };
+
+export const getListHistoryP2p = function (data : any) {
+  try {
+    return axiosService.post("/api/p2pBank/getListHistoryP2p", data);
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+export const getListHistoryP2pWhere = function (data : any) {
+  try {
+    return axiosService.post("/api/p2pBank/getListHistoryP2pWhere", data);
+  } catch (error) {
+    console.log(error);
+  }
+}
+export const getListHistoryP2pPendding = function (data : any) {
+  try {
+    return axiosService.post("/api/p2pBank/getListHistoryP2pPendding", data);
+  } catch (error) {
+    console.log(error);
+  }
+}

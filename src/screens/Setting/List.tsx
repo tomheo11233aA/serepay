@@ -57,7 +57,8 @@ const List = ({ t }: Props) => {
     },
     {
       title: 'History',
-      icon: require('@images/setting/history.png')
+      icon: require('@images/setting/history.png'),
+      onClick: () => navigate(screens.HISTORY_TRANSACTION)
     },
     {
       title: 'Security 12 characters',

@@ -97,7 +97,7 @@ const FooterButtons: React.FC<FooterButtonsProps> = ({ typeUser, userid, loginUs
             );
         } else {
             return (
-                <View>
+                <View style={{flexDirection: 'row'}}>
                     <Btn backgroundColor={colors.darkGreen} radius={3} padding={8} onPress={handleCompanyConfirmOrder}>
                         <Text style={{ color: 'white' }}>Đã nhận được tiền</Text>
                     </Btn>

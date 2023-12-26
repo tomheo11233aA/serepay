@@ -20,4 +20,5 @@ export const screens = {
     ECOSYSTEM: 'Ecosystem',
     TRANSACTION: 'Transaction',
     CONFIRM_TRANSACTION: 'ConfirmTransaction',
+    HISTORY_TRANSACTION: 'HistoryTransaction',
 }

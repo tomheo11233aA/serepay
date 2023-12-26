@@ -23,4 +23,5 @@ export const colors = {
   darkGreen: '#284b5f',
   darkViolet: '#3d204c',
   red: '#e75559',
+  blue: '#3b5998',
 }

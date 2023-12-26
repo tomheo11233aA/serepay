@@ -17,6 +17,7 @@ import FooterButtons from './Footer';
 import PaymentModal from './PaymentModal';
 import TransactionTable from './TransactionTable';
 import { set } from 'lodash';
+import { RouteProp } from '@react-navigation/native';
 
 interface IResponse {
     amount: number;
@@ -41,8 +42,18 @@ interface IResponse {
     useridAds: number;
 }
 
-const ConfirmTransaction = () => {
-    const [idP2p, setIdP2p] = React.useState('');
+type RootStackParamList = {
+    ConfirmTransaction: { idP2p: number };
+};
+
+type ConfirmTransactionScreenRouteProp = RouteProp<RootStackParamList, 'ConfirmTransaction'>;
+
+interface ConfirmTransactionProps {
+    route: ConfirmTransactionScreenRouteProp;
+}
+
+const ConfirmTransaction:React.FC<ConfirmTransactionProps> = ({route}) => {
+    const [idP2p, setIdP2p] = React.useState(route?.params?.idP2p || '');
     const [tableData, setTableData] = React.useState([]);
     const padding = 20;
     const [visible, setVisible] = React.useState(false);
@@ -156,7 +167,7 @@ const ConfirmTransaction = () => {
     React.useEffect(() => {
         dispatch(fetchUserInfo())
     }, [dispatch]);
-        
+
     const refresh = () => {
         fetchP2pInfo();
     }
@@ -179,7 +190,7 @@ const ConfirmTransaction = () => {
                     </View>
                     <TransactionTable tableData={tableData} showModal={showModal} />
                     <View style={styles.viewFooter}>
-                        <FooterButtons typeUser={typeUser} userid={userId} loginUserid={loginUserid} idP2p={selectedidP2p} refresh={refresh}/>
+                        <FooterButtons typeUser={typeUser} userid={userId} loginUserid={loginUserid} idP2p={selectedidP2p} refresh={refresh} />
                     </View>
                     <PaymentModal
                         visible={visible}
