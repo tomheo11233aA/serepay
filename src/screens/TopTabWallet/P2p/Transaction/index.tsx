@@ -23,7 +23,6 @@ const Transaction = () => {
     useCoinSocket();
     const coins = useSelector(coinListSelector)
     const [item, setItem] = useState<any>();
-    const [payment, setPayment] = useState('');
     const [amount, setAmount] = useState('');
     const [isChecked, setIsChecked] = useState(false);
     const [bankList, setBankList] = useState([]);
@@ -60,7 +59,7 @@ const Transaction = () => {
             return;
         }
         const data: ICreateP2p = {
-            amount: Number(receiveAmount),
+            amount: item.side === 'sell' ? Number(receiveAmount) : Number(amount),
             idP2p: item.id,
             idBankingUser: bankListId,
         }

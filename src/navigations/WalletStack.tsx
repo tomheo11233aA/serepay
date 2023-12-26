@@ -3,7 +3,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack'
 import TopTabWallet from '@screens/TopTabWallet'
 import React from 'react'
 import Transaction from '@screens/TopTabWallet/P2p/Transaction'
-import ConfirmTransaction from '@screens/TopTabWallet/P2p/ConfirmTransaction/ConfirmTransaction'
+import ConfirmTransaction from '@screens/TopTabWallet/P2p/ConfirmTransaction'
 
 const Stack = createNativeStackNavigator()
 
