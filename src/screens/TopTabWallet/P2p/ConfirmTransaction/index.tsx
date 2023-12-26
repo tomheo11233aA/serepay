@@ -130,7 +130,7 @@ const ConfirmTransaction:React.FC<ConfirmTransactionProps> = ({route}) => {
                             {new Date(item.created_at).toLocaleString()}
                         </Text>,
                         <View style={{ alignItems: 'center', paddingVertical: 15, paddingHorizontal: 10 }}>
-                            {/* <Text style={{ flexShrink: 1, textAlign: 'justify' }}>
+                            <Text style={{ flexShrink: 1, textAlign: 'justify' }}>
                                 • Vui lòng thanh toán đúng thông tin tại màn hình
                                 thanh toán trong thời gian quy định. Nếu bạn đã thanh
                                 toán có thể nhắn tin cho người bán ngay để họ kiểm tra.{`\n`}
@@ -141,7 +141,7 @@ const ConfirmTransaction:React.FC<ConfirmTransactionProps> = ({route}) => {
                                 nhiệm. {`\n`}
                                 • Nếu khách hàng thanh toán bị chậm, lỗi ngân hàng ...
                                 vui lòng liên hệ người bán để được hỗ trợ
-                            </Text> */}
+                            </Text>
                         </View>,
                     ]);
                     setTableData(formattedData);
