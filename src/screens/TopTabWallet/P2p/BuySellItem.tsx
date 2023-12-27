@@ -45,14 +45,6 @@ const BuySellItem = ({
         price = selectedCoin && selectedCoin.price !== undefined ? selectedCoin.price + (selectedCoin.price * (value/100)) : 0;
     }
 
-    const [isPressed, setIsPressed] = React.useState(false);
-
-    const handlePress = () => {
-        setIsPressed(true);
-        if (onPress) {
-            onPress();
-        }
-    };
 
     return (
         <Box
@@ -84,9 +76,9 @@ const BuySellItem = ({
                 paddingHorizontal={10}
                 backgroundColor={buttonColor}
                 alignSelf={'flex-start'}
-                onPress={handlePress}
+                onPress={onPress}
             >
-                <Txt color={'white'} bold>{isPressed ? 'Pressed' : buttonText}</Txt>
+                <Txt color={'white'} bold>{buttonText}</Txt>
             </Btn>
         </Box>
     )

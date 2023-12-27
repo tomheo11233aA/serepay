@@ -5,12 +5,12 @@ import { useTranslation } from 'react-i18next'
 import Coins from './Coins'
 import Options from './Options'
 import { fetchUserInfo, fetchUserWallet } from '@redux/slice/userSlice'
-import { userWalletUserSelector, userInfoUserSelector, exchangeRateSelector } from '@redux/selector/userSelector'
+import { userWalletUserSelector, userInfoUserSelector } from '@redux/selector/userSelector'
 import { useDispatch, useSelector } from 'react-redux'
 import { AppDispatch } from '@redux/store/store'
 import { fetchListExchange } from '../../../redux/slice/exchangeRateSlice'
 import { coinListSelector } from '@redux/selector/userSelector'
-import AsyncStorage from '@react-native-async-storage/async-storage'
+import Icon from '@commom/Icon'
 
 const Wallet = () => {
   const { t } = useTranslation()
@@ -26,6 +26,11 @@ const Wallet = () => {
     dispatch(fetchUserInfo())
     dispatch(fetchListExchange())
   }, [dispatch]);
+  const totalValueInUSD = Object.keys(userWallet ?? {}).reduce((total, coinKey) => {
+    const coin = coins.find(coin => coin?.symbolWallet?.toLowerCase() === coinKey.split('_')[0]);
+    return total + ((coin?.price ?? 0) * (userWallet?.[coinKey] ?? 0));
+  }, 0);
+  const totalValueInBTC = totalValueInUSD / (coins.find(coin => coin.name === 'BTC')?.price ?? 1);
   return (
     <Box flex={1} marginTop={50}>
       <Box alignCenter>
@@ -36,12 +41,24 @@ const Wallet = () => {
         >
           {t('HELLO')} {userInfo?.username}
         </Txt>
-        <Txt color={'white'} size={30} marginTop={10}>
-          BTC: {userWallet?.btc_balance ? userWallet.btc_balance.toFixed(8) : 0} coins
-        </Txt>
-        <Txt color={'white'} size={30} marginTop={10}>
+        <Box marginTop={10} row justifyCenter alignCenter>
+          <Icon
+            size={30}
+            source={require('@images/wallet/bitcoin.png')}
+          />
+          <Txt color={'white'} size={30} marginLeft={10}>
+            {totalValueInBTC.toFixed(8)}
+          </Txt>
+        </Box>
+        <Box marginTop={10} row justifyCenter alignCenter>
+          <Icon
+            size={30}
+            source={require('@images/wallet/dollar.png')}
+          />
+          <Txt color={'white'} size={30} marginLeft={10}>
           {selectedRate?.title}: {transferPrice.toFixed(3)}
-        </Txt>
+          </Txt>
+        </Box>
       </Box>
       <Box
         flex={1}

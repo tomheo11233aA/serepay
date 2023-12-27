@@ -5,10 +5,12 @@ import { colors } from '@themes/colors';
 import { styled } from '@themes/styled';
 import React from 'react';
 import { roundDecimalValues } from '../../../helper/function/roundCoin';
-import moment from 'moment';
-
 import { IHistory } from '@models/history';
 import { fonts } from '@themes/fonts';
+import { navigate } from '@utils/navigationRef';
+import { screens } from '@contants/screens';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
 interface Props {
     t: any;
     user: IHistory;
@@ -16,8 +18,13 @@ interface Props {
 }
 
 const ItemBuyCoin = ({ user, t, adType }: Props) => {
-    const formatTime = (time: string) => {
-        return moment(time, "DD/MM/YYYY H:m:s").format('DD/MM/YYYY HH:mm:ss')
+    const handleItemClick = async (item: any) => {
+        try {
+            await AsyncStorage.setItem('adsItem', JSON.stringify(item))
+            navigate(screens.TRANSACTION)
+        } catch (error) {
+            console.log(error)
+        }
     }
     return (
         <Box
@@ -94,7 +101,14 @@ const ItemBuyCoin = ({ user, t, adType }: Props) => {
                     {t('Banking')}
                 </Txt>
             </Box>
-            <Btn radius={5} alignSelf={'center'} paddingVertical={7} paddingHorizontal={25} maxWidth={150} backgroundColor={adType === 'buy' ? colors.green : colors.red}>
+            <Btn
+                onPress={() => handleItemClick(user)}
+                radius={5}
+                alignSelf={'center'}
+                paddingVertical={7}
+                paddingHorizontal={25}
+                maxWidth={150}
+                backgroundColor={adType === 'buy' ? colors.green : colors.red}>
                 <Txt bold fontFamily={fonts.IBMPM} color={'white'}>
                     {t(adType === 'buy' ? 'Buy' : 'Sell')}
                 </Txt>
