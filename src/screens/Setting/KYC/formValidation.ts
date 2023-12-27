@@ -1,6 +1,6 @@
 import * as yup from "yup";
 
-export interface FormData {
+export interface MyData {
     fullName: string;
     address: string;
     phone: string;
@@ -9,7 +9,6 @@ export interface FormData {
     frontImage: string;
     backImage: string;
     selfieImage: string;
-    // userId: number|null;
 }
 
 export const schema = yup.object().shape({
@@ -21,5 +20,4 @@ export const schema = yup.object().shape({
     frontImage: yup.string().required("Front image is required"),
     backImage: yup.string().required("Back image is required"),
     selfieImage: yup.string().required("Selfie image is required"),
-    // userId: yup.number().nullable().required("User id is required"),
 });

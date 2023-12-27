@@ -30,14 +30,9 @@ const ImportImage: React.FC<Props> = ({ title, onImageSelected }) => {
                 } else if (response.errorCode) {
                     console.log('ImagePicker Error: ', response.errorMessage);
                 } else {
-                    // const source = { uri: response?.assets?.[0]?.uri ?? 'Anh bi null' };
-                    // setSelectedImage(source.uri);
-                    // onImageSelected?.(source.uri);
-                    // base64
                     const source = { uri: response?.assets?.[0]?.uri ?? 'Anh bi null' };
                     setSelectedImage(source.uri);
-                    onImageSelected?.(response?.assets?.[0]?.uri ?? 'Anh bi null');
-                    
+                    onImageSelected?.(response?.assets?.[0]?.uri ?? 'Anh bi null')
                 }
             },
         );

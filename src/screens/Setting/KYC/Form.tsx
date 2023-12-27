@@ -12,30 +12,26 @@ import Btn from '@commom/Btn';
 import { fonts } from '@themes/fonts';
 import ImportImage from './ImportImage';
 import { uploadKyc } from '@utils/userCallApi';
-import Input from '@commom/Input';
 import { fetchUserInfo } from '@redux/slice/userSlice'
 import { useDispatch, useSelector } from 'react-redux'
 import { AppDispatch } from '@redux/store/store'
 import { userInfoUserSelector } from '@redux/selector/userSelector'
 import Spinner from 'react-native-loading-spinner-overlay'
-import RNRestart from 'react-native-restart';
-import { schema, FormData } from './formValidation'
+import { schema, MyData } from './formValidation'
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
+import CustomInput from './CustomInput';
+import { navigate } from '@utils/navigationRef';
+import { screens } from '@contants/screens';
 
 const FormKYC = () => {
     const { t } = useTranslation()
-    const [fullName, setFullName] = useState('');
     const [isLoading, setIsLoading] = useState<boolean>(false)
-    const [address, setAddress] = useState('');
-    const [phone, setPhone] = useState('');
-    const [company, setCompany] = useState('');
-    const [passport, setPassport] = useState('');
     const [frontIdImage, setFrontIdImage] = useState(null);
     const [backIdImage, setBackIdImage] = useState(null);
     const [selfieImage, setSelfieImage] = useState(null);
     const [userId, setUserId] = useState<number | null>(null);
-    const { handleSubmit, formState: { errors }, setValue } = useForm<FormData>({
+    const { handleSubmit, formState: { errors }, setValue } = useForm<MyData>({
         resolver: yupResolver(schema)
     });
 
@@ -52,7 +48,8 @@ const FormKYC = () => {
         }
     }, [userInfo]);
 
-    const submitKyc = async (data: FormData) => {
+    const submitKyc = async (data: MyData) => {
+        console.log("data", data)
         setIsLoading(true)
         try {
             const formData = new FormData();
@@ -61,7 +58,6 @@ const FormKYC = () => {
             formData.append('phone', data.phone);
             formData.append('company', data.company);
             formData.append('passport', data.passport);
-
             const frontIdPhoto = {
                 uri: frontIdImage,
                 type: 'image/jpeg',
@@ -81,19 +77,19 @@ const FormKYC = () => {
             formData.append('photo', backIdPhoto);
             formData.append('photo', selfiePhoto);
             formData.append('userid', userId?.toString());
-            await uploadKyc(formData)?.then(() => {
+            try {
+                await uploadKyc(formData)
                 Alert.alert('Update KYC success');
-                setTimeout(() => {
-                    RNRestart.Restart();
-                }, 3000);
-            });
+                navigate(screens.SETTING)
+            } catch (error: any) {
+                console.log("Error1", error)
+            }
         } catch (error: any) {
-            console.log("Error", error);
+            console.log("Error2", error)
         } finally {
             setIsLoading(false)
         }
     }
-
     return (
         <LinearGradient
             style={{ flex: 1 }}
@@ -130,101 +126,75 @@ const FormKYC = () => {
                     </Txt>
                 </Box>
                 <Scroll paddingHorizontal={15} paddingVertical={20}>
-                    <Input
-                        value={fullName}
-                        hint="Full Name"
-                        onChangeText={(value: string) => setFullName(value)}
-                        radius={5}
-                        height={45}
-                        width={'100%'}
-                        borderWidth={1}
-                        tintColor={colors.gray2}
-                        borderColor={colors.gray}
-                        iconOne={require('@images/unAuth/user.png')}
+                    <CustomInput
+                        placeholder="Full Name"
+                        icon={require('@images/unAuth/user.png')}
+                        onChangeText={(value: string) => setValue('fullName', value)}
                     />
                     <Txt size={12} color={colors.red} paddingHorizontal={5}>
                         {errors.fullName?.message}
                     </Txt>
-                    <Input
-                        marginTop={10}
-                        value={address}
-                        hint="Address"
-                        onChangeText={(value: string) => setAddress(value)}
-                        radius={5}
-                        height={45}
-                        width={'100%'}
-                        borderWidth={1}
-                        tintColor={colors.gray2}
-                        borderColor={colors.gray}
-                        iconOne={require('@images/unAuth/pin.png')}
+                    <CustomInput
+                        placeholder="Address"
+                        icon={require('@images/unAuth/pin.png')}
+                        onChangeText={(value: string) => setValue('address', value)}
                     />
                     <Txt size={12} color={colors.red} paddingHorizontal={5}>
                         {errors.address?.message}
                     </Txt>
-                    <Input
-                        marginTop={10}
-                        value={phone}
-                        hint="Phone"
-                        onChangeText={(value: string) => setPhone(value)}
-                        radius={5}
-                        height={45}
-                        width={'100%'}
-                        borderWidth={1}
-                        tintColor={colors.gray2}
-                        borderColor={colors.gray}
-                        iconOne={require('@images/unAuth/telephone.png')}
+                    <CustomInput
+                        placeholder="Phone"
+                        icon={require('@images/unAuth/telephone.png')}
+                        onChangeText={(value: string) => setValue('phone', value)}
                     />
                     <Txt size={12} color={colors.red} paddingHorizontal={5}>
                         {errors.phone?.message}
                     </Txt>
-                    <Input
-                        marginTop={10}
-                        value={company}
-                        hint="Company"
-                        onChangeText={(value: string) => setCompany(value)}
-                        radius={5}
-                        height={45}
-                        width={'100%'}
-                        borderWidth={1}
-                        tintColor={colors.gray2}
-                        borderColor={colors.gray}
-                        iconOne={require('@images/unAuth/company.png')}
+                    <CustomInput
+                        placeholder="Company"
+                        icon={require('@images/unAuth/company.png')}
+                        onChangeText={(value: string) => setValue('company', value)}
                     />
                     <Txt size={12} color={colors.red} paddingHorizontal={5}>
                         {errors.company?.message}
                     </Txt>
-                    <Input
-                        marginTop={10}
-                        value={passport}
-                        hint="Passport"
-                        onChangeText={(value: string) => setPassport(value)}
-                        radius={5}
-                        height={45}
-                        width={'100%'}
-                        borderWidth={1}
-                        tintColor={colors.gray2}
-                        borderColor={colors.gray}
-                        iconOne={require('@images/unAuth/passport.png')}
+                    <CustomInput
+                        placeholder="Passport"
+                        icon={require('@images/unAuth/passport.png')}
+                        onChangeText={(value: string) => setValue('passport', value)}
                     />
                     <Txt size={12} color={colors.red} paddingHorizontal={5}>
                         {errors.passport?.message}
                     </Txt>
                 </Scroll>
+
                 <ImportImage title='Front Image of Citizen Identification Card or Identity Card'
-                    onImageSelected={(image: any) => setFrontIdImage(image)} />
+                    onImageSelected={(image: any) => {
+                        setValue('frontImage', image);
+                        setFrontIdImage(image);
+                    }} />
                 <Txt size={12} color={colors.red} paddingHorizontal={5}>
                     {errors.frontImage?.message}
                 </Txt>
+
                 <ImportImage title='Back Image of Citizen Identification Card or Identity Card'
-                    onImageSelected={(image: any) => setBackIdImage(image)} />
+                    onImageSelected={(image: any) => {
+                        setValue('backImage', image);
+                        setBackIdImage(image);
+                    }} />
                 <Txt size={12} color={colors.red} paddingHorizontal={5}>
                     {errors.backImage?.message}
                 </Txt>
+
                 <ImportImage title='Portrait'
-                    onImageSelected={(image: any) => setSelfieImage(image)} />
+                    onImageSelected={(image: any) => {
+                        setValue('selfieImage', image);
+                        setSelfieImage(image);
+                    }} />
                 <Txt size={12} color={colors.red} paddingHorizontal={5}>
                     {errors.selfieImage?.message}
                 </Txt>
+
                 <Btn
                     onPress={handleSubmit(submitKyc)}
                     radius={5}

@@ -22,9 +22,12 @@ const Waiting = () => {
         </Box>
       </TouchableOpacity>
       <LottieView style={{ flex: 3, position: 'relative' }} source={require('../../../assets/lottie/waiting.json')} autoPlay loop />
-      <Txt center size={20} flex={1} paddingHorizontal={20}>
-        {t('Please wait for admin to verify your account!')}
-      </Txt>
+      <Box flex={1} alignCenter>
+        <Txt width={'80%'} center size={20} paddingHorizontal={20}>
+          {t('Please wait for admin to verify your account!')}
+        </Txt>
+      </Box>
+
     </Safe>
   )
 }
