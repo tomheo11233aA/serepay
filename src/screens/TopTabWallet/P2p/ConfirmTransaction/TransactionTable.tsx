@@ -25,7 +25,7 @@ const TransactionTable: React.FC<TransactionTableProps> = ({ tableData, showModa
                         key={index}
                         data={rowData}
                         style={{ ...styles.row, ...(index % 2 ? styles.rowAlternate : {}) }}
-                        textStyle={{textAlign: 'center', margin: 6, flexShrink: 1, fontWeight: 'bold' }}
+                        textStyle={{margin: 6, flexShrink: 1, fontWeight: 'bold' }}
                         widthArr={columnWidthRatios.map(ratio => adjustedWidth * ratio)}
                     />
                 ))

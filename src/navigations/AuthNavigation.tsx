@@ -24,14 +24,14 @@ const AuthNavigation = () => {
       icon: require('@images/tab/wallet.png'),
       icon2: require('@images/tab/wallet2.png'),
     },
-    {
-      sizeIcon: 20,
-      title: 'Tobe Ads',
-      component: ADStack,
-      name: screens.AD_STACK,
-      icon: require('@images/tab/menu.png'),
-      icon2: require('@images/tab/menu2.png'),
-    },
+    // {
+    //   sizeIcon: 20,
+    //   title: 'Tobe Ads',
+    //   component: ADStack,
+    //   name: screens.AD_STACK,
+    //   icon: require('@images/tab/menu.png'),
+    //   icon2: require('@images/tab/menu2.png'),
+    // },
     {
       sizeIcon: 20,
       title: 'Swap',
@@ -75,6 +75,7 @@ const AuthNavigation = () => {
                 return (
                   <Box alignCenter>
                     <Icon
+                      tintColor={focused ? colors.violet : 'black'}
                       marginBottom={5}
                       size={tab.sizeIcon}
                       source={focused ? tab.icon : tab.icon2}

@@ -5,12 +5,13 @@ import { Platform, StatusBar, StyleSheet, View, Image } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { handleMargin, handlePadding, handleRound, handleSquare } from '../shared';
 import styles from '@commom/Box/styles';
+import { colors } from '@themes/colors';
 
 const Icon = ({
     size,
     source,
     resizeMode,
-    tintColor,
+    tintColor ,
     flex,
     flexShrink,
     flexGrow,

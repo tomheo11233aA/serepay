@@ -104,6 +104,7 @@ const Options = ({ t, setSelectedRate }: Props) => {
                 {options.map((option) =>
                     <Btn key={option.title} onPress={option.onPress}>
                         <Icon
+                        tintColor={colors.violet}
                             size={25}
                             source={option.icon}
                         />

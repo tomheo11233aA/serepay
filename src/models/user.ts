@@ -28,6 +28,7 @@ export interface IUserInfo {
 }
 
 export interface IUserWallet {
+    [key: string]: number | undefined;
     btc_balance: number;
     eth_balance: number;
     usdt_balance: number;

@@ -4,9 +4,8 @@ import TopTabWallet from '@screens/TopTabWallet'
 import React from 'react'
 import Transaction from '@screens/TopTabWallet/P2p/Transaction'
 import ConfirmTransaction from '@screens/TopTabWallet/P2p/ConfirmTransaction'
-
 const Stack = createNativeStackNavigator()
-
+// sửa
 const WalletStack = () => {
     return (
         <Stack.Navigator screenOptions={{ headerShown: false }}>

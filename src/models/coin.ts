@@ -9,7 +9,7 @@ export interface ICoin {
     name?: string,
     p2p?: number,
     percent: number,
-    price?: number,
+    price?: number | any,
     staking?: number,
     swap?: number,
     symbolWallet?: string,

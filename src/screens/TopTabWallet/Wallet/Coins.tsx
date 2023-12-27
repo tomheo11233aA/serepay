@@ -4,15 +4,16 @@ import Scroll from '@commom/Scroll'
 import Txt from '@commom/Txt'
 import { colors } from '@themes/colors'
 import React from 'react'
-import { socket } from '../../../helper/AxiosInstance'
 import { useDispatch, useSelector } from 'react-redux';
 import { AppDispatch } from '@redux/store/store'
-import { setListCoinRealtime } from '@redux/slice/coinSlice'
 import { coinListSelector } from '@redux/selector/userSelector'
-import { keys } from '@contants/keys' 
+import { keys } from '@contants/keys'
 import { ICoin } from '@models/coin'
 import Btn from '@commom/Btn'
 import { useCoinSocket } from '../../../helper/useCoinSocket'
+import { userWalletUserSelector } from '@redux/selector/userSelector'
+import { IUserWallet } from '@models/user'
+import { roundDecimalValues } from '../../../helper/function/roundCoin'
 
 type Props = {
     t?: any
@@ -20,9 +21,11 @@ type Props = {
     isShowHeader?: boolean
     onCoinSelected?: (coin: ICoin) => void
 }
-const Coins:React.FC<Props> = ({t, style, isShowHeader, onCoinSelected}) => {
+const Coins: React.FC<Props> = ({ t, style, isShowHeader, onCoinSelected }) => {
     useCoinSocket()
     const coins = useSelector(coinListSelector)
+    const dispatch: AppDispatch = useDispatch()
+    const userWallet: IUserWallet | undefined = useSelector(userWalletUserSelector);
     return (
         <Box>
             <Scroll style={style} showsVerticalScrollIndicator={false}>
@@ -42,6 +45,7 @@ const Coins:React.FC<Props> = ({t, style, isShowHeader, onCoinSelected}) => {
                     </Box>
                 )} */}
                 {coins.map((coin) => {
+                    const volume = roundDecimalValues(userWallet?.[`${coin?.symbolWallet?.toLowerCase()}_balance`] || 0, coin.price);
                     return (
                         <Btn
                             row
@@ -71,7 +75,9 @@ const Coins:React.FC<Props> = ({t, style, isShowHeader, onCoinSelected}) => {
                                 </Box>
                             </Box>
                             <Txt bold color={colors.darkGreen}>
-                                {`${coin.volume} ${coin.symbolWallet}`}
+                                {/* {`${coin.volume} ${coin.symbolWallet}`} */}
+                                {`${volume} ${coin.symbolWallet}`}
+
                             </Txt>
                         </Btn>
                     )

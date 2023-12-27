@@ -4,8 +4,7 @@ import Txt from '@commom/Txt';
 import { colors } from '@themes/colors';
 import { styled } from '@themes/styled';
 import React from 'react';
-// import { IUser } from './BuyCoin';
-import ButtonBuyCoin from './ButtonBuyCoin';
+
 import { IHistory } from '@models/history';
 interface Props {
     t: any;
@@ -13,11 +12,6 @@ interface Props {
 }
 
 const ItemBuyCoin = ({ user, t }: Props) => {
-    // const typeUser = 1;
-    // const userId = 2;
-    // const loggedInUserId = 1;
-    // const typeP2P = 1;
-
     return (
         <Box
             row
@@ -56,7 +50,6 @@ const ItemBuyCoin = ({ user, t }: Props) => {
                     {t('Buy')}
                 </Txt>
             </Btn>
-            {/* <ButtonBuyCoin typeUser={typeUser} userId={userId} loggedInUserId={loggedInUserId} typeP2P={typeP2P} /> */}
         </Box>
     )
 }
