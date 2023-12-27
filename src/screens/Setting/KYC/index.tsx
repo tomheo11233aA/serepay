@@ -1,4 +1,3 @@
-import { StyleSheet, Text, View } from 'react-native'
 import React from 'react'
 import Form from './Form'
 import Success from './KYCSuccess'

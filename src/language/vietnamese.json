@@ -81,6 +81,7 @@
         "Selling price": "Giá bán",
         "Buying price": "Giá mua",
         "Available": "Khả dụng",
-        "Banking": "Chuyển khoản ngân hàng"  
+        "Banking": "Chuyển khoản ngân hàng",
+        "Pending": "Đang chờ"
     }
 }

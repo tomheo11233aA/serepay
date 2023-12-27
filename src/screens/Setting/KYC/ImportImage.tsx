@@ -1,60 +1,81 @@
-import { StyleSheet, Text, View } from 'react-native'
-import React from 'react'
-import Box from '@commom/Box'
-import Txt from '@commom/Txt'
-import { colors } from '@themes/colors'
-import Btn from '@commom/Btn'
-import { useTranslation } from 'react-i18next'
-import * as ImagePicker from 'react-native-image-picker'
+import React, { useState } from 'react';
+import { StyleSheet, Image, View } from 'react-native';
+import Box from '@commom/Box';
+import Txt from '@commom/Txt';
+import { colors } from '@themes/colors';
+import Btn from '@commom/Btn';
+import { useTranslation } from 'react-i18next';
+import * as ImagePicker from 'react-native-image-picker';
+
 interface Props {
-    title?: string
-    onImageSelected?: (image: string) => void
+    title?: string;
+    onImageSelected?: (image: string) => void;
 }
 
-const ImportImage:React.FC<Props> = ({title, onImageSelected}) => {
-    const { t } = useTranslation()
-    const [selectedName, setSelectedName] = React.useState<string | null>(null)
+const ImportImage: React.FC<Props> = ({ title, onImageSelected }) => {
+    const { t } = useTranslation();
+    const [selectedImage, setSelectedImage] = useState<string | null>(null);
+
+    const handleImagePicker = () => {
+        ImagePicker.launchImageLibrary(
+            {
+                mediaType: 'photo',
+                includeBase64: false,
+                maxHeight: 200,
+                maxWidth: 200,
+            },
+            (response) => {
+                if (response.didCancel) {
+                    console.log('User cancelled image picker');
+                } else if (response.errorCode) {
+                    console.log('ImagePicker Error: ', response.errorMessage);
+                } else {
+                    // const source = { uri: response?.assets?.[0]?.uri ?? 'Anh bi null' };
+                    // setSelectedImage(source.uri);
+                    // onImageSelected?.(source.uri);
+                    // base64
+                    const source = { uri: response?.assets?.[0]?.uri ?? 'Anh bi null' };
+                    setSelectedImage(source.uri);
+                    onImageSelected?.(response?.assets?.[0]?.uri ?? 'Anh bi null');
+                    
+                }
+            },
+        );
+    };
+
     return (
         <Box marginHorizontal={20} marginBottom={15}>
-            <Txt color={colors.black2}>
-                {t(title ?? '')}
-            </Txt>
-            <Btn
-                borderWidth={0.5}
-                width={'25%'}
-                backgroundColor={colors.gray}
-                padding={3}
-                radius={3}
-                onPress={() => {
-                    ImagePicker.launchImageLibrary(
-                        {
-                            mediaType: 'photo',
-                            includeBase64: false,
-                            maxHeight: 200,
-                            maxWidth: 200,
-                        },
-                        (response) => {
-                            if (response.didCancel) {
-                                console.log('User cancelled image picker');
-                            } else if (response.errorCode) {
-                                console.log('ImagePicker Error: ', response.errorMessage);
-                            } else {
-                                const source = {uri : response?.assets?.[0]?.uri ?? 'Anh bi null'}
-                                setSelectedName(response?.assets?.[0]?.fileName ?? 'khong co anh')
-                                onImageSelected?.(source.uri)
-                            }
-                        },
-                    );
-                }}>
-                <Txt>
-                    {t('Choose file')}
-                </Txt>
+            <Btn onPress={handleImagePicker}>
+                {selectedImage ? (
+                    <Image source={{ uri: selectedImage }} style={{
+                        width: '100%',
+                        height: 150,
+                        borderRadius: 10,
+                    }} />
+                ) : (
+                    <View style={styles.rectangle}>
+                        <Txt center alignSelf="center">
+                            {t(`Press here to choose ${title} image`)}
+                        </Txt>
+                    </View>
+                )}
             </Btn>
-            {selectedName && <Txt> {selectedName} </Txt>}
         </Box>
-    )
-}
+    );
+};
 
-export default React.memo(ImportImage)
+export default React.memo(ImportImage);
 
-const styles = StyleSheet.create({})
+const styles = StyleSheet.create({
+    rectangle: {
+        width: '100%',
+        height: 150,
+        borderColor: 'black',
+        borderWidth: 1,
+        borderStyle: 'dashed',
+        borderRadius: 10,
+        backgroundColor: colors.gray7,
+        justifyContent: 'center',
+        padding: 10,
+    },
+});
