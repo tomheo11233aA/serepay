@@ -12,7 +12,6 @@ import { coinListSelector } from '@redux/selector/userSelector'
 import { ScrollView, View } from 'react-native'
 import { useCoinSocket } from '../../../helper/useCoinSocket'
 import SearchBox from './SearchBox'
-import Scroll from '@commom/Scroll'
 const P2p = () => {
   const { t } = useTranslation()
   useCoinSocket()
@@ -30,8 +29,6 @@ const P2p = () => {
 
   return (
     <ScrollView
-      // flex={1}
-      // marginTop={10}
       showsVerticalScrollIndicator={false}
       style={{ flex: 1, marginTop: 10 }}>
       <CoinChoosed setSelectedCoin={setSelectedCoin} selectedCoin={selectedCoin} />
@@ -80,4 +77,4 @@ const P2p = () => {
   )
 }
 
-export default P2p
+export default React.memo(P2p)

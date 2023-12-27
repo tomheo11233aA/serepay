@@ -12,9 +12,10 @@ import { AppDispatch } from '@redux/store/store'
 import { IHistory } from '@models/history'
 import { Image } from 'react-native'
 import Spinner from 'react-native-loading-spinner-overlay'
+
 const BuyCoin = ({ t, type, selectedCoin }: any) => {
     const dispatch: AppDispatch = useDispatch()
-    const users: IHistory[] = type === 'buy' ? useSelector(adsBuySelector) : useSelector(adsSellSelector)
+    const users: IHistory[] = type === 'buy' ?  useSelector(adsSellSelector) : useSelector(adsBuySelector)
     const symbol = selectedCoin ? selectedCoin.name : 'BTC';
     const [loading, setLoading] = React.useState(false);
 
@@ -34,11 +35,11 @@ const BuyCoin = ({ t, type, selectedCoin }: any) => {
     return (
         <Box paddingHorizontal={15}>
             <Box row alignCenter >
-            <Spinner
-                visible={loading}
-                textContent={t('Loading...')}
-                textStyle={{ color: '#FFF' }}
-            />
+                <Spinner
+                    visible={loading}
+                    textContent={t('Loading...')}
+                    textStyle={{ color: '#FFF' }}
+                />
                 <Icon
                     size={25}
                     marginRight={10}
@@ -65,6 +66,8 @@ const BuyCoin = ({ t, type, selectedCoin }: any) => {
                             key={user.id}
                             user={user}
                             t={t}
+                            // symbol={symbol}
+                            adType={type}
                         />
                     )
                 ) : (

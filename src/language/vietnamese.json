@@ -70,6 +70,17 @@
         "Please wait for admin to verify your account!": "Vui lòng chờ admin xác minh tài khoản của bạn!",
         "Choose your bank": "Chọn ngân hàng của bạn",
         "Buyer": "Người mua",
-        "Seller": "Người bán"
+        "Seller": "Người bán",
+        "Maximum": "Tối đa",
+        "Minimum": "Tối thiểu",
+        "You want to": "Bạn muốn",
+        "Buy": "Mua",
+        "Sell": "Bán",
+        "Buy now": "Mua ngay",
+        "Sell now": "Bán ngay",
+        "Selling price": "Giá bán",
+        "Buying price": "Giá mua",
+        "Available": "Khả dụng",
+        "Banking": "Chuyển khoản ngân hàng"  
     }
 }

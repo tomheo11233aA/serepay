@@ -1,8 +1,6 @@
 import Box from '@commom/Box'
 import Btn from '@commom/Btn'
-import Icon from '@commom/Icon'
 import Txt from '@commom/Txt'
-import { colors } from '@themes/colors'
 import { fonts } from '@themes/fonts'
 import React from 'react'
 import { ICoin } from '@models/coin'
@@ -47,6 +45,14 @@ const BuySellItem = ({
         price = selectedCoin && selectedCoin.price !== undefined ? selectedCoin.price + (selectedCoin.price * (value/100)) : 0;
     }
 
+    const [isPressed, setIsPressed] = React.useState(false);
+
+    const handlePress = () => {
+        setIsPressed(true);
+        if (onPress) {
+            onPress();
+        }
+    };
 
     return (
         <Box
@@ -78,9 +84,9 @@ const BuySellItem = ({
                 paddingHorizontal={10}
                 backgroundColor={buttonColor}
                 alignSelf={'flex-start'}
-                onPress={onPress}
+                onPress={handlePress}
             >
-                <Txt color={'white'} bold>{buttonText}</Txt>
+                <Txt color={'white'} bold>{isPressed ? 'Pressed' : buttonText}</Txt>
             </Btn>
         </Box>
     )

@@ -8,6 +8,7 @@ import LottieView from 'lottie-react-native'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import { navigate } from '@utils/navigationRef'
 import { screens } from '@contants/screens'
+import { roundDecimalValues } from '../../../helper/function/roundCoin'
 interface Props {
     coin: string
     type?: 'buy' | 'sell'
@@ -78,17 +79,17 @@ const SearchBox: React.FC<Props> = ({ coin, type }) => {
             ) : data.length > 0 ? (
                 data.map((item, index) => (
                     <TouchableOpacity key={index} onPress={() => handleItemClick(item)}>
-                        <View style={{ flexDirection: 'row', justifyContent: 'space-between', padding: 10, borderBottomWidth: 0.5, borderBottomColor: colors.black2 }}>
+                        <View style={{ flexDirection: 'row', justifyContent: 'space-around', padding: 10, borderBottomWidth: 0.5, borderBottomColor: colors.black2 }}>
                             <Text>{type === 'buy' ? t('Seller') : t('Buyer')}: {item.userName}</Text>
-                            <Text>{t('Max')}: {item.amount}. {t('Min')}: {item.amountMinimum}</Text>
+                            <Text> {t('Available')}:{roundDecimalValues(item.amount - item.amountSuccess, 10001)}</Text>
+                            <Text> {t('Min')}:{item.amountMinimum}</Text>
                         </View>
                     </TouchableOpacity>
                 ))
             ) : (
                 <LottieView
-                    source={require('../../../assets/lottie/nodataanimation.json')}
+                    source={require('../../../assets/lottie/searchNodata.json')}
                     autoPlay
-                    loop
                     style={{ width: 200, height: 200, alignSelf: 'center' }}
                 />
             )}
