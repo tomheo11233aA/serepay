@@ -7,6 +7,7 @@ import KYCScreen from '@screens/Setting/KYC'
 import Verify2FA from '@screens/Setting/TwoFactorAuth/Verify2FA'
 import Ecosystem from '@screens/Setting/Ecosystem/Ecosystem'
 import History from '@screens/Setting/History'
+import Advertising from '@screens/Setting/AdvertisingHistory'
 
 const Stack = createNativeStackNavigator()
 
@@ -19,6 +20,7 @@ const SettingStack = () => {
             <Stack.Screen name={screens.KYC} component={KYCScreen} />
             <Stack.Screen name={screens.ECOSYSTEM} component={Ecosystem} />
             <Stack.Screen name={screens.HISTORY_TRANSACTION} component={History} />
+            <Stack.Screen name={screens.ADVERTISING_HISTORY} component={Advertising} />
         </Stack.Navigator>
     )
 }

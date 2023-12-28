@@ -53,7 +53,8 @@ const List = ({ t }: Props) => {
     },
     {
       title: 'Listing',
-      icon: require('@images/setting/list.png')
+      icon: require('@images/setting/list.png'),
+      onClick: () => navigate(screens.ADVERTISING_HISTORY)
     },
     {
       title: 'History',

@@ -293,3 +293,11 @@ export const getListHistoryP2pPendding = function (data : any) {
     console.log(error);
   }
 }
+
+export const cancelP2p = function (data : any) {
+  try {
+    return axiosService.post("/api/p2pBank/cancelP2p", data);
+  } catch (error) {
+    console.log(error);
+  }
+}

@@ -13,7 +13,6 @@ import { ScrollView, View } from 'react-native'
 import { useCoinSocket } from '../../../helper/useCoinSocket'
 import SearchBox from './SearchBox'
 import { socketConnectedSelector } from '@redux/selector/userSelector'
-import { setConnected } from '@redux/slice/coinSlice'
 import { useDispatch } from 'react-redux'
 import { AppDispatch } from '@redux/store/store'
 

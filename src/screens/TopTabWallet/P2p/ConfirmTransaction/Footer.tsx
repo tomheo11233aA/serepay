@@ -84,7 +84,7 @@ const FooterButtons: React.FC<FooterButtonsProps> = ({ typeUser, userid, loginUs
         } else {
             return (
                 <Btn radius={3} padding={8} disabled>
-                    <Text style={{ color: 'white' }}>Đang chờ đối phương chuyển tiền</Text>
+                    <Text style={{ color: 'black' }}>Đang chờ đối phương chuyển tiền</Text>
                 </Btn>
             );
         }

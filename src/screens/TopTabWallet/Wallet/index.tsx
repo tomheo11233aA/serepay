@@ -56,7 +56,7 @@ const Wallet = () => {
             source={require('@images/wallet/dollar.png')}
           />
           <Txt color={'white'} size={30} marginLeft={10}>
-          {selectedRate?.title}: {transferPrice.toFixed(3)}
+          {transferPrice.toFixed(3)}
           </Txt>
         </Box>
       </Box>

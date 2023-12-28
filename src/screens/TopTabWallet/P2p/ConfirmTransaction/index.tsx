@@ -44,9 +44,9 @@ type RootStackParamList = {
     ConfirmTransaction: { idP2p: number };
 };
 
-type ConfirmTransactionScreenRouteProp = RouteProp<RootStackParamList, 'ConfirmTransaction'>;
+export type ConfirmTransactionScreenRouteProp = RouteProp<RootStackParamList, 'ConfirmTransaction'>;
 
-interface ConfirmTransactionProps {
+export interface ConfirmTransactionProps {
     route: ConfirmTransactionScreenRouteProp;
 }
 
@@ -109,7 +109,7 @@ const ConfirmTransaction:React.FC<ConfirmTransactionProps> = ({route}) => {
                                     autoPlay
                                     loop
                                 />
-                                <Text style={{ color: '#0101ff' }}>Đang chờ thanh toán từ ngân hàng</Text>
+                                <Text style={{ color: 'black' }}>Đang chờ thanh toán từ ngân hàng</Text>
                             </View>
                         </View>,
                         <Btn

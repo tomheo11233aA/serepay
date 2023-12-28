@@ -30,3 +30,4 @@ const CoinModal: React.FC<Props> = ({ visible, hideModal, handleChooseCoin, t })
 };
 
 export default React.memo(CoinModal);
+

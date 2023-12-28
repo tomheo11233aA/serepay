@@ -21,4 +21,5 @@ export const screens = {
     TRANSACTION: 'Transaction',
     CONFIRM_TRANSACTION: 'ConfirmTransaction',
     HISTORY_TRANSACTION: 'HistoryTransaction',
+    ADVERTISING_HISTORY: 'AdvertisingHistory',
 }

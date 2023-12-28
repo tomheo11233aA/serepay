@@ -16,6 +16,7 @@ const initialState: CoinState = {
 export const fetchListCoin = createAsyncThunk('coin/fetchListCoin', async () => {
     const axiosInstance = AxiosInstance();
     const response = await axiosInstance.get('api/coin/list');
+    console.log(response.data);
     return response.data;
 });
 
