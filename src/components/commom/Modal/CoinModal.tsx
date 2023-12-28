@@ -2,6 +2,7 @@ import React from 'react';
 import { Modal, Portal } from 'react-native-paper';
 import { ICoin } from '@models/coin';
 import Coins from '@screens/TopTabWallet/Wallet/Coins';
+import { useCoinSocket } from '../../../helper/useCoinSocket'
 
 interface Props {
   visible: boolean;

@@ -4,6 +4,7 @@ import DropDownPicker from 'react-native-dropdown-picker';
 import { Dispatch, SetStateAction } from 'react';
 import { useTranslation } from 'react-i18next';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { fonts } from '@themes/fonts';
 interface Bank {
     id: number;
     name: string;
@@ -11,7 +12,7 @@ interface Bank {
     logo: string;
 }
 
-const containerStyle: StyleProp<ViewStyle> = { height: 40, width: '90%' };
+const containerStyle: StyleProp<ViewStyle> = { width: '90%' };
 const dropdownStyle: StyleProp<ViewStyle> = { backgroundColor: '#fafafa' };
 const imageStyle: StyleProp<ImageStyle> = { width: 100, height: 50 };
 
@@ -48,7 +49,6 @@ const Dropdown: FC<Props> = ({ onChange }) => {
                 }
             })
             .catch((error) => {
-                // Handle error appropriately
                 console.error(error);
             });
     }, []);
@@ -70,6 +70,11 @@ const Dropdown: FC<Props> = ({ onChange }) => {
                         onChange(value);
                         storeData(value);
                     }}
+                    labelStyle={{
+                        fontWeight: 'bold',
+                        fontFamily: fonts.JR,
+                    }}
+                    dropDownContainerStyle={{backgroundColor: '#fafafa'}}
                 />
             )}
         </View>

@@ -12,21 +12,32 @@ import { coinListSelector } from '@redux/selector/userSelector'
 import { ScrollView, View } from 'react-native'
 import { useCoinSocket } from '../../../helper/useCoinSocket'
 import SearchBox from './SearchBox'
+import { socketConnectedSelector } from '@redux/selector/userSelector'
+import { setConnected } from '@redux/slice/coinSlice'
+import { useDispatch } from 'react-redux'
+import { AppDispatch } from '@redux/store/store'
+
 const P2p = () => {
-  const { t } = useTranslation()
   useCoinSocket()
-  const coins = useSelector(coinListSelector)
+  const { t } = useTranslation()
+  const dispatch: AppDispatch = useDispatch()
   const [selectedCoin, setSelectedCoin] = React.useState<ICoin | null>(null)
   const [searchType, setSearchType] = useState<'buy' | 'sell' | null>(null)
+  const coins = useSelector(coinListSelector)
+  const socketConnected = useSelector(socketConnectedSelector)
   useEffect(() => {
     if (!selectedCoin) {
       const btc = coins.find((coin: ICoin) => coin.name === 'BTC')
       if (btc) {
         setSelectedCoin(btc)
       }
+    } else {
+      const coin = coins.find((coin: ICoin) => coin.name === selectedCoin.name)
+      if (coin) {
+        setSelectedCoin(coin)
+      }
     }
-  }, [coins, selectedCoin])
-
+  }, [selectedCoin, coins])
   return (
     <ScrollView
       showsVerticalScrollIndicator={false}

@@ -60,41 +60,6 @@ const ItemBuyCoin = ({ user, t, adType }: Props) => {
                         {user.userName.replace(/\b\w/g, l => l.toUpperCase())}
                     </Txt>
                 </Box>
-
-                {/* <Box row marginTop={5}>
-                    <Txt fontFamily={fonts.IBMPM} color={colors.gray4}>
-                        {t('Available')}:
-                    </Txt>
-                    <Txt fontFamily={fonts.IBMPM} marginLeft={5} color={'black'}>
-                        {parseFloat(roundDecimalValues(user.amount - user.amountSuccess, 10001))} {user.symbol}
-                    </Txt>
-                </Box>
-                <Box row marginTop={5}>
-                    <Box row>
-                        <Txt fontFamily={fonts.IBMPM} color={colors.gray4}>
-                            {t('Min')}:
-                        </Txt>
-                        <Txt fontFamily={fonts.IBMPM} marginLeft={5} color={'black'}>
-                            {user.amountMinimum}
-                        </Txt>
-                    </Box>
-                    <Box row marginLeft={15}>
-                        <Txt fontFamily={fonts.IBMPM} color={colors.gray4}>
-                            {t('Max')}:
-                        </Txt>
-                        <Txt fontFamily={fonts.IBMPM} marginLeft={5} color={'black'}>
-                            {user.amount}
-                        </Txt>
-                    </Box>
-                </Box>
-                <Box row marginTop={5}>
-                    <Txt fontFamily={fonts.IBMPM} color={colors.gray4}>
-                        {t('Created At')}:
-                    </Txt>
-                    <Txt fontFamily={fonts.IBMPM} marginLeft={5} color={'black'}>
-                        {formatTime(user.created_at)}
-                    </Txt>
-                </Box> */}
             </Box>
             <Box flex={1} justifyCenter maxWidth={'33%'}>
                 <Txt alignSelf={'center'} fontFamily={fonts.IBMPM} bold color={colors.gray4} flexShrink={1}>

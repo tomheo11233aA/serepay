@@ -42,7 +42,6 @@ const Ecosystem = () => {
         try {
             setIsLoading(true);
             await addListBanking(data);
-            // clear data
             setAccountNumber('');
             setAccountName('');
             setNameBanking('');

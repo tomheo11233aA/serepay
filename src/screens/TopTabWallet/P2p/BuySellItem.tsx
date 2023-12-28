@@ -2,7 +2,7 @@ import Box from '@commom/Box'
 import Btn from '@commom/Btn'
 import Txt from '@commom/Txt'
 import { fonts } from '@themes/fonts'
-import React from 'react'
+import React, { useCallback, useEffect, useState, useMemo, memo } from 'react'
 import { ICoin } from '@models/coin'
 import { useSelector, useDispatch } from 'react-redux'
 import { configSelector } from '@redux/selector/userSelector'
@@ -29,23 +29,25 @@ const BuySellItem = ({
     const dispatch = useDispatch<AppDispatch>();
     const [value, setValue] = React.useState(0);
     React.useEffect(() => {
-        dispatch(fetchConfig({"name": "exchangeRate"}))
+        dispatch(fetchConfig({ "name": "exchangeRate" }))
     }, [])
+
     React.useEffect(() => {
         if (config) {
             const newValue = config.length > 0 ? config[0].value : 0;
             setValue(newValue);
         }
     }, [config])
-
-    let price = 0
-    if (type === 'buy') {
-        price = selectedCoin && selectedCoin.price !== undefined ? selectedCoin.price - (selectedCoin.price * (value/100)) : 0;
-    } else {
-        price = selectedCoin && selectedCoin.price !== undefined ? selectedCoin.price + (selectedCoin.price * (value/100)) : 0;
-    }
-
-
+    const price = useMemo(() => {
+        let price = 0;
+        if (type === 'buy') {
+            price = selectedCoin && selectedCoin.price !== undefined ? selectedCoin.price - (selectedCoin.price * (value / 100)) : 0;
+        } else {
+            price = selectedCoin && selectedCoin.price !== undefined ? selectedCoin.price + (selectedCoin.price * (value / 100)) : 0;
+        }
+        return price;
+    }, [type, selectedCoin, value]);
+    
     return (
         <Box
             radius={5}

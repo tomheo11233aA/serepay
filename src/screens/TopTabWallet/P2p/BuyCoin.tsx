@@ -17,10 +17,9 @@ const BuyCoin = ({ t, type, selectedCoin }: any) => {
     const dispatch: AppDispatch = useDispatch()
     const users: IHistory[] = type === 'buy' ?  useSelector(adsSellSelector) : useSelector(adsBuySelector)
     const symbol = selectedCoin ? selectedCoin.name : 'BTC';
-    const [loading, setLoading] = React.useState(false);
+    const [loading, setLoading] = React.useState(true);
 
     useEffect(() => {
-        setLoading(true);
         type === 'buy' ? dispatch(fetchListAdsBuy({
             page: 1,
             limit: 5,

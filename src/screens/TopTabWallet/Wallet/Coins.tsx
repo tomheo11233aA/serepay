@@ -26,6 +26,7 @@ const Coins: React.FC<Props> = ({ t, style, isShowHeader, onCoinSelected }) => {
     const coins = useSelector(coinListSelector)
     const dispatch: AppDispatch = useDispatch()
     const userWallet: IUserWallet | undefined = useSelector(userWalletUserSelector);
+
     return (
         <Box>
             <Scroll style={style} showsVerticalScrollIndicator={false}>
@@ -53,7 +54,11 @@ const Coins: React.FC<Props> = ({ t, style, isShowHeader, onCoinSelected }) => {
                             padding={20}
                             key={coin.id}
                             justifySpaceBetween
-                            onPress={() => onCoinSelected && onCoinSelected(coin)}
+                            onPress={() => {
+                                if (onCoinSelected) {
+                                    onCoinSelected(coin)
+                                }
+                            }}
                         >
                             <Box row alignCenter>
                                 <Icon

@@ -1,5 +1,5 @@
-import { StyleSheet, Text, View, TextInput, Alert, TouchableOpacity } from 'react-native'
-import React from 'react'
+import { Text, View, Alert, TouchableOpacity } from 'react-native'
+import React, { useState, useEffect, useMemo } from 'react'
 import Input from '@commom/Input'
 import { colors } from '@themes/colors'
 import { useTranslation } from 'react-i18next'
@@ -9,6 +9,8 @@ import AsyncStorage from '@react-native-async-storage/async-storage'
 import { navigate } from '@utils/navigationRef'
 import { screens } from '@contants/screens'
 import { roundDecimalValues } from '../../../helper/function/roundCoin'
+import { debounce } from 'lodash'
+
 interface Props {
     coin: string
     type?: 'buy' | 'sell'
@@ -16,36 +18,40 @@ interface Props {
 
 const SearchBox: React.FC<Props> = ({ coin, type }) => {
     const { t } = useTranslation()
-    const [amount, setAmount] = React.useState<number>()
-    const [data, setData] = React.useState<any[]>([])
-    const [loading, setLoading] = React.useState(false)
+    const [amount, setAmount] = useState<number>()
+    const [data, setData] = useState<any[]>([])
+    const [loading, setLoading] = useState(false)
+    const searchFunction = type === 'buy' ? searchBuyQuick : searchSellQuick
 
-    React.useEffect(() => {
-        if (amount) {
-            setLoading(true)
-            const params = {
-                limit: 10,
-                page: 1,
-                symbol: coin,
-                amount: amount
-            }
+    const params = useMemo(() => ({
+        limit: 10,
+        page: 1,
+        symbol: coin,
+        amount: amount
+    }), [amount, coin])
 
-            const searchFunction = type === 'buy' ? searchBuyQuick : searchSellQuick
-            if (searchFunction) {
-                searchFunction(params)?.then(response => {
-                    setData(response.data.array)
+    const debouncedSearch = useMemo(() => debounce((params) => {
+        if (searchFunction) {
+            searchFunction(params)?.then(response => {
+                setData(response.data.array)
+                setLoading(false)
+            })
+                .catch(error => {
+                    Alert.alert('Error', error.message)
                     setLoading(false)
                 })
-                    .catch(error => {
-                        Alert.alert('Error', error.message)
-                        setLoading(false)
-                    })
-            } else {
-                setData([])
-                setLoading(false)
-            }
+        } else {
+            setData([])
+            setLoading(false)
         }
-    }, [amount, coin, type])
+    }, 500), [searchFunction]);
+
+    useEffect(() => {
+        if (amount) {
+            setLoading(true)
+            debouncedSearch(params);
+        }
+    }, [amount, coin, type, debouncedSearch])
 
     const handleItemClick = async (item: any) => {
         try {
@@ -98,5 +104,3 @@ const SearchBox: React.FC<Props> = ({ coin, type }) => {
 }
 
 export default React.memo(SearchBox)
-
-const styles = StyleSheet.create({})

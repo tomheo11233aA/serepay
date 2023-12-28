@@ -8,7 +8,7 @@ export const userInfoUserSelector = (state: RootState) => state.user.userInfo
 
 export const userWalletUserSelector = (state: RootState) => state.user.userWallet
 
-export const coinListSelector = (state: RootState) => state.coin
+export const coinListSelector = (state: RootState) => state.coin.coins
 
 export const exchangeRateSelector = (state: RootState) => state.exchangeRate
 
@@ -21,3 +21,5 @@ export const adsSellSelector = (state: RootState) => state.history.sell
 export const configSelector = (state: RootState) => state.config.data
 
 export const selectedRateSelector = (state: RootState) => state.user.selectedRate
+
+export const socketConnectedSelector = (state: RootState) => state.coin.connected

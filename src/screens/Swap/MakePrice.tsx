@@ -17,6 +17,7 @@ import { getBalanceOfChoosedCoin } from '../../helper/function/getBalanceOfChoos
 import { userWalletUserSelector } from '@redux/selector/userSelector'
 import { useCoinSocket } from '../../helper/useCoinSocket'
 import { calculateConversionRate } from '../../helper/function/calculateConversionRate'
+import LottieView from 'lottie-react-native';
 
 interface Props {
     t: any;
@@ -37,12 +38,13 @@ const MakePrice = ({ t }: Props) => {
     const showModal = useCallback(() => setVisible(true), [])
     const hideModal = useCallback(() => setVisible(false), [])
     const [isChoosingForSymbolTo, setIsChoosingForSymbolTo] = useState(false)
+    const [isLoading, setIsLoading] = useState<boolean>(false)
     useEffect(() => {
         const conversionRate = calculateConversionRate(symbolForm, symbolTo, coins)
         const amountTo = parseFloat(amountForm) * Number(conversionRate);
         setAmountTo(amountTo.toFixed(8))
     }, [amountForm, symbolForm, symbolTo, coins])
-    
+
     const swapSymbol = useCallback(() => {
         const currentFrom = symbolForm
         const currentTo = symbolTo
@@ -75,17 +77,26 @@ const MakePrice = ({ t }: Props) => {
         hideModal()
     }, [hideModal, isChoosingForSymbolTo])
     const swapCoin = useCallback(async (swapData: ISwap) => {
+        setIsLoading(true)
         try {
             const res = await swapCoinApi(swapData)
             Alert.alert(res?.data?.message ?? 'Successful coin conversion!')
         } catch (error) {
             Alert.alert('Insufficient balance! ')
             console.log(error)
-        }
+        } 
+        setIsLoading(false)
     }, [])
 
     return (
         <Box>
+            {isLoading && (
+                <LottieView
+                    source={require('../../assets/lottie/loading.json')}
+                    autoPlay
+                    loop
+                />
+            )}
             <CoinModal visible={visible} hideModal={hideModal} t={t} handleChooseCoin={changeCoin} />
             <ItemConver
                 symbol={symbolForm}
@@ -126,7 +137,7 @@ const MakePrice = ({ t }: Props) => {
                 value={amountTo}
                 swapSymbol={swapSymbol}
             />
-             <Box
+            <Box
                 top={3}
                 row
                 justifySpaceBetween>

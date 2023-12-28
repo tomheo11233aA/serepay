@@ -79,13 +79,13 @@ const FormKYC = () => {
             formData.append('userid', userId?.toString());
             try {
                 await uploadKyc(formData)
-                Alert.alert('Update KYC success');
                 navigate(screens.SETTING)
             } catch (error: any) {
-                console.log("Error1", error)
+                Alert.alert(error?.response?.data?.message ?? 'Update KYC fail')
             }
         } catch (error: any) {
-            console.log("Error2", error)
+            Alert.alert(error ?? 'Update KYC fail')
+            console.log("error", error)
         } finally {
             setIsLoading(false)
         }
@@ -173,7 +173,7 @@ const FormKYC = () => {
                         setValue('frontImage', image);
                         setFrontIdImage(image);
                     }} />
-                <Txt size={12} color={colors.red} paddingHorizontal={5}>
+                <Txt marginLeft={15} size={12} color={colors.red} paddingHorizontal={5}>
                     {errors.frontImage?.message}
                 </Txt>
 
@@ -182,7 +182,7 @@ const FormKYC = () => {
                         setValue('backImage', image);
                         setBackIdImage(image);
                     }} />
-                <Txt size={12} color={colors.red} paddingHorizontal={5}>
+                <Txt marginLeft={15} size={12} color={colors.red} paddingHorizontal={5}>
                     {errors.backImage?.message}
                 </Txt>
 
@@ -191,7 +191,7 @@ const FormKYC = () => {
                         setValue('selfieImage', image);
                         setSelfieImage(image);
                     }} />
-                <Txt size={12} color={colors.red} paddingHorizontal={5}>
+                <Txt marginLeft={15} size={12} color={colors.red} paddingHorizontal={5}>
                     {errors.selfieImage?.message}
                 </Txt>
 
