@@ -8,6 +8,7 @@ export const useCoinSocket = () => {
   const dispatch = useDispatch<AppDispatch>();
   useEffect(() => {
     socket.connect();
+    console.log("connect socket");  
     socket.on("listCoin", (resp) => {
       dispatch(setListCoinRealtime(resp));
     });
@@ -15,6 +16,7 @@ export const useCoinSocket = () => {
     return () => {
       socket.off("listCoin");
       socket.disconnect();
+      console.log("disconnect socket");
     }
   }, [dispatch]);
 }
