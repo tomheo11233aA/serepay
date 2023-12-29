@@ -13,7 +13,6 @@ export const useCoinSocket = () => {
     });
 
     return () => {
-      console.log("socket off");
       socket.off("listCoin");
       socket.disconnect();
     }

@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, Dimensions } from 'react-native'
+import { StyleSheet, Text, View } from 'react-native'
 import React from 'react'
 import Safe from '@reuse/Safe'
 import Scroll from '@commom/Scroll'
@@ -8,7 +8,7 @@ import { getInfoP2p } from '@utils/userCallApi';
 import { IGetInfoP2p } from '@models/P2P/USER/Operation/getInfoP2p';
 import Btn from '@commom/Btn';
 import LottieView from 'lottie-react-native';
-import { fetchUserInfo, setLogin } from '@redux/slice/userSlice'
+import { fetchUserInfo } from '@redux/slice/userSlice'
 import { useDispatch, useSelector } from 'react-redux';
 import { AppDispatch } from '@redux/store/store';
 import { userInfoUserSelector } from '@redux/selector/userSelector'
@@ -16,6 +16,7 @@ import FooterButtons from './Footer';
 import PaymentModal from './PaymentModal';
 import TransactionTable from './TransactionTable';
 import { RouteProp } from '@react-navigation/native';
+import Countdown from './Countdown'
 
 interface IResponse {
     amount: number;
@@ -67,6 +68,7 @@ const ConfirmTransaction:React.FC<ConfirmTransactionProps> = ({route}) => {
     const userInfo = useSelector(userInfoUserSelector)
     const [loading, setLoading] = React.useState<boolean>(false);
     const [selectedidP2p, setSelectedidP2p] = React.useState<number>(0);
+    const [content, setContent] = React.useState<string>('');
 
     React.useEffect(() => {
         setLoading(true);
@@ -101,7 +103,7 @@ const ConfirmTransaction:React.FC<ConfirmTransactionProps> = ({route}) => {
                     setSelectedidP2p(p2pInfo?.data[0]?.id);
                     const formattedData = p2pInfo?.data?.map((item: IResponse) => [
                         item.code,
-                        <View style={{}}>
+                        <View >
                             <View style={{ flexDirection: 'row', alignItems: 'center' }}>
                                 <LottieView
                                     style={{ width: 35, height: 35 }}
@@ -111,6 +113,7 @@ const ConfirmTransaction:React.FC<ConfirmTransactionProps> = ({route}) => {
                                 />
                                 <Text style={{ color: 'black' }}>Đang chờ thanh toán từ ngân hàng</Text>
                             </View>
+                            <Countdown createdAt={item.created_at} />
                         </View>,
                         <Btn
                             padding={10}
@@ -119,6 +122,7 @@ const ConfirmTransaction:React.FC<ConfirmTransactionProps> = ({route}) => {
                                 setSelectedBankName(item.bankName);
                                 setSelectedBankNumber(item.numberBank);
                                 setSelectedBankOwner(item.ownerAccount);
+                                setContent(item.id.toString());
                                 showModal();
                             }}>
                             <Text style={{ color: 'white', fontWeight: 'bold', flexShrink: 1 }}>Mở màn hình thanh toán</Text>
@@ -189,7 +193,7 @@ const ConfirmTransaction:React.FC<ConfirmTransactionProps> = ({route}) => {
                     </View>
                     <TransactionTable tableData={tableData} showModal={showModal} />
                     <View style={styles.viewFooter}>
-                        <FooterButtons typeUser={typeUser} userid={userId} loginUserid={loginUserid} idP2p={selectedidP2p} refresh={refresh} />
+                        <FooterButtons typeUser={typeUser} userid={userId} loginUserid={loginUserid} idP2p={selectedidP2p}/>
                     </View>
                     <PaymentModal
                         visible={visible}
@@ -197,6 +201,7 @@ const ConfirmTransaction:React.FC<ConfirmTransactionProps> = ({route}) => {
                         selectedBankName={selectedBankName}
                         selectedBankNumber={selectedBankNumber}
                         selectedBankOwner={selectedBankOwner}
+                        content={content}
                     />
                 </Scroll>
             )}

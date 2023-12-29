@@ -10,9 +10,10 @@ interface PaymentModalProps {
     selectedBankName: string;
     selectedBankNumber: string;
     selectedBankOwner: string;
+    content: string;
 }
 
-const PaymentModal: React.FC<PaymentModalProps> = ({ visible, hideModal, selectedBankName, selectedBankNumber, selectedBankOwner }) => {
+const PaymentModal: React.FC<PaymentModalProps> = ({ visible, hideModal, selectedBankName, selectedBankNumber, selectedBankOwner, content }) => {
     return (
         <Portal>
             <Modal visible={visible} onDismiss={hideModal} contentContainerStyle={{ backgroundColor: 'white', padding: 20, width: '90%', alignSelf: 'center', borderRadius: 10 }}>
@@ -22,6 +23,7 @@ const PaymentModal: React.FC<PaymentModalProps> = ({ visible, hideModal, selecte
                     <Text style={{ marginBottom: 5 }}>Tên ngân hàng: {selectedBankName}</Text>
                     <Text style={{ marginBottom: 5 }}>Số tài khoản: {selectedBankNumber}</Text>
                     <Text style={{ marginBottom: 5 }}>Chủ tài khoản: {selectedBankOwner}</Text>
+                    <Text style={{ marginBottom: 5 }}>Nội dung chuyển khoản: {content}</Text>
                 </View>
                 <View style={{ borderBottomColor: 'black', borderBottomWidth: 1, marginBottom: 10 }} />
 

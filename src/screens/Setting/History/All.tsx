@@ -4,6 +4,7 @@ import { getListHistoryP2p } from '@utils/userCallApi';
 import { colors } from '@themes/colors';
 import TransactionItem from './TransactionItem';
 import LottieView from 'lottie-react-native';
+import { socket } from '../../../helper/AxiosInstance';
 
 export interface Transaction {
   id: number;
@@ -34,8 +35,37 @@ const AllHistory = () => {
   const [loading, setLoading] = useState(false);
   const [hasMore, setHasMore] = useState(true);
 
+  const refreshData = async () => {
+    setLoading(true);
+    setPage(1);
+    setHasMore(true);
+    const response = await getListHistoryP2p({ page: 1, limit: 10 });
+    if (Array.isArray(response?.data?.array)) {
+      setData(response.data.array);
+      if (response.data.array.length === 0) {
+        setHasMore(false);
+      }
+    } else {
+      console.error('response.data.array is not an array:', response?.data?.array);
+    }
+    setLoading(false);
+  };
+
   useEffect(() => {
     loadMoreData();
+    socket.on("createP2p", (res) => {
+      console.log(res, "createP2p");
+      refreshData();
+    });
+    socket.on("operationP2p", (idP2p) => {
+      console.log(idP2p, "operationP2p");
+      refreshData();
+    });
+    return () => {
+      socket.off("createP2p");
+      socket.off("operationP2p");
+      console.log("leave createP2p");
+    }
   }, []);
 
   const loadMoreData = async () => {
@@ -61,7 +91,7 @@ const AllHistory = () => {
         source={require('../../../assets/lottie/nodataanimation.json')}
         autoPlay
         loop
-        style={{alignSelf: 'center', width: 200, height: 200, marginTop: 200}}
+        style={{ alignSelf: 'center', width: 200, height: 200, marginTop: 200 }}
       />
     );
   }

@@ -4,6 +4,7 @@ import { getListHistoryP2pPendding } from '@utils/userCallApi';
 import { colors } from '@themes/colors';
 import TransactionItem from './TransactionItem';
 import LottieView from 'lottie-react-native';
+import { socket } from '../../../helper/AxiosInstance';
 
 const PendingHistory = () => {
   const [data, setData] = useState<any[]>([]);
@@ -11,16 +12,39 @@ const PendingHistory = () => {
   const [loading, setLoading] = useState(false);
   const [hasMore, setHasMore] = useState(true);
 
+  const refreshData = async () => {
+    setLoading(true);
+    setPage(1);
+    setHasMore(true);
+    const response = await getListHistoryP2pPendding({ page: 1, limit: 10 });
+    if (Array.isArray(response?.data?.array)) {
+      setData(response.data.array);
+      if (response.data.array.length === 0) {
+        setHasMore(false);
+      }
+    } else {
+      console.error('response.data.array is not an array:', response?.data?.array);
+    }
+    setLoading(false);
+  };
   useEffect(() => {
     loadMoreData();
+    socket.on("createP2p", (res) => {
+      console.log(res, "createP2p");
+      refreshData();
+    });
+    return () => {
+      socket.off("createP2p");
+      console.log("leave createP2p");
+    }
   }, []);
 
   const loadMoreData = async () => {
     if (!loading && hasMore) {
       setLoading(true);
-      const response = await getListHistoryP2pPendding({ 
-        limit: 10, 
-        page, 
+      const response = await getListHistoryP2pPendding({
+        limit: 10,
+        page,
       });
       if (Array.isArray(response?.data?.array)) {
         setData(prevData => [...prevData, ...response.data.array]);
@@ -41,7 +65,7 @@ const PendingHistory = () => {
         source={require('../../../assets/lottie/nodataanimation.json')}
         autoPlay
         loop
-        style={{alignSelf: 'center', width: 200, height: 200, marginTop: 200}}
+        style={{ alignSelf: 'center', width: 200, height: 200, marginTop: 200 }}
       />
     );
   }

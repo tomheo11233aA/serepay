@@ -1,31 +1,23 @@
-import { Text } from 'react-native'
-import React from 'react'
+import { Text } from 'react-native';
+import React, { useState, useEffect } from 'react';
+import moment from 'moment';
 
 const Countdown = ({ createdAt }: any) => {
-    const [timeLeft, setTimeLeft] = React.useState<string>(''); // Define initial state
-
-    React.useEffect(() => {
+    const [timeLeft, setTimeLeft] = useState<string>('');
+    useEffect(() => {
         const countdown = setInterval(() => {
-            const createdTime = new Date(createdAt).getTime();
-            const currentTime = new Date().getTime();
-            const timeDifference = createdTime + 15 * 60 * 1000 - currentTime; // Thêm 15 phút
-
-            if (timeDifference < 0) {
-                clearInterval(countdown);
-                setTimeLeft('00:00:00');
-            } else {
-                const hours = Math.floor(timeDifference / (1000 * 60 * 60));
-                const minutes = Math.floor((timeDifference % (1000 * 60 * 60)) / (1000 * 60));
-                const seconds = Math.floor((timeDifference % (1000 * 60)) / 1000);
-
-                setTimeLeft(`${hours}:${minutes}:${seconds}`);
-            }
+            const expirationTime = moment(createdAt).add(15, 'minutes');
+            const now = moment();
+            const duration = moment.duration(expirationTime.diff(now));
+            const minutes = duration.minutes();
+            const seconds = duration.seconds();
+            setTimeLeft(`${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`);
         }, 1000);
 
         return () => clearInterval(countdown);
     }, [createdAt]);
 
-    return <Text style={{flexShrink: 1}}>{timeLeft}</Text>;
+    return <Text style={{ flexShrink: 1, color: 'red'}}>{timeLeft}</Text>;
 };
 
-export default Countdown
+export default Countdown;

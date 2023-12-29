@@ -5,14 +5,14 @@ import AuthNavigation from './AuthNavigation'
 import UnAuthNavigation from './UnAuthNavigation'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import { setLogin } from '@redux/slice/userSlice'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { AppDispatch } from '@redux/store/store'
-
+import { userInfoUserSelector } from '@redux/selector/userSelector'
+import { socket } from '../helper/AxiosInstance'
 
 const Main = () => {
     const isLogin = useAppSelector(isLoginUserSelector)
-    
-    // const userInfo = useSelector(userInfoUserSelector)
+    const userInfo = useSelector(userInfoUserSelector)
     const dispatch: AppDispatch = useDispatch()
     // const isEnebleTwoFA = useCallback(async () => {
     //     const isTwoFA = userInfo?.enabled_twofa
@@ -39,6 +39,20 @@ const Main = () => {
         fetchIsLogin()
     }, [])
 
+    // useEffect(() => {
+    //     if (userInfo && userInfo.id) {
+    //         socket.emit('join', userInfo.id);
+    //         socket.on("ok", (res) => {
+    //             console.log(res, "ok");
+    //         });
+    //         return () => {
+    //             console.log("leave");
+    //             socket.off("ok");
+    //         }
+    //     } else {
+    //         socket.off("ok");
+    //     }
+    // }, [userInfo]);
 
     return (
         <>

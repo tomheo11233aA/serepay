@@ -4,6 +4,7 @@ import { getListHistoryP2pWhere } from '@utils/userCallApi';
 import { colors } from '@themes/colors';
 import TransactionItem from './TransactionItem';
 import LottieView from 'lottie-react-native';
+import { socket } from '../../../helper/AxiosInstance';
 
 const SellHistory = () => {
   const [data, setData] = useState<any[]>([]);
@@ -11,8 +12,31 @@ const SellHistory = () => {
   const [loading, setLoading] = useState(false);
   const [hasMore, setHasMore] = useState(true);
 
+  const refreshData = async () => {
+    setLoading(true);
+    setPage(1);
+    setHasMore(true);
+    const response = await getListHistoryP2pWhere({ page: 1, limit: 10, where: "side='sell'" });
+    if (Array.isArray(response?.data?.array)) {
+      setData(response.data.array);
+      if (response.data.array.length === 0) {
+        setHasMore(false);
+      }
+    } else {
+      console.error('response.data.array is not an array:', response?.data?.array);
+    }
+    setLoading(false);
+  };
   useEffect(() => {
     loadMoreData();
+    socket.on("createP2p", (res) => {
+      console.log(res, "createP2p");
+      refreshData();
+    });
+    return () => {
+      socket.off("createP2p");
+      console.log("leave createP2p");
+    }
   }, []);
 
   const loadMoreData = async () => {
