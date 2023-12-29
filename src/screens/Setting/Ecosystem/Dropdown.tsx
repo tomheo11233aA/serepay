@@ -5,6 +5,7 @@ import { Dispatch, SetStateAction } from 'react';
 import { useTranslation } from 'react-i18next';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { fonts } from '@themes/fonts';
+
 interface Bank {
     id: number;
     name: string;
@@ -12,25 +13,25 @@ interface Bank {
     logo: string;
 }
 
-const containerStyle: StyleProp<ViewStyle> = { width: '90%' };
-const dropdownStyle: StyleProp<ViewStyle> = { backgroundColor: '#fafafa' };
+const containerStyle: StyleProp<ViewStyle> = { width: '90%'};
+const dropdownStyle: StyleProp<ViewStyle> = { backgroundColor: '#fafafa'};
 const imageStyle: StyleProp<ImageStyle> = { width: 100, height: 50 };
 
 interface Props {
     onChange: (value: string) => void;
+    onLogoChange?: (value: string) => void;
 }
 
-const Dropdown: FC<Props> = ({ onChange }) => {
+const Dropdown: FC<Props> = ({ onChange, onLogoChange }) => {
     const [open, setOpen] = useState(false);
     const [value, setValue] = useState<string | null>(null);
-    const [items, setItems] = useState([]);
+    const [items, setItems] = useState<any>([]);
     const { t } = useTranslation();
 
     const storeData = async (value: string) => {
         try {
             await AsyncStorage.setItem('@selected_bank', value)
         } catch (e) {
-            // saving error
             console.error(e);
         }
     }
@@ -44,6 +45,7 @@ const Dropdown: FC<Props> = ({ onChange }) => {
                         label: item.shortName,
                         value: item.shortName,
                         icon: () => <Image source={{ uri: item.logo }} style={imageStyle} resizeMode='contain' />,
+                        logo: item.logo,
                     }));
                     setItems(formattedData);
                 }
@@ -54,7 +56,7 @@ const Dropdown: FC<Props> = ({ onChange }) => {
     }, []);
 
     return (
-        <View style={{ flex: 1, alignItems: 'center' }}>
+        <View style={{ alignItems: 'center' }}>
             {items.length > 0 && (
                 <DropDownPicker
                     open={open}
@@ -69,12 +71,18 @@ const Dropdown: FC<Props> = ({ onChange }) => {
                     onChangeValue={(value: any) => {
                         onChange(value);
                         storeData(value);
+                        const selectedItem = items.find((item: any) => item.value === value);
+                        if (selectedItem && onLogoChange) { 
+                            onLogoChange(selectedItem.logo);
+                        }
                     }}
                     labelStyle={{
                         fontWeight: 'bold',
                         fontFamily: fonts.JR,
                     }}
-                    dropDownContainerStyle={{backgroundColor: '#fafafa'}}
+                    dropDownContainerStyle={{ backgroundColor: '#fafafa' }}
+                    zIndex={1}
+                    // zIndexInverse={2}
                 />
             )}
         </View>

@@ -111,7 +111,7 @@ const ConfirmTransaction:React.FC<ConfirmTransactionProps> = ({route}) => {
                     setAmount(p2pInfo?.data[0]?.amount);
                     const formattedData = p2pInfo?.data?.map((item: IResponse) => [
                         item.code,
-                        <View >
+                        <View style={{marginRight: 20}}>
                             <View style={{ flexDirection: 'row', alignItems: 'center' }}>
                                 <LottieView
                                     style={{ width: 35, height: 35 }}
@@ -119,7 +119,7 @@ const ConfirmTransaction:React.FC<ConfirmTransactionProps> = ({route}) => {
                                     autoPlay
                                     loop
                                 />
-                                <Text style={{ color: 'black' }}>Đang chờ thanh toán từ ngân hàng</Text>
+                                <Text style={{ color: 'black', flexShrink: 1}}>Đang chờ thanh toán từ ngân hàng</Text>
                             </View>
                             <Countdown createdAt={item.created_at} />
                         </View>,
@@ -135,7 +135,7 @@ const ConfirmTransaction:React.FC<ConfirmTransactionProps> = ({route}) => {
                             }}>
                             <Text style={{ color: 'white', fontWeight: 'bold', flexShrink: 1 }}>Mở màn hình thanh toán</Text>
                         </Btn>,
-                        item.amount,
+                        item.amount + ' ' + item.symbol,
                         item.rate,
                         item.pay.toFixed(3),
                         <Text style={{ color: colors.green, fontWeight: 'bold', marginLeft: 5, flexShrink: 1 }}>
@@ -184,7 +184,7 @@ const ConfirmTransaction:React.FC<ConfirmTransactionProps> = ({route}) => {
     }
 
     return (
-        <Safe flex={1} backgroundColor='white'>
+        <Safe flex={1} backgroundColor={'white'}>
             {loading ? (
                 <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
                     <LottieView
