@@ -12,18 +12,26 @@ import { coinListSelector } from '@redux/selector/userSelector'
 import { ScrollView, View } from 'react-native'
 import { useCoinSocket } from '../../../helper/useCoinSocket'
 import SearchBox from './SearchBox'
-import { socketConnectedSelector } from '@redux/selector/userSelector'
-import { useDispatch } from 'react-redux'
-import { AppDispatch } from '@redux/store/store'
+import AsyncStorage from '@react-native-async-storage/async-storage'
 
 const P2p = () => {
   useCoinSocket()
   const { t } = useTranslation()
-  const dispatch: AppDispatch = useDispatch()
   const [selectedCoin, setSelectedCoin] = React.useState<ICoin | null>(null)
   const [searchType, setSearchType] = useState<'buy' | 'sell' | null>(null)
   const coins = useSelector(coinListSelector)
-  const socketConnected = useSelector(socketConnectedSelector)
+
+  useEffect(() => {
+    const fetchCoin = async () => {
+      const mycoin = await AsyncStorage.getItem('coin_token_key')
+      const selectCoin = coins.find((coin: ICoin) => coin.name == mycoin?.trim())
+      if (selectCoin) {
+        setSelectedCoin(selectCoin)
+      }
+    }
+    fetchCoin()
+  }, [])
+
   useEffect(() => {
     if (!selectedCoin) {
       const btc = coins.find((coin: ICoin) => coin.name === 'BTC')

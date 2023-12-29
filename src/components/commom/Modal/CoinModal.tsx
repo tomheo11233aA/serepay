@@ -1,7 +1,6 @@
 import React from 'react';
 import { Modal, Portal } from 'react-native-paper';
 import { ICoin } from '@models/coin';
-import Coins from '@screens/TopTabWallet/Wallet/Coins';
 import { useCoinSocket } from '../../../helper/useCoinSocket'
 import { useSelector } from 'react-redux';
 import { coinListSelector } from '@redux/selector/userSelector'
@@ -10,9 +9,9 @@ import Scroll from '@commom/Scroll';
 import Btn from '@commom/Btn';
 import Txt from '@commom/Txt';
 import Icon from '@commom/Icon';
-import { fonts } from '@themes/fonts';
 import { keys } from '@contants/keys';
 import { colors } from '@themes/colors';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 interface Props {
   visible: boolean;
@@ -24,7 +23,6 @@ interface Props {
 const CoinModal: React.FC<Props> = ({ visible, hideModal, handleChooseCoin, t }) => {
   useCoinSocket()
   const coins = useSelector(coinListSelector)
-  
   return (
     <Portal>
       <Modal
@@ -48,6 +46,7 @@ const CoinModal: React.FC<Props> = ({ visible, hideModal, handleChooseCoin, t })
                   justifySpaceBetween
                   onPress={() => {
                     handleChooseCoin(coin)
+                    AsyncStorage.setItem('coin_token_key', coin.name ?? 'BTC')
                   }}
                 >
                   <Box row alignCenter>
