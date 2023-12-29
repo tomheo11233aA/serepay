@@ -17,6 +17,7 @@ import PaymentModal from './PaymentModal';
 import TransactionTable from './TransactionTable';
 import { RouteProp } from '@react-navigation/native';
 import Countdown from './Countdown'
+import { set } from 'lodash'
 
 interface IResponse {
     amount: number;
@@ -69,6 +70,9 @@ const ConfirmTransaction:React.FC<ConfirmTransactionProps> = ({route}) => {
     const [loading, setLoading] = React.useState<boolean>(false);
     const [selectedidP2p, setSelectedidP2p] = React.useState<number>(0);
     const [content, setContent] = React.useState<string>('');
+    const [side, setSide] = React.useState<string>('');
+    const [amount, setAmount] = React.useState<number>(0);
+    const [pay, setPay] = React.useState<number>(0);
 
     React.useEffect(() => {
         setLoading(true);
@@ -78,6 +82,7 @@ const ConfirmTransaction:React.FC<ConfirmTransactionProps> = ({route}) => {
                 if (adsItem) {
                     const adsItemParse = JSON.parse(adsItem);
                     setIdP2p(adsItemParse.id);
+                    setSide(adsItemParse.side);
                 }
             } catch (error) {
                 console.log("lỗi 1", error);
@@ -101,6 +106,9 @@ const ConfirmTransaction:React.FC<ConfirmTransactionProps> = ({route}) => {
                     setTypeUser(p2pInfo?.data[0]?.typeUser);
                     setUserId(p2pInfo?.data[0]?.userid);
                     setSelectedidP2p(p2pInfo?.data[0]?.id);
+                    setSide(p2pInfo?.data[0]?.side);
+                    setPay(p2pInfo?.data[0]?.pay);
+                    setAmount(p2pInfo?.data[0]?.amount);
                     const formattedData = p2pInfo?.data?.map((item: IResponse) => [
                         item.code,
                         <View >
@@ -122,7 +130,7 @@ const ConfirmTransaction:React.FC<ConfirmTransactionProps> = ({route}) => {
                                 setSelectedBankName(item.bankName);
                                 setSelectedBankNumber(item.numberBank);
                                 setSelectedBankOwner(item.ownerAccount);
-                                setContent(item.id.toString());
+                                setContent(item.code.toString());
                                 showModal();
                             }}>
                             <Text style={{ color: 'white', fontWeight: 'bold', flexShrink: 1 }}>Mở màn hình thanh toán</Text>
@@ -202,6 +210,9 @@ const ConfirmTransaction:React.FC<ConfirmTransactionProps> = ({route}) => {
                         selectedBankNumber={selectedBankNumber}
                         selectedBankOwner={selectedBankOwner}
                         content={content}
+                        side={side === 'sell' ? 'selling' : 'buying'}
+                        amount={amount}
+                        pay={pay}
                     />
                 </Scroll>
             )}

@@ -18,6 +18,8 @@ import AdvertisementInfo from './AdvertisementInfo';
 import PartnerInfo from './PartnerInfo';
 import { navigate } from '@utils/navigationRef';
 import { screens } from '@contants/screens';
+import { use } from 'i18next';
+import { set } from 'lodash';
 
 const Transaction = () => {
     useCoinSocket();
@@ -108,7 +110,20 @@ const Transaction = () => {
             }
         }
     }, [item, coins, exchangeRate]);
-
+    useEffect(() => {
+        if (item) {
+            setAmount(item.amountMinimum.toString());
+            if (item.side === 'sell') {
+                const coin = coins.find(coin => coin?.name === item.symbol);
+                if (coin) {
+                    const rateDollar = exchangeRate.find((item) => item.title === 'VND')?.rate ?? 1;
+                    const coinPrice = coin.price ?? 0;
+                    const amountVND = item.amountMinimum * coinPrice * rateDollar;
+                    setAmount(amountVND.toFixed(3));
+                }
+            }
+        }
+    }, [item, coins, exchangeRate]);
 
     useEffect(() => {
         if (item) {

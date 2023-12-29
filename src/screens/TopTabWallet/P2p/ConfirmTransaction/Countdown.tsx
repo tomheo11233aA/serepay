@@ -11,7 +11,11 @@ const Countdown = ({ createdAt }: any) => {
             const duration = moment.duration(expirationTime.diff(now));
             const minutes = duration.minutes();
             const seconds = duration.seconds();
-            setTimeLeft(`${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`);
+            if (minutes < 0 || seconds < 0) {
+                setTimeLeft('00:00');
+            } else {
+                setTimeLeft(`${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`);
+            }
         }, 1000);
 
         return () => clearInterval(countdown);
