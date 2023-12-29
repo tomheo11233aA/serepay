@@ -14,6 +14,7 @@ import { useCoinSocket } from '../../../helper/useCoinSocket'
 import { userWalletUserSelector } from '@redux/selector/userSelector'
 import { IUserWallet } from '@models/user'
 import { roundDecimalValues } from '../../../helper/function/roundCoin'
+import { exchangeRateSelector } from '@redux/selector/userSelector'
 
 type Props = {
     t?: any
@@ -26,6 +27,7 @@ const Coins: React.FC<Props> = ({ t, style, isShowHeader, onCoinSelected }) => {
     const coins = useSelector(coinListSelector)
     const dispatch: AppDispatch = useDispatch()
     const userWallet: IUserWallet | undefined = useSelector(userWalletUserSelector);
+    const exchangeRate = useSelector(exchangeRateSelector)
 
     return (
         <Box>

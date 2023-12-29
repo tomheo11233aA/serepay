@@ -11,13 +11,14 @@ import { cancelP2p } from '@utils/userCallApi';
 import { navigate } from '@utils/navigationRef';
 import { screens } from '@contants/screens';
 import { getInfoP2p } from '@utils/userCallApi';
-import { use } from 'i18next';
+import { useTranslation } from 'react-i18next';
 
 interface TransactionItemProps {
     item: IAdvertising;
 }
 
 const TransactionItem = ({ item }: TransactionItemProps) => {
+    const { t } = useTranslation()
     const [hasP2PInfo, setHasP2PInfo] = React.useState(false)
     const formatTime = (time: string) => {
         return moment(time, "DD/MM/YYYY H:m:s").format('DD/MM/YYYY')
