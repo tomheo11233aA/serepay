@@ -8,7 +8,7 @@ interface Props {
     flex?: number;
     backgroundColor?: string;
     children: JSX.Element | JSX.Element[];
-    height?: any;
+    // height?: any;
     relative?: boolean;
 }
 
@@ -16,7 +16,7 @@ const Safe = ({
     flex,
     children,
     width = '100%',
-    height = '100%',
+    // height = '100%',
     backgroundColor,
 }: Props) => {
     return (
@@ -25,7 +25,7 @@ const Safe = ({
                 flex: flex,
                 width: width,
                 backgroundColor,
-                height: height,
+                // height: height,
             }}
         >
             <Box

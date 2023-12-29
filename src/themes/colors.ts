@@ -21,7 +21,7 @@ export const colors = {
   violet2: '#e2be36',
   violet3: '#ebe5ee',
   darkGreen: '#284b5f',
-  darkViolet: '#000000',
+  darkViolet: '#121212',
   red: '#e75559',
   blue: '#3b5998',
 }

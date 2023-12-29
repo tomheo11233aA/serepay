@@ -27,9 +27,6 @@ const Form = ({ t }: Props) => {
     const [isLoading, setIsLoading] = useState<boolean>(false)
     const [otp2fa, setOtp2fa] = useState<string>('')
     const [show2FA, setShow2FA] = useState<boolean>(false)
-    React.useEffect(() => {
-        console.log('form')
-    }, [])
     const handleLogin = async () => {
         const axiosInstance = AxiosInstance()
         setIsLoading(true)
@@ -58,8 +55,7 @@ const Form = ({ t }: Props) => {
     }
 
     return (
-        <Box width={'100%'} paddingHorizontal={40} alignCenter>
-            
+        <Box width={'100%'} paddingHorizontal={40} alignCenter backgroundColor={'white'}>
             <Spinner
                 visible={isLoading}
                 textContent={'Loading...'}
