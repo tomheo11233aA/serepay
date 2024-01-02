@@ -10,6 +10,7 @@ export const useCoinSocket = () => {
     socket.connect();
     socket.on("listCoin", (resp) => {
       dispatch(setListCoinRealtime(resp));
+      // console.log(resp);
     });
 
     return () => {

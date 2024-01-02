@@ -14,22 +14,6 @@ const Main = () => {
     const isLogin = useAppSelector(isLoginUserSelector)
     const userInfo = useSelector(userInfoUserSelector)
     const dispatch: AppDispatch = useDispatch()
-    // const isEnebleTwoFA = useCallback(async () => {
-    //     const isTwoFA = userInfo?.enabled_twofa
-    //     await AsyncStorage.setItem('isTwoFA', (isTwoFA ?? 0).toString())
-    //     if (isTwoFA == 1) {
-    //         dispatch(setLogin(false))
-    //     } else if (isTwoFA == 0) {
-    //         dispatch(setLogin(true))
-    //     }
-    // }, [userInfo?.enabled_twofa, dispatch])
-
-    // useEffect(() => {
-    //     dispatch(fetchUserInfo())
-    //     isEnebleTwoFA()
-    // }, [isEnebleTwoFA]);
-    // get
-    // get isLogin from AsyncStorage
 
     useEffect(() => {
         const fetchIsLogin = async () => {
@@ -39,20 +23,19 @@ const Main = () => {
         fetchIsLogin()
     }, [])
 
-    // useEffect(() => {
-    //     if (userInfo && userInfo.id) {
-    //         socket.emit('join', userInfo.id);
-    //         socket.on("ok", (res) => {
-    //             console.log(res, "ok");
-    //         });
-    //         return () => {
-    //             console.log("leave");
-    //             socket.off("ok");
-    //         }
-    //     } else {
-    //         socket.off("ok");
-    //     }
-    // }, [userInfo]);
+    useEffect(() => {
+        if (userInfo && userInfo.id) {
+            socket.emit('join', userInfo.id);
+            socket.on("ok", (res) => {
+                console.log(res, "ok"); // // hàm này chạy tất là join thành công
+            });
+            return () => {
+                socket.off("ok");
+            }
+        } else {
+            socket.off("ok");
+        }
+    }, [userInfo]);
 
     return (
         <>

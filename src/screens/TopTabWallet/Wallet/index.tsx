@@ -19,7 +19,6 @@ const Wallet = () => {
   const coins = useSelector(coinListSelector)
   const selectedRate = useSelector(selectedRateSelector)
   const price = coins.find((coin) => coin?.name === 'BTC')?.price ?? 0
-  const transferPrice = (userWallet?.btc_balance ?? 0) * price * selectedRate.rate
 
   React.useEffect(() => {
     dispatch(fetchUserWallet())
@@ -33,6 +32,7 @@ const Wallet = () => {
   }, 0)
 
   const totalValueInBTC = totalValueInUSD / (coins.find(coin => coin.name === 'BTC')?.price ?? 1)
+  const transferPrice = totalValueInUSD * selectedRate.rate
 
   return (
     <Box flex={1} marginTop={50}>
@@ -49,7 +49,7 @@ const Wallet = () => {
         <Box marginTop={10} row justifyCenter alignCenter>
           <Icon size={30} source={require('@images/wallet/dollar.png')} />
           <Txt color={'white'} size={30} marginLeft={10}>
-            {transferPrice.toFixed(3)} {selectedRate.title}
+            {transferPrice.toLocaleString()} {selectedRate.title}
           </Txt>
         </Box>
       </Box>
