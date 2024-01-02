@@ -7,22 +7,24 @@ import { fonts } from '@themes/fonts'
 import { TFunction } from 'i18next'
 import React from 'react'
 import { Modal, Portal } from 'react-native-paper';
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 import { exchangeRateSelector } from '@redux/selector/userSelector'
+import { AppDispatch } from '@redux/store/store'
+import { setSelectedRate } from '@redux/slice/userSlice'
 
 interface Props {
     t: TFunction<"translation", undefined>
-    setSelectedRate: (rate: any) => void
 }
 
-const Options = ({ t, setSelectedRate }: Props) => {
+const Options = ({ t }: Props) => {
+    const dispatch: AppDispatch = useDispatch()
     const [visible, setVisible] = React.useState(false);
     const exchangeRate = useSelector(exchangeRateSelector)
     const showModal = () => setVisible(true);
     const hideModal = () => setVisible(false);
 
     const handleRateSelect = (rate: any) => {
-        setSelectedRate({ title: rate.title, rate: rate.rate })
+        dispatch(setSelectedRate({ title: rate.title, rate: rate.rate }))
         hideModal()
     }
 
@@ -104,7 +106,7 @@ const Options = ({ t, setSelectedRate }: Props) => {
                 {options.map((option) =>
                     <Btn key={option.title} onPress={option.onPress}>
                         <Icon
-                        tintColor={colors.violet}
+                            tintColor={colors.violet}
                             size={25}
                             source={option.icon}
                         />

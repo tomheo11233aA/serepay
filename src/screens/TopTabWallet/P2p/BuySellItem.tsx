@@ -8,6 +8,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { configSelector } from '@redux/selector/userSelector'
 import { fetchConfig } from '@redux/slice/getConfig'
 import { AppDispatch } from '@redux/store/store'
+import { selectedRateSelector } from '@redux/selector/userSelector'
 
 interface Props {
     title: string;
@@ -28,6 +29,7 @@ const BuySellItem = ({
     const config = useSelector(configSelector);
     const dispatch = useDispatch<AppDispatch>();
     const [value, setValue] = React.useState(0);
+    const selectedRate = useSelector(selectedRateSelector);
     React.useEffect(() => {
         dispatch(fetchConfig({ "name": "exchangeRate" }))
     }, [])
@@ -45,8 +47,8 @@ const BuySellItem = ({
         } else {
             price = selectedCoin && selectedCoin.price !== undefined ? selectedCoin.price + (selectedCoin.price * (value / 100)) : 0;
         }
-        return price;
-    }, [type, selectedCoin, value]);
+        return price * selectedRate.rate;
+    }, [type, selectedCoin, value, selectedRate]);
     
     return (
         <Box
@@ -70,7 +72,7 @@ const BuySellItem = ({
                 size={15}
                 marginVertical={15}
             >
-                {price ? price.toLocaleString() : 0} USD
+                {price ? price.toLocaleString() : 0} {selectedRate.title} 
             </Txt>
             <Btn
                 radius={5}

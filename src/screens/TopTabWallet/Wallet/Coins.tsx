@@ -15,6 +15,7 @@ import { userWalletUserSelector } from '@redux/selector/userSelector'
 import { IUserWallet } from '@models/user'
 import { roundDecimalValues } from '../../../helper/function/roundCoin'
 import { exchangeRateSelector } from '@redux/selector/userSelector'
+import { selectedRateSelector } from '@redux/selector/userSelector'
 
 type Props = {
     t?: any
@@ -27,8 +28,7 @@ const Coins: React.FC<Props> = ({ t, style, isShowHeader, onCoinSelected }) => {
     const coins = useSelector(coinListSelector)
     const dispatch: AppDispatch = useDispatch()
     const userWallet: IUserWallet | undefined = useSelector(userWalletUserSelector);
-    const exchangeRate = useSelector(exchangeRateSelector)
-
+    const selectedRate = useSelector(selectedRateSelector)
     return (
         <Box>
             <Scroll style={style} showsVerticalScrollIndicator={false}>
@@ -49,6 +49,7 @@ const Coins: React.FC<Props> = ({ t, style, isShowHeader, onCoinSelected }) => {
                 )} */}
                 {coins.map((coin) => {
                     const volume = roundDecimalValues(userWallet?.[`${coin?.symbolWallet?.toLowerCase()}_balance`] || 0, coin.price);
+                    const transferPrice = (userWallet?.[`${coin?.symbolWallet?.toLowerCase()}_balance`] ?? 0) * coin.price * selectedRate.rate
                     return (
                         <Btn
                             row
@@ -84,7 +85,7 @@ const Coins: React.FC<Props> = ({ t, style, isShowHeader, onCoinSelected }) => {
                             <Txt bold color={colors.darkGreen}>
                                 {/* {`${coin.volume} ${coin.symbolWallet}`} */}
                                 {`${volume} ${coin.symbolWallet}`}
-
+                                {/* {`${transferPrice.toFixed(3)} ${selectedRate.title}`} */}
                             </Txt>
                         </Btn>
                     )

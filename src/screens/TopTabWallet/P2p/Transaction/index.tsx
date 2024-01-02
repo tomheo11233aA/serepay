@@ -18,8 +18,6 @@ import AdvertisementInfo from './AdvertisementInfo';
 import PartnerInfo from './PartnerInfo';
 import { navigate } from '@utils/navigationRef';
 import { screens } from '@contants/screens';
-import { use } from 'i18next';
-import { set } from 'lodash';
 
 const Transaction = () => {
     useCoinSocket();
