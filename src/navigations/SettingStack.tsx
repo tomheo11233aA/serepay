@@ -8,6 +8,9 @@ import Verify2FA from '@screens/Setting/TwoFactorAuth/Verify2FA'
 import Ecosystem from '@screens/Setting/Ecosystem/Ecosystem'
 import History from '@screens/Setting/History'
 import Advertising from '@screens/Setting/AdvertisingHistory'
+import Promotion from '@screens/Setting/Promotion/Promotion'
+import CreateWallet from '@screens/Setting/Promotion/CreateWallet'
+import Withdraw from '@screens/Setting/Promotion/Withdraw'
 
 const Stack = createNativeStackNavigator()
 
@@ -21,6 +24,9 @@ const SettingStack = () => {
             <Stack.Screen name={screens.ECOSYSTEM} component={Ecosystem} />
             <Stack.Screen name={screens.HISTORY_TRANSACTION} component={History} />
             <Stack.Screen name={screens.ADVERTISING_HISTORY} component={Advertising} />
+            <Stack.Screen name={screens.PROMOTION} component={Promotion} />
+            <Stack.Screen name={screens.DEPOSIT} component={CreateWallet as React.FC} />
+            <Stack.Screen name={screens.WITHDRAW} component={Withdraw as React.FC} />
         </Stack.Navigator>
     )
 }

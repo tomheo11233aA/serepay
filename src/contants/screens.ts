@@ -22,4 +22,7 @@ export const screens = {
     CONFIRM_TRANSACTION: 'ConfirmTransaction',
     HISTORY_TRANSACTION: 'HistoryTransaction',
     ADVERTISING_HISTORY: 'AdvertisingHistory',
+    PROMOTION: 'Promotion',
+    DEPOSIT: 'Deposit',
+    WITHDRAW: 'Withdraw',
 }

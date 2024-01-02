@@ -4,8 +4,6 @@ import TopTabWallet from '@screens/TopTabWallet'
 import React from 'react'
 import Transaction from '@screens/TopTabWallet/P2p/Transaction'
 import ConfirmTransaction from '@screens/TopTabWallet/P2p/ConfirmTransaction'
-import { ConfirmTransactionProps } from '@screens/TopTabWallet/P2p/ConfirmTransaction'
-import { ComponentProps } from 'react'
 
 const Stack = createNativeStackNavigator()
 const WalletStack = () => {

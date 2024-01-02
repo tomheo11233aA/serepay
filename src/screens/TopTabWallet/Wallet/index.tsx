@@ -18,8 +18,7 @@ const Wallet = () => {
   const userInfo = useSelector(userInfoUserSelector)
   const coins = useSelector(coinListSelector)
   const selectedRate = useSelector(selectedRateSelector)
-  const price = coins.find((coin) => coin?.name === 'BTC')?.price ?? 0
-
+  
   React.useEffect(() => {
     dispatch(fetchUserWallet())
     dispatch(fetchUserInfo())

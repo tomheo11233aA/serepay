@@ -49,7 +49,8 @@ const List = ({ t }: Props) => {
     },
     {
       title: 'Promotion',
-      icon: require('@images/setting/gift.png')
+      icon: require('@images/setting/gift.png'),
+      onClick: () => navigate(screens.PROMOTION)
     },
     {
       title: 'Listing',
