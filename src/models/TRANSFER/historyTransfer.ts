@@ -1,5 +1,5 @@
 export interface IHistoryTransfer {
     limit: string;
-    page: string;
+    page: number;
     symbol: string;
 }

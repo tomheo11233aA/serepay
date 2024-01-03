@@ -9,7 +9,6 @@ import { useTranslation } from 'react-i18next'
 import { goBack } from '@utils/navigationRef'
 import { TouchableOpacity } from 'react-native'
 
-
 const Swap = () => {
   const { t } = useTranslation()
   return (

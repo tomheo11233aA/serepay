@@ -49,7 +49,9 @@ const Coins: React.FC<Props> = ({ style }) => {
     const handelWithdraw = useCallback(async (symbol: string) => {
         setLoadingStates(prev => ({ ...prev, [symbol]: true }))
         navigate(screens.WITHDRAW, { symbol })
+        setLoadingStates(prev => ({ ...prev, [symbol]: false }))
     }, [])
+
     return (
         <Box flex={1} marginBottom={50}>
             <Scroll style={style} showsVerticalScrollIndicator={false}>
