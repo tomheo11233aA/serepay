@@ -1,7 +1,5 @@
 import React, { useEffect, useState } from 'react'
 import QRCode from 'react-native-qrcode-svg'
-import Safe from '@reuse/Safe'
-import Box from '@commom/Box'
 import { generateOTPToken, turnOn2FA } from '@utils/userCallApi'
 import Txt from '@commom/Txt'
 import { colors } from '@themes/colors'
@@ -13,8 +11,10 @@ import Icon from '@commom/Icon'
 import { TouchableOpacity } from 'react-native'
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { SafeAreaView, View, Text } from 'react-native'
+import { useTranslation } from 'react-i18next'
 
 const TurnOn2FA = () => {
+    const { t } = useTranslation()
     const [otp, setOtp] = useState('')
     const [otpAuthUrl, setOtpAuthUrl] = useState('')
     useEffect(() => {
@@ -45,39 +45,10 @@ const TurnOn2FA = () => {
     };
 
     return (
-        // <Safe>
-        //     <Txt color={colors.darkGreen} bold size={18} >
-        //         Scan this QR code in the authenticator app, or enter the code below manually into the app
-        //     </Txt>
-        //     <Box alignCenter marginVertical={30}>
-        //         {otpAuthUrl && <QRCode size={200} value={otpAuthUrl} />}
-        //     </Box>
-        //     <Box row justifyCenter>
-        //         <Txt color={colors.darkGreen} bold size={18} center>
-        //             {otp}
-        //         </Txt>
-        //         <TouchableOpacity onPress={handleCopy} style={{marginLeft: 10}}>
-        //             <Icon size={20} source={require('../../../assets/images/setting/copy.png')} />
-        //         </TouchableOpacity>
-        //     </Box>
-
-        //     <Btn
-        //         onPress={() => navigate(screens.VERIFY2FA)}
-        //         radius={5}
-        //         height={45}
-        //         marginTop={20}
-        //         width={'100%'}
-        //         backgroundColor={colors.darkViolet}
-        //     >
-        //         <Txt bold size={18} color={'white'}>
-        //             Next
-        //         </Txt>
-        //     </Btn>
-        // </Safe>
         <SafeAreaView style={{ justifyContent: 'space-between', height: '95%' }}>
             <View>
                 <Text style={{ color: colors.darkGreen, fontWeight: 'bold', fontSize: 18 }}>
-                    Scan this QR code in the authenticator app, or enter the code below manually into the app
+                    {t('Scan this QR code in the authenticator app, or enter the code below manually into the app')}
                 </Text>
                 <View style={{ alignItems: 'center', marginVertical: 30 }}>
                     {otpAuthUrl && <QRCode size={200} value={otpAuthUrl} />}
@@ -100,7 +71,7 @@ const TurnOn2FA = () => {
                 backgroundColor={colors.darkViolet}
             >
                 <Txt bold size={18} color={'white'}>
-                    Next
+                    {t('Next')}
                 </Txt>
             </Btn>
         </SafeAreaView>
