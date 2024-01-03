@@ -83,7 +83,7 @@ const WalletBTC: React.FC<Props> = ({ route }) => {
                         <Text style={{ fontFamily: fonts.LR, color: 'black' }}>BEP20</Text>
                     </View>
                 </View>
-                <Text style={{ fontFamily: fonts.LR, color: 'black', marginTop: 20, fontSize: 18 }}>Address</Text>
+                <Text style={{ fontFamily: fonts.LR, color: 'black', marginTop: 20, fontSize: 18 }}>{t('Address')}</Text>
                 <Input
                     value={address}
                     onChangeText={setAddress}
@@ -96,7 +96,7 @@ const WalletBTC: React.FC<Props> = ({ route }) => {
                     fontSize={18}
                     marginTop={10}
                 />
-                <Text style={{ fontFamily: fonts.LR, color: 'black', marginTop: 20, fontSize: 18 }}>Note</Text>
+                <Text style={{ fontFamily: fonts.LR, color: 'black', marginTop: 20, fontSize: 18 }}>{t('Note')}</Text>
                 <Input
                     value={note}
                     onChangeText={setNote}
@@ -109,7 +109,7 @@ const WalletBTC: React.FC<Props> = ({ route }) => {
                     fontSize={18}
                     marginTop={10}
                 />
-                <Text style={{ fontFamily: fonts.LR, color: 'black', marginTop: 20, fontSize: 18 }}>Amount of {route?.params?.symbol}</Text>
+                <Text style={{ fontFamily: fonts.LR, color: 'black', marginTop: 20, fontSize: 18 }}>{t('Amount of')} {route?.params?.symbol}</Text>
                 <Input
                     value={amount}
                     onChangeText={setAmount}
@@ -124,7 +124,7 @@ const WalletBTC: React.FC<Props> = ({ route }) => {
                     coin={route?.params?.symbol}
                 />
                 <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
-                    <Text style={{ fontFamily: fonts.LR, color: 'black', marginTop: 20, fontSize: 18 }}>Max available: </Text>
+                    <Text style={{ fontFamily: fonts.LR, color: 'black', marginTop: 20, fontSize: 18 }}>{t('Max available:')}</Text>
                     <Text style={{ fontFamily: fonts.LR, color: 'black', marginTop: 20, fontSize: 18 }}>{roundDecimalValues(maxAvailable, 10001)} {route?.params?.symbol}</Text>
                 </View>
                 <View style={{ marginTop: 15 }}>

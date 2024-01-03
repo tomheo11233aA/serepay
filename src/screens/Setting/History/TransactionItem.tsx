@@ -6,12 +6,14 @@ import { screens } from '@contants/screens';
 import { colors } from '@themes/colors';
 import { Transaction } from './All';
 import { socket } from '../../../helper/AxiosInstance';
+import { useTranslation } from 'react-i18next';
 
 interface TransactionItemProps {
     item: Transaction;
 }
 
 const TransactionItem: React.FC<TransactionItemProps> = ({ item }) => {
+    const { t } = useTranslation()
     const renderAction = (typeP2p: number, typeUser: number, idP2p: number) => {
         if (typeP2p === 2) {
             return (
@@ -28,7 +30,7 @@ const TransactionItem: React.FC<TransactionItemProps> = ({ item }) => {
                         socket.emit("operationP2p", idP2p)
                     }}
                 >
-                    <Text style={{ color: colors.blue }}>Pending Transaction</Text>
+                    <Text style={{ color: colors.blue }}>{t('Pending Transaction')}</Text>
                 </Btn>
             );
         } else if (typeP2p === 1) {
@@ -43,7 +45,7 @@ const TransactionItem: React.FC<TransactionItemProps> = ({ item }) => {
                     borderWidth={1}
                     disabled
                 >
-                    <Text style={{ color: colors.green }}>Successful Transaction</Text>
+                    <Text style={{ color: colors.green }}>{t('Successful Transaction')}</Text>
                 </Btn>
             );
         } else if (typeP2p === 3 && typeUser === 3) {
@@ -58,7 +60,7 @@ const TransactionItem: React.FC<TransactionItemProps> = ({ item }) => {
                     borderWidth={1}
                     disabled
                 >
-                    <Text style={{ color: colors.red }}>Transaction Cancelled</Text>
+                    <Text style={{ color: colors.red }}>{t('Transaction Cancelled')}</Text>
                 </Btn>
             );
         } else if (typeP2p === 3) {
@@ -73,7 +75,7 @@ const TransactionItem: React.FC<TransactionItemProps> = ({ item }) => {
                     borderWidth={1}
                     disabled
                 >
-                    <Text style={{ color: colors.red }}>Advertiser Not Received Funds</Text>
+                    <Text style={{ color: colors.red }}>{t('Advertiser Not Received Funds')}</Text>
                 </Btn>
             );
         }
@@ -85,9 +87,9 @@ const TransactionItem: React.FC<TransactionItemProps> = ({ item }) => {
 
             <View style={{ marginTop: 10 }}>
                 <View style={{ flexDirection: 'row' }}>
-                    <Text style={{ fontWeight: 'bold', flex: 1 }}>Số lượng</Text>
-                    <Text style={{ fontWeight: 'bold', flex: 1 }}>Loại tiền</Text>
-                    <Text style={{ fontWeight: 'bold', flex: 1 }}>Giá</Text>
+                    <Text style={{ fontWeight: 'bold', flex: 1 }}>{t('Amount')}</Text>
+                    <Text style={{ fontWeight: 'bold', flex: 1 }}>{t('Coin')}</Text>
+                    <Text style={{ fontWeight: 'bold', flex: 1 }}>{t('Price')}</Text>
                 </View>
                 <View style={{ flexDirection: 'row' }}>
                     <Text style={{ flex: 1 }}>{item.amount}</Text>
@@ -98,8 +100,8 @@ const TransactionItem: React.FC<TransactionItemProps> = ({ item }) => {
 
             <View style={{ marginTop: 10 }}>
                 <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
-                    <Text style={{ fontWeight: 'bold', flex: 1 }}>Thanh toán</Text>
-                    <Text style={{ fontWeight: 'bold', flex: 1 }}>Ngày tạo</Text>
+                    <Text style={{ fontWeight: 'bold', flex: 1 }}>{t('Pay')}</Text>
+                    <Text style={{ fontWeight: 'bold', flex: 1 }}>{t('Created at')}</Text>
                 </View>
                 <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
                     <Text style={{ flex: 1 }}>{item.pay}</Text>

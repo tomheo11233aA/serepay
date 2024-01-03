@@ -4,6 +4,7 @@ import { colors } from '@themes/colors';
 import { fonts } from '@themes/fonts';
 import { selectedRateSelector } from '@redux/selector/userSelector';
 import { useSelector } from 'react-redux';
+import { useTranslation } from 'react-i18next';
 
 interface AdvertisementInfoProps {
     item: any;
@@ -11,19 +12,19 @@ interface AdvertisementInfoProps {
 }
 
 const AdvertisementInfo: React.FC<AdvertisementInfoProps> = ({ item, coin }) => {
+    const { t } = useTranslation()
     const selectedRate = useSelector(selectedRateSelector);
     const priceInSelectedCurrency = coin?.price * selectedRate.rate;
     return (
         <View style={{ marginTop: 10 }}>
-            <Text style={{ color: colors.black2, fontWeight: 'bold', fontSize: 16 }}>Advertisement Informations</Text>
+            <Text style={{ color: colors.black2, fontWeight: 'bold', fontSize: 16 }}>{t('Advertisement Informations')}</Text>
             <View style={{ padding: 10, backgroundColor: colors.gray8, borderRadius: 5, marginTop: 10, justifyContent: 'center' }}>
                 <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
-                    <Text style={{ fontFamily: fonts.AS }}> Price</Text>
-                    {/* <Text style={{ fontFamily: fonts.AS }}>{coin?.price?.toFixed(3)} USD</Text> */}
+                    <Text style={{ fontFamily: fonts.AS }}>{t('Price')}</Text>
                     <Text style={{ fontFamily: fonts.AS }}>{priceInSelectedCurrency?.toFixed(3)} {selectedRate.title}</Text>
                 </View>
                 <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginTop: 10 }}>
-                    <Text style={{ fontFamily: fonts.AS }}> Amount limits</Text>
+                    <Text style={{ fontFamily: fonts.AS }}>{t('Amount limits')}</Text>
                     <View style={{ flexDirection: 'row' }}>
                         <View style={{ padding: 5, backgroundColor: colors.darkGreen, borderRadius: 3 }}>
                             <Text style={{ fontFamily: fonts.AS, color: 'white' }}>{item.amountMinimum} {item.symbol}</Text>
@@ -35,13 +36,13 @@ const AdvertisementInfo: React.FC<AdvertisementInfoProps> = ({ item, coin }) => 
                     </View>
                 </View>
                 <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginTop: 10 }}>
-                    <Text style={{ fontFamily: fonts.AS }}> Payment method</Text>
+                    <Text style={{ fontFamily: fonts.AS }}>{t('Payment method')}</Text>
                     <View style={{ flexDirection: 'row' }}>
                         <Text style={{ fontFamily: fonts.AS, color: colors.black3 }}>{item.bankName}</Text>
                     </View>
                 </View>
                 <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginTop: 10 }}>
-                    <Text style={{ fontFamily: fonts.AS }}> Payment Window</Text>
+                    <Text style={{ fontFamily: fonts.AS }}>{t('Payment Window')}</Text>
                     <Text style={{ fontFamily: fonts.AS, color: colors.black3 }}>15 minutes</Text>
                 </View>
             </View>

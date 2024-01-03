@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, { useEffect } from 'react';
 import { View, StyleSheet, Alert } from 'react-native';
 import { IAdvertising } from '.';
 import moment from 'moment';
@@ -50,32 +50,32 @@ const TransactionItem = ({ item }: TransactionItemProps) => {
                 <Box row>
                     <Txt fontFamily={fonts.AS}>{capitalizeFirstLetter(item.userName)}</Txt>
                     <Box row marginLeft={20}>
-                    <Txt fontFamily={fonts.AS}>{item.bankName ? item.bankName : "Unknown"}: </Txt>
-                    <Txt fontFamily={fonts.AS} color={colors.gray2}>{item.numberBank ? item.numberBank : "Unknown"}</Txt>
+                        <Txt fontFamily={fonts.AS}>{item.bankName ? item.bankName : "Unknown"}: </Txt>
+                        <Txt fontFamily={fonts.AS} color={colors.gray2}>{item.numberBank ? item.numberBank : "Unknown"}</Txt>
                     </Box>
                 </Box>
                 <Box row>
-                    <Txt color={colors.gray2} fontFamily={fonts.AS}>Available: </Txt>
+                    <Txt color={colors.gray2} fontFamily={fonts.AS}>{t('Available')}: </Txt>
                     <Txt fontFamily={fonts.AS}>{parseFloat((item.amount - item.amountSuccess).toFixed(8))} {item.symbol}</Txt>
                 </Box>
                 <Box row>
                     <Box row>
-                        <Txt color={colors.gray2} fontFamily={fonts.AS}>Min: </Txt>
+                        <Txt color={colors.gray2} fontFamily={fonts.AS}>{t('Min')}: </Txt>
                         <Txt fontFamily={fonts.AS}>{item.amountMinimum}</Txt>
                     </Box>
                     <Box row marginLeft={10}>
-                        <Txt color={colors.gray2} fontFamily={fonts.AS}>Max: </Txt>
+                        <Txt color={colors.gray2} fontFamily={fonts.AS}>{t('Max')}: </Txt>
                         <Txt fontFamily={fonts.AS}>{item.amount}</Txt>
                     </Box>
                 </Box>
                 <Box row>
-                    <Txt color={colors.gray2} fontFamily={fonts.AS}>Created at: </Txt>
+                    <Txt color={colors.gray2} fontFamily={fonts.AS}>{t('Created at')}: </Txt>
                     <Txt fontFamily={fonts.AS}>{formatTime(item.created_at)}</Txt>
                 </Box>
             </Box>
             <Box justifyCenter>
                 {(item.type === 1 || item.type === 2) && (
-                    <Btn backgroundColor={colors.red} padding={5} radius={5}  onPress={async() => { 
+                    <Btn backgroundColor={colors.red} padding={5} radius={5} onPress={async () => {
                         try {
                             await cancelP2p({ idP2p: item.id })
                             Alert.alert("Cancel success")
@@ -83,7 +83,7 @@ const TransactionItem = ({ item }: TransactionItemProps) => {
                         } catch (error) {
                             console.log(error)
                         }
-                     }} >
+                    }} >
                         <Txt fontFamily={fonts.AS} color={'white'}>Cancel</Txt>
                     </Btn>
                 )}

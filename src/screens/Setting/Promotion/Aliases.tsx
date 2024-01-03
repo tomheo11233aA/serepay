@@ -14,14 +14,12 @@ import { IHistoryTransfer } from '@models/TRANSFER/historyTransfer'
 import { historytransfer } from '@utils/userCallApi'
 import { transferToUsername } from '@utils/userCallApi'
 import { ITransferToUserName } from '@models/TRANSFER/transferToUsername'
-
 import LottieView from 'lottie-react-native'
 
 interface Props {
     route?: WithdrawProps['route'];
 }
 const Aliases: React.FC<Props> = ({ route }) => {
-    console.log("ALiases", route?.params?.symbol)
     const { t } = useTranslation()
     const userWallet = useAppSelector(userWalletUserSelector)
     const [userName, setUserName] = React.useState<string>('')
@@ -71,7 +69,7 @@ const Aliases: React.FC<Props> = ({ route }) => {
     return (
         <View>
             <View>
-                <Text style={{ fontFamily: fonts.LR, color: 'black', marginTop: 20, fontSize: 18 }}>Address</Text>
+                <Text style={{ fontFamily: fonts.LR, color: 'black', marginTop: 20, fontSize: 18 }}>{t('Address')}</Text>
                 <Input
                     value={userName}
                     onChangeText={setUserName}
@@ -84,7 +82,7 @@ const Aliases: React.FC<Props> = ({ route }) => {
                     fontSize={18}
                     marginTop={10}
                 />
-                <Text style={{ fontFamily: fonts.LR, color: 'black', marginTop: 20, fontSize: 18 }}>Amount of {route?.params?.symbol}</Text>
+                <Text style={{ fontFamily: fonts.LR, color: 'black', marginTop: 20, fontSize: 18 }}>{t('Amount of')} {route?.params?.symbol}</Text>
                 <Input
                     value={amount}
                     onChangeText={setAmount}
@@ -99,7 +97,7 @@ const Aliases: React.FC<Props> = ({ route }) => {
                     coin={route?.params?.symbol}
                 />
                 <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
-                    <Text style={{ fontFamily: fonts.LR, color: 'black', marginTop: 20, fontSize: 18 }}>Max available: </Text>
+                    <Text style={{ fontFamily: fonts.LR, color: 'black', marginTop: 20, fontSize: 18 }}>{t('Max available')}:</Text>
                     <Text style={{ fontFamily: fonts.LR, color: 'black', marginTop: 20, fontSize: 18 }}>{roundDecimalValues(maxAvailable, 10001)} {route?.params?.symbol}</Text>
                 </View>
                 <Text style={{ fontFamily: fonts.LR, color: 'black', marginTop: 20, fontSize: 18 }}>Message</Text>
