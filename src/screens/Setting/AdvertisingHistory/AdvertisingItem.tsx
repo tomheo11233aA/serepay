@@ -15,19 +15,14 @@ import { useTranslation } from 'react-i18next';
 
 interface TransactionItemProps {
     item: IAdvertising;
+    refreshData?: () => void;
 }
 
-const TransactionItem = ({ item }: TransactionItemProps) => {
+const TransactionItem = ({ item , refreshData}: TransactionItemProps) => {
     const { t } = useTranslation()
     const [hasP2PInfo, setHasP2PInfo] = React.useState(false)
     const formatTime = (time: string) => {
         return moment(time, "DD/MM/YYYY H:m:s").format('DD/MM/YYYY')
-    }
-    const truncateText = (text: string, length: number) => {
-        if (text.length > length) {
-            return text.substring(0, length) + '...'
-        }
-        return text
     }
     const capitalizeFirstLetter = (string: string) => {
         return string.charAt(0).toUpperCase() + string.slice(1);
@@ -79,6 +74,7 @@ const TransactionItem = ({ item }: TransactionItemProps) => {
                         try {
                             await cancelP2p({ idP2p: item.id })
                             Alert.alert("Cancel success")
+                            // refreshData && refreshData();
                             navigate(screens.SETTING)
                         } catch (error) {
                             console.log(error)

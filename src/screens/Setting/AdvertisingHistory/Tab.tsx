@@ -39,7 +39,6 @@ const Tab = ({ t }: Props) => {
                     </Btn>
                 )}
             </Box>
-            {/* {tabChoosed === 'All' ? <AllHistory /> : tabChoosed === 'Buy' ? <BuyHistory /> : tabChoosed === 'Sell' ? <SellHistory /> : <PendingHistory />} */}
             {tabChoosed === 'Buy' ? <Buy /> : <Sell />}
         </Box>
     )

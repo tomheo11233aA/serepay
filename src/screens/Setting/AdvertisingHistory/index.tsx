@@ -56,7 +56,7 @@ const Advertising = () => {
             />
           </TouchableOpacity>
           <Txt bold color={colors.violet} size={18}>
-            {`  ${t('History')}`}
+            {`  ${t('Advertising History')}`}
           </Txt>
         </Box>
         <Box paddingHorizontal={10}>

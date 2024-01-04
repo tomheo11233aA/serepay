@@ -8,25 +8,25 @@ interface Props {
     flex?: number;
     backgroundColor?: string;
     children: JSX.Element | JSX.Element[];
-    // height?: any;
     relative?: boolean;
+    style?: any;
 }
 
 const Safe = ({
     flex,
     children,
     width = '100%',
-    // height = '100%',
     backgroundColor,
+    style,
 }: Props) => {
     return (
         <SafeAreaView
-            style={{
-                flex: flex,
-                width: width,
-                backgroundColor,
-                // height: height,
-            }}
+            // style={{
+            //     flex: flex,
+            //     width: width,
+            //     backgroundColor,
+            // }}
+            style={[{ flex: flex, width: width, backgroundColor }, style]}
         >
             <Box
                 flex={flex}

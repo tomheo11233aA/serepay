@@ -65,7 +65,6 @@ const BuyCoin = ({ t, type, selectedCoin }: any) => {
                             key={user.id}
                             user={user}
                             t={t}
-                            // symbol={symbol}
                             adType={type}
                         />
                     )

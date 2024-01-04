@@ -14,7 +14,6 @@ import QRCode from 'react-native-qrcode-svg';
 import Clipboard from '@react-native-clipboard/clipboard';
 import { getDepositHistory } from '@utils/userCallApi';
 import { IHistoryRecharge } from '@models/WALLET/historyRecharge';
-import Scroll from '@commom/Scroll';
 import LottieView from 'lottie-react-native';
 
 type RootStackParamList = {
@@ -105,7 +104,7 @@ const CreateWallet: React.FC<DepositProps> = ({ route }) => {
 
     return (
         <Safe flex={1} backgroundColor={'white'}>
-            <Scroll>
+            <>
                 <View style={{ justifyContent: 'center', marginTop: 20 }}>
                     <Txt paddingHorizontal={20} fontFamily={fonts.AS} size={16} bold style={{ marginBottom: 10 }}>{t('Select Coin')}</Txt>
                     <DropDownPicker
@@ -195,7 +194,7 @@ const CreateWallet: React.FC<DepositProps> = ({ route }) => {
                         </View>
                     )}
                 </View>
-            </Scroll>
+            </>
         </Safe>
     )
 }

@@ -7,7 +7,7 @@ import Txt from '@commom/Txt';
 
 interface WalletBTCProps {
     placeholder: string;
-    onChangeText: (value: string) => void;
+    onChangeText: (value: any) => void;
     maxLength?: number;
     value?: string;
     coin?: any;
@@ -15,7 +15,7 @@ interface WalletBTCProps {
     height?: number;
 }
 
-const WalletCoinInput: React.FC<WalletBTCProps> = ({
+const BuyAdvertisementInput: React.FC<WalletBTCProps> = ({
     placeholder,
     onChangeText,
     maxLength,
@@ -49,7 +49,7 @@ const WalletCoinInput: React.FC<WalletBTCProps> = ({
     );
 };
 
-export default WalletCoinInput;
+export default BuyAdvertisementInput;
 
 const styles = StyleSheet.create({
     inputContainer: {

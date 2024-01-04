@@ -11,6 +11,9 @@ import { useSelector, useDispatch } from 'react-redux'
 import { exchangeRateSelector } from '@redux/selector/userSelector'
 import { AppDispatch } from '@redux/store/store'
 import { setSelectedRate } from '@redux/slice/userSlice'
+import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
+import { navigate } from '@utils/navigationRef'
+import { screens } from '@contants/screens'
 
 interface Props {
     t: TFunction<"translation", undefined>
@@ -30,14 +33,15 @@ const Options = ({ t }: Props) => {
 
     const options = [
         {
-            title: 'Send',
+            title: 'Create Your Buy Ads',
             icon: require('@images/wallet/upload.png'),
-            // onPress: () => console.log('send'),
+            onPress: () => navigate(screens.CREATE_BUY_ADS),
+
         },
         {
-            title: 'Receive',
+            title: 'Create Your Sell Ads',
             icon: require('@images/wallet/download.png'),
-            // onPress: () => console.log('receive'),
+            onPress: () => navigate(screens.CREATE_SELL_ADS),
         },
         {
             title: 'Swap',
@@ -110,7 +114,10 @@ const Options = ({ t }: Props) => {
                             size={25}
                             source={option.icon}
                         />
-                        <Txt marginTop={10} fontFamily={fonts.IBMPM}>
+                        <Txt marginTop={10} fontFamily={fonts.IBMPM}
+                            width={wp(20)}
+                            center
+                        >
                             {t(option.title)}
                         </Txt>
                     </Btn>

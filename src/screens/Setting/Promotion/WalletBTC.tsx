@@ -82,7 +82,7 @@ const WalletBTC: React.FC<Props> = ({ route }) => {
         getHistory()
     }, [])
     return (
-        <Scroll>
+        <>
             <View style={{ marginTop: 20 }}>
                 <View style={{ flexDirection: 'row', justifyContent: 'flex-start' }}>
                     <View style={{ padding: 8, backgroundColor: colors.gray2, borderRadius: 5 }}>
@@ -181,7 +181,7 @@ const WalletBTC: React.FC<Props> = ({ route }) => {
                 )}
             </View>
 
-        </Scroll>
+        </>
     )
 }
 

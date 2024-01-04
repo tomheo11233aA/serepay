@@ -20,7 +20,6 @@ const P2p = () => {
   const [selectedCoin, setSelectedCoin] = React.useState<ICoin | null>(null)
   const [searchType, setSearchType] = useState<'buy' | 'sell' | null>(null)
   const coins = useSelector(coinListSelector)
-
   useEffect(() => {
     const fetchCoin = async () => {
       const mycoin = await AsyncStorage.getItem('coin_token_key')

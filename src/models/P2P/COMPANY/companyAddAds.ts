@@ -3,7 +3,4 @@ export interface ICompanyAddAds {
     amountMinimum: number;
     symbol: string;
     side: string;
-    bankName: string;
-    ownerAccount: string;
-    numberBank: string;
 }

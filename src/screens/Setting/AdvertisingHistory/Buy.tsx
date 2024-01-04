@@ -17,6 +17,23 @@ const Buy = () => {
         loadMoreData();
     }, []);
 
+    const refreshData = async () => {
+        setLoading(true);
+        setPage(1);
+        setHasMore(true);
+        setData([]);
+        const response = await getListAdsBuyToUser({ page: 1, limit: 10 });
+        if (Array.isArray(response?.data?.array)) {
+          setData(response.data.array);
+          if (response.data.array.length === 0) {
+            setHasMore(false);
+          }
+        } else {
+          console.error('response.data.array is not an array:', response?.data?.array);
+        }
+        setLoading(false);
+      };
+
     const loadMoreData = async () => {
         if (!loading && hasMore) {
             setLoading(true);
@@ -57,7 +74,7 @@ const Buy = () => {
             onEndReached={loadMoreData}
             onEndReachedThreshold={0.1}
             ListFooterComponent={() => loading && hasMore && <ActivityIndicator size="large" color={colors.blue} />}
-            renderItem={({ item }) => <AdvertisingItem item={item} />}
+            renderItem={({ item }) => <AdvertisingItem item={item} refreshData={refreshData} />}
         />
     )
 }
