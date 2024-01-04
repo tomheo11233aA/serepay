@@ -23,7 +23,7 @@ const AuthNavigation = () => {
     if (userInfo && userInfo.id) {
       socket.emit('join', userInfo.id);
       socket.on("ok", (res) => {
-        console.log(res, "ok");
+        // console.log(res, "ok");
       });
       return () => {
         socket.off("ok");

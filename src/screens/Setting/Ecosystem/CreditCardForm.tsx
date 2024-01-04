@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { TextInput, View, StyleSheet, Text, Image } from 'react-native';
-import CreditCard from '../../../assets/images/setting/bg-card2.svg';
+import CreditCard from '../../../assets/images/setting/bg-card3.svg';
 import { fonts } from '@themes/fonts';
 import { Dimensions } from 'react-native';
 
@@ -42,19 +42,18 @@ const CreditCardForm: React.FC<CreditCardFormProps> = ({ bankLogo, cardNumber, c
             <CreditCard width={width * 0.9} height={height * 0.3} style={{ alignSelf: 'center' }} />
             <Image
                 source={bankLogo ? { uri: bankLogo } : {}}
-                style={{ width: 160, height: 100, position: 'absolute', resizeMode: 'contain', justifyContent: 'center', alignSelf: 'center' }}
+                style={{ width: 160, height: 100, position: 'absolute', resizeMode: 'contain', right: width * 0.37, top: 10}}
             />
 
             <TextInput
                 style={{
                     height: 40,
                     position: 'absolute',
-                    top: 90,
+                    top: 100,
                     width: '95%',
                     fontFamily: fonts.OSB,
                     color: '#fff',
                     fontSize: 25,
-                    alignSelf: 'center',
                     fontWeight: 'bold',
                 }}
                 onChangeText={text => onChangeCardNumber && onChangeCardNumber(text)}

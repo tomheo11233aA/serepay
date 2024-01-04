@@ -112,6 +112,9 @@
         "Pending Transaction": "Giao dịch đang chờ",
         "Successful Transaction": "Giao dịch thành công",
         "Transaction Cancelled": "Giao dịch đã hủy",
-        "Advertiser Not Received Funds": "Người quảng cáo không nhận được tiền"
+        "Advertiser Not Received Funds": "Người quảng cáo không nhận được tiền",
+        "Estimated assets value": "Giá trị tài sản ước tính",
+        "Start buying and selling cryptocurrencies": "Bắt đầu mua bán tiền điện tử",
+        "You have": "Bạn có"
     }
 }

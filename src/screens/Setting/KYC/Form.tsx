@@ -49,7 +49,6 @@ const FormKYC = () => {
     }, [userInfo]);
 
     const submitKyc = async (data: MyData) => {
-        console.log("data", data)
         setIsLoading(true)
         try {
             const formData = new FormData();

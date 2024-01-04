@@ -240,13 +240,18 @@ const Input = ({
                 </Btn>
             }
             {coin &&
-                <Txt
-                    center
-                    justify={'center'}
-                    alignSelf={'center'}
+                <Btn
+                    onPress={onPress}
+                    height={'100%'}
                 >
-                    {coin}
-                </Txt>
+                    <Txt
+                        center
+                        justify={'center'}
+                        alignSelf={'center'}
+                    >
+                        {coin}
+                    </Txt>
+                </Btn>
             }
         </Box>
     );

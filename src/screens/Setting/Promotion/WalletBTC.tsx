@@ -5,17 +5,20 @@ import { useAppSelector } from '@hooks/redux'
 import { userWalletUserSelector } from '@redux/selector/userSelector'
 import { colors } from '@themes/colors'
 import { fonts } from '@themes/fonts'
-import Input from '@commom/Input'
 import { useTranslation } from 'react-i18next'
 import { roundDecimalValues } from '../../../helper/function/roundCoin'
 import Warn from '@screens/Swap/Warn'
 import Scroll from '@commom/Scroll'
 import Btn from '@commom/Btn'
 import Txt from '@commom/Txt'
-import { transferToAddress, historytransfer} from '@utils/userCallApi'
+import { transferToAddress, historytransfer } from '@utils/userCallApi'
 import { ITransferToAddress } from '@models/SWAP/transferToAddress'
 import { IHistoryTransfer } from '@models/TRANSFER/historyTransfer'
 import LottieView from 'lottie-react-native'
+import { useForm } from 'react-hook-form';
+import { yupResolver } from '@hookform/resolvers/yup';
+import { walletSchema } from './Validation/formValidation'
+import WalletCoinInput from './Validation/WalletCoinInput'
 
 interface Props {
     route?: WithdrawProps['route'];
@@ -31,12 +34,21 @@ const WalletBTC: React.FC<Props> = ({ route }) => {
     const maxAvailable = userWallet?.[balanceKey] || 0;
     const [isLoading, setIsLoading] = React.useState(false);
     const [history, setHistory] = React.useState<[]>([]);
+    const { handleSubmit, formState: { errors }, setValue } = useForm({
+        resolver: yupResolver(walletSchema)
+    });
 
-    const handleSend = async () => {
+    const handleChangeAmount = (value: string) => {
+        setValue('amount', value)
+        setAmount(value)
+    }
+
+    const handleSend = async (inputData: any) => {
+        const { address, note, amount } = inputData;
         const data: ITransferToAddress = {
             to_address: address,
             symbol: route?.params?.symbol ?? 'BTC',
-            amount: '0',
+            amount: amount,
             note: note,
             type: '1',
         }
@@ -84,56 +96,48 @@ const WalletBTC: React.FC<Props> = ({ route }) => {
                     </View>
                 </View>
                 <Text style={{ fontFamily: fonts.LR, color: 'black', marginTop: 20, fontSize: 18 }}>{t('Address')}</Text>
-                <Input
-                    value={address}
-                    onChangeText={setAddress}
-                    hint={t('Enter address')}
-                    height={45}
-                    radius={5}
-                    borderWidth={1}
-                    borderColor={colors.darkGreen}
-                    paddingHorizontal={10}
-                    fontSize={18}
-                    marginTop={10}
+                <WalletCoinInput
+                    placeholder="Enter address"
+                    onChangeText={(value: string) => setValue('address', value)}
+                    maxLength={100}
                 />
-                <Text style={{ fontFamily: fonts.LR, color: 'black', marginTop: 20, fontSize: 18 }}>{t('Note')}</Text>
-                <Input
-                    value={note}
-                    onChangeText={setNote}
-                    hint={t('Enter note')}
-                    height={45}
-                    radius={5}
-                    borderWidth={1}
-                    borderColor={colors.darkGreen}
-                    paddingHorizontal={10}
-                    fontSize={18}
-                    marginTop={10}
+                {errors.address && <Txt size={12} color={colors.red} style={{ zIndex: -1 }} marginTop={7} bold>
+                    {errors.address?.message}
+                </Txt>}
+                <Text style={{ fontFamily: fonts.LR, color: 'black', marginTop: 15, fontSize: 18 }}>{t('Note')}</Text>
+                <WalletCoinInput
+                    placeholder="Enter note"
+                    onChangeText={(value: string) => setValue('note', value)}
+                    maxLength={100}
                 />
-                <Text style={{ fontFamily: fonts.LR, color: 'black', marginTop: 20, fontSize: 18 }}>{t('Amount of')} {route?.params?.symbol}</Text>
-                <Input
+                {errors.note && <Txt size={12} color={colors.red} style={{ zIndex: -1 }} marginTop={7} bold>
+                    {errors.note?.message}
+                </Txt>}
+                <Text style={{ fontFamily: fonts.LR, color: 'black', marginTop: 15, fontSize: 18 }}>{t('Amount of')} {route?.params?.symbol}</Text>
+                <WalletCoinInput
+                    placeholder="Enter amount"
+                    onChangeText={handleChangeAmount}
+                    maxLength={100}
                     value={amount}
-                    onChangeText={setAmount}
-                    hint={t('Enter amount')}
-                    height={45}
-                    radius={5}
-                    borderWidth={1}
-                    borderColor={colors.darkGreen}
-                    paddingHorizontal={10}
-                    fontSize={18}
-                    marginTop={10}
                     coin={route?.params?.symbol}
+                    onPress={() => {
+                        setAmount(maxAvailable.toString())
+                    }}
                 />
+                {errors.amount && <Txt size={12} color={colors.red} style={{ zIndex: -1 }} marginTop={7} bold>
+                    {errors.amount?.message}
+                </Txt>}
                 <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
-                    <Text style={{ fontFamily: fonts.LR, color: 'black', marginTop: 20, fontSize: 18 }}>{t('Max available:')}</Text>
+                    <Text style={{ fontFamily: fonts.LR, color: 'black', marginTop: 15, fontSize: 18 }}>{t('Max available:')}</Text>
                     <Text style={{ fontFamily: fonts.LR, color: 'black', marginTop: 20, fontSize: 18 }}>{roundDecimalValues(maxAvailable, 10001)} {route?.params?.symbol}</Text>
                 </View>
-                <View style={{ marginTop: 15 }}>
+                <View style={{ marginTop: 15, marginRight: 10 }}>
                     <Warn title={t('You must keep a minimum of 20 TRX in your wallet to secure enough gas fees for trading TRC20 tokens.')} />
                     <Warn title={t('The overhead fees are not fixed, subject to change depending on the state of the blockchain networks.')} />
                     <Warn title={t('Estimated completion time: 2 minutes.')} />
                 </View>
                 <Btn
-                    onPress={handleSend}
+                    onPress={handleSubmit(handleSend)}
                     marginTop={20}
                     height={50}
                     radius={5}
@@ -143,39 +147,39 @@ const WalletBTC: React.FC<Props> = ({ route }) => {
             </View>
 
             <View style={{ justifyContent: 'center', marginTop: 20, zIndex: -1 }}>
-                    <Txt paddingHorizontal={20} fontFamily={fonts.AS} size={16} bold style={{ marginBottom: 10 }}>{t('History')}</Txt>
-                    {isLoading ? (
-                        <View style={{ justifyContent: 'center', alignItems: 'center', marginTop: 50 }}>
-                            <LottieView
-                                source={require('../../../assets/lottie/loading.json')}
-                                autoPlay
-                                loop
-                                style={{ width: 100, height: 100 }}
-                            />
-                        </View>
-                    ) : (
-                        <View style={{ alignSelf: 'center', width: '90%' }}>
-                            {history.length > 0 ? (
-                                history.map((item: any, index: number) => (
-                                    <View key={index} style={{ flexDirection: 'row', justifyContent: 'space-between', marginBottom: 10 }}>
-                                        <Txt fontFamily={fonts.AS} size={16} bold>{item.symbol}</Txt>
-                                        <Txt fontFamily={fonts.AS} size={16} bold>{item.amount}</Txt>
-                                    </View>
-                                ))
-                            ) : (
-                                <>
-                                    <LottieView
-                                        source={require('../../../assets/lottie/nodata.json')}
-                                        autoPlay
-                                        loop
-                                        style={{ width: 200, height: 200, alignSelf: 'center' }}
-                                    />
-                                    <Txt center fontFamily={fonts.AS} size={16} bold>{t('No data')}</Txt>
-                                </>
-                            )}
-                        </View>
-                    )}
-                </View>
+                <Txt paddingHorizontal={20} fontFamily={fonts.AS} size={16} bold style={{ marginBottom: 10 }}>{t('History')}</Txt>
+                {isLoading ? (
+                    <View style={{ justifyContent: 'center', alignItems: 'center', marginTop: 50 }}>
+                        <LottieView
+                            source={require('../../../assets/lottie/loading.json')}
+                            autoPlay
+                            loop
+                            style={{ width: 100, height: 100 }}
+                        />
+                    </View>
+                ) : (
+                    <View style={{ alignSelf: 'center', width: '90%' }}>
+                        {history.length > 0 ? (
+                            history.map((item: any, index: number) => (
+                                <View key={index} style={{ flexDirection: 'row', justifyContent: 'space-between', marginBottom: 10 }}>
+                                    <Txt fontFamily={fonts.AS} size={16} bold>{item.symbol}</Txt>
+                                    <Txt fontFamily={fonts.AS} size={16} bold>{item.amount}</Txt>
+                                </View>
+                            ))
+                        ) : (
+                            <>
+                                <LottieView
+                                    source={require('../../../assets/lottie/nodata.json')}
+                                    autoPlay
+                                    loop
+                                    style={{ width: 200, height: 200, alignSelf: 'center' }}
+                                />
+                                <Txt center fontFamily={fonts.AS} size={16} bold>{t('No data')}</Txt>
+                            </>
+                        )}
+                    </View>
+                )}
+            </View>
 
         </Scroll>
     )

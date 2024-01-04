@@ -8,7 +8,7 @@ import Verify2FA from '@screens/Setting/TwoFactorAuth/Verify2FA'
 import Ecosystem from '@screens/Setting/Ecosystem/Ecosystem'
 import History from '@screens/Setting/History'
 import Advertising from '@screens/Setting/AdvertisingHistory'
-import Promotion from '@screens/Setting/Promotion/Promotion'
+import Promotion from '@screens/Setting/Promotion'
 import CreateWallet from '@screens/Setting/Promotion/CreateWallet'
 import Withdraw from '@screens/Setting/Promotion/Withdraw'
 

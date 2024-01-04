@@ -5,7 +5,6 @@ import { useAppSelector } from '@hooks/redux'
 import { userWalletUserSelector } from '@redux/selector/userSelector'
 import { colors } from '@themes/colors'
 import { fonts } from '@themes/fonts'
-import Input from '@commom/Input'
 import { useTranslation } from 'react-i18next'
 import { roundDecimalValues } from '../../../helper/function/roundCoin'
 import Btn from '@commom/Btn'
@@ -15,6 +14,10 @@ import { historytransfer } from '@utils/userCallApi'
 import { transferToUsername } from '@utils/userCallApi'
 import { ITransferToUserName } from '@models/TRANSFER/transferToUsername'
 import LottieView from 'lottie-react-native'
+import { useForm } from 'react-hook-form';
+import { yupResolver } from '@hookform/resolvers/yup';
+import { walletSchema } from './Validation/formValidation'
+import WalletCoinInput from './Validation/WalletCoinInput'
 
 interface Props {
     route?: WithdrawProps['route'];
@@ -22,17 +25,24 @@ interface Props {
 const Aliases: React.FC<Props> = ({ route }) => {
     const { t } = useTranslation()
     const userWallet = useAppSelector(userWalletUserSelector)
-    const [userName, setUserName] = React.useState<string>('')
     const [amount, setAmount] = React.useState<string>('')
-    const [message, setMessage] = React.useState<string>('')
     const balanceKey = `${route?.params?.symbol.toLocaleLowerCase()}_balance`;
     const maxAvailable = userWallet?.[balanceKey] || 0;
     const [isLoading, setIsLoading] = React.useState(false);
     const [history, setHistory] = React.useState<[]>([]);
+    const { handleSubmit, formState: { errors }, setValue } = useForm({
+        resolver: yupResolver(walletSchema)
+    });
 
-    const handleSend = async () => {
+    const handleChangeAmount = (value: string) => {
+        setValue('amount', value)
+        setAmount(value)
+    }
+
+    const handleSend = async (inputData: any) => {
+        const { userName, amount, message } = inputData;
         const data: ITransferToUserName = {
-            symbol: route?.params?.symbol ?? 'BTC', 
+            symbol: route?.params?.symbol ?? 'BTC',
             userName: userName,
             amount: amount,
             note: message,
@@ -42,8 +52,6 @@ const Aliases: React.FC<Props> = ({ route }) => {
             const res = await transferToUsername(data)
             if (res?.data?.data) {
                 setIsLoading(false)
-                setUserName('')
-                setAmount('')
             }
         } catch (error) {
             console.log(error)
@@ -69,52 +77,46 @@ const Aliases: React.FC<Props> = ({ route }) => {
     return (
         <View>
             <View>
-                <Text style={{ fontFamily: fonts.LR, color: 'black', marginTop: 20, fontSize: 18 }}>{t('Address')}</Text>
-                <Input
-                    value={userName}
-                    onChangeText={setUserName}
-                    hint={t('Enter address')}
-                    height={45}
-                    radius={5}
-                    borderWidth={1}
-                    borderColor={colors.darkGreen}
-                    paddingHorizontal={10}
-                    fontSize={18}
-                    marginTop={10}
+                <Text style={{ fontFamily: fonts.LR, color: 'black', marginTop: 20, fontSize: 18 }}>{t('User Name')}</Text>
+                <WalletCoinInput
+                    placeholder="Enter user name"
+                    onChangeText={(value: string) => setValue('userName', value)}
+                    maxLength={100}
                 />
+                {errors.address && <Txt size={12} color={colors.red} style={{ zIndex: -1 }} marginTop={7} bold>
+                    {errors.userName?.message}
+                </Txt>}
                 <Text style={{ fontFamily: fonts.LR, color: 'black', marginTop: 20, fontSize: 18 }}>{t('Amount of')} {route?.params?.symbol}</Text>
-                <Input
+                <WalletCoinInput
+                    placeholder="Enter amount"
+                    onChangeText={handleChangeAmount}
+                    maxLength={100}
                     value={amount}
-                    onChangeText={setAmount}
-                    hint={t('Enter amount')}
-                    height={45}
-                    radius={5}
-                    borderWidth={1}
-                    borderColor={colors.darkGreen}
-                    paddingHorizontal={10}
-                    fontSize={18}
-                    marginTop={10}
                     coin={route?.params?.symbol}
+                    onPress={() => {
+                        setAmount(maxAvailable.toString())
+                    }}
                 />
+                {errors.amount && <Txt size={12} color={colors.red} style={{ zIndex: -1 }} marginTop={7} bold>
+                    {errors.amount?.message}
+                </Txt>}
                 <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
                     <Text style={{ fontFamily: fonts.LR, color: 'black', marginTop: 20, fontSize: 18 }}>{t('Max available')}:</Text>
                     <Text style={{ fontFamily: fonts.LR, color: 'black', marginTop: 20, fontSize: 18 }}>{roundDecimalValues(maxAvailable, 10001)} {route?.params?.symbol}</Text>
                 </View>
                 <Text style={{ fontFamily: fonts.LR, color: 'black', marginTop: 20, fontSize: 18 }}>Message</Text>
-                <Input
-                    value={message}
-                    onChangeText={setMessage}
-                    hint={t('I am fine, tks. And u!')}
+                <WalletCoinInput
+                    placeholder="I am fine, tks. And u!"
+                    onChangeText={(value: string) => setValue('message', value)}
+                    maxLength={100}
                     height={150}
-                    radius={5}
-                    borderWidth={1}
-                    borderColor={colors.darkGreen}
-                    paddingHorizontal={10}
-                    fontSize={18}
-                    marginTop={10}
                 />
+                {errors.message && <Txt size={12} color={colors.red} style={{ zIndex: -1 }} marginTop={7} bold>
+                    {errors.message?.message}
+                </Txt>}
+                
                 <Btn
-                    onPress={handleSend}
+                    onPress={handleSubmit(handleSend)}
                     marginTop={20}
                     height={50}
                     radius={5}

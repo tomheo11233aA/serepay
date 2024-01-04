@@ -32,7 +32,7 @@ const Coins: React.FC<Props> = ({ style }) => {
     const userWallet: IUserWallet | undefined = useSelector(userWalletUserSelector);
     const selectedRate = useSelector(selectedRateSelector)
     const [loadingStates, setLoadingStates] = React.useState<Record<string, boolean>>({})
-
+    const [loadingWithdraw, setLoadingWithdraw] = React.useState<Record<string, boolean>>({})
     const handleDeposit = useCallback(async (symbol: string) => {
         setLoadingStates(prev => ({ ...prev, [symbol]: true }))
         try {
@@ -47,9 +47,11 @@ const Coins: React.FC<Props> = ({ style }) => {
         }
     }, [])
     const handelWithdraw = useCallback(async (symbol: string) => {
-        setLoadingStates(prev => ({ ...prev, [symbol]: true }))
-        navigate(screens.WITHDRAW, { symbol })
-        setLoadingStates(prev => ({ ...prev, [symbol]: false }))
+        setLoadingWithdraw(prev => ({ ...prev, [symbol]: true }))
+        setTimeout(() => {
+            navigate(screens.WITHDRAW, { symbol })
+            setLoadingWithdraw(prev => ({ ...prev, [symbol]: false }))
+        }, 250);
     }, [])
 
     return (
@@ -80,7 +82,7 @@ const Coins: React.FC<Props> = ({ style }) => {
                                     </Text>
                                     <View style={{ flexDirection: 'row', alignItems: 'center' }}>
                                         <Text style={{ fontFamily: fonts.FSCR, fontSize: 16, color: colors.black3 }}>
-                                            You have {ownedCoin} {coin.symbolWallet}
+                                            {t('You have')} {ownedCoin} {coin.symbolWallet}
                                         </Text>
                                         <Icon
                                             marginLeft={5}
@@ -112,7 +114,7 @@ const Coins: React.FC<Props> = ({ style }) => {
                                     marginTop={5}
                                     borderColor={colors.violet}
                                 >
-                                    {loadingStates[coin.name ?? ''] ? (
+                                    {loadingWithdraw[coin.name ?? ''] ? (
                                         <ActivityIndicator size="small" color={colors.violet} />
                                     ) : (
                                         <Text style={{ fontFamily: fonts.LR, fontSize: 16, color: colors.violet }}>
