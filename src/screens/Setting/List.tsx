@@ -82,7 +82,6 @@ const List = ({ t }: Props) => {
     },
     {
       title: 'Change Language',
-      // icon: require('@images/unAuth/vietnam.png'),
       icon: i18n.language == 'en' ? require('@images/unAuth/america.png') : require('@images/unAuth/vietnam.png'),
       onClick: () => {
         handleChangeLanguage()

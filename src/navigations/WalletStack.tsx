@@ -10,8 +10,6 @@ const WalletStack = () => {
     return (
         <Stack.Navigator screenOptions={{ headerShown: false }}>
             <Stack.Screen name={screens.TOP_TAB_WALLET} component={TopTabWallet} />
-            <Stack.Screen name={screens.TRANSACTION} component={Transaction} />
-            <Stack.Screen name={screens.CONFIRM_TRANSACTION} component={ConfirmTransaction as React.FC} />
         </Stack.Navigator>
     )
 }

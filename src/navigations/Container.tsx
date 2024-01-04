@@ -6,6 +6,8 @@ import { navigationRef } from '@utils/navigationRef'
 import React from 'react'
 import Main from './Main'
 import TwoFactorAuth from '@screens/Setting/TwoFactorAuth'
+import Transaction from '@screens/TopTabWallet/P2p/Transaction'
+import ConfirmTransaction from '@screens/TopTabWallet/P2p/ConfirmTransaction'
 
 const Stack = createNativeStackNavigator()
 
@@ -16,6 +18,8 @@ const Container = () => {
                 <Stack.Screen name={screens.HELLO} component={Hello} />
                 <Stack.Screen name={screens.MAIN} component={Main} />
                 <Stack.Screen name={screens.TWO_FACTOR_AUTHENTICATION} component={TwoFactorAuth} />
+                <Stack.Screen name={screens.TRANSACTION} component={Transaction} />
+                <Stack.Screen name={screens.CONFIRM_TRANSACTION} component={ConfirmTransaction as React.FC} />
             </Stack.Navigator>
         </NavigationContainer>
     )

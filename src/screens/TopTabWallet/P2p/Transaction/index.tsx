@@ -54,8 +54,12 @@ const Transaction = () => {
     }, []);
 
     const handleBuyNow = async () => {
-        if (!amount || !isChecked) {
+        if (!amount) {
             Alert.alert('Error', 'Please fill all fields and agree to the terms');
+            return;
+        }
+        if (!isChecked) {
+            Alert.alert('Error', 'Not yet accpet EULA');
             return;
         }
         const data: ICreateP2p = {
