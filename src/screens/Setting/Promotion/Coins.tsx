@@ -20,6 +20,7 @@ import { createWalletApi } from '@utils/userCallApi'
 import { ActivityIndicator } from 'react-native'
 import { navigate } from '@utils/navigationRef'
 import { screens } from '@contants/screens'
+import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 
 type Props = {
     style?: any
@@ -61,27 +62,31 @@ const Coins: React.FC<Props> = ({ style }) => {
                     const priceOfCoin = coin.price * selectedRate.rate
                     const ownedCoin = roundDecimalValues(userWallet?.[`${coin?.symbolWallet?.toLowerCase()}_balance`] || 0, coin.price);
                     return (
-                        <View key={coin.id} style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', padding: 20, backgroundColor: 'white', borderRadius: 10, marginBottom: 10 }}>
+                        <View key={coin.id} style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', padding: hp('2%'), backgroundColor: 'white', borderRadius: wp('2.5%'), marginBottom: hp('1%') }}>
                             <View style={{ flexDirection: 'row', alignItems: 'center' }}>
                                 <Icon
-                                    size={35}
-                                    marginRight={10}
+                                    size={wp('8.5%')}
+                                    marginRight={wp('2.5%')}
                                     source={{ uri: `${keys.HOSTING_API}${coin.image}` }}
                                 />
                                 <View>
                                     <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-                                        <Text style={{ fontFamily: fonts.FSCR, fontSize: 16, color: 'black' }}>
+                                        <Text style={{
+                                            fontFamily: fonts.FSCR,
+                                            fontSize: wp('4%'),
+                                            color: 'black'
+                                        }}>
                                             {coin.name}
                                         </Text>
-                                        <Text style={{ fontFamily: fonts.FSCR, fontSize: 16, color: colors.black3, marginLeft: 7 }}>
+                                        <Text style={{ fontFamily: fonts.FSCR, fontSize: wp('4%'), color: colors.black3, marginLeft: 7 }}>
                                             {coin.token_key}
                                         </Text>
                                     </View>
-                                    <Text style={{ fontFamily: fonts.FSCR, fontSize: 16, color: colors.darkGreen }}>
+                                    <Text style={{ fontFamily: fonts.FSCR, fontSize: wp('4%'), color: colors.darkGreen }}>
                                         {priceOfCoin.toLocaleString()} {selectedRate.title}
                                     </Text>
                                     <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-                                        <Text style={{ fontFamily: fonts.FSCR, fontSize: 16, color: colors.black3 }}>
+                                        <Text style={{ fontFamily: fonts.FSCR, fontSize: wp('4%'), color: colors.black3 }}>
                                             {t('You have')} {ownedCoin} {coin.symbolWallet}
                                         </Text>
                                         <Icon
@@ -95,29 +100,30 @@ const Coins: React.FC<Props> = ({ style }) => {
                             <View>
                                 <Btn
                                     onPress={() => handleDeposit(coin.name ?? '')}
-                                    padding={5}
+                                    padding={wp('1.4%')}
+                                    radius={wp('1.4%')}
                                     backgroundColor={colors.violet}
-                                    radius={7}>
+                                    >
                                     {loadingStates[coin.name ?? ''] ? (
                                         <ActivityIndicator size="small" color="#fff" />
                                     ) : (
-                                        <Text style={{ fontFamily: fonts.OSB, fontWeight: 'bold', fontSize: 16, color: 'white' }}>
+                                        <Text style={{ fontFamily: fonts.OSB, fontWeight: 'bold', fontSize: wp('4%'), color: 'white' }}>
                                             {t('Deposit')}
                                         </Text>
                                     )}
                                 </Btn>
                                 <Btn
                                     onPress={() => handelWithdraw(coin.name ?? '')}
-                                    padding={5}
-                                    radius={7}
+                                    padding={wp('1.4%')}
+                                    radius={wp('1.4%')}
                                     borderWidth={1}
-                                    marginTop={5}
+                                    marginTop={hp('1%')}
                                     borderColor={colors.violet}
                                 >
                                     {loadingWithdraw[coin.name ?? ''] ? (
                                         <ActivityIndicator size="small" color={colors.violet} />
                                     ) : (
-                                        <Text style={{ fontFamily: fonts.LR, fontSize: 16, color: colors.violet }}>
+                                        <Text style={{ fontFamily: fonts.LR, fontSize: wp('4%'), color: colors.violet }}>
                                             {t('Withdraw')}
                                         </Text>
                                     )}

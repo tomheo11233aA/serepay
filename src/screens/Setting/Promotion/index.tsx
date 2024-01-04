@@ -12,6 +12,7 @@ import { userWalletUserSelector, coinListSelector, selectedRateSelector } from '
 import { navigate } from '@utils/navigationRef'
 import { screens } from '@contants/screens'
 import Coins from './Coins'
+import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 
 const Promotion = () => {
     const { t } = useTranslation()
@@ -26,7 +27,13 @@ const Promotion = () => {
 
     return (
         <Safe flex={1} backgroundColor='white'>
-            <Box radius={5} backgroundColor={colors.gray3} alignSelf={'center'} alignCenter width={'90%'}>
+            <Box
+                radius={wp('2%')}
+                backgroundColor={colors.gray3}
+                alignSelf={'center'}
+                alignCenter
+                width={wp('90%')}
+            >
                 <Box row>
                     <Box padding={10}>
                         <Txt size={14} color='black' fontFamily={fonts.AS}>{t('Estimated assets value')}</Txt>
@@ -38,13 +45,15 @@ const Promotion = () => {
                     <Box padding={10}>
                         <Txt size={14} color='black' fontFamily={fonts.AS}>{t('Start buying and selling cryptocurrencies')}</Txt>
                         <Box row alignCenter justifyCenter>
-                            <Btn padding={7} backgroundColor={colors.violet} marginTop={10} radius={5} 
-                            onPress={() => navigate(screens.WALLET_STACK)}
+                            <Btn padding={7} backgroundColor={colors.violet} marginTop={10}
+                                radius={wp('1%')}
+                                onPress={() => navigate(screens.WALLET_STACK)}
                             >
                                 <Txt size={14} color='black' fontFamily={fonts.OSB}>{t('BUY NOW')}</Txt>
                             </Btn>
-                            <Btn padding={7} marginTop={10} marginLeft={10} radius={5} borderWidth={1} borderColor={colors.violet}
-                            onPress={() => navigate(screens.WALLET_STACK)}
+                            <Btn padding={7} marginTop={10} marginLeft={10}
+                                radius={wp('1%')} borderWidth={1} borderColor={colors.violet}
+                                onPress={() => navigate(screens.WALLET_STACK)}
                             >
                                 <Txt size={14} color={colors.violet} fontFamily={fonts.OSB}>{t('SELL NOW')}</Txt>
                             </Btn>
