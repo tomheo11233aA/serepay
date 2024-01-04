@@ -144,7 +144,7 @@ const Ecosystem = () => {
                     backgroundColor={colors.violet}
                     alignSelf={'center'}>
                     <Txt bold size={16} color={'white'} fontFamily={fonts.AS}>
-                        {t('Update')}
+                        {t('Add Card')}
                     </Txt>
                 </Btn>
             </View>
