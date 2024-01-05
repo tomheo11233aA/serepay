@@ -26,16 +26,7 @@ const FooterButtons: React.FC<FooterButtonsProps> = ({ typeUser, userid, loginUs
         };
         const response = await userCancelP2pCommand(data);
         if (response?.status) {
-            try {
-                socket.on("operationP2p", (idP2p) => {
-                    Alert.alert('Success', 'Cancel order successfully');
-                    console.log(idP2p, "operationP2p");
-                    // navigate(screens.HISTORY_TRANSACTION);
-                });
-            } catch (error) {
-                Alert.alert('Error', 'Cancel order failed');
-                console.log(error);
-            }
+            Alert.alert('Success', 'Cancel order successfully');
             navigate(screens.HISTORY_TRANSACTION);
         }
     }

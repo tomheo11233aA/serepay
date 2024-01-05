@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback, useMemo} from 'react';
 import { FlatList, StyleSheet, ActivityIndicator } from 'react-native';
 import { getListHistoryP2p } from '@utils/userCallApi';
 import { colors } from '@themes/colors';
@@ -35,7 +35,7 @@ const AllHistory = () => {
   const [loading, setLoading] = useState(false);
   const [hasMore, setHasMore] = useState(true);
 
-  const refreshData = async () => {
+  const refreshData = useCallback(async () => {
     setLoading(true);
     setPage(1);
     setHasMore(true);
@@ -49,7 +49,7 @@ const AllHistory = () => {
       console.error('response.data.array is not an array:', response?.data?.array);
     }
     setLoading(false);
-  };
+  }, []);
 
   useEffect(() => {
     loadMoreData();
@@ -57,18 +57,16 @@ const AllHistory = () => {
       console.log(res, "createP2p");
       refreshData();
     });
+  }, [refreshData]);
+
+  useEffect(() => {
     socket.on("operationP2p", (idP2p) => {
       console.log(idP2p, "operationP2p");
       refreshData();
     });
-    return () => {
-      socket.off("createP2p");
-      socket.off("operationP2p");
-      console.log("leave createP2p");
-    }
-  }, []);
+  }, [refreshData]);
 
-  const loadMoreData = async () => {
+  const loadMoreData = useCallback(async () => {
     if (!loading && hasMore) {
       setLoading(true);
       const response = await getListHistoryP2p({ page, limit: 10 });
@@ -83,7 +81,11 @@ const AllHistory = () => {
       setPage(page + 1);
       setLoading(false);
     }
-  };
+  }, [loading, hasMore, page]);
+
+  const ListFooterComponent = useMemo(() => {
+    return () => loading && hasMore && <ActivityIndicator size="large" color={colors.blue} />;
+  }, [loading, hasMore]);
 
   if (data.length === 0) {
     return (
@@ -104,7 +106,8 @@ const AllHistory = () => {
       keyExtractor={(item) => item.id.toString()}
       onEndReached={loadMoreData}
       onEndReachedThreshold={0.1}
-      ListFooterComponent={() => loading && hasMore && <ActivityIndicator size="large" color={colors.blue} />}
+      // ListFooterComponent={() => loading && hasMore && <ActivityIndicator size="large" color={colors.blue} />}
+      ListFooterComponent={ListFooterComponent}
       renderItem={({ item }) => <TransactionItem item={item} />}
     />
   );
