@@ -12,13 +12,14 @@ import { navigate } from '@utils/navigationRef';
 import { screens } from '@contants/screens';
 import { getInfoP2p } from '@utils/userCallApi';
 import { useTranslation } from 'react-i18next';
+import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 
 interface TransactionItemProps {
     item: IAdvertising;
     refreshData?: () => void;
 }
 
-const TransactionItem = ({ item , refreshData}: TransactionItemProps) => {
+const TransactionItem = ({ item, refreshData }: TransactionItemProps) => {
     const { t } = useTranslation()
     const [hasP2PInfo, setHasP2PInfo] = React.useState(false)
     const formatTime = (time: string) => {
@@ -69,19 +70,37 @@ const TransactionItem = ({ item , refreshData}: TransactionItemProps) => {
                 </Box>
             </Box>
             <Box justifyCenter>
-                {(item.type === 1 || item.type === 2) && (
+                {item.type === 1 && (
                     <Btn backgroundColor={colors.red} padding={5} radius={5} onPress={async () => {
                         try {
                             await cancelP2p({ idP2p: item.id })
                             Alert.alert("Cancel success")
-                            // refreshData && refreshData();
                             navigate(screens.SETTING)
                         } catch (error) {
                             console.log(error)
                         }
                     }} >
-                        <Txt fontFamily={fonts.AS} color={'white'}>Cancel</Txt>
+                        <Txt fontFamily={fonts.AS} color={'white'}>{t('Cancel')}</Txt>
                     </Btn>
+                )}
+                {item.type === 2 && (
+                    <>
+                        <Btn backgroundColor={colors.red} padding={5} radius={5} onPress={async () => {
+                            try {
+                                await cancelP2p({ idP2p: item.id })
+                                Alert.alert("Cancel success")
+                                navigate(screens.SETTING)
+                            } catch (error) {
+                                console.log(error)
+                            }
+                        }} >
+                            <Txt fontFamily={fonts.AS} color={'white'}>{t('Cancel')}</Txt>
+                        </Btn>
+                        <Txt
+                            center
+                            width={wp('20%')}
+                            fontFamily={fonts.LR} color={'black'}>{t('Waiting for admin confirm')}</Txt>
+                    </>
                 )}
                 {hasP2PInfo && (
                     <Btn backgroundColor={colors.green} radius={5} padding={5} marginTop={5} onPress={() => navigate(screens.CONFIRM_TRANSACTION, { idP2p: item.id })}>
@@ -89,7 +108,6 @@ const TransactionItem = ({ item , refreshData}: TransactionItemProps) => {
                     </Btn>
                 )}
             </Box>
-
         </View>
     );
 };
