@@ -12,7 +12,7 @@ import { AppDispatch } from '@redux/store/store'
 import { IHistory } from '@models/history'
 import { Image } from 'react-native'
 import Spinner from 'react-native-loading-spinner-overlay'
-import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
+import { heightPercentageToDP as hp } from 'react-native-responsive-screen';
 
 const BuyCoin = ({ t, type, selectedCoin }: any) => {
     const dispatch: AppDispatch = useDispatch()
@@ -95,7 +95,6 @@ const BuyCoin = ({ t, type, selectedCoin }: any) => {
                             {t('No data')}
                         </Txt>
                     </Box>
-
                 )
                 }
             </Scroll>
