@@ -3,6 +3,7 @@ import { TextInput, View, StyleSheet, Text, Image } from 'react-native';
 import CreditCard from '../../../assets/images/setting/bg-card3.svg';
 import { fonts } from '@themes/fonts';
 import { Dimensions } from 'react-native';
+import { useTranslation } from 'react-i18next';
 
 interface CreditCardFormProps {
     bankLogo?: string;
@@ -37,12 +38,13 @@ export const formatExpiryDate = (value: string) => {
     return v;
 };
 const CreditCardForm: React.FC<CreditCardFormProps> = ({ bankLogo, cardNumber, cardHolder, expiryDate, onChangeCardHolder, onChangeCardNumber, onChangeExpiryDate }) => {
+    const { t } = useTranslation();
     return (
         <View style={styles.container}>
             <CreditCard width={width * 0.9} height={height * 0.3} style={{ alignSelf: 'center' }} />
             <Image
                 source={bankLogo ? { uri: bankLogo } : {}}
-                style={{ width: 160, height: 100, position: 'absolute', resizeMode: 'contain', right: width * 0.37, top: 10}}
+                style={{ width: 160, height: 100, position: 'absolute', resizeMode: 'contain', right: width * 0.37, top: 10 }}
             />
 
             <TextInput
@@ -58,23 +60,23 @@ const CreditCardForm: React.FC<CreditCardFormProps> = ({ bankLogo, cardNumber, c
                 }}
                 onChangeText={text => onChangeCardNumber && onChangeCardNumber(text)}
                 value={cardNumber}
-                placeholder={'Card Number'}
+                placeholder={t('Card Number')}
                 placeholderTextColor={'#fff'}
                 keyboardType={'numeric'}
             />
             <View style={{ flexDirection: 'row', justifyContent: 'space-between', position: 'absolute', top: 170 }}>
                 <View>
-                    <Text style={{ fontFamily: fonts.JR, color: 'white' }}>Card Holder name</Text>
+                    <Text style={{ fontFamily: fonts.JR, color: 'white' }}>{t('Card Holder name')}</Text>
                     <TextInput
                         style={{ height: 30, width: 150, fontFamily: fonts.OSB, color: '#fff', fontSize: 16, fontWeight: 'bold' }}
                         onChangeText={text => onChangeCardHolder && onChangeCardHolder(text)}
                         value={cardHolder}
-                        placeholder={'YOUR NAME'}
+                        placeholder={t('YOUR NAME')}
                         placeholderTextColor={'#fff'}
                     />
                 </View>
                 <View style={{ marginLeft: 25 }}>
-                    <Text style={{ fontFamily: fonts.JR, color: 'white' }}>Expiry Date</Text>
+                    <Text style={{ fontFamily: fonts.JR, color: 'white' }}>{t('Expiry Date')}</Text>
                     <TextInput
                         style={{ height: 30, width: 150, fontFamily: fonts.OSB, color: '#fff', fontSize: 16, fontWeight: 'bold' }}
                         onChangeText={text => onChangeExpiryDate && onChangeExpiryDate(formatExpiryDate(text))}

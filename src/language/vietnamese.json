@@ -117,6 +117,18 @@
         "Start buying and selling cryptocurrencies": "Bắt đầu mua bán tiền điện tử",
         "You have": "Bạn có",
         "Add Card": "Thêm thẻ",
-        "Advertising History": "Lịch sử quảng cáo"
+        "Advertising History": "Lịch sử quảng cáo",
+        "Create Your Buy Ads": "Tạo lệnh mua",
+        "Create Your Sell Ads": "Tạo lệnh bán",
+        "Card Number": "Số thẻ",
+        "Card Holder name": "Tên chủ thẻ",
+        "YOUR NAME": "TÊN CỦA BẠN",
+        "Expiry Date": "Ngày hết hạn",
+        "Scan this QR code in the authenticator app, or enter the code below manually into the app": "Quét mã QR này trong ứng dụng xác thực hoặc nhập mã bên dưới vào ứng dụng thủ công",
+        "Next": "Tiếp theo",
+        "Enter the 6-digit code from authenticator app": "Nhập mã 6 chữ số từ ứng dụng xác thực",
+        "6 digit code": "Mã 6 chữ số",
+        "Previous": "Trước",
+        "Turn on 2FA": "Bật 2FA"
     }
 }

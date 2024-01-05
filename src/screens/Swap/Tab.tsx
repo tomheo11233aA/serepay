@@ -39,7 +39,7 @@ const Tab = ({ t }: Props) => {
                     </Btn>
                 )}
             </Box>
-            {tabChoosed === 'Make price' ? <MakePrice t={t} /> : <YourPrice />}
+            {tabChoosed === 'Make price' ? <MakePrice t={t} /> : <MakePrice t={t} />}
         </Box>
     )
 }

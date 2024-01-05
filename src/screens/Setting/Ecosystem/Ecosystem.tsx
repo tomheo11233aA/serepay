@@ -106,7 +106,7 @@ const Ecosystem = () => {
                     {errors.bankName?.message}
                 </Txt>}
                 <CardInput
-                    placeholder="Card Number"
+                    placeholder={t('Card Number')}
                     onChangeText={handleCardNumber}
                     icon={require('@images/setting/credit-card-number.png')}
                     maxLength={19}
@@ -116,7 +116,7 @@ const Ecosystem = () => {
                     {errors.cardNumber?.message}
                 </Txt>}
                 <CardInput
-                    placeholder="Card Holder Name"
+                    placeholder={t('Card Holder name')}
                     onChangeText={handleCardHolder}
                     icon={require('@images/setting/name.png')}
                     maxLength={50}
@@ -126,7 +126,7 @@ const Ecosystem = () => {
                     {errors.cardHolderName?.message}
                 </Txt>}
                 <CardInput
-                    placeholder="Expiry Date"
+                    placeholder={t('Expiry Date')}
                     onChangeText={handleExpiryDate}
                     icon={require('@images/setting/expiry-date.png')}
                     maxLength={5}
