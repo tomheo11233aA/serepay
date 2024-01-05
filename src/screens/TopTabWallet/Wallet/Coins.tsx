@@ -4,8 +4,7 @@ import Scroll from '@commom/Scroll'
 import Txt from '@commom/Txt'
 import { colors } from '@themes/colors'
 import React from 'react'
-import { useDispatch, useSelector } from 'react-redux';
-import { AppDispatch } from '@redux/store/store'
+import { useSelector } from 'react-redux';
 import { coinListSelector } from '@redux/selector/userSelector'
 import { keys } from '@contants/keys'
 import { ICoin } from '@models/coin'
@@ -14,8 +13,7 @@ import { useCoinSocket } from '../../../helper/useCoinSocket'
 import { userWalletUserSelector } from '@redux/selector/userSelector'
 import { IUserWallet } from '@models/user'
 import { roundDecimalValues } from '../../../helper/function/roundCoin'
-import { exchangeRateSelector } from '@redux/selector/userSelector'
-import { selectedRateSelector } from '@redux/selector/userSelector'
+
 
 type Props = {
     t?: any
@@ -26,9 +24,7 @@ type Props = {
 const Coins: React.FC<Props> = ({ t, style, isShowHeader, onCoinSelected }) => {
     useCoinSocket()
     const coins = useSelector(coinListSelector)
-    const dispatch: AppDispatch = useDispatch()
     const userWallet: IUserWallet | undefined = useSelector(userWalletUserSelector);
-    const selectedRate = useSelector(selectedRateSelector)
     return (
         <Box>
             <Scroll style={style} showsVerticalScrollIndicator={false}>
