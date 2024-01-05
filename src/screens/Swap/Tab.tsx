@@ -16,7 +16,7 @@ const Tab = ({ t }: Props) => {
     return (
         <Box>
             <Box
-                marginTop={40}
+                marginTop={20}
                 marginRight={20}
                 paddingVertical={5}
                 paddingHorizontal={10}

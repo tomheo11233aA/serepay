@@ -10,9 +10,7 @@ import { AppDispatch } from '@redux/store/store'
 import { fetchUserInfo, fetchUserWallet } from '@redux/slice/userSlice'
 import { fetchListExchange } from '../../../redux/slice/exchangeRateSlice'
 import { userWalletUserSelector, userInfoUserSelector, coinListSelector, selectedRateSelector } from '@redux/selector/userSelector'
-import { navigate } from '@utils/navigationRef'
-import { screens } from '@contants/screens'
-import { set } from 'lodash'
+import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen'
 
 const Wallet = () => {
   const { t } = useTranslation()
@@ -21,7 +19,7 @@ const Wallet = () => {
   const userInfo = useSelector(userInfoUserSelector)
   const coins = useSelector(coinListSelector)
   const selectedRate = useSelector(selectedRateSelector)
-  
+
   React.useEffect(() => {
     dispatch(fetchUserWallet())
     dispatch(fetchUserInfo())
@@ -45,19 +43,25 @@ const Wallet = () => {
         <Box marginTop={10} row justifyCenter alignCenter>
           <Icon size={30} source={require('@images/wallet/bitcoin.png')} />
           <Txt color={'white'} size={30} marginLeft={10}>
-            {totalValueInBTC.toFixed(8)}
+            {totalValueInBTC.toLocaleString()}
           </Txt>
         </Box>
         <Box marginTop={10} row justifyCenter alignCenter>
           <Icon size={30} source={require('@images/wallet/dollar.png')} />
-          <Txt color={'white'} size={30} marginLeft={10}>
+          <Txt color={'white'} size={30} marginLeft={10}
+            justify
+            width={wp('70%')}
+            numberOfLines={2}
+          >
             {transferPrice.toLocaleString()} {selectedRate.title}
           </Txt>
         </Box>
       </Box>
-      <Box flex={1} marginTop={30} borderTopLeftRadius={20} borderTopRightRadius={20} backgroundColor={'white'}>
+      <Box flex={1} marginTop={hp('2.5%')} borderTopLeftRadius={20} borderTopRightRadius={20} backgroundColor={'white'}>
         <Options t={t} />
-        <Coins style={{ paddingBottom: 150 }} />
+        <Coins
+          style={{ paddingBottom: hp('20%') }}
+        />
       </Box>
     </Box>
   )

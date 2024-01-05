@@ -49,7 +49,6 @@ const Coins: React.FC<Props> = ({ t, style, isShowHeader, onCoinSelected }) => {
                 )} */}
                 {coins.map((coin) => {
                     const volume = roundDecimalValues(userWallet?.[`${coin?.symbolWallet?.toLowerCase()}_balance`] || 0, coin.price);
-                    const transferPrice = (userWallet?.[`${coin?.symbolWallet?.toLowerCase()}_balance`] ?? 0) * coin.price * selectedRate.rate
                     return (
                         <Btn
                             row
@@ -74,7 +73,7 @@ const Coins: React.FC<Props> = ({ t, style, isShowHeader, onCoinSelected }) => {
                                         {coin.name}
                                     </Txt>
                                     <Txt marginTop={9} size={14} color={colors.darkGreen}>
-                                        {`$${coin.price}  `}
+                                        {`$${coin.price.toLocaleString()}  `}
                                         <Txt color={coin.percent >= 0 ? '#75c1a8' : '#c94d4d'}>
                                             {coin.percent >= 0 ? `+${coin.percent}%` : `${coin.percent}%`}
                                         </Txt>
@@ -83,9 +82,7 @@ const Coins: React.FC<Props> = ({ t, style, isShowHeader, onCoinSelected }) => {
                                 </Box>
                             </Box>
                             <Txt bold color={colors.darkGreen}>
-                                {/* {`${coin.volume} ${coin.symbolWallet}`} */}
-                                {`${volume} ${coin.symbolWallet}`}
-                                {/* {`${transferPrice.toFixed(3)} ${selectedRate.title}`} */}
+                                {`${Number(volume).toLocaleString()} ${coin.symbolWallet}`}
                             </Txt>
                         </Btn>
                     )
