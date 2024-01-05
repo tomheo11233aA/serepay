@@ -68,9 +68,16 @@ const TransactionItem = ({ item, refreshData }: TransactionItemProps) => {
                     <Txt color={colors.gray2} fontFamily={fonts.AS}>{t('Created at')}: </Txt>
                     <Txt fontFamily={fonts.AS}>{formatTime(item.created_at)}</Txt>
                 </Box>
+                {item.type === 2 && (
+                    <Txt
+                        marginTop={3}
+                        fontFamily={fonts.AS} color={colors.red2}>
+                        {t('Waiting for admin confirm')}
+                    </Txt>
+                )}
             </Box>
             <Box justifyCenter>
-                {item.type === 1 && (
+                {item.type === 1 || item.type === 2 && (
                     <Btn backgroundColor={colors.red} padding={5} radius={5} onPress={async () => {
                         try {
                             await cancelP2p({ idP2p: item.id })
@@ -83,7 +90,7 @@ const TransactionItem = ({ item, refreshData }: TransactionItemProps) => {
                         <Txt fontFamily={fonts.AS} color={'white'}>{t('Cancel')}</Txt>
                     </Btn>
                 )}
-                {item.type === 2 && (
+                {/* {item.type === 2 && (
                     <>
                         <Btn backgroundColor={colors.red} padding={5} radius={5} onPress={async () => {
                             try {
@@ -99,9 +106,11 @@ const TransactionItem = ({ item, refreshData }: TransactionItemProps) => {
                         <Txt
                             center
                             width={wp('20%')}
-                            fontFamily={fonts.LR} color={'black'}>{t('Waiting for admin confirm')}</Txt>
+                            fontFamily={fonts.LR} color={'black'}>
+                                {t('Waiting for admin confirm')}
+                        </Txt>
                     </>
-                )}
+                )} */}
                 {hasP2PInfo && (
                     <Btn backgroundColor={colors.green} radius={5} padding={5} marginTop={5} onPress={() => navigate(screens.CONFIRM_TRANSACTION, { idP2p: item.id })}>
                         <Txt fontFamily={fonts.AS} color={colors.blue}>Info</Txt>

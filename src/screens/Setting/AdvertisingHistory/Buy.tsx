@@ -96,14 +96,14 @@ const Buy = () => {
                     flexDirection: 'row',
                     alignSelf: 'flex-end',
                     position: 'absolute',
-                    marginTop: hp('4%'),
+                    marginTop: hp('3.5%'),
                     alignItems: 'center',
                 }}>
                     <BouncyCheckbox
                         size={25}
-                        fillColor={colors.blue}
+                        fillColor={colors.violet}
                         unfillColor="#FFFFFF"
-                        iconStyle={{ borderColor: colors.blue }}
+                        iconStyle={{ borderColor: colors.violet }}
                         onPress={
                             () => {
                                 setIsChecked(!isChecked)
@@ -132,14 +132,14 @@ const Buy = () => {
                 flexDirection: 'row',
                 alignSelf: 'flex-end',
                 position: 'absolute',
-                marginTop: hp('4%'),
+                marginTop: hp('3.5%'),
                 alignItems: 'center',
             }}>
                 <BouncyCheckbox
                     size={25}
-                    fillColor={colors.blue}
+                    fillColor={colors.violet}
                     unfillColor="#FFFFFF"
-                    iconStyle={{ borderColor: colors.blue }}
+                    iconStyle={{ borderColor: colors.violet }}
                     onPress={
                         () => {
                             setIsChecked(!isChecked)
@@ -154,10 +154,13 @@ const Buy = () => {
             </View>
             <FlatList
                 showsVerticalScrollIndicator={false}
-                style={{ marginTop: 15, marginBottom: 240 }}
+                style={{
+                    marginTop: hp('2%'),
+                    marginBottom: hp('27%'),
+                }}
                 data={data}
                 keyExtractor={(item) => item.id.toString()}
-                onEndReached={loadMoreData}
+                onEndReached={isChecked ? loadMoreDataPending : loadMoreData}
                 onEndReachedThreshold={0.1}
                 ListFooterComponent={() => loading && hasMore && <ActivityIndicator size="large" color={colors.blue} />}
                 renderItem={({ item }) => <AdvertisingItem item={item} refreshData={refreshData} />}
