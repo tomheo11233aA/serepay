@@ -27,7 +27,9 @@ const FooterButtons: React.FC<FooterButtonsProps> = ({ typeUser, userid, loginUs
         const response = await userCancelP2pCommand(data);
         if (response?.status) {
             Alert.alert('Success', 'Cancel order successfully');
-            navigate(screens.HISTORY_TRANSACTION);
+            navigate(screens.SETTING_STACK, {
+                screen: screens.HISTORY_TRANSACTION,
+            })
         }
     }
     const handleConfirmOrder = async () => {
@@ -37,7 +39,9 @@ const FooterButtons: React.FC<FooterButtonsProps> = ({ typeUser, userid, loginUs
         const response = await userConfirmP2pCommand(data);
         if (response?.status) {
             Alert.alert('Success', 'Confirm order successfully');
-            navigate(screens.HISTORY_TRANSACTION);
+            navigate(screens.SETTING_STACK, {
+                screen: screens.HISTORY_TRANSACTION
+            })
         }
     }
     const handleCompanyConfirmOrder = async () => {
@@ -47,7 +51,9 @@ const FooterButtons: React.FC<FooterButtonsProps> = ({ typeUser, userid, loginUs
         const response = await companyConfirmP2pCommand(data);
         if (response?.status) {
             Alert.alert('Success', 'Confirm order successfully');
-            navigate(screens.HISTORY_TRANSACTION);
+            navigate(screens.SETTING_STACK, {
+                screen: screens.HISTORY_TRANSACTION
+            })
         }
     }
     const handleCompanyCancelOrder = async () => {
@@ -57,7 +63,9 @@ const FooterButtons: React.FC<FooterButtonsProps> = ({ typeUser, userid, loginUs
         const response = await companyCancelP2pCommand(data);
         if (response?.status) {
             Alert.alert('Success', 'Cancel order successfully');
-            navigate(screens.HISTORY_TRANSACTION);
+            navigate(screens.SETTING_STACK, {
+                screen: screens.HISTORY_TRANSACTION
+            })
         }
     }
 

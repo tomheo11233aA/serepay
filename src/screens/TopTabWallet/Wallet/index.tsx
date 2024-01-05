@@ -10,6 +10,9 @@ import { AppDispatch } from '@redux/store/store'
 import { fetchUserInfo, fetchUserWallet } from '@redux/slice/userSlice'
 import { fetchListExchange } from '../../../redux/slice/exchangeRateSlice'
 import { userWalletUserSelector, userInfoUserSelector, coinListSelector, selectedRateSelector } from '@redux/selector/userSelector'
+import { navigate } from '@utils/navigationRef'
+import { screens } from '@contants/screens'
+import { set } from 'lodash'
 
 const Wallet = () => {
   const { t } = useTranslation()

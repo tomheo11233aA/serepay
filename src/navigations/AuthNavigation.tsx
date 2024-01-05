@@ -8,30 +8,11 @@ import Box from '@commom/Box'
 import Icon from '@commom/Icon'
 import { colors } from '@themes/colors'
 import Txt from '@commom/Txt'
-import ADStack from './ADStack'
 import { useTranslation } from 'react-i18next'
-import { useSelector } from 'react-redux'
-import { userInfoUserSelector } from '@redux/selector/userSelector'
-import { socket } from '../helper/AxiosInstance'
-import { useEffect } from 'react'
 
 const Tab = createBottomTabNavigator()
 const AuthNavigation = () => {
   const { t } = useTranslation()
-  const userInfo = useSelector(userInfoUserSelector)
-  useEffect(() => {
-    if (userInfo && userInfo.id) {
-      socket.emit('join', userInfo.id);
-      socket.on("ok", (res) => {
-        // console.log(res, "ok");
-      });
-      return () => {
-        socket.off("ok");
-      }
-    } else {
-      socket.off("ok");
-    }
-  }, [userInfo]);
   const tabs = [
     {
       sizeIcon: 25,
