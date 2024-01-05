@@ -96,7 +96,7 @@ const Ecosystem = () => {
                 expiryDate={expiryDate}
             />
             <View style={{ marginTop: 20 }}>
-                <Dropdown onChange={handleBankChange} onLogoChange={handleLogoChange} />
+                <Dropdown onChange={handleBankChange} onLogoChange={handleLogoChange} isStoreData={true} />
                 {errors.bankName && <Txt size={12} color={colors.red} paddingHorizontal={5} marginLeft={20} style={{ zIndex: -1 }} marginTop={7} bold>
                     {errors.bankName?.message}
                 </Txt>}

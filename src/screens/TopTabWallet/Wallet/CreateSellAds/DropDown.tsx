@@ -21,22 +21,13 @@ interface Props {
     onChange: (value: string) => void;
     onLogoChange?: (value: string) => void;
     myContainerStyle?: StyleProp<ViewStyle>;
-    isStoreData?: boolean;
 }
 
-const Dropdown: FC<Props> = ({ onChange, onLogoChange, myContainerStyle, isStoreData }) => {
+const Dropdown: FC<Props> = ({ onChange, onLogoChange, myContainerStyle }) => {
     const [open, setOpen] = useState(false);
     const [value, setValue] = useState<string | null>(null);
     const [items, setItems] = useState<any>([]);
     const { t } = useTranslation();
-
-    const storeData = async (value: string) => {
-        try {
-            await AsyncStorage.setItem('@selected_bank', value)
-        } catch (e) {
-            console.error(e);
-        }
-    }
 
     useEffect(() => {
         fetch('https://api.vietqr.io/v2/banks')
@@ -72,9 +63,6 @@ const Dropdown: FC<Props> = ({ onChange, onLogoChange, myContainerStyle, isStore
                     placeholder={t('Choose your bank')}
                     onChangeValue={(value: any) => {
                         onChange(value);
-                        if (isStoreData) {
-                            storeData(value);
-                        }
                         const selectedItem = items.find((item: any) => item.value === value);
                         if (selectedItem && onLogoChange) { 
                             onLogoChange(selectedItem.logo);
@@ -86,6 +74,8 @@ const Dropdown: FC<Props> = ({ onChange, onLogoChange, myContainerStyle, isStore
                     }}
                     dropDownContainerStyle={{ backgroundColor: '#fafafa' }}
                     zIndex={1}
+                    dropDownDirection="TOP"
+                    listMode='SCROLLVIEW'
                 />
             )}
         </View>
