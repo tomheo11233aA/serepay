@@ -45,7 +45,7 @@ const TurnOn2FA = () => {
     };
 
     return (
-        <SafeAreaView style={{ justifyContent: 'space-between', height: '95%' }}>
+        <SafeAreaView style={{ justifyContent: 'space-between', height: '90%' }}>
             <View>
                 <Text style={{ color: colors.darkGreen, fontWeight: 'bold', fontSize: 18 }}>
                     {t('Scan this QR code in the authenticator app, or enter the code below manually into the app')}

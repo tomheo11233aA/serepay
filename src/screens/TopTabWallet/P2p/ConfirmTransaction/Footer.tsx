@@ -36,16 +36,7 @@ const FooterButtons: React.FC<FooterButtonsProps> = ({ typeUser, userid, loginUs
         };
         const response = await userConfirmP2pCommand(data);
         if (response?.status) {
-            try {
-                socket.emit("operationP2p", (idP2p: any) => {
-                    Alert.alert('Success', 'Confirm order successfully');
-                    console.log(idP2p, "operationP2p");
-                    navigate(screens.HISTORY_TRANSACTION);
-                });
-            } catch (error) {
-                Alert.alert('Error', 'Confirm order failed');
-                console.log(error);
-            }
+            Alert.alert('Success', 'Confirm order successfully');
             navigate(screens.HISTORY_TRANSACTION);
         }
     }
@@ -57,7 +48,6 @@ const FooterButtons: React.FC<FooterButtonsProps> = ({ typeUser, userid, loginUs
         if (response?.status) {
             Alert.alert('Success', 'Confirm order successfully');
             navigate(screens.HISTORY_TRANSACTION);
-            socket.emit("operationP2p", idP2p)
         }
     }
     const handleCompanyCancelOrder = async () => {
@@ -68,7 +58,6 @@ const FooterButtons: React.FC<FooterButtonsProps> = ({ typeUser, userid, loginUs
         if (response?.status) {
             Alert.alert('Success', 'Cancel order successfully');
             navigate(screens.HISTORY_TRANSACTION);
-            socket.emit("operationP2p", idP2p)
         }
     }
 

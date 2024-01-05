@@ -106,7 +106,6 @@ const AllHistory = () => {
       keyExtractor={(item) => item.id.toString()}
       onEndReached={loadMoreData}
       onEndReachedThreshold={0.1}
-      // ListFooterComponent={() => loading && hasMore && <ActivityIndicator size="large" color={colors.blue} />}
       ListFooterComponent={ListFooterComponent}
       renderItem={({ item }) => <TransactionItem item={item} />}
     />

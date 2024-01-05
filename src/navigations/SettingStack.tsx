@@ -11,9 +11,7 @@ import Advertising from '@screens/Setting/AdvertisingHistory'
 import Promotion from '@screens/Setting/Promotion'
 import CreateWallet from '@screens/Setting/Promotion/CreateWallet'
 import Withdraw from '@screens/Setting/Promotion/Withdraw'
-import Transaction from '@screens/TopTabWallet/P2p/Transaction'
-import ConfirmTransaction from '@screens/TopTabWallet/P2p/ConfirmTransaction'
-
+import TwoFactorAuth from '@screens/Setting/TwoFactorAuth'
 
 const Stack = createNativeStackNavigator()
 
@@ -30,8 +28,7 @@ const SettingStack = () => {
             <Stack.Screen name={screens.PROMOTION} component={Promotion} />
             <Stack.Screen name={screens.DEPOSIT} component={CreateWallet as React.FC} />
             <Stack.Screen name={screens.WITHDRAW} component={Withdraw as React.FC} />
-            {/* <Stack.Screen name={screens.TRANSACTION} component={Transaction} />
-            <Stack.Screen name={screens.CONFIRM_TRANSACTION} component={ConfirmTransaction as React.FC} /> */}
+            <Stack.Screen name={screens.TWO_FACTOR_AUTHENTICATION} component={TwoFactorAuth} />
         </Stack.Navigator>
     )
 }
