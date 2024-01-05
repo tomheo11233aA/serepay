@@ -22,10 +22,12 @@ import CoinModal from '@commom/Modal/CoinModal'
 import { configSelector } from '@redux/selector/userSelector'
 import { companyAddAds } from '@utils/userCallApi'
 import { ICompanyAddAds } from '@models/P2P/COMPANY/companyAddAds'
+import { selectedRateSelector } from '@redux/selector/userSelector'
 
 const CreateBuyAds = () => {
     const { t } = useTranslation()
     const coins = useAppSelector(coinListSelector)
+    const selectedRate = useAppSelector(selectedRateSelector)
     const config = useAppSelector(configSelector);
     const [myValue, setMyValue] = React.useState(0);
     const { handleSubmit, formState: { errors }, setValue } = useForm({
@@ -50,8 +52,9 @@ const CreateBuyAds = () => {
     const price = useMemo(() => {
         let price = 0;
         price = selectedCoin && selectedCoin.price !== undefined ? selectedCoin.price + (selectedCoin.price * (myValue / 100)) : 0;
-        return price
+        return price * selectedRate.rate;
     }, [selectedCoin, myValue]);
+
 
     useEffect(() => {
         if (!selectedCoin) {
@@ -129,7 +132,7 @@ const CreateBuyAds = () => {
                         </Box>
                         <Box row marginTop={20} style={{ alignItem: 'center' }}>
                             <Txt fontFamily={fonts.LR}>{t('Market Buy Price:')}</Txt>
-                            <Txt marginLeft={5} fontFamily={fonts.OSB}>{`${price.toLocaleString()} USD`}</Txt>
+                            <Txt marginLeft={5} fontFamily={fonts.OSB}>{`${price.toLocaleString()} ${selectedRate.title}`}</Txt>
                         </Box>
                         <Txt size={20} marginTop={20} fontFamily={fonts.LR}>{t('Amount')}</Txt>
                         <Box marginTop={20} style={{ alignItem: 'center' }}>
