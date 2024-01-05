@@ -72,6 +72,8 @@ const Box = ({
     borderTopRightRadius,
     borderBottomRightRadius,
     borderBottomLeftRadius,
+    minHeight,
+    justifyContent,
     ...rest
 }: Props) => {
     const insets = useSafeAreaInsets();
@@ -153,6 +155,8 @@ const Box = ({
         borderTopRightRadius && { borderTopRightRadius },
         borderBottomRightRadius && { borderBottomRightRadius },
         borderBottomLeftRadius && { borderBottomLeftRadius },
+        minHeight && { minHeight: getSize.m(minHeight) },
+        justifyContent && { justifyContent },
         { ...StyleSheet.flatten(style) },
     ];
 
@@ -166,6 +170,8 @@ const Box = ({
 export default React.memo(Box);
 
 interface Props {
+    justifyContent?: any,
+    minHeight?: any,
     flex?: any,
     flexShrink?: any,
     flexGrow?: any,

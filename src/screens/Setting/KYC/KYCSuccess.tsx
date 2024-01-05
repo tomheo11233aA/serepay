@@ -21,7 +21,7 @@ const Success = () => {
           />
         </Box>
       </TouchableOpacity>
-      <LottieView style={{ flex: 3, position: 'relative' }} source={require('../../../assets/lottie/success.json')} autoPlay loop />
+      <LottieView style={{ flex: 3, position: 'relative' }} source={require('../../../assets/lottie/success2.json')} autoPlay loop={false} />
       <Txt center size={20} flex={1} paddingHorizontal={20} >
         {t('Congratulation! Your account has been verified!')}
       </Txt>

@@ -9,6 +9,7 @@ import Icon from '@commom/Icon'
 import { colors } from '@themes/colors'
 import Txt from '@commom/Txt'
 import { useTranslation } from 'react-i18next'
+import { heightPercentageToDP as hp } from 'react-native-responsive-screen'
 
 const Tab = createBottomTabNavigator()
 const AuthNavigation = () => {
@@ -54,7 +55,8 @@ const AuthNavigation = () => {
         headerShown: false,
         tabBarShowLabel: false,
         tabBarStyle: {
-          height: 90,
+          //default: height: 90
+          height: hp('10%'),
           paddingTop: 10,
           borderTopWidth: 1,
           backgroundColor: '#f8f8f8',

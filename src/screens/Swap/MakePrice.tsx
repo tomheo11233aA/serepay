@@ -21,6 +21,7 @@ import LottieView from 'lottie-react-native';
 import { fetchUserWallet } from '@redux/slice/userSlice'
 import { useAppDispatch } from '@hooks/redux'
 import { AppDispatch } from '@redux/store/store'
+import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen'
 
 interface Props {
     t: any;
@@ -154,11 +155,13 @@ const MakePrice = ({ t }: Props) => {
             </Box>
 
             <Btn
+                height={hp('5%')}
+                width={wp('90%')}
                 radius={5}
                 alignSelf={'center'}
                 paddingVertical={7}
                 paddingHorizontal={25}
-                backgroundColor={colors.green}
+                backgroundColor={colors.violet}
                 marginTop={20}
                 onPress={() => {
                     swapCoin({
@@ -168,7 +171,7 @@ const MakePrice = ({ t }: Props) => {
                     })
                 }}
             >
-                <Txt color={'white'}>
+                <Txt color={'white'} size={18}>
                     {t('Swap')}
                 </Txt>
             </Btn>

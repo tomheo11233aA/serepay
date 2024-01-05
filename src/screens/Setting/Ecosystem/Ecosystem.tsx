@@ -18,6 +18,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { cardSchema } from './Validation/formValidation'
 import CardInput from './Validation/CardInput'
 import { formatCardNumber, formatExpiryDate } from './CreditCardForm'
+import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen'
 
 const Ecosystem = () => {
     const { t } = useTranslation()
@@ -37,7 +38,7 @@ const Ecosystem = () => {
         await AsyncStorage.getItem('@selected_bank')
         setSelectedBank(value);
         setNameBanking(value);
-        setValue('bankName', value);    
+        setValue('bankName', value);
     };
 
     const handleLogoChange = async (value: any) => {
@@ -80,7 +81,11 @@ const Ecosystem = () => {
     }
 
     return (
-        <SafeAreaView style={{ justifyContent: 'space-between', height: '90%' }}>
+        <SafeAreaView style={{
+            justifyContent: 'space-between',
+            height: hp('85%'),
+            width: wp('100%'),
+        }}>
             <Spinner
                 visible={isLoading}
                 textContent={'Loading...'}
@@ -134,7 +139,10 @@ const Ecosystem = () => {
                     {error}
                 </Txt>
             </View>
-            <View style={{ marginTop: 100, zIndex: -1 }}>
+            <View style={{
+                marginTop: hp('5%'),
+                zIndex: -1
+            }}>
                 <Btn
                     zIndex={-1}
                     onPress={handleSubmit(handleAdd)}

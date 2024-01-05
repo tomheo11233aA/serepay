@@ -12,31 +12,41 @@ import { AppDispatch } from '@redux/store/store'
 import { IHistory } from '@models/history'
 import { Image } from 'react-native'
 import Spinner from 'react-native-loading-spinner-overlay'
+import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 
 const BuyCoin = ({ t, type, selectedCoin }: any) => {
     const dispatch: AppDispatch = useDispatch()
-    const users: IHistory[] = type === 'buy' ?  useSelector(adsSellSelector) : useSelector(adsBuySelector)
+    const users: IHistory[] = type === 'buy' ? useSelector(adsSellSelector) : useSelector(adsBuySelector)
     const symbol = selectedCoin ? selectedCoin.name : 'BTC';
-    const [loading, setLoading] = React.useState(true);
-
+    const [sellLoading, setSellLoading] = React.useState(true);
+    const [buyLoading, setBuyLoading] = React.useState(true);
     useEffect(() => {
-        type === 'buy' ? dispatch(fetchListAdsBuy({
-            page: 1,
-            limit: 5,
-            symbol: symbol
-        })).finally(() => setLoading(false)) : dispatch(fetchListAdsSell({
-            page: 1,
-            limit: 5,
-            symbol: symbol
-        })).finally(() => setLoading(false))
+        const fetchListAds = async () => {
+            if (type === 'buy') {
+                await dispatch(fetchListAdsBuy({
+                    page: 1,
+                    limit: 5,
+                    symbol: symbol
+                }))
+                setBuyLoading(false)
+            } else {
+                await dispatch(fetchListAdsSell({
+                    page: 1,
+                    limit: 5,
+                    symbol: symbol
+                }))
+                setSellLoading(false)
+            }
+        }
+        fetchListAds()
     }, [dispatch, type, selectedCoin])
 
     return (
         <Box paddingHorizontal={15}>
             <Box row alignCenter >
-                <Spinner
-                    visible={loading}
-                    textContent={t('Loading...')}
+                <Spinner    
+                    visible={type === 'buy' ? buyLoading : sellLoading}
+                    textContent={'Loading...'}
                     textStyle={{ color: '#FFF' }}
                 />
                 <Icon
@@ -69,7 +79,12 @@ const BuyCoin = ({ t, type, selectedCoin }: any) => {
                         />
                     )
                 ) : (
-                    <Box marginVertical={20} alignCenter>
+                    <Box marginVertical={20}
+                        alignCenter
+                        minHeight={hp('15%')}
+                        maxHeight={hp('22%')}
+                        justifyContent={'center'}
+                    >
                         <Image
                             source={require('@images/tab/nodata.png')}
                             style={{
