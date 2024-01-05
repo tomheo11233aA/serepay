@@ -143,7 +143,7 @@ const CreateBuyAds = () => {
                 </Box>
                 <Box flex={1} marginTop={20}>
                     <SafeAreaView>
-                        <Txt fontFamily={fonts.LR} onPress={() => navigate(screens.CREATE_SELL_ADS)}>{t('Do you want to buy ?')}</Txt>
+                        <Txt fontFamily={fonts.LR} onPress={() => navigate(screens.CREATE_BUY_ADS)}>{t('Do you want to buy ?')}</Txt>
                         <Box row justifySpaceBetween={true} marginTop={20}>
                             <Txt size={20} fontFamily={fonts.LR}>{t(`ADS to Sell ${selectedCoin?.name} `)}</Txt>
                             <TouchableOpacity onPress={() => { showModal() }}>
