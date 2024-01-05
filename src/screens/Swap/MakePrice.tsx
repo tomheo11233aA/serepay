@@ -18,6 +18,9 @@ import { userWalletUserSelector } from '@redux/selector/userSelector'
 import { useCoinSocket } from '../../helper/useCoinSocket'
 import { calculateConversionRate } from '../../helper/function/calculateConversionRate'
 import LottieView from 'lottie-react-native';
+import { fetchUserWallet } from '@redux/slice/userSlice'
+import { useAppDispatch } from '@hooks/redux'
+import { AppDispatch } from '@redux/store/store'
 
 interface Props {
     t: any;
@@ -25,6 +28,7 @@ interface Props {
 
 const MakePrice = ({ t }: Props) => {
     useCoinSocket()
+    const dispatch: AppDispatch = useAppDispatch()
     const coins = useSelector(coinListSelector)
     const userWallet = useSelector(userWalletUserSelector)
     const [symbolForm, setSymbolForm] = useState<string>('BTC')
@@ -42,7 +46,7 @@ const MakePrice = ({ t }: Props) => {
     useEffect(() => {
         const conversionRate = calculateConversionRate(symbolForm, symbolTo, coins)
         const amountTo = parseFloat(amountForm) * Number(conversionRate);
-        setAmountTo(amountTo.toFixed(8))
+        setAmountTo(amountTo.toLocaleString())
     }, [amountForm, symbolForm, symbolTo, coins])
 
     const swapSymbol = useCallback(() => {
@@ -80,6 +84,7 @@ const MakePrice = ({ t }: Props) => {
         setIsLoading(true)
         try {
             const res = await swapCoinApi(swapData)
+            dispatch(fetchUserWallet())
             Alert.alert(res?.data?.message ?? 'Successful coin conversion!')
         } catch (error) {
             Alert.alert('Insufficient balance! ')
@@ -113,7 +118,7 @@ const MakePrice = ({ t }: Props) => {
                 <Txt
                     marginTop={10}
                     color={'#999999'}>
-                    {`Balance: ${balance.toFixed(8)} ${symbolForm}`}
+                    {`Balance: ${balance.toLocaleString()} ${symbolForm}`}
                 </Txt>
                 <Btn
                     radius={5}
