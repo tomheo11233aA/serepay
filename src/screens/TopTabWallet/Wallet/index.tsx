@@ -43,15 +43,14 @@ const Wallet = () => {
         <Box marginTop={10} row justifyCenter alignCenter>
           <Icon size={30} source={require('@images/wallet/bitcoin.png')} />
           <Txt color={'white'} size={30} marginLeft={10}>
-            {totalValueInBTC.toLocaleString()}
+            {totalValueInBTC.toFixed(8)}
           </Txt>
         </Box>
-        <Box marginTop={10} row justifyCenter alignCenter>
+        <Box marginTop={10} row justifyCenter alignCenter style={{alignSelf: 'center'}}>
           <Icon size={30} source={require('@images/wallet/dollar.png')} />
           <Txt color={'white'} size={30} marginLeft={10}
             justify
-            width={wp('70%')}
-            numberOfLines={2}
+            maxWidth={wp('80%')}
           >
             {transferPrice.toLocaleString()} {selectedRate.title}
           </Txt>
