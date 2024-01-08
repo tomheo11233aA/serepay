@@ -17,7 +17,10 @@ import PaymentModal from './PaymentModal';
 import TransactionTable from './TransactionTable';
 import { RouteProp } from '@react-navigation/native';
 import Countdown from './Countdown'
-import { set } from 'lodash'
+import { goBack } from '@utils/navigationRef';
+import Box from '@commom/Box'
+import Icon from '@commom/Icon'
+import { useTranslation } from 'react-i18next'
 
 interface IResponse {
     amount: number;
@@ -52,7 +55,7 @@ export interface ConfirmTransactionProps {
     route: ConfirmTransactionScreenRouteProp;
 }
 
-const ConfirmTransaction:React.FC<ConfirmTransactionProps> = ({route}) => {
+const ConfirmTransaction: React.FC<ConfirmTransactionProps> = ({ route }) => {
     const [idP2p, setIdP2p] = React.useState(route?.params?.idP2p || '');
     const [tableData, setTableData] = React.useState([]);
     const padding = 20;
@@ -73,6 +76,7 @@ const ConfirmTransaction:React.FC<ConfirmTransactionProps> = ({route}) => {
     const [side, setSide] = React.useState<string>('');
     const [amount, setAmount] = React.useState<number>(0);
     const [pay, setPay] = React.useState<number>(0);
+    const { t } = useTranslation();
 
     React.useEffect(() => {
         setLoading(true);
@@ -111,7 +115,7 @@ const ConfirmTransaction:React.FC<ConfirmTransactionProps> = ({route}) => {
                     setAmount(p2pInfo?.data[0]?.amount);
                     const formattedData = p2pInfo?.data?.map((item: IResponse) => [
                         item.code,
-                        <View style={{marginRight: 20}}>
+                        <View style={{ marginRight: 20 }}>
                             <View style={{ flexDirection: 'row', alignItems: 'center' }}>
                                 <LottieView
                                     style={{ width: 35, height: 35 }}
@@ -119,7 +123,7 @@ const ConfirmTransaction:React.FC<ConfirmTransactionProps> = ({route}) => {
                                     autoPlay
                                     loop
                                 />
-                                <Text style={{ color: 'black', flexShrink: 1}}>Đang chờ thanh toán từ ngân hàng</Text>
+                                <Text style={{ color: 'black', flexShrink: 1 }}>{t('Waiting for payment from the bank')}</Text>
                             </View>
                             <Countdown createdAt={item.created_at} />
                         </View>,
@@ -133,7 +137,7 @@ const ConfirmTransaction:React.FC<ConfirmTransactionProps> = ({route}) => {
                                 setContent(item.code.toString());
                                 showModal();
                             }}>
-                            <Text style={{ color: 'white', fontWeight: 'bold', flexShrink: 1 }}>Mở màn hình thanh toán</Text>
+                            <Text style={{ color: 'white', fontWeight: 'bold', flexShrink: 1 }}>{t('Open payment screen')}</Text>
                         </Btn>,
                         item.amount + ' ' + item.symbol,
                         item.rate,
@@ -143,16 +147,10 @@ const ConfirmTransaction:React.FC<ConfirmTransactionProps> = ({route}) => {
                         </Text>,
                         <View style={{ alignItems: 'center', paddingVertical: 15, paddingHorizontal: 10 }}>
                             <Text style={{ flexShrink: 1, textAlign: 'justify' }}>
-                                • Vui lòng thanh toán đúng thông tin tại màn hình
-                                thanh toán trong thời gian quy định. Nếu bạn đã thanh
-                                toán có thể nhắn tin cho người bán ngay để họ kiểm tra.{`\n`}
-                                • Chúng tôi chỉ mua bán tiền điện tử, không liên quan
-                                đến bất kì dự án nào. {`\n`}
-                                • Khách hàng lưu ý chỉ giao dịch trên web. Các giao
-                                dịch bên ngoài website chúng tôi không chịu trách
-                                nhiệm. {`\n`}
-                                • Nếu khách hàng thanh toán bị chậm, lỗi ngân hàng ...
-                                vui lòng liên hệ người bán để được hỗ trợ
+                                {t('• Please pay the correct information on the payment screen within the prescribed time. If you have paid, you can message the seller immediately for them to check.')}{"\n"}
+                                {t('• We only buy and sell cryptocurrencies, not related to any project.')}{"\n"}
+                                {t('• Customers should note that only transactions on the website. Transactions outside our website are not responsible.')}{"\n"}
+                                {t('• If the customer payment is delayed, bank error ... please contact the seller for support')}
                             </Text>
                         </View>,
                     ]);
@@ -196,12 +194,25 @@ const ConfirmTransaction:React.FC<ConfirmTransactionProps> = ({route}) => {
                 </View>
             ) : (
                 <Scroll justifyCenter padding={padding}>
+                    <Box
+                        row
+                        alignCenter
+                        justifySpaceBetween
+                        paddingVertical={15}
+                    >
+                        <Btn onPress={() => goBack()}>
+                            <Icon
+                                size={20}
+                                source={require('@images/unAuth/left.png')}
+                            />
+                        </Btn>
+                    </Box>
                     <View style={styles.header}>
-                        <Text style={styles.tableTitle}>Giao dịch BTC</Text>
+                        <Text style={styles.tableTitle}>{t('BTC Transaction')}</Text>
                     </View>
                     <TransactionTable tableData={tableData} showModal={showModal} />
                     <View style={styles.viewFooter}>
-                        <FooterButtons typeUser={typeUser} userid={userId} loginUserid={loginUserid} idP2p={selectedidP2p}/>
+                        <FooterButtons typeUser={typeUser} userid={userId} loginUserid={loginUserid} idP2p={selectedidP2p} />
                     </View>
                     <PaymentModal
                         visible={visible}
@@ -210,7 +221,7 @@ const ConfirmTransaction:React.FC<ConfirmTransactionProps> = ({route}) => {
                         selectedBankNumber={selectedBankNumber}
                         selectedBankOwner={selectedBankOwner}
                         content={content}
-                        side={side === 'sell' ? 'selling' : 'buying'}
+                        side = {side === 'sell' ? t('selling') : t('buying')}
                         amount={amount}
                         pay={pay}
                     />

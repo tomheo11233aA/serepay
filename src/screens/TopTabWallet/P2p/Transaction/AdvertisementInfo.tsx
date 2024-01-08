@@ -36,14 +36,22 @@ const AdvertisementInfo: React.FC<AdvertisementInfoProps> = ({ item, coin }) => 
                     </View>
                 </View>
                 <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginTop: 10 }}>
+                    <Text style={{ fontFamily: fonts.AS }}>{t('Available')}</Text>
+                    <View style={{ flexDirection: 'row' }}>
+                        <View style={{ padding: 5}}>
+                            <Text style={{ fontFamily: fonts.AS, color: colors.black2 }}>{item.amount - item.amountSuccess} {item.symbol}</Text>
+                        </View>
+                    </View>
+                </View>
+                <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginTop: 10 }}>
                     <Text style={{ fontFamily: fonts.AS }}>{t('Payment method')}</Text>
                     <View style={{ flexDirection: 'row' }}>
-                        <Text style={{ fontFamily: fonts.AS, color: colors.black3 }}>{item.bankName}</Text>
+                        <Text style={{ fontFamily: fonts.AS, color: colors.black2 }}>{item.bankName}</Text>
                     </View>
                 </View>
                 <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginTop: 10 }}>
                     <Text style={{ fontFamily: fonts.AS }}>{t('Payment Window')}</Text>
-                    <Text style={{ fontFamily: fonts.AS, color: colors.black3 }}>15 minutes</Text>
+                    <Text style={{ fontFamily: fonts.AS, color: colors.black2 }}>15 minutes</Text>
                 </View>
             </View>
         </View>

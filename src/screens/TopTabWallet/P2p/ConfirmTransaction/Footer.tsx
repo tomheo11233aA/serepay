@@ -10,8 +10,7 @@ import { ICompanyCancelF2pCommand } from '@models/P2P/COMPANY/companyCancelF2pCo
 import { Alert } from 'react-native';
 import { navigate } from '@utils/navigationRef';
 import { screens } from '@contants/screens';
-import { socket } from '../../../../helper/AxiosInstance';
-
+import { useTranslation } from 'react-i18next';
 interface FooterButtonsProps {
     typeUser: number;
     userid: number;
@@ -20,6 +19,7 @@ interface FooterButtonsProps {
 }
 
 const FooterButtons: React.FC<FooterButtonsProps> = ({ typeUser, userid, loginUserid, idP2p }) => {
+    const { t } = useTranslation();
     const handleCancelOrder = async () => {
         const data: IUserCancelP2pCommand = {
             idP2p: idP2p,
@@ -76,19 +76,19 @@ const FooterButtons: React.FC<FooterButtonsProps> = ({ typeUser, userid, loginUs
                     <Btn backgroundColor={colors.darkGreen} radius={3} padding={8} onPress={
                         handleConfirmOrder
                     }>
-                        <Text style={{ color: 'white' }}>Xác nhận đã chuyển tiền</Text>
+                        <Text style={{ color: 'white' }}>{t('Confirm Transaction')}</Text>
                     </Btn>
                     <Btn backgroundColor={colors.red} padding={8} radius={3} marginLeft={10} onPress={
                         handleCancelOrder
                     }>
-                        <Text style={{ color: 'white' }}>Hủy lệnh</Text>
+                        <Text style={{ color: 'white' }}>{t('Cancel Transaction')}</Text>
                     </Btn>
                 </View>
             );
         } else {
             return (
                 <Btn radius={3} padding={8} disabled>
-                    <Text style={{ color: 'black' }}>Đang chờ đối phương chuyển tiền</Text>
+                    <Text style={{ color: 'black' }}>{t('Waiting for the other party to transfer money')}</Text>
                 </Btn>
             );
         }
@@ -96,17 +96,17 @@ const FooterButtons: React.FC<FooterButtonsProps> = ({ typeUser, userid, loginUs
         if (userid === loginUserid) {
             return (
                 <Btn backgroundColor={colors.black3} radius={3} padding={8} disabled>
-                    <Text style={{ color: 'white' }}>Đang chờ đối phương xác nhận</Text>
+                    <Text style={{ color: 'white' }}>{t('Waiting for the other party to confirm')}</Text>
                 </Btn>
             );
         } else {
             return (
                 <View style={{ flexDirection: 'row' }}>
                     <Btn backgroundColor={colors.darkGreen} radius={3} padding={8} onPress={handleCompanyConfirmOrder}>
-                        <Text style={{ color: 'white' }}>Đã nhận được tiền</Text>
+                        <Text style={{ color: 'white' }}>{t('Received Money')}</Text>
                     </Btn>
                     <Btn backgroundColor={colors.red} padding={8} radius={3} marginLeft={10} onPress={handleCompanyCancelOrder}>
-                        <Text style={{ color: 'white' }}>Chưa nhận được tiền</Text>
+                        <Text style={{ color: 'white' }}>{t('Not Received Money')}</Text>
                     </Btn>
                 </View>
             );

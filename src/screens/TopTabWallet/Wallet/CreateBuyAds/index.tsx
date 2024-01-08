@@ -122,7 +122,7 @@ const CreateBuyAds = () => {
                     <SafeAreaView>
                         <Txt fontFamily={fonts.LR} onPress={() => navigate(screens.CREATE_SELL_ADS)}>{t('Do you want to sell ?')}</Txt>
                         <Box row justifySpaceBetween={true} marginTop={20}>
-                            <Txt size={20} fontFamily={fonts.LR}>{t(`ADS to Buy ${selectedCoin?.name} `)}</Txt>
+                            <Txt size={20} fontFamily={fonts.LR}>{t(`ADS to Buy `) + selectedCoin?.name}</Txt>                      
                             <TouchableOpacity onPress={() => { showModal() }}>
                                 <Icon
                                     size={25}
@@ -136,9 +136,9 @@ const CreateBuyAds = () => {
                         </Box>
                         <Txt size={20} marginTop={20} fontFamily={fonts.LR}>{t('Amount')}</Txt>
                         <Box marginTop={20} style={{ alignItem: 'center' }}>
-                            <Txt fontFamily={fonts.LR}>{t('Amount of BTC:')}</Txt>
+                            <Txt size={20} fontFamily={fonts.LR}>{t(`Amount of `) + selectedCoin?.name}</Txt>                            
                             <BuyAdvertisementInput
-                                placeholder="Enter amount"
+                                placeholder={t('Enter amount')}
                                 maxLength={100}
                                 onChangeText={(value: number) => setValue('amount', value)}
                             />
@@ -147,9 +147,9 @@ const CreateBuyAds = () => {
                             </Txt>}
                         </Box>
                         <Box marginTop={20} style={{ alignItem: 'center' }}>
-                            <Txt fontFamily={fonts.LR}>{t('Minimum BTC Amount:')}</Txt>
+                            <Txt size={20} fontFamily={fonts.LR}>{t(`Minimum `) + selectedCoin?.name + t('Amount:')}</Txt>
                             <BuyAdvertisementInput
-                                placeholder="Enter minimum amount"
+                                placeholder={t('Enter minimum amount')}
                                 maxLength={100}
                                 onChangeText={(value: number) => setValue('amountMinimum', value)}
                             />

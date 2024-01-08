@@ -3,6 +3,7 @@ import { Table, Row } from 'react-native-table-component';
 import { colors } from '@themes/colors'
 import { StyleSheet } from 'react-native'
 import { Dimensions } from 'react-native';
+import { useTranslation } from 'react-i18next';
 
 interface TransactionTableProps {
     tableData: any[];
@@ -10,12 +11,21 @@ interface TransactionTableProps {
 }
 
 const TransactionTable: React.FC<TransactionTableProps> = ({ tableData, showModal }) => {
+    const { t } = useTranslation();
     const windowWidth = Dimensions.get('window').width;
     const padding = 20;
     const borderWidth = 1;
     const adjustedWidth = windowWidth - 2 * (padding + borderWidth);
     const columnWidthRatios = [0.33, 0.67];
-    const tableHead = ['Mã GD', 'Trạng thái', 'Thanh toán', 'Bạn nhận', 'Tỉ giá', 'Số tiền', 'Thời gian', 'Ghi chú'];
+    const tableHead = [t('Transaction Id'), 
+    t('Status'),
+    t('Payment'),
+    t('You receive'),
+    t('Exchange rate'),
+    t('Amount'),
+    t('Time'),
+    t('Note')
+]
     const rowDataWithHeader = tableHead.map((header, index) => [header, ...tableData.map(row => row[index])]);
     return (
         <Table borderStyle={styles.tableBorder}>

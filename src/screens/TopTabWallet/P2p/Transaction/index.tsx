@@ -18,6 +18,10 @@ import AdvertisementInfo from './AdvertisementInfo';
 import PartnerInfo from './PartnerInfo';
 import { navigate } from '@utils/navigationRef';
 import { screens } from '@contants/screens';
+import { goBack } from '@utils/navigationRef';
+import Btn from '@commom/Btn';
+import Icon from '@commom/Icon';
+import Box from '@commom/Box';
 
 const Transaction = () => {
     useCoinSocket();
@@ -143,8 +147,22 @@ const Transaction = () => {
 
     return (
         <Safe flex={1} backgroundColor='white'>
+            <Box
+                row
+                alignCenter
+                justifySpaceBetween
+                paddingHorizontal={15}
+            >
+                <Btn onPress={() => goBack()}>
+                    <Icon
+                        size={20}
+                        source={require('@images/unAuth/left.png')}
+                    />
+                </Btn>
+            </Box>
+
             <ScrollView showsVerticalScrollIndicator={false} style={{ padding: 20 }}>
-                <TransactionForm 
+                <TransactionForm
                     amount={amount}
                     setAmount={setAmount}
                     receiveAmount={receiveAmount}

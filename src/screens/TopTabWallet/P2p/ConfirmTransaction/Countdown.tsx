@@ -11,7 +11,11 @@ const Countdown = ({ createdAt }: any) => {
             const duration = moment.duration(expirationTime.diff(now));
             const minutes = duration.minutes();
             const seconds = duration.seconds();
-            if (minutes === 0 && seconds === 0) {
+            // if now > expirationTime => expired
+            if (now.isAfter(expirationTime)) {
+                setTimeLeft('00:00');
+                clearInterval(countdown);
+            } else if (minutes === 0 && seconds === 0) {
                 setTimeLeft('00:00');
                 clearInterval(countdown);
             } else {

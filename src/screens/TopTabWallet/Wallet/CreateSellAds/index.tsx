@@ -138,14 +138,15 @@ const CreateBuyAds = () => {
                         />
                     </TouchableOpacity>
                     <Txt bold color={colors.violet} size={18}>
-                        {`${t('Create new buy advertisement')}`}
+                        {`${t('Create new sell advertisement')}`}
                     </Txt>
                 </Box>
                 <Box flex={1} marginTop={20}>
                     <SafeAreaView>
                         <Txt fontFamily={fonts.LR} onPress={() => navigate(screens.CREATE_BUY_ADS)}>{t('Do you want to buy ?')}</Txt>
                         <Box row justifySpaceBetween={true} marginTop={20}>
-                            <Txt size={20} fontFamily={fonts.LR}>{t(`ADS to Sell ${selectedCoin?.name} `)}</Txt>
+                            <Txt size={20} fontFamily={fonts.LR}>{t(`ADS to Sell `) + selectedCoin?.name}</Txt>                      
+
                             <TouchableOpacity onPress={() => { showModal() }}>
                                 <Icon
                                     size={25}
@@ -158,10 +159,9 @@ const CreateBuyAds = () => {
                             <Txt marginLeft={5} fontFamily={fonts.OSB}>{`${price.toLocaleString()} ${selectedRate.title}`}</Txt>
                         </Box>
                         <Txt size={20} marginTop={20} fontFamily={fonts.LR}>{t('Amount')}</Txt>
-                        <Box marginTop={20} style={{ alignItem: 'center' }}>
-                            <Txt fontFamily={fonts.LR}>{t('Amount of BTC:')}</Txt>
+                        <Box style={{ alignItem: 'center' }}>
                             <BuyAdvertisementInput
-                                placeholder="Enter amount"
+                                placeholder={t('Enter amount')}
                                 maxLength={100}
                                 onChangeText={(value: number) => setValue('amount', value)}
                             />
@@ -170,9 +170,9 @@ const CreateBuyAds = () => {
                             </Txt>}
                         </Box>
                         <Box marginTop={20} style={{ alignItem: 'center' }}>
-                            <Txt fontFamily={fonts.LR}>{t('Minimum BTC Amount:')}</Txt>
+                            <Txt size={20} fontFamily={fonts.LR}>{t('Minimum amount of ') + selectedCoin?.name}</Txt>
                             <BuyAdvertisementInput
-                                placeholder="Enter minimum amount"
+                                placeholder={t('Enter minimum amount')}
                                 maxLength={100}
                                 onChangeText={(value: number) => setValue('amountMinimum', value)}
                             />
@@ -191,7 +191,8 @@ const CreateBuyAds = () => {
                         <Box marginTop={10} style={{ alignItem: 'center', zIndex: -1 }}>
                             <Txt fontFamily={fonts.LR}>{t('Full name:')}</Txt>
                             <BuyAdvertisementInput
-                                placeholder="Enter full name"
+                                // placeholder="Enter full name"
+                                placeholder={t('Enter full name')}
                                 maxLength={100}
                                 onChangeText={(value: string) => setValue('ownerAccount', value)}
                             />
@@ -202,7 +203,8 @@ const CreateBuyAds = () => {
                         <Box marginVertical={20} style={{ alignItem: 'center', zIndex: -1 }}>
                             <Txt fontFamily={fonts.LR}>{t('Account number:')}</Txt>
                             <BuyAdvertisementInput
-                                placeholder="Enter account number"
+                                // placeholder="Enter account number"
+                                placeholder={t('Enter account number')}
                                 maxLength={100}
                                 onChangeText={(value: string) => setValue('numberBank', value)}
                             />
