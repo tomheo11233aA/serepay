@@ -4,6 +4,7 @@ import CreditCard from '../../../assets/images/setting/bg-card3.svg';
 import { fonts } from '@themes/fonts';
 import { Dimensions } from 'react-native';
 import { useTranslation } from 'react-i18next';
+import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 
 interface CreditCardFormProps {
     bankLogo?: string;
@@ -49,9 +50,11 @@ const CreditCardForm: React.FC<CreditCardFormProps> = ({ bankLogo, cardNumber, c
 
             <TextInput
                 style={{
-                    height: 40,
+                    // height: 40,
+                    // height: hp('5%'),
                     position: 'absolute',
-                    top: 100,
+                    // top: 100,
+                    top: hp('11%'),
                     width: '95%',
                     fontFamily: fonts.OSB,
                     color: '#fff',
@@ -64,11 +67,11 @@ const CreditCardForm: React.FC<CreditCardFormProps> = ({ bankLogo, cardNumber, c
                 placeholderTextColor={'#fff'}
                 keyboardType={'numeric'}
             />
-            <View style={{ flexDirection: 'row', justifyContent: 'space-between', position: 'absolute', top: 170 }}>
+            <View style={{ flexDirection: 'row', justifyContent: 'space-between', position: 'absolute', top: hp('20%') }}>
                 <View>
                     <Text style={{ fontFamily: fonts.JR, color: 'white' }}>{t('Card Holder name')}</Text>
                     <TextInput
-                        style={{ height: 30, width: 150, fontFamily: fonts.OSB, color: '#fff', fontSize: 16, fontWeight: 'bold' }}
+                        style={{ width: 150, fontFamily: fonts.OSB, color: '#fff', fontSize: 16, fontWeight: 'bold' }}
                         onChangeText={text => onChangeCardHolder && onChangeCardHolder(text)}
                         value={cardHolder}
                         placeholder={t('YOUR NAME')}
@@ -78,7 +81,7 @@ const CreditCardForm: React.FC<CreditCardFormProps> = ({ bankLogo, cardNumber, c
                 <View style={{ marginLeft: 25 }}>
                     <Text style={{ fontFamily: fonts.JR, color: 'white' }}>{t('Expiry Date')}</Text>
                     <TextInput
-                        style={{ height: 30, width: 150, fontFamily: fonts.OSB, color: '#fff', fontSize: 16, fontWeight: 'bold' }}
+                        style={{ width: 150, fontFamily: fonts.OSB, color: '#fff', fontSize: 16, fontWeight: 'bold' }}
                         onChangeText={text => onChangeExpiryDate && onChangeExpiryDate(formatExpiryDate(text))}
                         value={expiryDate}
                         placeholder={'MM/YY'}
@@ -94,9 +97,12 @@ const CreditCardForm: React.FC<CreditCardFormProps> = ({ bankLogo, cardNumber, c
 const styles = StyleSheet.create({
     container: {
         position: 'relative',
-        width: 300,
-        height: 300,
+        width: wp('85%'),
+        height: hp('30%'),
+        // width: 300,
+        // height: 300,
         alignSelf: 'center',
+        marginTop: 20,
     }
 });
 

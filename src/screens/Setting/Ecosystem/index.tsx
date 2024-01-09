@@ -19,6 +19,7 @@ import { cardSchema } from './Validation/formValidation'
 import CardInput from './Validation/CardInput'
 import { formatCardNumber, formatExpiryDate } from './CreditCardForm'
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen'
+import KeyBoardSafe from '@reuse/KeyBoardSafe'
 
 const Ecosystem = () => {
     const { t } = useTranslation()
@@ -81,96 +82,100 @@ const Ecosystem = () => {
     }
 
     return (
-        <SafeAreaView style={{
-            justifyContent: 'space-between',
-            height: hp('85%'),
-            width: wp('100%'),
-        }}>
-            <Spinner
-                visible={isLoading}
-                textContent={'Loading...'}
-                textStyle={{ color: '#FFF' }}
-            />
-            <CreditCardForm
-                bankLogo={logo}
-                onChangeCardNumber={handleCardNumber}
-                onChangeCardHolder={handleCardHolder}
-                onChangeExpiryDate={handleExpiryDate}
-                cardNumber={cardNumber}
-                cardHolder={cardHolder}
-                expiryDate={expiryDate}
-            />
-            <View style={{ marginTop: 20 }}>
-                <Dropdown onChange={handleBankChange} onLogoChange={handleLogoChange} isStoreData={true} />
-                {errors.bankName && <Txt size={12} color={colors.red} paddingHorizontal={5} marginLeft={20} style={{ zIndex: -1 }} marginTop={7} bold>
-                    {errors.bankName?.message}
-                </Txt>}
-                <CardInput
-                    placeholder={t('Card Number')}
-                    onChangeText={handleCardNumber}
-                    icon={require('@images/setting/credit-card-number.png')}
-                    maxLength={19}
-                    value={cardNumber}
-                />
-                {errors.cardNumber && <Txt size={12} color={colors.red} paddingHorizontal={5} marginLeft={20} style={{ zIndex: -1 }} marginTop={7} bold>
-                    {errors.cardNumber?.message}
-                </Txt>}
-                <CardInput
-                    placeholder={t('Card Holder name')}
-                    onChangeText={handleCardHolder}
-                    icon={require('@images/setting/name.png')}
-                    maxLength={50}
-                    value={cardHolder}
-                />
-                {errors.cardHolderName && <Txt size={12} color={colors.red} paddingHorizontal={5} marginLeft={20} style={{ zIndex: -1 }} marginTop={7} bold>
-                    {errors.cardHolderName?.message}
-                </Txt>}
-                <CardInput
-                    placeholder={t('Expiry Date')}
-                    onChangeText={handleExpiryDate}
-                    icon={require('@images/setting/expiry-date.png')}
-                    maxLength={5}
-                    value={expiryDate}
-                />
-                {errors.cardExpiryDate && <Txt size={12} color={colors.red} paddingHorizontal={5} marginLeft={20} style={{ zIndex: -1 }} marginTop={7} bold>
-                    {errors.cardExpiryDate?.message}
-                </Txt>}
-                <Txt size={12} color={colors.red} paddingHorizontal={5} marginLeft={20} style={{ zIndex: -1 }}>
-                    {error}
-                </Txt>
-            </View>
-            <View style={{
-                marginTop: hp('5%'),
-                zIndex: -1
+        <KeyBoardSafe
+         styles={{marginBottom: hp('10%')}}
+        >
+            <SafeAreaView style={{
+                justifyContent: 'space-between',
+                height: hp('85%'),
+                width: wp('100%'),
             }}>
-                <Btn
-                    zIndex={-1}
-                    onPress={() => {navigate(screens.CURRENT_BANK)}}
-                    radius={5}
-                    width={'90%'}
-                    paddingVertical={7}
-                    backgroundColor={colors.darkViolet}
-                    marginBottom={10}
-                    alignSelf={'center'}>
-                    <Txt bold size={16} color={'white'} fontFamily={fonts.AS}>
-                        {t('Current Bank')}
+                <Spinner
+                    visible={isLoading}
+                    textContent={'Loading...'}
+                    textStyle={{ color: '#FFF' }}
+                />
+                <CreditCardForm
+                    bankLogo={logo}
+                    onChangeCardNumber={handleCardNumber}
+                    onChangeCardHolder={handleCardHolder}
+                    onChangeExpiryDate={handleExpiryDate}
+                    cardNumber={cardNumber}
+                    cardHolder={cardHolder}
+                    expiryDate={expiryDate}
+                />
+                <View style={{ marginTop: 20 }}>
+                    <Dropdown onChange={handleBankChange} onLogoChange={handleLogoChange} isStoreData={true} />
+                    {errors.bankName && <Txt size={12} color={colors.red} paddingHorizontal={5} marginLeft={20} style={{ zIndex: -1 }} marginTop={7} bold>
+                        {errors.bankName?.message}
+                    </Txt>}
+                    <CardInput
+                        placeholder={t('Card Number')}
+                        onChangeText={handleCardNumber}
+                        icon={require('@images/setting/credit-card-number.png')}
+                        maxLength={19}
+                        value={cardNumber}
+                    />
+                    {errors.cardNumber && <Txt size={12} color={colors.red} paddingHorizontal={5} marginLeft={20} style={{ zIndex: -1 }} marginTop={7} bold>
+                        {errors.cardNumber?.message}
+                    </Txt>}
+                    <CardInput
+                        placeholder={t('Card Holder name')}
+                        onChangeText={handleCardHolder}
+                        icon={require('@images/setting/name.png')}
+                        maxLength={50}
+                        value={cardHolder}
+                    />
+                    {errors.cardHolderName && <Txt size={12} color={colors.red} paddingHorizontal={5} marginLeft={20} style={{ zIndex: -1 }} marginTop={7} bold>
+                        {errors.cardHolderName?.message}
+                    </Txt>}
+                    <CardInput
+                        placeholder={t('Expiry Date')}
+                        onChangeText={handleExpiryDate}
+                        icon={require('@images/setting/expiry-date.png')}
+                        maxLength={5}
+                        value={expiryDate}
+                    />
+                    {errors.cardExpiryDate && <Txt size={12} color={colors.red} paddingHorizontal={5} marginLeft={20} style={{ zIndex: -1 }} marginTop={7} bold>
+                        {errors.cardExpiryDate?.message}
+                    </Txt>}
+                    <Txt size={12} color={colors.red} paddingHorizontal={5} marginLeft={20} style={{ zIndex: -1 }}>
+                        {error}
                     </Txt>
-                </Btn>
+                </View>
+                <View style={{
+                    marginTop: hp('5%'),
+                    zIndex: -1
+                }}>
+                    <Btn
+                        zIndex={-1}
+                        onPress={() => { navigate(screens.CURRENT_BANK) }}
+                        radius={5}
+                        width={'90%'}
+                        paddingVertical={7}
+                        backgroundColor={colors.darkViolet}
+                        marginBottom={10}
+                        alignSelf={'center'}>
+                        <Txt bold size={16} color={'white'} fontFamily={fonts.AS}>
+                            {t('Current Bank')}
+                        </Txt>
+                    </Btn>
 
-                <Btn
-                    zIndex={-1}
-                    onPress={handleSubmit(handleAdd)}
-                    radius={5}
-                    width={'90%'}
-                    paddingVertical={7}
-                    backgroundColor={colors.violet}
-                    alignSelf={'center'}>
-                    <Txt bold size={16} color={'white'} fontFamily={fonts.AS}>
-                        {t('Add Card')}
-                    </Txt>
-                </Btn>
-            </View>
-        </SafeAreaView>
+                    <Btn
+                        zIndex={-1}
+                        onPress={handleSubmit(handleAdd)}
+                        radius={5}
+                        width={'90%'}
+                        paddingVertical={7}
+                        backgroundColor={colors.violet}
+                        alignSelf={'center'}>
+                        <Txt bold size={16} color={'white'} fontFamily={fonts.AS}>
+                            {t('Add Card')}
+                        </Txt>
+                    </Btn>
+                </View>
+            </SafeAreaView>
+        </KeyBoardSafe>
     )
 }
 

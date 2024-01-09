@@ -79,7 +79,6 @@ const P2p = () => {
           borderTopLeftRadius: 20,
           borderTopRightRadius: 20,
           backgroundColor: 'white',
-          marginBottom: 50,
           flex: 1
         }}
       >
