@@ -5,7 +5,7 @@ import Txt from '@commom/Txt'
 import { colors } from '@themes/colors'
 import { fonts } from '@themes/fonts'
 import { TFunction } from 'i18next'
-import React from 'react'
+import React, { useMemo } from 'react'
 import { Modal, Portal } from 'react-native-paper';
 import { useSelector, useDispatch } from 'react-redux'
 import { exchangeRateSelector } from '@redux/selector/userSelector'
@@ -25,6 +25,9 @@ const Options = ({ t }: Props) => {
     const exchangeRate = useSelector(exchangeRateSelector)
     const showModal = () => setVisible(true);
     const hideModal = () => setVisible(false);
+    const sortedexExchangeRate = useMemo(()=>{
+        return [...exchangeRate].sort((a,b)=>a.title.localeCompare(b.title))
+    }, [exchangeRate])
 
     const handleRateSelect = (rate: any) => {
         dispatch(setSelectedRate({ title: rate.title, rate: rate.rate }))
@@ -73,7 +76,7 @@ const Options = ({ t }: Props) => {
                         paddingVertical={20}
                         borderColor={colors.gray3}
                     >
-                        {exchangeRate.map((item) => (
+                        {sortedexExchangeRate.map((item) => (
                             <Btn
                                 key={item.id}
                                 row

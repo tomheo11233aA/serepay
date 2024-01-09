@@ -22,7 +22,6 @@ import { fetchUserWallet } from '@redux/slice/userSlice'
 import { useAppDispatch } from '@hooks/redux'
 import { AppDispatch } from '@redux/store/store'
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen'
-import { set } from 'lodash'
 
 interface Props {
     t: any;
@@ -203,9 +202,6 @@ const MakePrice = ({ t }: Props) => {
             <Warn
                 title={t('Swap Fee 0.25% implementation and has been deducted from the estimate above')}
             />
-
-
-
         </Box>
     )
 }

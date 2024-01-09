@@ -8,7 +8,6 @@ import { fonts } from '@themes/fonts'
 import { useTranslation } from 'react-i18next'
 import { roundDecimalValues } from '../../../helper/function/roundCoin'
 import Warn from '@screens/Swap/Warn'
-import Scroll from '@commom/Scroll'
 import Btn from '@commom/Btn'
 import Txt from '@commom/Txt'
 import { transferToAddress, historytransfer } from '@utils/userCallApi'
@@ -19,6 +18,7 @@ import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { walletSchema } from './Validation/formValidation'
 import WalletCoinInput from './Validation/WalletCoinInput'
+import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen'
 
 interface Props {
     route?: WithdrawProps['route'];
@@ -97,7 +97,7 @@ const WalletBTC: React.FC<Props> = ({ route }) => {
                 </View>
                 <Text style={{ fontFamily: fonts.LR, color: 'black', marginTop: 20, fontSize: 18 }}>{t('Address')}</Text>
                 <WalletCoinInput
-                    placeholder="Enter address"
+                    placeholder={t('Enter address')}
                     onChangeText={(value: string) => setValue('address', value)}
                     maxLength={100}
                 />
@@ -106,7 +106,7 @@ const WalletBTC: React.FC<Props> = ({ route }) => {
                 </Txt>}
                 <Text style={{ fontFamily: fonts.LR, color: 'black', marginTop: 15, fontSize: 18 }}>{t('Note')}</Text>
                 <WalletCoinInput
-                    placeholder="Enter note"
+                    placeholder={t('Enter note')}
                     onChangeText={(value: string) => setValue('note', value)}
                     maxLength={100}
                 />
@@ -115,7 +115,7 @@ const WalletBTC: React.FC<Props> = ({ route }) => {
                 </Txt>}
                 <Text style={{ fontFamily: fonts.LR, color: 'black', marginTop: 15, fontSize: 18 }}>{t('Amount of')} {route?.params?.symbol}</Text>
                 <WalletCoinInput
-                    placeholder="Enter amount"
+                    placeholder={t('Enter amount')}
                     onChangeText={handleChangeAmount}
                     maxLength={100}
                     value={amount}
@@ -127,11 +127,11 @@ const WalletBTC: React.FC<Props> = ({ route }) => {
                 {errors.amount && <Txt size={12} color={colors.red} style={{ zIndex: -1 }} marginTop={7} bold>
                     {errors.amount?.message}
                 </Txt>}
-                <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+                <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
                     <Text style={{ fontFamily: fonts.LR, color: 'black', marginTop: 15, fontSize: 18 }}>{t('Max available:')}</Text>
                     <Text style={{ fontFamily: fonts.LR, color: 'black', marginTop: 20, fontSize: 18 }}>{roundDecimalValues(maxAvailable, 10001)} {route?.params?.symbol}</Text>
                 </View>
-                <View style={{ marginTop: 15, marginRight: 10 }}>
+                <View style={{ marginTop: 15, paddingRight: wp('3%') }}>
                     <Warn title={t('You must keep a minimum of 20 TRX in your wallet to secure enough gas fees for trading TRC20 tokens.')} />
                     <Warn title={t('The overhead fees are not fixed, subject to change depending on the state of the blockchain networks.')} />
                     <Warn title={t('Estimated completion time: 2 minutes.')} />

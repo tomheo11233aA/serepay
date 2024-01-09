@@ -88,7 +88,7 @@
         "Created at": "Ngày tạo",
         "Min": "Tối thiểu",
         "Max": "Tối đa",
-        "Deposit": "Nạp tiền",
+        "Deposit": "Kí gửi",
         "Withdraw": "Rút tiền",
         "Select Coin" : "Chọn loại tiền",
         "Select Network" : "Chọn mạng",
@@ -183,6 +183,18 @@
         "Balance": "Số dư",
         "Your List of Banks": "Danh sách ngân hàng của bạn",
         "Confirm Swap": "Xác nhận quy đổi",
-        "Do you wantto exchange": "Bạn có muốn quy đổi"
+        "Do you wantto exchange": "Bạn có muốn quy đổi",
+        "Wallet ": "Ví ",
+        "Aliases": "Tên định danh",
+        "You must keep a minimum of 20 TRX in your wallet to secure enough gas fees for trading TRC20 tokens.": "Bạn phải giữ tối thiểu 20 TRX trong ví để đảm bảo đủ phí gas cho việc giao dịch các token TRC20.",
+        "The overhead fees are not fixed, subject to change depending on the state of the blockchain networks.": "Các phí phát sinh không cố định, có thể thay đổi tùy thuộc vào trạng thái của các mạng blockchain.",
+        "Estimated completion time: 2 minutes.": "Thời gian hoàn thành ước tính: 2 phút.",
+        "Max available:": "Tối đa có sẵn:",
+        "Enter address": "Nhập địa chỉ",
+        "Enter note": "Nhập ghi chú",
+        "User Name": "Tên người dùng",
+        "Enter user name": "Nhập tên người dùng",
+        "I'm fine, thank you. And you?": "Tôi ổn, cảm ơn bạn. Còn bạn thì sao?",
+        "Current Bank": "Danh sách ngân hàng"
     }
 }

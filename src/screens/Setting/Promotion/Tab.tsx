@@ -11,14 +11,16 @@ import { ScrollView } from 'react-native'
 
 interface Props {
     t: any;
-    route?: WithdrawProps['route'];  
+    route?: WithdrawProps['route'];
 }
 
-const Tab = ({ t, route}: Props) => {
-    const [tabChoosed, setTabChoosed] = useState<string>(`Wallet ${route?.params?.symbol}`)
-    const tabs = [`Wallet ${route?.params?.symbol}`, 'Aliases']
+const Tab = ({ t, route }: Props) => {
+    // const [tabChoosed, setTabChoosed] = useState<string>(`Wallet ${route?.params?.symbol}`)
+    // const tabs = [`Wallet ${route?.params?.symbol}`, 'Aliases']
+    const [tabChoosed, setTabChoosed] = useState<string>(`Wallet`)
+    const tabs = ['Wallet', 'Aliases']
     return (
-        <ScrollView style={{marginBottom: 130}} showsVerticalScrollIndicator={false}>
+        <ScrollView style={{ marginBottom: 130 }} showsVerticalScrollIndicator={false}>
             <Box
                 marginTop={20}
                 marginRight={20}
@@ -38,12 +40,12 @@ const Tab = ({ t, route}: Props) => {
                         borderBottomWidth={tab === tabChoosed ? 3 : 0}
                     >
                         <Txt color={colors.darkGreen} size={16} bold>
-                            {t(tab)}
+                            {t(tab)} {tab === 'Wallet' ? route?.params?.symbol : ''}
                         </Txt>
                     </Btn>
                 )}
             </Box>
-            {tabChoosed === `Wallet ${route?.params?.symbol}` ? <WalletBTC  route={route}/> : <Aliases route={route} />}
+            {tabChoosed === 'Wallet' ? <WalletBTC route={route} /> : <Aliases route={route} />}
         </ScrollView>
     )
 }

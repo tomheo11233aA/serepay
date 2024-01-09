@@ -36,14 +36,14 @@ const Promotion = () => {
             >
                 <Box row>
                     <Box padding={10}>
-                        <Txt size={14} color='black' fontFamily={fonts.AS}>{t('Estimated assets value')}</Txt>
+                        <Txt size={14} color='black' center fontFamily={fonts.AS}>{t('Estimated assets value')}</Txt>
                         <Txt center marginTop={15} size={14} color='black' fontFamily={fonts.AS}>{transferPrice.toLocaleString()} {selectedRate.title} </Txt>
                     </Box>
                 </Box>
 
                 <Box row>
                     <Box padding={10}>
-                        <Txt size={14} color='black' fontFamily={fonts.AS}>{t('Start buying and selling cryptocurrencies')}</Txt>
+                        <Txt size={14} color='black' center fontFamily={fonts.AS}>{t('Start buying and selling cryptocurrencies')}</Txt>
                         <Box row alignCenter justifyCenter>
                             <Btn padding={7} backgroundColor={colors.violet} marginTop={10}
                                 radius={wp('1%')}

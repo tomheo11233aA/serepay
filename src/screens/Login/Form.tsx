@@ -13,6 +13,7 @@ import AxiosInstance from '../../helper/AxiosInstance'
 import Spinner from 'react-native-loading-spinner-overlay'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import View from 'react-native'
+import { set } from 'lodash'
 
 interface Props {
     t: TFunction<"translation", undefined>
@@ -43,7 +44,11 @@ const Form = ({ t }: Props) => {
             }
         } catch (error: any) {
             setTxtError(error.response.data.message)
-            if (error.response.data.errors === 2) {
+            if (error.response.data.message === "Email or password is incorrect! ") {
+                setTxtError('Email hoặc mật khẩu không đúng!')
+            } else if (error.response.data.message === "Account is not activated! ") {
+                setTxtError('Tài khoản chưa được kích hoạt!')
+            } else if (error.response.data.message === "Code Emty! ") {
                 setShow2FA(true)
                 setTxtError('Tài khoản đã được kích hoạt 2FA, vui lòng nhập mã OTP')
             } else if (error.response.data.errors === 11) {
@@ -133,7 +138,7 @@ const Form = ({ t }: Props) => {
                 {txtError}
             </Txt>
 
-            
+
 
         </Box>
     )

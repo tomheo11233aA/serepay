@@ -79,7 +79,7 @@ const Aliases: React.FC<Props> = ({ route }) => {
             <View>
                 <Text style={{ fontFamily: fonts.LR, color: 'black', marginTop: 20, fontSize: 18 }}>{t('User Name')}</Text>
                 <WalletCoinInput
-                    placeholder="Enter user name"
+                    placeholder={t('Enter user name')}
                     onChangeText={(value: string) => setValue('userName', value)}
                     maxLength={100}
                 />
@@ -88,7 +88,7 @@ const Aliases: React.FC<Props> = ({ route }) => {
                 </Txt>}
                 <Text style={{ fontFamily: fonts.LR, color: 'black', marginTop: 20, fontSize: 18 }}>{t('Amount of')} {route?.params?.symbol}</Text>
                 <WalletCoinInput
-                    placeholder="Enter amount"
+                    placeholder={t('Enter amount')}
                     onChangeText={handleChangeAmount}
                     maxLength={100}
                     value={amount}
@@ -101,12 +101,12 @@ const Aliases: React.FC<Props> = ({ route }) => {
                     {errors.amount?.message}
                 </Txt>}
                 <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
-                    <Text style={{ fontFamily: fonts.LR, color: 'black', marginTop: 20, fontSize: 18 }}>{t('Max available')}:</Text>
+                    <Text style={{ fontFamily: fonts.LR, color: 'black', marginTop: 20, fontSize: 18 }}>{t('Max available:')}</Text>
                     <Text style={{ fontFamily: fonts.LR, color: 'black', marginTop: 20, fontSize: 18 }}>{roundDecimalValues(maxAvailable, 10001)} {route?.params?.symbol}</Text>
                 </View>
                 <Text style={{ fontFamily: fonts.LR, color: 'black', marginTop: 20, fontSize: 18 }}>Message</Text>
                 <WalletCoinInput
-                    placeholder="I am fine, tks. And u!"
+                    placeholder={t('I\'m fine, thank you. And you?')}
                     onChangeText={(value: string) => setValue('message', value)}
                     maxLength={100}
                     height={150}
