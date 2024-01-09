@@ -44,7 +44,7 @@ const BuyCoin = ({ t, type, selectedCoin }: any) => {
     return (
         <Box paddingHorizontal={15}>
             <Box row alignCenter >
-                <Spinner    
+                <Spinner
                     visible={type === 'buy' ? buyLoading : sellLoading}
                     textContent={'Loading...'}
                     textStyle={{ color: '#FFF' }}
@@ -62,7 +62,7 @@ const BuyCoin = ({ t, type, selectedCoin }: any) => {
                     </Txt> : <Txt color={colors.red} bold>
                         {` ${t('Sell')} `}
                     </Txt>}
-                    BTC?
+                    {symbol}?
                     <Txt>
                     </Txt>
                 </Txt>
