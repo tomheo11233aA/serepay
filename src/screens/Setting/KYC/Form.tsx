@@ -23,6 +23,8 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import CustomInput from './CustomInput';
 import { navigate } from '@utils/navigationRef';
 import { screens } from '@contants/screens';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 
 const FormKYC = () => {
     const { t } = useTranslation()
@@ -78,6 +80,7 @@ const FormKYC = () => {
             formData.append('userid', userId?.toString());
             try {
                 await uploadKyc(formData)
+                dispatch(fetchUserInfo())
                 navigate(screens.SETTING)
             } catch (error: any) {
                 Alert.alert(error?.response?.data?.message ?? 'Update KYC fail')
@@ -102,11 +105,11 @@ const FormKYC = () => {
                 textStyle={{ color: '#FFF' }}
             />
             <ScrollView showsVerticalScrollIndicator={false} style={{
-                marginTop: 60,
+                marginTop: hp('8%'),
                 borderTopLeftRadius: 20,
                 borderTopRightRadius: 20,
                 backgroundColor: 'white',
-                marginBottom: 90
+                marginBottom: hp('10%'),
             }}>
                 <Box
                     row
@@ -202,7 +205,7 @@ const FormKYC = () => {
                     backgroundColor={colors.violet}
                     alignSelf={'center'}>
                     <Txt bold size={16} color={'white'} fontFamily={fonts.AS}>
-                        {t('Update')}
+                        {t('Upload KYC')}
                     </Txt>
                 </Btn>
             </ScrollView>

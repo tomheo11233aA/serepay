@@ -145,6 +145,20 @@ const Ecosystem = () => {
             }}>
                 <Btn
                     zIndex={-1}
+                    onPress={() => {navigate(screens.CURRENT_BANK)}}
+                    radius={5}
+                    width={'90%'}
+                    paddingVertical={7}
+                    backgroundColor={colors.darkViolet}
+                    marginBottom={10}
+                    alignSelf={'center'}>
+                    <Txt bold size={16} color={'white'} fontFamily={fonts.AS}>
+                        {t('Current Bank')}
+                    </Txt>
+                </Btn>
+
+                <Btn
+                    zIndex={-1}
                     onPress={handleSubmit(handleAdd)}
                     radius={5}
                     width={'90%'}

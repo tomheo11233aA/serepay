@@ -17,7 +17,7 @@ module.exports = {
           "@contants": "./src/contants",
           "@images": "./src/assets/images",
           "@reuse": "./src/components/reuse",
-          "@lotties": "./src/assets/lotties",
+          "@lottie": "./src/assets/lottie",
           "@selector": "./src/redux/selector",
           "@navigations": "./src/navigations",
           "@commom": "./src/components/commom",

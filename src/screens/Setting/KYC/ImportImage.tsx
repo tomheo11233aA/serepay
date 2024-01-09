@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { StyleSheet, Image, View } from 'react-native';
+import { StyleSheet, Image, View, ActivityIndicator } from 'react-native';
 import Box from '@commom/Box';
 import Txt from '@commom/Txt';
 import { colors } from '@themes/colors';
@@ -15,8 +15,10 @@ interface Props {
 const ImportImage: React.FC<Props> = ({ title, onImageSelected }) => {
     const { t } = useTranslation();
     const [selectedImage, setSelectedImage] = useState<string | null>(null);
+    const [loading, setLoading] = useState<boolean>(false);
 
     const handleImagePicker = () => {
+        setLoading(true);
         ImagePicker.launchImageLibrary(
             {
                 mediaType: 'photo',
@@ -25,6 +27,7 @@ const ImportImage: React.FC<Props> = ({ title, onImageSelected }) => {
                 maxWidth: 200,
             },
             (response) => {
+                setLoading(false);
                 if (response.didCancel) {
                 } else if (response.errorCode) {
                 } else {
@@ -39,7 +42,9 @@ const ImportImage: React.FC<Props> = ({ title, onImageSelected }) => {
     return (
         <Box marginHorizontal={20} marginBottom={15}>
             <Btn onPress={handleImagePicker}>
-                {selectedImage ? (
+                {loading ? (
+                    <ActivityIndicator size="large" color={colors.violet} />
+                ) : selectedImage ? (
                     <Image source={{ uri: selectedImage }} style={{
                         width: '100%',
                         height: 150,

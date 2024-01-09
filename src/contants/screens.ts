@@ -27,4 +27,5 @@ export const screens = {
     WITHDRAW: 'Withdraw',
     CREATE_BUY_ADS: 'CreateBuyAds',
     CREATE_SELL_ADS: 'CreateSellAds',
+    CURRENT_BANK: 'CurrentBank',
 }

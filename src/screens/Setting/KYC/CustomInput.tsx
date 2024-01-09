@@ -44,12 +44,13 @@ const styles = StyleSheet.create({
         width: 20,
         height: 20,
         left: 15,
+        tintColor: 'black'
     },
     input: {
         flex: 1,
         height: 45,
         paddingLeft: 40,
-        color: colors.gray2,
+        color: 'black',
         fontFamily: fonts.AS,
         fontSize: 14,
     },
