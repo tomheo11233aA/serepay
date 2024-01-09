@@ -36,9 +36,11 @@ export const formatExpiryDate = (value: string) => {
 };
 const CreditCardForm: React.FC<CreditCardFormProps> = ({ item }) => {
     const { t } = useTranslation();
+    const creditCards = [CreditCard, CreditCard2, CreditCard3]
+    const RandomCreditCard = creditCards[Math.floor(Math.random() * creditCards.length)];
     return (
         <View style={styles.container}>
-            <CreditCard width={width * 0.9} height={height * 0.3} style={{ alignSelf: 'center' }} />
+            <RandomCreditCard width={width * 0.9} height={height * 0.3} style={{ alignSelf: 'center' }} />
             <Text
                 style={{
                     position: 'absolute',
