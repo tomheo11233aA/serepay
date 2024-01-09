@@ -3,6 +3,7 @@ import { View, StyleSheet, Text, Image } from 'react-native';
 import CreditCard from '@images/setting/bg-card1.svg'
 import CreditCard2 from '@images/setting/bg-card2.svg'
 import CreditCard3 from '@images/setting/bg-card3.svg'
+import CreditCard4 from '@images/setting/bg-card4.svg'
 import { fonts } from '@themes/fonts';
 import { Dimensions } from 'react-native';
 import { useTranslation } from 'react-i18next';
@@ -36,7 +37,7 @@ export const formatExpiryDate = (value: string) => {
 };
 const CreditCardForm: React.FC<CreditCardFormProps> = ({ item }) => {
     const { t } = useTranslation();
-    const creditCards = [CreditCard, CreditCard2, CreditCard3]
+    const creditCards = [CreditCard, CreditCard2, CreditCard3, CreditCard4]
     const SelectedCard = useState(() => creditCards[Math.floor(Math.random() * creditCards.length)])[0];
     return (
         <View style={styles.container}>

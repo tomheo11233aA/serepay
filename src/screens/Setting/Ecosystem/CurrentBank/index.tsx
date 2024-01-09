@@ -17,6 +17,7 @@ const CurrentBank = () => {
     const [hasMore, setHasMore] = useState(true);
     const [loading, setLoading] = useState(false);
 
+
     const loadMoreData = async () => {
         if (!loading && hasMore) {
             setIsLoading(true);
@@ -61,11 +62,10 @@ const CurrentBank = () => {
                     autoPlay
                     loop
                     style={{
-                        width: 300,
-                        height: 300,
-                        alignSelf: 'center',
-                        marginTop: 50
+                        flex: 1,
+                        marginBottom: hp('10%'),
                     }}
+                    
                 />
             </Safe>
         )
