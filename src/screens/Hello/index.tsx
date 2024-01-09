@@ -39,7 +39,7 @@ const Hello = () => {
     >
       <Icon
         resizeMode={'contain'}
-        source={require('@images/logo.png')}
+        source={require('@images/logowhite.png')}
         size={width * 40 / 100}
       />
     </Box>
