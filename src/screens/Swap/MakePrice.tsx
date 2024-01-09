@@ -119,7 +119,7 @@ const MakePrice = ({ t }: Props) => {
                 <Txt
                     marginTop={10}
                     color={'#999999'}>
-                    {`Balance: ${balance.toLocaleString()} ${symbolForm}`}
+                    {t('Balance')} {balance} {symbolForm}
                 </Txt>
                 <Btn
                     radius={5}
