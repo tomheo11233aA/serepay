@@ -144,7 +144,6 @@ const Ecosystem = () => {
                     </Txt>
                 </View>
                 <View style={{
-                    marginTop: hp('5%'),
                     zIndex: -1
                 }}>
                     <Btn

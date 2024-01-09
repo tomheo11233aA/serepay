@@ -85,6 +85,7 @@ const Dropdown: FC<Props> = ({ onChange, onLogoChange, myContainerStyle, isStore
                         fontFamily: fonts.JR,
                     }}
                     dropDownContainerStyle={{ backgroundColor: '#fafafa' }}
+                    listMode='SCROLLVIEW'
                     zIndex={1}
                 />
             )}
