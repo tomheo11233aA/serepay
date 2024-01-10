@@ -18,6 +18,9 @@ import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import WalletCoinInput from './Validation/WalletCoinInput'
 import { aliasesSchema } from './Validation/aliasesValidation'
+import Icon from '@commom/Icon'
+import { coinListSelector } from '@redux/selector/userSelector'
+import { keys } from '@contants/keys'
 
 interface Props {
     route?: WithdrawProps['route'];
@@ -30,6 +33,7 @@ const Aliases: React.FC<Props> = ({ route }) => {
     const maxAvailable = userWallet?.[balanceKey] || 0;
     const [isLoading, setIsLoading] = React.useState(false);
     const [history, setHistory] = React.useState<[]>([]);
+    const coinList = useAppSelector(coinListSelector)
     const { handleSubmit, formState: { errors }, setValue } = useForm({
         resolver: yupResolver(aliasesSchema)
     });
@@ -68,8 +72,8 @@ const Aliases: React.FC<Props> = ({ route }) => {
                 symbol: route?.params?.symbol ?? 'BTC',
             }
             const res = await historytransfer(data)
-            if (res?.data?.data) {
-                setHistory(res?.data?.data)
+            if (res?.data?.array) {
+                setHistory(res?.data?.array)
             }
         }
         getHistory()
@@ -114,7 +118,7 @@ const Aliases: React.FC<Props> = ({ route }) => {
                 {errors.message && <Txt size={12} color={colors.red} style={{ zIndex: -1 }} marginTop={7} bold>
                     {errors.message?.message}
                 </Txt>}
-                
+
                 <Btn
                     onPress={handleSubmit(handleSend)}
                     marginTop={20}
@@ -137,14 +141,46 @@ const Aliases: React.FC<Props> = ({ route }) => {
                         />
                     </View>
                 ) : (
-                    <View style={{ alignSelf: 'center', width: '90%' }}>
+                    <View style={{ alignSelf: 'center', width: '100%' }}>
                         {history.length > 0 ? (
-                            history.map((item: any, index: number) => (
-                                <View key={index} style={{ flexDirection: 'row', justifyContent: 'space-between', marginBottom: 10 }}>
-                                    <Txt fontFamily={fonts.AS} size={16} bold>{item.symbol}</Txt>
-                                    <Txt fontFamily={fonts.AS} size={16} bold>{item.amount}</Txt>
-                                </View>
-                            ))
+                            history.map((item: any, index: number) => {
+                                const coin = coinList.find((coin) => coin?.name === item?.coin_key.toUpperCase())
+                                return (
+                                    <View key={index} style={{ marginBottom: 10 }}>
+                                        <View style={{ backgroundColor: 'black', padding: 7, borderTopLeftRadius: 10, borderTopRightRadius: 10, flexDirection: 'row', alignItems: 'center' }}>
+                                            <Icon size={16} tintColor={'white'} source={require('@images/setting/calendar.png')} marginRight={10} />
+                                            <Txt fontFamily={fonts.LR} size={16} color={'white'} bold>{item?.created_at}</Txt>
+                                        </View>
+                                        <View style={{ backgroundColor: colors.gray5, padding: 7, borderBottomLeftRadius: 10, borderBottomRightRadius: 10 }}>
+                                            <View style={{ flexDirection: 'row', alignContent: 'center', marginBottom: 7 }}>
+                                                <Txt fontFamily={fonts.LR} size={16}>Coin: </Txt>
+                                                <Txt fontFamily={fonts.LR} size={16}>{item?.coin_key.toUpperCase()}</Txt>
+                                            </View>
+                                            <View style={{ flexDirection: 'row', alignContent: 'center', alignItems: 'center', marginBottom: 7 }}>
+                                                <Txt fontFamily={fonts.LR} size={16}>{t('Final Amount:')}</Txt>
+                                                <Txt marginLeft={5} color={colors.green} fontFamily={fonts.OSB} size={16}> {item?.amount}</Txt>
+                                                <Icon marginLeft={5} size={15} source={{ uri: `${keys.HOSTING_API}${coin?.image}` }} />
+                                            </View>
+                                            <View style={{ flexDirection: 'row', alignContent: 'center' }}>
+                                                <Txt fontFamily={fonts.LR} size={16}>Type: </Txt>
+                                                <Txt fontFamily={fonts.LR} size={16}>{item?.type_exchange}</Txt>
+                                            </View>
+                                            <View style={{ flexDirection: 'row', alignContent: 'center', marginTop: 7, alignItems: 'center' }}>
+                                                <Txt fontFamily={fonts.LR} size={16}>Note: </Txt>
+                                                <Txt fontFamily={fonts.LR} size={16}>{item?.note}</Txt>
+                                            </View>
+                                            <View style={{ flexDirection: 'row', alignContent: 'center', marginTop: 7, alignItems: 'center' }}>
+                                                <Txt fontFamily={fonts.LR} size={16}>From User: </Txt>
+                                                <Txt fontFamily={fonts.LR} size={16}>{item?.address_form}</Txt>
+                                            </View>
+                                            <View style={{ flexDirection: 'row', alignContent: 'center', marginTop: 7, alignItems: 'center', marginBottom: 7}}>
+                                                <Txt fontFamily={fonts.LR} size={16}>From To: </Txt>
+                                                <Txt fontFamily={fonts.LR} size={16}>{item?.address_to}</Txt>
+                                            </View>
+                                        </View>
+                                    </View>
+                                )
+                            })
                         ) : (
                             <>
                                 <LottieView
