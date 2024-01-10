@@ -77,40 +77,35 @@ const TransactionItem = ({ item, refreshData }: TransactionItemProps) => {
                 )}
             </Box>
             <Box justifyCenter>
-                {item.type === 1 || item.type === 2 && (
-                    <Btn backgroundColor={colors.red} padding={5} radius={5} onPress={async () => {
-                        try {
-                            await cancelP2p({ idP2p: item.id })
-                            Alert.alert("Cancel success")
-                            navigate(screens.SETTING)
-                        } catch (error) {
-                            console.log(error)
-                        }
+                {item.type === 1 && (
+                    <Btn backgroundColor={colors.red} padding={5} radius={5} onPress={() => {
+                        Alert.alert(
+                            t('Confirmation'),
+                            t('Are you sure you want to cancel?'),
+                            [
+                                {
+                                    text: 'Cancel',
+                                    style: 'destructive',
+                                },
+                                {
+                                    text: 'OK',
+                                    onPress: async () => {
+                                        try {
+                                            await cancelP2p({ idP2p: item.id })
+                                            Alert.alert("Cancel success")
+                                            navigate(screens.SETTING)
+                                        } catch (error) {
+                                            console.log(error)
+                                        }
+                                    }
+                                },
+                            ],
+                            { cancelable: false },
+                        );
                     }} >
                         <Txt fontFamily={fonts.AS} color={'white'}>{t('Cancel')}</Txt>
                     </Btn>
                 )}
-                {/* {item.type === 2 && (
-                    <>
-                        <Btn backgroundColor={colors.red} padding={5} radius={5} onPress={async () => {
-                            try {
-                                await cancelP2p({ idP2p: item.id })
-                                Alert.alert("Cancel success")
-                                navigate(screens.SETTING)
-                            } catch (error) {
-                                console.log(error)
-                            }
-                        }} >
-                            <Txt fontFamily={fonts.AS} color={'white'}>{t('Cancel')}</Txt>
-                        </Btn>
-                        <Txt
-                            center
-                            width={wp('20%')}
-                            fontFamily={fonts.LR} color={'black'}>
-                                {t('Waiting for admin confirm')}
-                        </Txt>
-                    </>
-                )} */}
                 {hasP2PInfo && (
                     <Btn backgroundColor={colors.green} radius={5} padding={5} marginTop={5} onPress={() => navigate(screens.CONFIRM_TRANSACTION, { idP2p: item.id })}>
                         <Txt fontFamily={fonts.AS} color={colors.blue}>Info</Txt>
