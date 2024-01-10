@@ -183,7 +183,7 @@ const Transaction = () => {
             <Box
                 row
                 alignCenter
-                paddingHorizontal={15}
+                paddingHorizontal={20}
             >
                 <Btn onPress={() => goBack()}>
                     <Icon

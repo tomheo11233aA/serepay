@@ -8,7 +8,6 @@ import LottieView from 'lottie-react-native'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import { navigate } from '@utils/navigationRef'
 import { screens } from '@contants/screens'
-import { roundDecimalValues } from '../../../helper/function/roundCoin'
 import { debounce } from 'lodash'
 import Txt from '@commom/Txt'
 import { fonts } from '@themes/fonts'
@@ -30,12 +29,12 @@ const SearchBox: React.FC<Props> = ({ coin, type }) => {
     const coinData = useMemo(() => coinList.find(item => item.name === coin), [coinList, coin]);
     const [isEnterWithUSD, setIsEnterWithUSD] = useState(false)
     const [isEnterWithCoin, setIsEnterWithCoin] = useState(true)
-    const handleAmountChange = (value: number) => {
+    const handleAmountChange = (value: string) => {
         if (isEnterWithUSD && coinData) {
-            setAmount(value / coinData.price)
+            setAmount(Number(value) / coinData.price)
         }
         if (isEnterWithCoin && coinData) {
-            setAmount(value)
+            setAmount(Number(value))
         }
     }
     const params = useMemo(() => ({
@@ -121,7 +120,7 @@ const SearchBox: React.FC<Props> = ({ coin, type }) => {
                         color={'white'}
                         center
                     >
-                        {t('Enter with')+ ' ' + coin}
+                        {t('Enter with') + ' ' + coin}
                     </Txt>
                 </TouchableOpacity>
             </View>
@@ -135,9 +134,9 @@ const SearchBox: React.FC<Props> = ({ coin, type }) => {
             ) : data.length > 0 ? (
                 data.map((item, index) => (
                     <TouchableOpacity key={index} onPress={() => handleItemClick(item)}>
-                        <View style={{ flexDirection: 'row', justifyContent: 'space-around', padding: 10, borderBottomWidth: 0.5, borderBottomColor: colors.black2 }}>
+                        <View style={{ flexDirection: 'row', justifyContent: 'space-around', padding: 10, flexWrap: 'wrap', borderBottomWidth: 0.5, borderBottomColor: colors.gray5 }}>
                             <Text>{type === 'buy' ? t('Seller') : t('Buyer')}: {item.userName}</Text>
-                            <Text> {t('Available')}:{roundDecimalValues(item.amount - item.amountSuccess, 10001)}</Text>
+                            <Text> {t('Available')}:{(item.amount - item.amountSuccess)}</Text>
                             <Text> {t('Min')}:{item.amountMinimum}</Text>
                         </View>
                     </TouchableOpacity>

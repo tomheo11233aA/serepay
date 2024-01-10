@@ -209,6 +209,7 @@ const ConfirmTransaction: React.FC<ConfirmTransactionProps> = ({ route }) => {
                         alignCenter
                         justifySpaceBetween
                         paddingVertical={15}
+                        maxWidth={'80%'}
                     >
                         <Btn onPress={() => goBack()}>
                             <Icon
