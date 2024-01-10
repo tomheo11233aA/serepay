@@ -22,7 +22,7 @@ const TransactionTable: React.FC<TransactionTableProps> = ({ tableData, showModa
     t('Trader'),
     t('Status'),
     t('Payment'),
-    t('You are ' + (type === 'sell' ? 'buying' : 'selling')),
+    t('You are ') + (type === 'sell' ? t('buying') : t('selling')),
     t('Exchange rate'),
     t('Amount'),
     t('Time'),

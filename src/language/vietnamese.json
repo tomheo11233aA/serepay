@@ -199,6 +199,11 @@
         "via Bank Transfer (VND)": "qua Chuyển khoản ngân hàng (VND)",
         "Please fill all fields and agree to the terms": "Vui lòng điền đầy đủ thông tin và đồng ý với các điều khoản",
         "Not yet accpet EULA": "Chưa chấp nhận EULA",
-        "Are you sure you want to cancel?": "Bạn có chắc chắn muốn hủy?"
+        "Are you sure you want to cancel?": "Bạn có chắc chắn muốn hủy?",
+        "Are you sure want to proceed?": "Bạn có chắc chắn muốn tiếp tục?",
+        "If you need assistance, please contact the ": "Nếu bạn cần trợ giúp, vui lòng liên hệ ",
+        "Transaction Code": "Mã giao dịch",
+        "Trader": "Người giao dịch",
+        "You are ": "Bạn đang "
     }
 }

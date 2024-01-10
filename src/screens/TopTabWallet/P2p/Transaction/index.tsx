@@ -84,7 +84,8 @@ const Transaction = () => {
                     style: 'default',
                     onPress: async () => {
                         const data: ICreateP2p = {
-                            amount: item.side === 'sell' ? Number(receiveAmount) : Number(amount),
+                            // amount: item.side === 'sell' ? Number(receiveAmount) : Number(amount),
+                            amount: Number(amount),
                             idP2p: item.id,
                             idBankingUser: bankListId,
                         }
@@ -126,6 +127,7 @@ const Transaction = () => {
             }
         }
         fetchMyAmount();
+        console.log('myAmount', myAmount);
     }, []);
     useEffect(() => {
         if (item) {
@@ -137,12 +139,12 @@ const Transaction = () => {
                     const rateDollar = exchangeRate.find((item) => item.title === 'VND')?.rate ?? 1;
                     const coinPrice = coin.price ?? 0;
                     const amountVND = myAmount * coinPrice * rateDollar;
-                    setAmount(amountVND.toLocaleString());
+                    setAmount(amountVND.toString());
                 }
             }
 
         }
-    }, [item, coins, exchangeRate]);
+    }, [item, exchangeRate, myAmount]);
     useEffect(() => {
         if (item) {
             const coin = coins.find(coin => coin?.name === item.symbol);
