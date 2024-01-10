@@ -12,17 +12,16 @@ interface Bank {
     logo: string;
 }
 
-const containerStyle: StyleProp<ViewStyle> = { width: '90%'};
-const dropdownStyle: StyleProp<ViewStyle> = { backgroundColor: '#fafafa'};
+const containerStyle: StyleProp<ViewStyle> = { width: '90%' };
+const dropdownStyle: StyleProp<ViewStyle> = { backgroundColor: '#fafafa' };
 const imageStyle: StyleProp<ImageStyle> = { width: 100, height: 50 };
 
 interface Props {
     onChange: (value: string) => void;
-    onLogoChange?: (value: string) => void;
     myContainerStyle?: StyleProp<ViewStyle>;
 }
 
-const Dropdown: FC<Props> = ({ onChange, onLogoChange, myContainerStyle }) => {
+const Dropdown: FC<Props> = ({ onChange, myContainerStyle }) => {
     const [open, setOpen] = useState(false);
     const [value, setValue] = useState<string | null>(null);
     const [items, setItems] = useState<any>([]);
@@ -65,19 +64,20 @@ const Dropdown: FC<Props> = ({ onChange, onLogoChange, myContainerStyle }) => {
                     placeholder={t('Choose your bank')}
                     onChangeValue={(value: any) => {
                         onChange(value);
-                        const selectedItem = items.find((item: any) => item.value === value);
-                        if (selectedItem && onLogoChange) { 
-                            onLogoChange(selectedItem.logo);
-                        }
                     }}
                     labelStyle={{
                         fontWeight: 'bold',
                         fontFamily: fonts.JR,
                     }}
-                    dropDownContainerStyle={{ backgroundColor: '#fafafa' }}
+                    dropDownContainerStyle={{ backgroundColor: '#fafafa', borderWidth: 1, borderColor: 'black'}}
                     zIndex={1}
-                    dropDownDirection="TOP"
                     listMode='SCROLLVIEW'
+                    searchable={true}
+                    searchTextInputProps={{ maxLength: 15 }}
+                    searchContainerStyle={{ borderBottomWidth: 0 }}
+                    searchPlaceholder='Search your bank'
+                    searchPlaceholderTextColor='black'
+                    searchTextInputStyle={{ fontFamily: fonts.JR }}
                 />
             )}
         </View>

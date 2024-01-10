@@ -20,7 +20,7 @@ const Main = () => {
     const isLogin = useAppSelector(isLoginUserSelector)
     const userInfo = useSelector(userInfoUserSelector)
     const dispatch: AppDispatch = useDispatch()
-    const [isConnected, setIsConnected] = React.useState(false);
+    const [isConnected, setIsConnected] = React.useState(true);
 
     useEffect(() => {
         const fetchIsLogin = async () => {

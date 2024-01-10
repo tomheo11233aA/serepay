@@ -106,7 +106,7 @@ const Options = ({ t }: Props) => {
             <Box
                 row
                 alignCenter
-                width={'90%'}
+                width={'95%'}
                 justifySpaceAround
                 alignSelf={'center'}
             >
@@ -118,7 +118,7 @@ const Options = ({ t }: Props) => {
                             source={option.icon}
                         />
                         <Txt marginTop={10} fontFamily={fonts.IBMPM}
-                            width={wp(20)}
+                            width={wp(33)}
                             center
                         >
                             {t(option.title)}

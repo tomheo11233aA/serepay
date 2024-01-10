@@ -82,7 +82,7 @@ const SearchBox: React.FC<Props> = ({ coin, type }) => {
             <Input
                 height={40}
                 hint={isEnterWithUSD ? t(`Search amount of money to ${type === 'buy' ? 'buy' : 'sell'} ${coin}`) : t(`Search ${coin} amount to ${type === 'buy' ? 'buy' : 'sell'}`)}
-                onChangeText={handleAmountChange}
+                onChangeText={setAmount}
                 value={amount}
                 hintColor={colors.black2}
                 iconTwo={require('../../../assets/images/setting/search.png')}
