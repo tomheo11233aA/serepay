@@ -3,7 +3,6 @@ import { View, Image, StyleProp, ViewStyle, ImageStyle } from 'react-native';
 import DropDownPicker from 'react-native-dropdown-picker';
 import { Dispatch, SetStateAction } from 'react';
 import { useTranslation } from 'react-i18next';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 import { fonts } from '@themes/fonts';
 
 interface Bank {
@@ -41,6 +40,9 @@ const Dropdown: FC<Props> = ({ onChange, onLogoChange, myContainerStyle }) => {
                         logo: item.logo,
                     }));
                     setItems(formattedData);
+                    if (formattedData.length > 0) {
+                        setValue(formattedData[1].value);
+                    }
                 }
             })
             .catch((error) => {

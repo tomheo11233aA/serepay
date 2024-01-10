@@ -143,7 +143,7 @@ const CreateBuyAds = () => {
                                 onChangeText={(value: number) => setValue('amount', value)}
                             />
                             {errors.amount && <Txt size={12} color={colors.red} style={{ zIndex: -1 }} marginTop={7} bold>
-                                {errors.amount?.message}
+                                {errors.amount.message && t(errors.amount.message)}
                             </Txt>}
                         </Box>
                         <Box marginTop={20} style={{ alignItem: 'center' }}>
@@ -154,7 +154,7 @@ const CreateBuyAds = () => {
                                 onChangeText={(value: number) => setValue('amountMinimum', value)}
                             />
                             {errors.amount && <Txt size={12} color={colors.red} style={{ zIndex: -1 }} marginTop={7} bold>
-                                {errors.amountMinimum?.message}
+                                {errors.amountMinimum?.message && t(errors.amountMinimum.message)}
                             </Txt>}
                         </Box>
                     </SafeAreaView>

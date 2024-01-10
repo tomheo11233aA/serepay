@@ -204,6 +204,11 @@
         "If you need assistance, please contact the ": "Nếu bạn cần trợ giúp, vui lòng liên hệ ",
         "Transaction Code": "Mã giao dịch",
         "Trader": "Người giao dịch",
-        "You are ": "Bạn đang "
+        "You are ": "Bạn đang ",
+        "Amount is required": "Số lượng là bắt buộc",
+        "Minimum amount is required": "Số lượng tối thiểu là bắt buộc",
+        "Bank name is required": "Tên ngân hàng là bắt buộc",
+        "Owner account is required": "Chủ tài khoản là bắt buộc",
+        "Number bank is required": "Số tài khoản là bắt buộc"
     }
 }

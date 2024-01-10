@@ -145,7 +145,7 @@ const CreateBuyAds = () => {
                     <SafeAreaView>
                         <Txt fontFamily={fonts.LR} onPress={() => navigate(screens.CREATE_BUY_ADS)}>{t('Do you want to buy ?')}</Txt>
                         <Box row justifySpaceBetween={true} marginTop={20}>
-                            <Txt size={20} fontFamily={fonts.LR}>{t(`ADS to Sell `) + selectedCoin?.name}</Txt>                      
+                            <Txt size={20} fontFamily={fonts.LR}>{t(`ADS to Sell `) + selectedCoin?.name}</Txt>
 
                             <TouchableOpacity onPress={() => { showModal() }}>
                                 <Icon
@@ -166,7 +166,7 @@ const CreateBuyAds = () => {
                                 onChangeText={(value: number) => setValue('amount', value)}
                             />
                             {errors.amount && <Txt size={12} color={colors.red} style={{ zIndex: -1 }} marginTop={7} bold>
-                                {errors.amount?.message}
+                                {errors.amount.message && t(errors.amount.message)}
                             </Txt>}
                         </Box>
                         <Box marginTop={20} style={{ alignItem: 'center' }}>
@@ -177,7 +177,7 @@ const CreateBuyAds = () => {
                                 onChangeText={(value: number) => setValue('amountMinimum', value)}
                             />
                             {errors.amount && <Txt size={12} color={colors.red} style={{ zIndex: -1 }} marginTop={7} bold>
-                                {errors.amountMinimum?.message}
+                                {errors.amountMinimum?.message && t(errors.amountMinimum?.message)}
                             </Txt>}
                         </Box>
                         <Txt size={20} marginTop={20} fontFamily={fonts.LR}>{t('Payment Details')}</Txt>
@@ -186,30 +186,28 @@ const CreateBuyAds = () => {
                             myContainerStyle={{ width: '100%' }}
                         />
                         {errors.bankName && <Txt size={12} color={colors.red} paddingHorizontal={5} style={{ zIndex: -1 }} marginTop={7} bold>
-                            {errors.bankName?.message}
+                            {errors.bankName?.message && t(errors.bankName?.message)}
                         </Txt>}
                         <Box marginTop={10} style={{ alignItem: 'center', zIndex: -1 }}>
                             <Txt fontFamily={fonts.LR}>{t('Full name:')}</Txt>
                             <BuyAdvertisementInput
-                                // placeholder="Enter full name"
                                 placeholder={t('Enter full name')}
                                 maxLength={100}
                                 onChangeText={(value: string) => setValue('ownerAccount', value)}
                             />
                             {errors.ownerAccount && <Txt size={12} color={colors.red} style={{ zIndex: -1 }} marginTop={7} bold>
-                                {errors.ownerAccount?.message}
+                                {errors.ownerAccount?.message && t(errors.ownerAccount?.message)}
                             </Txt>}
                         </Box>
                         <Box marginVertical={20} style={{ alignItem: 'center', zIndex: -1 }}>
                             <Txt fontFamily={fonts.LR}>{t('Account number:')}</Txt>
                             <BuyAdvertisementInput
-                                // placeholder="Enter account number"
                                 placeholder={t('Enter account number')}
                                 maxLength={100}
                                 onChangeText={(value: string) => setValue('numberBank', value)}
                             />
                             {errors.numberBank && <Txt size={12} color={colors.red} style={{ zIndex: -1 }} marginTop={7} bold>
-                                {errors.numberBank?.message}
+                                {errors.numberBank?.message && t(errors.numberBank?.message)}
                             </Txt>}
                         </Box>
                     </SafeAreaView>
