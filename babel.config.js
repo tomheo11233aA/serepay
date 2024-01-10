@@ -22,6 +22,8 @@ module.exports = {
           "@navigations": "./src/navigations",
           "@commom": "./src/components/commom",
           "@asyncThunk": "./src/redux/asyncThunk",
+          "@helper/*": ["./src/helper/*"],
+
         }
       }
     ]

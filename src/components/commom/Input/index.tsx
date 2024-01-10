@@ -217,7 +217,6 @@ const Input = ({
                 placeholderTextColor={hintColor}
                 secureTextEntry={security ? true : false}
                 keyboardType={keyboardType}
-                // editable={disabled}
                 editable={readonly ? false : true}
                 autoCapitalize={autoCapitalize}
                 textAlign={textAlign}

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { StyleSheet, Alert } from 'react-native';
+import { Alert } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useCoinSocket } from '../../../../helper/useCoinSocket';
 import { coinListSelector } from '@redux/selector/userSelector';
@@ -22,8 +22,12 @@ import { goBack } from '@utils/navigationRef';
 import Btn from '@commom/Btn';
 import Icon from '@commom/Icon';
 import Box from '@commom/Box';
+import Txt from '@commom/Txt';
+import { fonts } from '@themes/fonts';
+import { useTranslation } from 'react-i18next';
 
 const Transaction = () => {
+    const { t } = useTranslation();
     useCoinSocket();
     const coins = useSelector(coinListSelector)
     const [item, setItem] = useState<any>();
@@ -37,6 +41,8 @@ const Transaction = () => {
     const exchangeRate = useSelector(exchangeRateSelector);
     const [loading, setLoading] = useState(true);
     const [bankListId, setBankListId] = useState<number | null>(null);
+    const [myAmount, setMyAmount] = useState(0);
+
     useEffect(() => {
         const fetchBanking = async () => {
             const data = {
@@ -56,32 +62,48 @@ const Transaction = () => {
         };
         fetchBanking();
     }, []);
-
-    const handleBuyNow = async () => {
+    const handleBuyNow = () => {
         if (!amount) {
-            Alert.alert('Error', 'Please fill all fields and agree to the terms');
+            Alert.alert('Error', t('Please fill all fields and agree to the terms'));
             return;
         }
         if (!isChecked) {
-            Alert.alert('Error', 'Not yet accpet EULA');
+            Alert.alert('Error', t('Not yet accpet EULA'));
             return;
         }
-        const data: ICreateP2p = {
-            amount: item.side === 'sell' ? Number(receiveAmount) : Number(amount),
-            idP2p: item.id,
-            idBankingUser: bankListId,
-        }
-        setLoading(true);
-        await createP2p(data)?.then((res) => {
-            Alert.alert('Success', 'Your transaction has been created');
-            navigate(screens.CONFIRM_TRANSACTION);
-            setLoading(false);
-        }).catch((err: any) => {
-            Alert.alert('Error', err?.response?.data?.message);
-            setLoading(false);
-        }).finally(() => {
-            setLoading(false);
-        });
+        Alert.alert(
+            t('Confirmation'),
+            t('Are you sure you want to proceed?'),
+            [
+                {
+                    text: 'Cancel',
+                    style: 'destructive',
+                },
+                {
+                    text: 'OK',
+                    style: 'default',
+                    onPress: async () => {
+                        const data: ICreateP2p = {
+                            amount: item.side === 'sell' ? Number(receiveAmount) : Number(amount),
+                            idP2p: item.id,
+                            idBankingUser: bankListId,
+                        }
+                        setLoading(true);
+                        await createP2p(data)?.then((res) => {
+                            Alert.alert('Success', 'Your transaction has been created');
+                            navigate(screens.CONFIRM_TRANSACTION);
+                            setLoading(false);
+                        }).catch((err: any) => {
+                            Alert.alert('Error', err?.response?.data?.message);
+                            setLoading(false);
+                        }).finally(() => {
+                            setLoading(false);
+                        });
+                    }
+                },
+            ],
+            { cancelable: false },
+        );
     };
     useEffect(() => {
         dispatch(fetchListExchange());
@@ -96,17 +118,41 @@ const Transaction = () => {
         }
         fetchData();
     }, []);
+    useEffect(() => {
+        const fetchMyAmount = async () => {
+            const myAmountString = await AsyncStorage.getItem('myAmount');
+            if (myAmountString) {
+                setMyAmount(Number(myAmountString));
+            }
+        }
+        fetchMyAmount();
+    }, []);
+    useEffect(() => {
+        if (item) {
+            if (item.side === 'sell') {
+                setAmount(myAmount.toString());
+            } else {
+                const coin = coins.find(coin => coin?.name === item.symbol);
+                if (coin) {
+                    const rateDollar = exchangeRate.find((item) => item.title === 'VND')?.rate ?? 1;
+                    const coinPrice = coin.price ?? 0;
+                    const amountVND = myAmount * coinPrice * rateDollar;
+                    setAmount(amountVND.toLocaleString());
+                }
+            }
 
+        }
+    }, [item, coins, exchangeRate]);
     useEffect(() => {
         if (item) {
             const coin = coins.find(coin => coin?.name === item.symbol);
             if (coin) {
-                const amountNumber = Number(amount);
+                const amountNumber = Number(amount.replace(/,/g, ''));
                 const rateDollar = exchangeRate.find((item) => item.title === 'VND')?.rate ?? 1;
-                if (item.side === 'buy') {
+                if (item.side === 'sell') {
                     const coinPrice = coin.price ?? 0;
                     const amountCoin = amountNumber * coinPrice * rateDollar;
-                    setReceiveAmount(amountCoin.toFixed(3));
+                    setReceiveAmount(amountCoin.toLocaleString());
                 } else {
                     const inputValueDollar = amountNumber / rateDollar;
                     const coinPrice = coin.price ?? 0;
@@ -116,21 +162,6 @@ const Transaction = () => {
             }
         }
     }, [item, coins, exchangeRate]);
-    useEffect(() => {
-        if (item) {
-            setAmount(item.amountMinimum.toString());
-            if (item.side === 'sell') {
-                const coin = coins.find(coin => coin?.name === item.symbol);
-                if (coin) {
-                    const rateDollar = exchangeRate.find((item) => item.title === 'VND')?.rate ?? 1;
-                    const coinPrice = coin.price ?? 0;
-                    const amountVND = item.amountMinimum * coinPrice * rateDollar;
-                    setAmount(amountVND.toFixed(3));
-                }
-            }
-        }
-    }, [item, coins, exchangeRate]);
-
     useEffect(() => {
         if (item) {
             const coin = coins.find(coin => coin?.name === item.symbol);
@@ -150,7 +181,6 @@ const Transaction = () => {
             <Box
                 row
                 alignCenter
-                justifySpaceBetween
                 paddingHorizontal={15}
             >
                 <Btn onPress={() => goBack()}>
@@ -159,6 +189,19 @@ const Transaction = () => {
                         source={require('@images/unAuth/left.png')}
                     />
                 </Btn>
+                <Box row>
+                    <Txt
+                        size={18}
+                        color={item.side === 'sell' ? 'red' : 'green'}
+                        fontFamily={fonts.OSB}
+                    > {item.side === 'sell' ? t('Sell') : t('Buy')} </Txt>
+                    <Txt
+                        size={18}
+                        color={'black'}
+                        fontFamily={fonts.OSB}
+                    > {item.symbol} {t('via Bank Transfer (VND)')}
+                    </Txt>
+                </Box>
             </Box>
 
             <ScrollView showsVerticalScrollIndicator={false} style={{ padding: 20 }}>
@@ -182,12 +225,4 @@ const Transaction = () => {
     );
 };
 
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        padding: 20,
-        backgroundColor: '#fff',
-    }
-});
-
-export default Transaction;
+export default React.memo(Transaction);

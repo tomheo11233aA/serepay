@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { View, Text, TouchableOpacity } from 'react-native';
 import { colors } from '@themes/colors';
 import Input from '@commom/Input';
@@ -46,7 +46,8 @@ const TransactionForm: React.FC<TransactionFormProps> = ({
                         value={amount}
                         onChangeText={setAmount}
                         radius={3}
-                        coin={item.side === 'buy' ? coin?.name : 'VND'}
+                        coin={item.side === 'sell' ? coin?.name : 'VND'}
+
                     />
                 </View>
                 <View style={{ padding: 5 }}></View>
@@ -58,7 +59,7 @@ const TransactionForm: React.FC<TransactionFormProps> = ({
                         backgroundColor={colors.gray7}
                         readonly
                         radius={3}
-                        coin={item.side === 'buy' ? 'VND' : coin?.name}
+                        coin={item.side === 'sell' ? 'VND' : coin?.name}
                     />
                 </View>
             </View>
@@ -73,6 +74,7 @@ const TransactionForm: React.FC<TransactionFormProps> = ({
                         setSelected(selectedItem);
                         setBankListId(selectedItem);
                     }}
+                    defaultOption={bankList[0]}
                     data={bankList} />
 
             </View>

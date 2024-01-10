@@ -10,6 +10,10 @@ import { navigate } from '@utils/navigationRef'
 import { screens } from '@contants/screens'
 import { roundDecimalValues } from '../../../helper/function/roundCoin'
 import { debounce } from 'lodash'
+import Txt from '@commom/Txt'
+import { fonts } from '@themes/fonts'
+import { coinListSelector } from '@redux/selector/userSelector'
+import { useAppSelector } from '@hooks/redux'
 
 interface Props {
     coin: string
@@ -21,8 +25,19 @@ const SearchBox: React.FC<Props> = ({ coin, type }) => {
     const [amount, setAmount] = useState<number>()
     const [data, setData] = useState<any[]>([])
     const [loading, setLoading] = useState(false)
-    const searchFunction = type === 'buy' ? searchBuyQuick : searchSellQuick
-
+    const searchFunction = type === 'buy' ? searchSellQuick : searchBuyQuick
+    const coinList = useAppSelector(coinListSelector)
+    const coinData = useMemo(() => coinList.find(item => item.name === coin), [coinList, coin]);
+    const [isEnterWithUSD, setIsEnterWithUSD] = useState(false)
+    const [isEnterWithCoin, setIsEnterWithCoin] = useState(true)
+    const handleAmountChange = (value: number) => {
+        if (isEnterWithUSD && coinData) {
+            setAmount(value / coinData.price)
+        }
+        if (isEnterWithCoin && coinData) {
+            setAmount(value)
+        }
+    }
     const params = useMemo(() => ({
         limit: 10,
         page: 1,
@@ -37,7 +52,7 @@ const SearchBox: React.FC<Props> = ({ coin, type }) => {
                 setLoading(false)
             })
                 .catch(error => {
-                    Alert.alert('Error', error.message)
+                    console.log(error)
                     setLoading(false)
                 })
         } else {
@@ -56,6 +71,7 @@ const SearchBox: React.FC<Props> = ({ coin, type }) => {
     const handleItemClick = async (item: any) => {
         try {
             await AsyncStorage.setItem('adsItem', JSON.stringify(item))
+            await AsyncStorage.setItem('myAmount', amount?.toString() ?? '')
             navigate(screens.TRANSACTION)
         } catch (error) {
             console.log(error)
@@ -66,8 +82,8 @@ const SearchBox: React.FC<Props> = ({ coin, type }) => {
         <View style={{ width: '92%', backgroundColor: 'white', alignSelf: 'center', marginTop: 10, borderRadius: 5 }}>
             <Input
                 height={40}
-                hint={t(`Search ${coin} amount to ${type === 'buy' ? 'buy' : 'sell'}`)}
-                onChangeText={setAmount}
+                hint={isEnterWithUSD ? t(`Search amount of money to ${type === 'buy' ? 'buy' : 'sell'} ${coin}`) : t(`Search ${coin} amount to ${type === 'buy' ? 'buy' : 'sell'}`)}
+                onChangeText={handleAmountChange}
                 value={amount}
                 hintColor={colors.black2}
                 iconTwo={require('../../../assets/images/setting/search.png')}
@@ -75,6 +91,40 @@ const SearchBox: React.FC<Props> = ({ coin, type }) => {
                 flex={1}
                 borderBottomWidth={1}
             />
+            <View style={{ flexDirection: 'row', justifyContent: 'space-between', margin: 10 }}>
+                <TouchableOpacity
+                    style={{ backgroundColor: isEnterWithUSD ? colors.violet : colors.black3, padding: 10, borderRadius: 5, }}
+                    onPress={() => {
+                        setIsEnterWithUSD(true);
+                        setIsEnterWithCoin(false);
+                    }}
+                >
+                    <Txt
+                        size={14}
+                        fontFamily={fonts.OSB}
+                        color={'white'}
+                        center
+                    >
+                        {t('Enter with USD')}
+                    </Txt>
+                </TouchableOpacity>
+                <TouchableOpacity
+                    style={{ backgroundColor: isEnterWithCoin ? colors.violet : colors.black3, padding: 10, borderRadius: 5 }}
+                    onPress={() => {
+                        setIsEnterWithUSD(false);
+                        setIsEnterWithCoin(true);
+                    }}
+                >
+                    <Txt
+                        size={14}
+                        fontFamily={fonts.OSB}
+                        color={'white'}
+                        center
+                    >
+                        {t('Enter with')+ ' ' + coin}
+                    </Txt>
+                </TouchableOpacity>
+            </View>
             {loading ? (
                 <LottieView
                     source={require('../../../assets/lottie/loading.json')}
