@@ -17,6 +17,7 @@ const TurnOn2FA = () => {
     const { t } = useTranslation()
     const [otp, setOtp] = useState('')
     const [otpAuthUrl, setOtpAuthUrl] = useState('')
+    const [copySuccess, setCopySuccess] = useState(false);
     useEffect(() => {
         const fetchOtpAuth = async () => {
             try {
@@ -42,6 +43,7 @@ const TurnOn2FA = () => {
 
     const handleCopy = () => {
         Clipboard.setString(otp);
+        setCopySuccess(true);
     };
 
     return (
@@ -58,7 +60,8 @@ const TurnOn2FA = () => {
                         {otp}
                     </Text>
                     <TouchableOpacity onPress={handleCopy} style={{ marginLeft: 10 }}>
-                        <Icon size={20} source={require('../../../assets/images/setting/copy.png')} />
+                        {/* <Icon size={20} source={require('../../../assets/images/setting/copy.png')} /> */}
+                        <Icon size={20} source={copySuccess ? require('@images/unAuth/check.png') : require('@images/setting/copy.png')} />
                     </TouchableOpacity>
                 </View>
             </View>

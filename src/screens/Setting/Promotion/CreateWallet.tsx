@@ -51,9 +51,11 @@ const CreateWallet: React.FC<DepositProps> = ({ route }) => {
     const [networkValue, setNetworkValue] = useState('TCBbitcon');
     const [isLoading, setIsLoading] = useState(false);
     const [history, setHistory] = useState<[]>([]);
+    const [copySuccess, setCopySuccess] = useState(false);
 
     const handleCopy = () => {
         Clipboard.setString(address);
+        setCopySuccess(true);
     };
 
     useEffect(() => {
@@ -155,7 +157,8 @@ const CreateWallet: React.FC<DepositProps> = ({ route }) => {
                     <View style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }}>
                         <Txt justify paddingHorizontal={20} fontFamily={fonts.AS} size={16} bold marginVertical={15} width={'80%'}>{address}</Txt>
                         <TouchableOpacity onPress={handleCopy} style={{ marginLeft: 10 }}>
-                            <Icon size={20} source={require('../../../assets/images/setting/copy.png')} />
+                            <Icon size={20} source={copySuccess ? require('@images/unAuth/check.png') : require('@images/setting/copy.png')} />
+
                         </TouchableOpacity>
                     </View>
                 </View>
