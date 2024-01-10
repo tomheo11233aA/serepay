@@ -13,6 +13,7 @@ import { ScrollView, View } from 'react-native'
 import { useCoinSocket } from '../../../helper/useCoinSocket'
 import SearchBox from './SearchBox'
 import AsyncStorage from '@react-native-async-storage/async-storage'
+import { heightPercentageToDP as hp } from 'react-native-responsive-screen'
 
 const P2p = () => {
   useCoinSocket()
@@ -84,6 +85,9 @@ const P2p = () => {
       >
         <Note t={t} />
         <ScrollView
+          style={{ flex: 1, 
+            marginBottom: hp(8),
+          }}
           showsVerticalScrollIndicator={false}>
           <BuyCoin t={t} type={'buy'} selectedCoin={selectedCoin} />
           <BuyCoin t={t} type={'sell'} selectedCoin={selectedCoin} />

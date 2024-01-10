@@ -84,4 +84,4 @@ const Dropdown: FC<Props> = ({ onChange, onLogoChange, myContainerStyle }) => {
     );
 };
 
-export default Dropdown;
+export default React.memo(Dropdown);
