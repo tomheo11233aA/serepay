@@ -16,8 +16,8 @@ import { ITransferToUserName } from '@models/TRANSFER/transferToUsername'
 import LottieView from 'lottie-react-native'
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { walletSchema } from './Validation/formValidation'
 import WalletCoinInput from './Validation/WalletCoinInput'
+import { aliasesSchema } from './Validation/aliasesValidation'
 
 interface Props {
     route?: WithdrawProps['route'];
@@ -31,7 +31,7 @@ const Aliases: React.FC<Props> = ({ route }) => {
     const [isLoading, setIsLoading] = React.useState(false);
     const [history, setHistory] = React.useState<[]>([]);
     const { handleSubmit, formState: { errors }, setValue } = useForm({
-        resolver: yupResolver(walletSchema)
+        resolver: yupResolver(aliasesSchema)
     });
 
     const handleChangeAmount = (value: string) => {
