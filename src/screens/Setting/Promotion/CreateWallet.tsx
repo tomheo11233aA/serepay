@@ -41,7 +41,7 @@ const dropdownStyle: StyleProp<ViewStyle> = { backgroundColor: '#fafafa' };
 const CreateWallet: React.FC<DepositProps> = ({ route }) => {
     const { t } = useTranslation();
     const coinList = useAppSelector(coinListSelector)
-    const [symbol, setSymbol] = useState<string | null>(null || 'BTC');
+    const [symbol, setSymbol] = useState<any>(route?.params?.symbol || 'USDT');
     const [address, setAddress] = useState('');
     const [items, setItems] = useState<Item[]>([]);
     const [open, setOpen] = useState(false);
@@ -72,7 +72,6 @@ const CreateWallet: React.FC<DepositProps> = ({ route }) => {
             limit: '10',
             symbol: symbol || 'BTC',
         }
-        console.log(data)
         const getHistory = async () => {
             setIsLoading(true)
             try {
