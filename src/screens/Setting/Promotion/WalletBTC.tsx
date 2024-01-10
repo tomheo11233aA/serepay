@@ -10,15 +10,19 @@ import { roundDecimalValues } from '../../../helper/function/roundCoin'
 import Warn from '@screens/Swap/Warn'
 import Btn from '@commom/Btn'
 import Txt from '@commom/Txt'
-import { transferToAddress, historytransfer } from '@utils/userCallApi'
+import { transferToAddress } from '@utils/userCallApi'
 import { ITransferToAddress } from '@models/SWAP/transferToAddress'
-import { IHistoryTransfer } from '@models/TRANSFER/historyTransfer'
 import LottieView from 'lottie-react-native'
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { walletSchema } from './Validation/formValidation'
 import WalletCoinInput from './Validation/WalletCoinInput'
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen'
+import Icon from '@commom/Icon'
+import { keys } from '@contants/keys'
+import { coinListSelector } from '@redux/selector/userSelector'
+import { getHistoryWidthdraw } from '@utils/userCallApi'
+import { IHistoryWidthdraw } from '@models/WALLET/gethHstoryWidthDraw'
 
 interface Props {
     route?: WithdrawProps['route'];
@@ -37,6 +41,8 @@ const WalletBTC: React.FC<Props> = ({ route }) => {
     const { handleSubmit, formState: { errors }, setValue } = useForm({
         resolver: yupResolver(walletSchema)
     });
+    const coinList = useAppSelector(coinListSelector)
+
 
     const handleChangeAmount = (value: string) => {
         setValue('amount', value)
@@ -69,14 +75,23 @@ const WalletBTC: React.FC<Props> = ({ route }) => {
     }
     React.useEffect(() => {
         const getHistory = async () => {
-            const data: IHistoryTransfer = {
+            // const data: IHistoryTransfer = {
+            //     page: 1,
+            //     limit: '10',
+            //     symbol: route?.params?.symbol ?? 'BTC',
+            // }
+            // const res = await historytransfer(data)
+            // if (res?.data?.array) {
+            //     setHistory(res?.data?.array)
+            // }
+            const data: IHistoryWidthdraw = {
                 page: 1,
                 limit: '10',
                 symbol: route?.params?.symbol ?? 'BTC',
             }
-            const res = await historytransfer(data)
-            if (res?.data?.data) {
-                setHistory(res?.data?.data)
+            const res = await getHistoryWidthdraw(data)
+            if (res?.data?.array) {
+                setHistory(res?.data?.array)
             }
         }
         getHistory()
@@ -160,12 +175,28 @@ const WalletBTC: React.FC<Props> = ({ route }) => {
                 ) : (
                     <View style={{ alignSelf: 'center', width: '90%' }}>
                         {history.length > 0 ? (
-                            history.map((item: any, index: number) => (
-                                <View key={index} style={{ flexDirection: 'row', justifyContent: 'space-between', marginBottom: 10 }}>
-                                    <Txt fontFamily={fonts.AS} size={16} bold>{item.symbol}</Txt>
-                                    <Txt fontFamily={fonts.AS} size={16} bold>{item.amount}</Txt>
-                                </View>
-                            ))
+                            history.map((item: any, index: number) => {
+                                const coin = coinList.find((coin) => coin?.name === item?.coin_key.toUpperCase())
+                                return (
+                                    <View key={index} style={{ marginBottom: 10 }}>
+                                        <View style={{ backgroundColor: 'black', padding: 7, borderTopLeftRadius: 10, borderTopRightRadius: 10, flexDirection: 'row', alignItems: 'center' }}>
+                                            <Icon size={16} tintColor={'white'} source={require('@images/setting/calendar.png')} marginRight={10} />
+                                            <Txt fontFamily={fonts.LR} size={16} color={'white'} bold>{item?.created_at}</Txt>
+                                        </View>
+                                        <View style={{ backgroundColor: colors.gray5, padding: 7, borderBottomLeftRadius: 10, borderBottomRightRadius: 10 }}>
+                                            <View style={{ flexDirection: 'row', alignContent: 'center' }}>
+                                                <Txt fontFamily={fonts.LR} size={16}>{item?.coin_key.toUpperCase()}</Txt>
+                                                <Txt marginLeft={20} color={colors.green} fontFamily={fonts.OSB} size={16}> +{item?.usd_amount} {t('coins')}</Txt>
+                                            </View>
+                                            <View style={{ flexDirection: 'row', alignContent: 'center', marginTop: 10, alignItems: 'center', marginBottom: 7 }}>
+                                                <Txt fontFamily={fonts.LR} size={16}>{t('Final Amount:')}</Txt>
+                                                <Txt marginLeft={20} color={colors.green} fontFamily={fonts.OSB} size={16}> +{item?.amount}</Txt>
+                                                <Icon marginLeft={5} size={15} source={{ uri: `${keys.HOSTING_API}${coin?.image}` }} />
+                                            </View>
+                                        </View>
+                                    </View>
+                                )
+                            })
                         ) : (
                             <>
                                 <LottieView

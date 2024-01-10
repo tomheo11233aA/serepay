@@ -98,20 +98,23 @@ const Coins: React.FC<Props> = ({ style }) => {
                                 </View>
                             </View>
                             <View>
-                                <Btn
-                                    onPress={() => handleDeposit(coin.name ?? '')}
-                                    padding={wp('1.4%')}
-                                    radius={wp('1.4%')}
-                                    backgroundColor={colors.violet}
+                                {coin.name === 'USDT' ? (
+                                    <Btn
+                                        onPress={() => handleDeposit(coin.name ?? '')}
+                                        padding={wp('1.4%')}
+                                        radius={wp('1.4%')}
+                                        backgroundColor={colors.violet}
                                     >
-                                    {loadingStates[coin.name ?? ''] ? (
-                                        <ActivityIndicator size="small" color="#fff" />
-                                    ) : (
-                                        <Text style={{ fontFamily: fonts.OSB, fontWeight: 'bold', fontSize: wp('4%'), color: 'white' }}>
-                                            {t('Deposit')}
-                                        </Text>
-                                    )}
-                                </Btn>
+                                        {loadingStates[coin.name ?? ''] ? (
+                                            <ActivityIndicator size="small" color="#fff" />
+                                        ) : (
+                                            <Text style={{ fontFamily: fonts.OSB, fontWeight: 'bold', fontSize: wp('4%'), color: 'white' }}>
+                                                {t('Deposit')}
+                                            </Text>
+                                        )}
+                                    </Btn>
+                                ) : null}
+                                
                                 <Btn
                                     onPress={() => handelWithdraw(coin.name ?? '')}
                                     padding={wp('1.4%')}

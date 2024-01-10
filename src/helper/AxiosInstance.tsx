@@ -2,7 +2,6 @@ import axios from 'axios';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import io from "socket.io-client";
 
-
 const AxiosInstance = (contentType = 'application/json') => {
     const axiosInstance = axios.create({
         baseURL: 'https://remitano.dk-tech.vn',

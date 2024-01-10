@@ -300,3 +300,11 @@ export const cancelP2p = function (data : any) {
     console.log(error);
   }
 }
+
+export const createWalletBEP20 = function (data : any) {
+  try {
+    return axiosService.post("/api/blockico/createWalletBEP20", data);
+  } catch (error) {
+    console.log(error);
+  }
+}
