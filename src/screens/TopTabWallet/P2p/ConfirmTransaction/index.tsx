@@ -21,6 +21,7 @@ import { goBack } from '@utils/navigationRef';
 import Box from '@commom/Box'
 import Icon from '@commom/Icon'
 import { useTranslation } from 'react-i18next'
+import moment from 'moment'
 
 interface IResponse {
     amount: number;
@@ -113,8 +114,21 @@ const ConfirmTransaction: React.FC<ConfirmTransactionProps> = ({ route }) => {
                     setSide(p2pInfo?.data[0]?.side);
                     setPay(p2pInfo?.data[0]?.pay);
                     setAmount(p2pInfo?.data[0]?.amount);
+                    const date = moment.utc(p2pInfo?.data[0]?.created_at).format('DD/MM/YYYY HH:mm:ss');
+                    console.log(p2pInfo?.data[0]?.created_at)
                     const formattedData = p2pInfo?.data?.map((item: IResponse) => [
                         item.code,
+                        <View style={{ alignItems: 'center' }}>
+                            <View style={{ flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'flex-start' }}>
+                                <Text style={{ color: 'black' }}>{t('If you need assistance, please contact the ')}
+                                    <Text style={{ color: 'green', fontWeight: 'bold' }}>{item.userNameAds}</Text>
+                                </Text>
+                                <Text style={{ color: 'black' }}>{t('Email: ')}
+                                    <Text style={{ color: 'green', fontWeight: 'bold' }}>{item.emailAds}</Text>
+                                </Text>
+                            </View>
+                        </View>
+                        ,
                         <View style={{ marginRight: 20 }}>
                             <View style={{ flexDirection: 'row', alignItems: 'center' }}>
                                 <LottieView
@@ -143,7 +157,8 @@ const ConfirmTransaction: React.FC<ConfirmTransactionProps> = ({ route }) => {
                         item.rate,
                         item.pay.toFixed(3),
                         <Text style={{ color: colors.green, fontWeight: 'bold', marginLeft: 5, flexShrink: 1 }}>
-                            {new Date(item.created_at).toLocaleString()}
+                            {/* {new Date(item.created_at).toLocaleString()} */}
+                            {date}
                         </Text>,
                         <View style={{ alignItems: 'center', paddingVertical: 15, paddingHorizontal: 10 }}>
                             <Text style={{ flexShrink: 1, textAlign: 'justify' }}>
@@ -172,14 +187,9 @@ const ConfirmTransaction: React.FC<ConfirmTransactionProps> = ({ route }) => {
         setLoginUserid(userInfo?.id ?? 0);
     }, [userInfo])
 
-
     React.useEffect(() => {
         dispatch(fetchUserInfo())
     }, [dispatch]);
-
-    const refresh = () => {
-        fetchP2pInfo();
-    }
 
     return (
         <Safe flex={1} backgroundColor={'white'}>
@@ -210,7 +220,9 @@ const ConfirmTransaction: React.FC<ConfirmTransactionProps> = ({ route }) => {
                     <View style={styles.header}>
                         <Text style={styles.tableTitle}>{t('BTC Transaction')}</Text>
                     </View>
-                    <TransactionTable tableData={tableData} showModal={showModal} />
+                    <TransactionTable tableData={tableData} showModal={showModal}
+                        type={side === 'sell' ? t('selling') : t('buying')}
+                    />
                     <View style={styles.viewFooter}>
                         <FooterButtons typeUser={typeUser} userid={userId} loginUserid={loginUserid} idP2p={selectedidP2p} />
                     </View>
@@ -221,7 +233,7 @@ const ConfirmTransaction: React.FC<ConfirmTransactionProps> = ({ route }) => {
                         selectedBankNumber={selectedBankNumber}
                         selectedBankOwner={selectedBankOwner}
                         content={content}
-                        side = {side === 'sell' ? t('selling') : t('buying')}
+                        side={side === 'sell' ? t('selling') : t('buying')}
                         amount={amount}
                         pay={pay}
                     />

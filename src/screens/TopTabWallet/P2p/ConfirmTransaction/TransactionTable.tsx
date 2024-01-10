@@ -8,19 +8,21 @@ import { useTranslation } from 'react-i18next';
 interface TransactionTableProps {
     tableData: any[];
     showModal: () => void;
+    type?: string;
 }
 
-const TransactionTable: React.FC<TransactionTableProps> = ({ tableData, showModal }) => {
+const TransactionTable: React.FC<TransactionTableProps> = ({ tableData, showModal, type }) => {
     const { t } = useTranslation();
     const windowWidth = Dimensions.get('window').width;
     const padding = 20;
     const borderWidth = 1;
     const adjustedWidth = windowWidth - 2 * (padding + borderWidth);
     const columnWidthRatios = [0.33, 0.67];
-    const tableHead = [t('Transaction Id'), 
+    const tableHead = [t('Transaction Code'), 
+    t('Trader'),
     t('Status'),
     t('Payment'),
-    t('You receive'),
+    t('You are ' + (type === 'sell' ? 'buying' : 'selling')),
     t('Exchange rate'),
     t('Amount'),
     t('Time'),

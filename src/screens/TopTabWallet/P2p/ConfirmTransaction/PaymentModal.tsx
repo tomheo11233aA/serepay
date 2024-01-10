@@ -49,7 +49,7 @@ const PaymentModal: React.FC<PaymentModalProps> = ({ visible, hideModal, selecte
                                 Clipboard.setString(bankName);
                                 notifyMessage(bankName);
                             }}>
-                            <Icon source={require('../../../.././assets/images/setting/copy.png')}
+                            <Icon source={require('@images/setting/copy.png')}
                                 size={20}
                                 style={{ marginLeft: 10 }}
                             />
@@ -67,7 +67,7 @@ const PaymentModal: React.FC<PaymentModalProps> = ({ visible, hideModal, selecte
                                 Clipboard.setString(bankNumber);
                                 notifyMessage(bankNumber);
                             }}>
-                            <Icon source={require('../../../.././assets/images/setting/copy.png')}
+                            <Icon source={require('@images/setting/copy.png')}
                                 size={20}
                                 style={{ marginLeft: 10 }}
                             />
@@ -76,7 +76,6 @@ const PaymentModal: React.FC<PaymentModalProps> = ({ visible, hideModal, selecte
 
                     <View style={{ flexDirection: 'row', marginBottom: 5, justifyContent: 'space-between' }}>
                         <View style={{ flexDirection: 'row', marginBottom: 5 }}>
-                            {/* <Text style={{ marginBottom: 5 }}>Chủ tài khoản: </Text> */}
                             <Text style={{ marginBottom: 5 }}>{t('Account owner: ')}</Text>
                             <Text style={{ marginBottom: 5, color: colors.red, fontWeight: 'bold' }}>{selectedBankOwner}</Text>
                         </View>
@@ -113,7 +112,6 @@ const PaymentModal: React.FC<PaymentModalProps> = ({ visible, hideModal, selecte
 
                     <View style={{ flexDirection: 'row', marginBottom: 5, justifyContent: 'space-between' }}>
                         <View style={{ flexDirection: 'row', marginBottom: 5 }}>
-                            {/* <Text style={{ marginBottom: 5 }}>Với số tiền </Text> */}
                             <Text style={{ marginBottom: 5 }}>{t('With amount: ')}</Text>
                             <Text style={{ marginBottom: 5, color: colors.green, fontWeight: 'bold' }}>{pay.toLocaleString()}đ</Text>
                         </View>
