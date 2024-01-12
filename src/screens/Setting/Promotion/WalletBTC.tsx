@@ -87,7 +87,8 @@ const WalletBTC: React.FC<Props> = ({ route }) => {
             setIsLoading(true);
             const response = await getHistoryWidthdraw(data);
             if (Array.isArray(response?.data?.array)) {
-                setHistory(prevData => [...prevData, ...response.data.array] as []);
+                // setHistory(prevData => [...prevData, ...response.data.array] as []);
+                setHistory(response.data.array);
                 if (response.data.array.length === 0) {
                     setHasMore(false);
                 }
@@ -98,6 +99,28 @@ const WalletBTC: React.FC<Props> = ({ route }) => {
             setIsLoading(false);
         }
     };
+    const loadPreviousData = async () => {
+        if (page > 1) {
+            const newPage = page - 1;
+            const data: IHistoryWidthdraw = {
+                page: newPage,
+                limit: '5',
+                symbol: route?.params?.symbol ?? 'BTC',
+            }
+            setIsLoading(true);
+            const response = await getHistoryWidthdraw(data);
+            if (Array.isArray(response?.data?.array)) {
+                setHistory(response.data.array);
+                if (response.data.array.length === 0) {
+                    setHasMore(false);
+                }
+            } else {
+                console.error('response.data.array is not an array:', response?.data?.array);
+            }
+            setPage(newPage);
+            setIsLoading(false);
+        }
+    }
     const handleLoadMore = () => {
         if (!isLoading && hasMore) {
             loadMoreData();
@@ -222,16 +245,32 @@ const WalletBTC: React.FC<Props> = ({ route }) => {
                                 <Txt center fontFamily={fonts.AS} size={16} bold>{t('No data')}</Txt>
                             </>
                         )}
-                        {hasMore && (
+                        <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+                            {page > 1 && (
+                                <Btn
+                                    onPress={loadPreviousData}
+                                    marginTop={20}
+                                    height={hp(5)}
+                                    padding={10}
+                                    radius={5}
+                                    width={'48%'}
+                                    backgroundColor={colors.darkViolet}>
+                                    <Txt color={'white'} size={18} bold fontFamily={fonts.LR}>{t('Previous page')}</Txt>
+                                </Btn>
+                            )}
+
                             <Btn
                                 onPress={handleLoadMore}
                                 marginTop={20}
-                                height={50}
+                                height={hp(5)}
+                                padding={10}
+                                width={'48%'}
                                 radius={5}
                                 backgroundColor={colors.lviolet}>
                                 <Txt color={'white'} size={18} bold fontFamily={fonts.LR}>{t('Next page')}</Txt>
                             </Btn>
-                        )}
+
+                        </View>
                     </View>
                 )}
             </View>

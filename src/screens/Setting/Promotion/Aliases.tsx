@@ -147,14 +147,6 @@ const Aliases: React.FC<Props> = ({ route }) => {
         }
     }
     useEffect(() => {
-        if (hasMore) {
-            const timeout = setTimeout(() => {
-                loadMoreData();
-            }, 1000);
-            return () => clearTimeout(timeout);
-        }
-    }, [page, hasMore]);
-    useEffect(() => {
         loadMoreData();
     }, []);
     return (
