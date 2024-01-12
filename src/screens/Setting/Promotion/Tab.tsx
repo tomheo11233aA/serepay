@@ -6,8 +6,8 @@ import Btn from '@commom/Btn'
 import WalletBTC from './WalletBTC'
 import Aliases from './Aliases'
 import { WithdrawProps } from './Withdraw'
-import Scroll from '@commom/Scroll'
 import { ScrollView } from 'react-native'
+import { heightPercentageToDP as hp } from 'react-native-responsive-screen'
 
 interface Props {
     t: any;
@@ -15,12 +15,12 @@ interface Props {
 }
 
 const Tab = ({ t, route }: Props) => {
-    // const [tabChoosed, setTabChoosed] = useState<string>(`Wallet ${route?.params?.symbol}`)
-    // const tabs = [`Wallet ${route?.params?.symbol}`, 'Aliases']
     const [tabChoosed, setTabChoosed] = useState<string>(`Wallet`)
     const tabs = ['Wallet', 'Aliases']
     return (
-        <ScrollView style={{ marginBottom: 130 }} showsVerticalScrollIndicator={false}>
+        <ScrollView style={{ 
+            marginBottom: hp(15),
+        }} showsVerticalScrollIndicator={false}>
             <Box
                 marginTop={20}
                 marginRight={20}

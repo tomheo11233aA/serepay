@@ -1,5 +1,5 @@
-import { StyleSheet, Text, View } from 'react-native'
-import React from 'react'
+import { Text, View } from 'react-native'
+import React, { useState, useEffect, memo } from 'react'
 import { WithdrawProps } from './Withdraw'
 import { useAppSelector } from '@hooks/redux'
 import { userWalletUserSelector } from '@redux/selector/userSelector'
@@ -28,11 +28,11 @@ interface Props {
 const Aliases: React.FC<Props> = ({ route }) => {
     const { t } = useTranslation()
     const userWallet = useAppSelector(userWalletUserSelector)
-    const [amount, setAmount] = React.useState<string>('')
+    const [amount, setAmount] = useState<string>('')
     const balanceKey = `${route?.params?.symbol.toLocaleLowerCase()}_balance`;
     const maxAvailable = userWallet?.[balanceKey] || 0;
-    const [isLoading, setIsLoading] = React.useState(false);
-    const [history, setHistory] = React.useState<[]>([]);
+    const [isLoading, setIsLoading] = useState(false);
+    const [history, setHistory] = useState<[]>([]);
     const coinList = useAppSelector(coinListSelector)
     const { handleSubmit, formState: { errors }, setValue } = useForm({
         resolver: yupResolver(aliasesSchema)
@@ -42,6 +42,8 @@ const Aliases: React.FC<Props> = ({ route }) => {
         setValue('amount', value)
         setAmount(value)
     }
+    const [page, setPage] = useState<number>(1)
+    const [hasMore, setHasMore] = useState(true);
 
     const handleSend = async (inputData: any) => {
         const { userName, amount, message } = inputData;
@@ -64,20 +66,35 @@ const Aliases: React.FC<Props> = ({ route }) => {
             setIsLoading(false)
         }
     }
-    React.useEffect(() => {
-        const getHistory = async () => {
-            const data: IHistoryTransfer = {
-                page: 1,
-                limit: '10',
-                symbol: route?.params?.symbol ?? 'BTC',
-            }
-            const res = await historytransfer(data)
-            if (res?.data?.array) {
-                setHistory(res?.data?.array)
-            }
+    const loadMoreData = async () => {
+        const data: IHistoryTransfer = {
+            page: page,
+            limit: '5',
+            symbol: route?.params?.symbol ?? 'BTC',
         }
-        getHistory()
-    }, [])
+        if (!isLoading && hasMore) {
+            setIsLoading(true);
+            const response = await historytransfer(data);
+            if (Array.isArray(response?.data?.array)) {
+                setHistory(prevData => [...prevData, ...response.data.array] as []);
+                if (response.data.array.length === 0) {
+                    setHasMore(false);
+                }
+            } else {
+                console.error('response.data.array is not an array:', response?.data?.array);
+            }
+            setPage(page + 1);
+            setIsLoading(false);
+        }
+    };
+    const handleLoadMore = () => {
+        if (!isLoading && hasMore) {
+            loadMoreData();
+        }
+    }
+    useEffect(() => {
+        loadMoreData();
+    }, []);
     return (
         <View>
             <View>
@@ -173,7 +190,7 @@ const Aliases: React.FC<Props> = ({ route }) => {
                                                 <Txt fontFamily={fonts.LR} size={16}>From User: </Txt>
                                                 <Txt fontFamily={fonts.LR} size={16}>{item?.address_form}</Txt>
                                             </View>
-                                            <View style={{ flexDirection: 'row', alignContent: 'center', marginTop: 7, alignItems: 'center', marginBottom: 7}}>
+                                            <View style={{ flexDirection: 'row', alignContent: 'center', marginTop: 7, alignItems: 'center', marginBottom: 7 }}>
                                                 <Txt fontFamily={fonts.LR} size={16}>From To: </Txt>
                                                 <Txt fontFamily={fonts.LR} size={16}>{item?.address_to}</Txt>
                                             </View>
@@ -192,6 +209,16 @@ const Aliases: React.FC<Props> = ({ route }) => {
                                 <Txt center fontFamily={fonts.AS} size={16} bold>{t('No data')}</Txt>
                             </>
                         )}
+                        {hasMore && (
+                            <Btn
+                                onPress={handleLoadMore}
+                                marginTop={20}
+                                height={50}
+                                radius={5}
+                                backgroundColor={colors.lviolet}>
+                                <Txt color={'white'} size={18} bold fontFamily={fonts.LR}>{t('Next page')}</Txt>
+                            </Btn>
+                        )}
                     </View>
                 )}
             </View>
@@ -200,6 +227,5 @@ const Aliases: React.FC<Props> = ({ route }) => {
     )
 }
 
-export default Aliases
+export default memo(Aliases)
 
-const styles = StyleSheet.create({})

@@ -1,5 +1,5 @@
-import { StyleSheet, Text, View } from 'react-native'
-import React from 'react'
+import { Text, View } from 'react-native'
+import React, { useState, useEffect } from 'react'
 import { WithdrawProps } from './Withdraw'
 import { useAppSelector } from '@hooks/redux'
 import { userWalletUserSelector } from '@redux/selector/userSelector'
@@ -49,6 +49,8 @@ const WalletBTC: React.FC<Props> = ({ route }) => {
         setAmount(value)
     }
 
+    const [page, setPage] = React.useState<number>(1)
+    const [hasMore, setHasMore] = useState(true);
     const handleSend = async (inputData: any) => {
         const { address, note, amount } = inputData;
         const data: ITransferToAddress = {
@@ -75,20 +77,36 @@ const WalletBTC: React.FC<Props> = ({ route }) => {
             setIsLoading(false)
         }
     }
-    React.useEffect(() => {
-        const getHistory = async () => {
-            const data: IHistoryWidthdraw = {
-                page: 1,
-                limit: '10',
-                symbol: route?.params?.symbol ?? 'BTC',
-            }
-            const res = await getHistoryWidthdraw(data)
-            if (res?.data?.array) {
-                setHistory(res?.data?.array)
-            }
+    const loadMoreData = async () => {
+        const data: IHistoryWidthdraw = {
+            page: page,
+            limit: '5',
+            symbol: route?.params?.symbol ?? 'BTC',
         }
-        getHistory()
-    }, [])
+        if (!isLoading && hasMore) {
+            setIsLoading(true);
+            const response = await getHistoryWidthdraw(data);
+            if (Array.isArray(response?.data?.array)) {
+                setHistory(prevData => [...prevData, ...response.data.array] as []);
+                if (response.data.array.length === 0) {
+                    setHasMore(false);
+                }
+            } else {
+                console.error('response.data.array is not an array:', response?.data?.array);
+            }
+            setPage(page + 1);
+            setIsLoading(false);
+        }
+    };
+    const handleLoadMore = () => {
+        if (!isLoading && hasMore) {
+            loadMoreData();
+        }
+    }
+    useEffect(() => {
+        loadMoreData();
+    }, []);
+
     return (
         <>
             <View style={{ marginTop: 20 }}>
@@ -153,7 +171,6 @@ const WalletBTC: React.FC<Props> = ({ route }) => {
                     <Txt color={'white'} size={18} bold fontFamily={fonts.LR}>{t('Send')}</Txt>
                 </Btn>
             </View>
-
             <View style={{ justifyContent: 'center', marginTop: 20, zIndex: -1 }}>
                 <Txt fontFamily={fonts.AS} size={16} bold style={{ marginBottom: 10 }}>{t('History')}</Txt>
                 {isLoading ? (
@@ -205,6 +222,16 @@ const WalletBTC: React.FC<Props> = ({ route }) => {
                                 <Txt center fontFamily={fonts.AS} size={16} bold>{t('No data')}</Txt>
                             </>
                         )}
+                        {hasMore && (
+                            <Btn
+                                onPress={handleLoadMore}
+                                marginTop={20}
+                                height={50}
+                                radius={5}
+                                backgroundColor={colors.lviolet}>
+                                <Txt color={'white'} size={18} bold fontFamily={fonts.LR}>{t('Next page')}</Txt>
+                            </Btn>
+                        )}
                     </View>
                 )}
             </View>
@@ -213,6 +240,4 @@ const WalletBTC: React.FC<Props> = ({ route }) => {
     )
 }
 
-export default WalletBTC
-
-const styles = StyleSheet.create({})
+export default React.memo(WalletBTC)
