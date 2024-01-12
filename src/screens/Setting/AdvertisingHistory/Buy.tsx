@@ -10,6 +10,13 @@ import BouncyCheckbox from "react-native-bouncy-checkbox";
 import { useTranslation } from 'react-i18next';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import { fonts } from '@themes/fonts'
+import { useAppSelector } from '@hooks/redux'
+import { listAdsBuyToUserSelector } from '@redux/selector/userSelector'
+import { listAdsBuyPenddingToUserSelector } from '@redux/selector/userSelector'
+import { fetchListAdsBuy } from '@redux/slice/advertisingSlice'
+import { fetchListAdsBuyPendding } from '@redux/slice/advertisingSlice'
+import { AppDispatch } from '@redux/store/store'
+import { useAppDispatch } from '@hooks/redux'
 
 const Buy = () => {
     const { t } = useTranslation()
@@ -18,27 +25,14 @@ const Buy = () => {
     const [loading, setLoading] = useState(false);
     const [hasMore, setHasMore] = useState(true);
     const [isChecked, setIsChecked] = useState(false);
+    const listAdsBuyToUser = useAppSelector(listAdsBuyToUserSelector)
+    const listAdsBuyPenddingToUser = useAppSelector(listAdsBuyPenddingToUserSelector)
+    const dispatch: AppDispatch = useAppDispatch()
 
-    // useEffect(() => {
-    //     loadMoreData();
-    // }, []);
-
-    const refreshData = async () => {
-        setLoading(true);
-        setPage(1);
-        setHasMore(true);
-        setData([]);
-        const response = await getListAdsBuyToUser({ page: 1, limit: 10 });
-        if (Array.isArray(response?.data?.array)) {
-            setData(response.data.array);
-            if (response.data.array.length === 0) {
-                setHasMore(false);
-            }
-        } else {
-            console.error('response.data.array is not an array:', response?.data?.array);
-        }
-        setLoading(false);
-    };
+    useEffect(() => {
+        dispatch(fetchListAdsBuy())
+        dispatch(fetchListAdsBuyPendding())
+    }, [])
 
     const loadMoreData = async () => {
         if (!loading && hasMore) {
@@ -78,7 +72,7 @@ const Buy = () => {
             setPage(page + 1);
             setLoading(false);
         }
-    }
+    };
 
     useEffect(() => {
         if (isChecked) {
@@ -88,6 +82,15 @@ const Buy = () => {
         }
     }, [isChecked])
 
+    useEffect(() => {
+        setPage(1)
+        setHasMore(true)
+        if (isChecked) {
+            loadMoreDataPending();
+        } else {
+            loadMoreData();
+        }
+    }, [listAdsBuyToUser, listAdsBuyPenddingToUser])
 
     if (data.length === 0) {
         return (
@@ -158,12 +161,12 @@ const Buy = () => {
                     marginTop: hp('2%'),
                     marginBottom: hp('27%'),
                 }}
-                data={data}
+                data={isChecked ? listAdsBuyPenddingToUser : listAdsBuyToUser}
                 keyExtractor={(item) => item.id.toString()}
                 onEndReached={isChecked ? loadMoreDataPending : loadMoreData}
                 onEndReachedThreshold={0.1}
                 ListFooterComponent={() => loading && hasMore && <ActivityIndicator size="large" color={colors.blue} />}
-                renderItem={({ item }) => <AdvertisingItem item={item} refreshData={refreshData} />}
+                renderItem={({ item }) => <AdvertisingItem item={item} side='buy' isPending={isChecked} />}
             />
         </>
     )

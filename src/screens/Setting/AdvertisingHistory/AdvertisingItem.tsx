@@ -12,14 +12,21 @@ import { navigate } from '@utils/navigationRef';
 import { screens } from '@contants/screens';
 import { getInfoP2p } from '@utils/userCallApi';
 import { useTranslation } from 'react-i18next';
+import { useAppDispatch } from '@hooks/redux';
+import { AppDispatch } from '@redux/store/store';
+import { fetchListAdsBuy } from '@redux/slice/advertisingSlice';
+import { fetchListAdsSell } from '@redux/slice/advertisingSlice';
+import { fetchListAdsBuyPendding } from '@redux/slice/advertisingSlice';
 
 interface TransactionItemProps {
     item: IAdvertising;
-    refreshData?: () => void;
+    side?: 'buy' | 'sell';
+    isPending?: boolean;
 }
 
-const TransactionItem = ({ item }: TransactionItemProps) => {
+const TransactionItem = ({ item, side, isPending }: TransactionItemProps) => {
     const { t } = useTranslation()
+    const dispatch: AppDispatch = useAppDispatch()
     const [hasP2PInfo, setHasP2PInfo] = React.useState(false)
     const formatTime = (time: string) => {
         return moment(time, "DD/MM/YYYY H:m:s").format('DD/MM/YYYY')
@@ -43,11 +50,17 @@ const TransactionItem = ({ item }: TransactionItemProps) => {
         <View style={styles.container}>
             <Box justifySpaceBetween>
                 <Box row>
+                    {side === "buy" && (
+                        <Txt color={colors.gray2} fontFamily={fonts.AS}>{t('UserName')}: </Txt>
+
+                    )}
                     <Txt fontFamily={fonts.AS}>{capitalizeFirstLetter(item.userName)}</Txt>
-                    <Box row marginLeft={20}>
-                        <Txt fontFamily={fonts.AS}>{item.bankName ? item.bankName : "Unknown"}: </Txt>
-                        <Txt fontFamily={fonts.AS} color={colors.gray2}>{item.numberBank ? item.numberBank : "Unknown"}</Txt>
-                    </Box>
+                    {side === 'sell' && (
+                        <Box row marginLeft={20}>
+                            <Txt fontFamily={fonts.AS}>{item.bankName ? item.bankName : "Unknown"}: </Txt>
+                            <Txt fontFamily={fonts.AS} color={colors.gray2}>{item.numberBank ? item.numberBank : "Unknown"}</Txt>
+                        </Box>
+                    )}
                 </Box>
                 <Box row>
                     <Txt color={colors.gray2} fontFamily={fonts.AS}>{t('Available')}: </Txt>
@@ -92,7 +105,14 @@ const TransactionItem = ({ item }: TransactionItemProps) => {
                                         try {
                                             await cancelP2p({ idP2p: item.id })
                                             Alert.alert("Cancel success")
-                                            navigate(screens.SETTING)
+                                            if (side === 'buy') {
+                                                if (isPending) {
+                                                    dispatch(fetchListAdsBuyPendding())
+                                                }
+                                                dispatch(fetchListAdsBuy())
+                                            } else {
+                                                dispatch(fetchListAdsSell())
+                                            }
                                         } catch (error) {
                                             console.log(error)
                                         }
@@ -121,7 +141,14 @@ const TransactionItem = ({ item }: TransactionItemProps) => {
                                         try {
                                             await cancelP2p({ idP2p: item.id })
                                             Alert.alert("Cancel success")
-                                            navigate(screens.SETTING)
+                                            if (side === 'buy') {
+                                                if (isPending) {
+                                                    dispatch(fetchListAdsBuyPendding())
+                                                }
+                                                dispatch(fetchListAdsBuy())
+                                            } else {
+                                                dispatch(fetchListAdsSell())
+                                            }
                                         } catch (error) {
                                             console.log(error)
                                         }

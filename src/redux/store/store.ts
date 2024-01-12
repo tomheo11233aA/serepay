@@ -4,6 +4,7 @@ import coinSlice from "@redux/slice/coinSlice";
 import exchangeRateSlice from "@redux/slice/exchangeRateSlice";
 import historySlice from "@redux/slice/historySlice";
 import configSlice from "@redux/slice/getConfig";
+import advertisingSlice from "@redux/slice/advertisingSlice";
 
 export const store = configureStore({
     reducer: {
@@ -11,7 +12,8 @@ export const store = configureStore({
         coin : coinSlice.reducer,
         exchangeRate : exchangeRateSlice.reducer,
         history : historySlice.reducer,
-        config : configSlice.reducer
+        config : configSlice.reducer,
+        advertising : advertisingSlice.reducer
     },
 })
 

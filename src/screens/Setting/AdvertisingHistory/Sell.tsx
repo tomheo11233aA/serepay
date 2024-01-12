@@ -10,6 +10,13 @@ import BouncyCheckbox from "react-native-bouncy-checkbox";
 import { useTranslation } from 'react-i18next';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import { fonts } from '@themes/fonts'
+import { useAppSelector } from '@hooks/redux'
+import { listAdsSellToUserSelector } from '@redux/selector/userSelector'
+import { listAdsSellPenddingToUserSelector } from '@redux/selector/userSelector'
+import { fetchListAdsSell } from '@redux/slice/advertisingSlice'
+import { fetchListAdsSellPendding } from '@redux/slice/advertisingSlice'
+import { AppDispatch } from '@redux/store/store'
+import { useAppDispatch } from '@hooks/redux'
 
 const Sell = () => {
     const { t } = useTranslation()
@@ -18,6 +25,14 @@ const Sell = () => {
     const [loading, setLoading] = useState(false);
     const [hasMore, setHasMore] = useState(true);
     const [isChecked, setIsChecked] = useState(false);
+    const dispatch: AppDispatch = useAppDispatch()
+    const listAdsSellToUser = useAppSelector(listAdsSellToUserSelector)
+    const listAdsSellPenddingToUser = useAppSelector(listAdsSellPenddingToUserSelector)
+
+    useEffect(() => {
+        dispatch(fetchListAdsSell())
+        dispatch(fetchListAdsSellPendding())
+    }, [])
 
     const loadMoreData = async () => {
         if (!loading && hasMore) {
@@ -66,6 +81,16 @@ const Sell = () => {
             loadMoreData()
         }
     }, [isChecked])
+
+    useEffect(() => {
+        setPage(1)
+        setHasMore(true)
+        if (isChecked) {
+            loadMoreDataPending();
+        } else {
+            loadMoreData();
+        }
+    }, [listAdsSellPenddingToUser, listAdsSellToUser])
 
     if (data.length === 0) {
         return (
@@ -136,12 +161,13 @@ const Sell = () => {
                     marginTop: hp('2%'),
                     marginBottom: hp('27%'),
                 }}
-                data={data}
+                // data={data}
+                data={isChecked ? listAdsSellPenddingToUser : listAdsSellToUser}
                 keyExtractor={(item) => item.id.toString()}
                 onEndReached={isChecked ? loadMoreDataPending : loadMoreData}
                 onEndReachedThreshold={0.1}
                 ListFooterComponent={() => loading && hasMore && <ActivityIndicator size="large" color={colors.blue} />}
-                renderItem={({ item }) => <AdvertisingItem item={item} />}
+                renderItem={({ item }) => <AdvertisingItem item={item} side='sell' />}
             />
         </>
     )
