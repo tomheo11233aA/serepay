@@ -216,6 +216,8 @@
         "History send USDT": "Lịch sử gửi USDT",
         "Please Choose Your Bank": "Vui lòng chọn ngân hàng của bạn",
         "Card number is required": "Số thẻ là bắt buộc",
-        "Card holder name is required": "Tên chủ thẻ là bắt buộc"
+        "Card holder name is required": "Tên chủ thẻ là bắt buộc",
+        "User name is required": "Tên người dùng là bắt buộc",
+        "Message is required": "Tin nhắn là bắt buộc"
     }
 }

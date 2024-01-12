@@ -1,5 +1,5 @@
-import { Text, View } from 'react-native'
-import React, { useState, useEffect, memo } from 'react'
+import { ScrollView, Text, View } from 'react-native'
+import React, { useState, useEffect, memo, useRef } from 'react'
 import { WithdrawProps } from './Withdraw'
 import { useAppSelector } from '@hooks/redux'
 import { userWalletUserSelector } from '@redux/selector/userSelector'
@@ -21,14 +21,22 @@ import { aliasesSchema } from './Validation/aliasesValidation'
 import Icon from '@commom/Icon'
 import { coinListSelector } from '@redux/selector/userSelector'
 import { keys } from '@contants/keys'
+import { useAppDispatch } from '@hooks/redux'
+import { AppDispatch } from '@redux/store/store'
+import { fetchUserWallet } from '@redux/slice/userSlice'
 
 interface Props {
     route?: WithdrawProps['route'];
 }
 const Aliases: React.FC<Props> = ({ route }) => {
     const { t } = useTranslation()
+    const dispatch: AppDispatch = useAppDispatch()
     const userWallet = useAppSelector(userWalletUserSelector)
     const [amount, setAmount] = useState<string>('')
+    const [userName, setUserName] = useState<string>('')
+    const [message, setMessage] = useState<string>('')
+    const [page, setPage] = useState<number>(1)
+    const [hasMore, setHasMore] = useState(true);
     const balanceKey = `${route?.params?.symbol.toLocaleLowerCase()}_balance`;
     const maxAvailable = userWallet?.[balanceKey] || 0;
     const [isLoading, setIsLoading] = useState(false);
@@ -42,8 +50,19 @@ const Aliases: React.FC<Props> = ({ route }) => {
         setValue('amount', value)
         setAmount(value)
     }
-    const [page, setPage] = useState<number>(1)
-    const [hasMore, setHasMore] = useState(true);
+    const handleChangeUserName = (value: string) => {
+        setValue('userName', value)
+        setUserName(value)
+    }
+    const handleChangeMessage = (value: string) => {
+        setValue('message', value)
+        setMessage(value)
+    }
+    useEffect(() => {
+        dispatch(fetchUserWallet())
+    }, [])
+
+    const scrollViewRef = useRef<ScrollView>(null);
 
     const handleSend = async (inputData: any) => {
         const { userName, amount, message } = inputData;
@@ -56,8 +75,13 @@ const Aliases: React.FC<Props> = ({ route }) => {
         try {
             setIsLoading(true)
             const res = await transferToUsername(data)
-            if (res?.data?.data) {
+            console.log(res)
+            if (res?.status) {
                 setIsLoading(false)
+                dispatch(fetchUserWallet())
+                setAmount('')
+                setUserName('')
+                setMessage('')
             }
         } catch (error) {
             console.log(error)
@@ -101,11 +125,11 @@ const Aliases: React.FC<Props> = ({ route }) => {
                 <Text style={{ fontFamily: fonts.LR, color: 'black', marginTop: 20, fontSize: 18 }}>{t('User Name')}</Text>
                 <WalletCoinInput
                     placeholder={t('Enter user name')}
-                    onChangeText={(value: string) => setValue('userName', value)}
+                    onChangeText={handleChangeUserName}
                     maxLength={100}
                 />
-                {errors.address && <Txt size={12} color={colors.red} style={{ zIndex: -1 }} marginTop={7} bold>
-                    {errors.userName?.message}
+                {errors.userName && <Txt size={12} color={colors.red} style={{ zIndex: -1 }} marginTop={7} bold>
+                    {t(`${errors.userName?.message}`)}
                 </Txt>}
                 <Text style={{ fontFamily: fonts.LR, color: 'black', marginTop: 20, fontSize: 18 }}>{t('Amount of')} {route?.params?.symbol}</Text>
                 <WalletCoinInput
@@ -119,7 +143,7 @@ const Aliases: React.FC<Props> = ({ route }) => {
                     }}
                 />
                 {errors.amount && <Txt size={12} color={colors.red} style={{ zIndex: -1 }} marginTop={7} bold>
-                    {errors.amount?.message}
+                    {t(`${errors.amount?.message}`)}
                 </Txt>}
                 <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
                     <Text style={{ fontFamily: fonts.LR, color: 'black', marginTop: 20, fontSize: 18 }}>{t('Max available:')}</Text>
@@ -128,12 +152,12 @@ const Aliases: React.FC<Props> = ({ route }) => {
                 <Text style={{ fontFamily: fonts.LR, color: 'black', marginTop: 20, fontSize: 18 }}>Message</Text>
                 <WalletCoinInput
                     placeholder={t('I\'m fine, thank you. And you?')}
-                    onChangeText={(value: string) => setValue('message', value)}
+                    onChangeText={handleChangeMessage}
                     maxLength={100}
                     height={150}
                 />
                 {errors.message && <Txt size={12} color={colors.red} style={{ zIndex: -1 }} marginTop={7} bold>
-                    {errors.message?.message}
+                    {t(`${errors.message?.message}`)}
                 </Txt>}
 
                 <Btn
@@ -145,7 +169,6 @@ const Aliases: React.FC<Props> = ({ route }) => {
                     <Txt color={'white'} size={18} bold fontFamily={fonts.LR}>{t('Send')}</Txt>
                 </Btn>
             </View>
-
             <View style={{ justifyContent: 'center', marginTop: 20, zIndex: -1 }}>
                 <Txt paddingHorizontal={20} fontFamily={fonts.AS} size={16} bold style={{ marginBottom: 10 }}>{t('History')}</Txt>
                 {isLoading ? (
