@@ -35,9 +35,6 @@ const Buy = () => {
         dispatch(fetchListAdsBuyPendding())
     }, [])
 
-    // console.log('listAdsBuyToUser', listAdsBuyToUser);
-    // console.log('listAdsBuyPenddingToUser', listAdsBuyPenddingToUser);
-
     const loadMoreData = async () => {
         if (!loading && hasMore) {
             setLoading(true);

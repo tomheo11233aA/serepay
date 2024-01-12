@@ -14,7 +14,7 @@ import { getInfoP2p } from '@utils/userCallApi';
 import { useTranslation } from 'react-i18next';
 import { useAppDispatch } from '@hooks/redux';
 import { AppDispatch } from '@redux/store/store';
-import { fetchListAdsBuy } from '@redux/slice/advertisingSlice';
+import { fetchListAdsBuyToUser } from '@redux/slice/advertisingSlice';
 import { fetchListAdsSell } from '@redux/slice/advertisingSlice';
 import { fetchListAdsBuyPendding } from '@redux/slice/advertisingSlice';
 import { fetchListAdsSellPendding } from '@redux/slice/advertisingSlice';
@@ -112,7 +112,7 @@ const TransactionItem = ({ item, side, isPending }: TransactionItemProps) => {
                                                 if (isPending) {
                                                     dispatch(fetchListAdsBuyPendding())
                                                 }
-                                                dispatch(fetchListAdsBuy())
+                                                dispatch(fetchListAdsBuyToUser())
                                             } else {
                                                 if (isPending) {
                                                     dispatch(fetchListAdsSellPendding())
@@ -154,7 +154,7 @@ const TransactionItem = ({ item, side, isPending }: TransactionItemProps) => {
                                                 if (isPending) {
                                                     dispatch(fetchListAdsBuyPendding())
                                                 }
-                                                dispatch(fetchListAdsBuy())
+                                                dispatch(fetchListAdsBuyToUser())
                                             } else {
                                                 if (isPending) {
                                                     dispatch(fetchListAdsSellPendding())
