@@ -55,7 +55,7 @@ const advertisingSlice = createSlice({
         setListAdsSellPendding: (state, action: PayloadAction<any>) => {
             return { ...state, listAdsSellPendding: action.payload }
         },
-        
+
     },
     extraReducers: (builder) => {
         builder.addCase(fetchListAdsBuy.fulfilled, (state, action: PayloadAction<any>) => {

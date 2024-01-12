@@ -30,8 +30,8 @@ const Buy = () => {
     const dispatch: AppDispatch = useAppDispatch()
 
     useEffect(() => {
-        dispatch(fetchListAdsBuy())
-        dispatch(fetchListAdsBuyPendding())
+        dispatch(fetchListAdsBuy(page))
+        dispatch(fetchListAdsBuyPendding(page))
     }, [])
 
     const loadMoreData = async () => {
