@@ -1,29 +1,38 @@
-import { ScrollView, Text, View } from 'react-native'
-import React, { useState, useEffect, memo, useRef } from 'react'
+// React and React Native imports
+import React, { useEffect, memo, useState } from 'react'
+import { Text, View } from 'react-native'
+
+// Redux imports
+import { useAppDispatch, useAppSelector } from '@hooks/redux'
+import { AppDispatch } from '@redux/store/store'
+import { fetchUserWallet } from '@redux/slice/userSlice'
+import { coinListSelector, userWalletUserSelector } from '@redux/selector/userSelector'
+
+// Model imports
+import { IHistoryTransfer } from '@models/TRANSFER/historyTransfer'
+import { ITransferToUserName } from '@models/TRANSFER/transferToUsername'
 import { WithdrawProps } from './Withdraw'
-import { useAppSelector } from '@hooks/redux'
-import { userWalletUserSelector } from '@redux/selector/userSelector'
+
+// Utility and helper function imports
+import { historytransfer, transferToUsername } from '@utils/userCallApi'
+import { roundDecimalValues } from '../../../helper/function/roundCoin'
+import { keys } from '@contants/keys'
+
+// Component imports
+import Btn from '@commom/Btn'
+import Icon from '@commom/Icon'
+import Txt from '@commom/Txt'
+import WalletCoinInput from './Validation/WalletCoinInput'
+import LottieView from 'lottie-react-native'
+
+// Other imports
+import { aliasesSchema } from './Validation/aliasesValidation'
 import { colors } from '@themes/colors'
 import { fonts } from '@themes/fonts'
 import { useTranslation } from 'react-i18next'
-import { roundDecimalValues } from '../../../helper/function/roundCoin'
-import Btn from '@commom/Btn'
-import Txt from '@commom/Txt'
-import { IHistoryTransfer } from '@models/TRANSFER/historyTransfer'
-import { historytransfer } from '@utils/userCallApi'
-import { transferToUsername } from '@utils/userCallApi'
-import { ITransferToUserName } from '@models/TRANSFER/transferToUsername'
-import LottieView from 'lottie-react-native'
-import { useForm } from 'react-hook-form';
-import { yupResolver } from '@hookform/resolvers/yup';
-import WalletCoinInput from './Validation/WalletCoinInput'
-import { aliasesSchema } from './Validation/aliasesValidation'
-import Icon from '@commom/Icon'
-import { coinListSelector } from '@redux/selector/userSelector'
-import { keys } from '@contants/keys'
-import { useAppDispatch } from '@hooks/redux'
-import { AppDispatch } from '@redux/store/store'
-import { fetchUserWallet } from '@redux/slice/userSlice'
+import { useForm } from 'react-hook-form'
+import { yupResolver } from '@hookform/resolvers/yup'
+import { heightPercentageToDP as hp } from 'react-native-responsive-screen'
 
 interface Props {
     route?: WithdrawProps['route'];
@@ -33,8 +42,8 @@ const Aliases: React.FC<Props> = ({ route }) => {
     const dispatch: AppDispatch = useAppDispatch()
     const userWallet = useAppSelector(userWalletUserSelector)
     const [amount, setAmount] = useState<string>('')
-    const [userName, setUserName] = useState<string>('')
-    const [message, setMessage] = useState<string>('')
+    const [, setUserName] = useState<string>('')
+    const [, setMessage] = useState<string>('')
     const [page, setPage] = useState<number>(1)
     const [hasMore, setHasMore] = useState(true);
     const balanceKey = `${route?.params?.symbol.toLocaleLowerCase()}_balance`;
@@ -61,8 +70,6 @@ const Aliases: React.FC<Props> = ({ route }) => {
     useEffect(() => {
         dispatch(fetchUserWallet())
     }, [])
-
-    const scrollViewRef = useRef<ScrollView>(null);
 
     const handleSend = async (inputData: any) => {
         const { userName, amount, message } = inputData;
@@ -100,7 +107,8 @@ const Aliases: React.FC<Props> = ({ route }) => {
             setIsLoading(true);
             const response = await historytransfer(data);
             if (Array.isArray(response?.data?.array)) {
-                setHistory(prevData => [...prevData, ...response.data.array] as []);
+                // setHistory(prevData => [...prevData, ...response.data.array] as []);
+                setHistory(response.data.array);
                 if (response.data.array.length === 0) {
                     setHasMore(false);
                 }
@@ -111,11 +119,41 @@ const Aliases: React.FC<Props> = ({ route }) => {
             setIsLoading(false);
         }
     };
+    const loadPreviousData = async () => {
+        if (page > 1) {
+            const newPage = page - 1;
+            const data: IHistoryTransfer = {
+                page: newPage,
+                limit: '5',
+                symbol: route?.params?.symbol ?? 'BTC',
+            }
+            setIsLoading(true);
+            const response = await historytransfer(data);
+            if (Array.isArray(response?.data?.array)) {
+                setHistory(response.data.array);
+                if (response.data.array.length === 0) {
+                    setHasMore(false);
+                }
+            } else {
+                console.error('response.data.array is not an array:', response?.data?.array);
+            }
+            setPage(newPage);
+            setIsLoading(false);
+        }
+    }
     const handleLoadMore = () => {
         if (!isLoading && hasMore) {
             loadMoreData();
         }
     }
+    useEffect(() => {
+        if (hasMore) {
+            const timeout = setTimeout(() => {
+                loadMoreData();
+            }, 1000);
+            return () => clearTimeout(timeout);
+        }
+    }, [page, hasMore]);
     useEffect(() => {
         loadMoreData();
     }, []);
@@ -221,6 +259,7 @@ const Aliases: React.FC<Props> = ({ route }) => {
                                     </View>
                                 )
                             })
+
                         ) : (
                             <>
                                 <LottieView
@@ -232,16 +271,32 @@ const Aliases: React.FC<Props> = ({ route }) => {
                                 <Txt center fontFamily={fonts.AS} size={16} bold>{t('No data')}</Txt>
                             </>
                         )}
-                        {hasMore && (
-                            <Btn
-                                onPress={handleLoadMore}
-                                marginTop={20}
-                                height={50}
-                                radius={5}
-                                backgroundColor={colors.lviolet}>
-                                <Txt color={'white'} size={18} bold fontFamily={fonts.LR}>{t('Next page')}</Txt>
-                            </Btn>
-                        )}
+                        <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+                            {page > 1 && (
+                                <Btn
+                                    onPress={loadPreviousData}
+                                    marginTop={20}
+                                    height={hp(5)}
+                                    padding={10}
+                                    radius={5}
+                                    width={'48%'}
+                                    backgroundColor={colors.darkViolet}>
+                                    <Txt color={'white'} size={18} bold fontFamily={fonts.LR}>{t('Previous page')}</Txt>
+                                </Btn>
+                            )}
+                            {hasMore && (
+                                <Btn
+                                    onPress={handleLoadMore}
+                                    marginTop={20}
+                                    height={hp(5)}
+                                    padding={10}
+                                    width={'48%'}
+                                    radius={5}
+                                    backgroundColor={colors.lviolet}>
+                                    <Txt color={'white'} size={18} bold fontFamily={fonts.LR}>{t('Next page')}</Txt>
+                                </Btn>
+                            )}
+                        </View>
                     </View>
                 )}
             </View>

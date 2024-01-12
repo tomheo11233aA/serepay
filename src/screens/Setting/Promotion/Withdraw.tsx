@@ -21,7 +21,6 @@ export interface WithdrawProps {
   route?: WithdrawScreenRouteProp;
 }
 const Withdraw:React.FC<WithdrawProps> = ({route}) => {
-  console.log("Withdraw", route?.params.symbol)
   const { t } = useTranslation()
   return (
     <LinearGradient

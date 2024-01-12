@@ -127,7 +127,6 @@ const Transaction = () => {
             }
         }
         fetchMyAmount();
-        console.log('myAmount', myAmount);
     }, []);
     useEffect(() => {
         if (item) {
