@@ -17,6 +17,7 @@ import { AppDispatch } from '@redux/store/store';
 import { fetchListAdsBuy } from '@redux/slice/advertisingSlice';
 import { fetchListAdsSell } from '@redux/slice/advertisingSlice';
 import { fetchListAdsBuyPendding } from '@redux/slice/advertisingSlice';
+import { fetchListAdsSellPendding } from '@redux/slice/advertisingSlice';
 
 interface TransactionItemProps {
     item: IAdvertising;
@@ -111,6 +112,9 @@ const TransactionItem = ({ item, side, isPending }: TransactionItemProps) => {
                                                 }
                                                 dispatch(fetchListAdsBuy())
                                             } else {
+                                                if (isPending) {
+                                                    dispatch(fetchListAdsSellPendding())
+                                                }
                                                 dispatch(fetchListAdsSell())
                                             }
                                         } catch (error) {
@@ -147,6 +151,9 @@ const TransactionItem = ({ item, side, isPending }: TransactionItemProps) => {
                                                 }
                                                 dispatch(fetchListAdsBuy())
                                             } else {
+                                                if (isPending) {
+                                                    dispatch(fetchListAdsSellPendding())
+                                                }
                                                 dispatch(fetchListAdsSell())
                                             }
                                         } catch (error) {
