@@ -107,7 +107,7 @@ const Ecosystem = () => {
                 <View style={{ marginTop: 20 }}>
                     <Dropdown onChange={handleBankChange} onLogoChange={handleLogoChange} isStoreData={true} />
                     {errors.bankName && <Txt size={12} color={colors.red} paddingHorizontal={5} marginLeft={20} style={{ zIndex: -1 }} marginTop={7} bold>
-                        {errors.bankName?.message}
+                        {t(`${errors.bankName?.message}`)}
                     </Txt>}
                     <CardInput
                         placeholder={t('Card Number')}
@@ -117,7 +117,7 @@ const Ecosystem = () => {
                         value={cardNumber}
                     />
                     {errors.cardNumber && <Txt size={12} color={colors.red} paddingHorizontal={5} marginLeft={20} style={{ zIndex: -1 }} marginTop={7} bold>
-                        {errors.cardNumber?.message}
+                        {t(`${errors.cardNumber?.message}`)}
                     </Txt>}
                     <CardInput
                         placeholder={t('Card Holder name')}
@@ -127,7 +127,7 @@ const Ecosystem = () => {
                         value={cardHolder}
                     />
                     {errors.cardHolderName && <Txt size={12} color={colors.red} paddingHorizontal={5} marginLeft={20} style={{ zIndex: -1 }} marginTop={7} bold>
-                        {errors.cardHolderName?.message}
+                        {t(`${errors.cardHolderName?.message}`)}
                     </Txt>}
                     <CardInput
                         placeholder={t('Expiry Date')}

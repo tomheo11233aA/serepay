@@ -13,7 +13,7 @@ import Txt from '@commom/Txt'
 import { fonts } from '@themes/fonts'
 import { coinListSelector } from '@redux/selector/userSelector'
 import { useAppSelector } from '@hooks/redux'
-
+import { selectedRateSelector } from '@redux/selector/userSelector'
 interface Props {
     coin: string
     type?: 'buy' | 'sell'
@@ -21,17 +21,18 @@ interface Props {
 
 const SearchBox: React.FC<Props> = ({ coin, type }) => {
     const { t } = useTranslation()
-    const [amount, setAmount] = useState<number>()
+    const [amount, setAmount] = useState<any>()
     const [data, setData] = useState<any[]>([])
     const [loading, setLoading] = useState(false)
     const searchFunction = type === 'buy' ? searchSellQuick : searchBuyQuick
     const coinList = useAppSelector(coinListSelector)
     const coinData = useMemo(() => coinList.find(item => item.name === coin), [coinList, coin]);
-    const [isEnterWithUSD, setIsEnterWithUSD] = useState(false)
+    const selectedRate = useAppSelector(selectedRateSelector)
+    const [isEnterWithSelectedRate, setIsEnterWithSelectedRate] = useState(false)
     const [isEnterWithCoin, setIsEnterWithCoin] = useState(true)
-    const handleAmountChange = (value: string) => {
-        if (isEnterWithUSD && coinData) {
-            setAmount(Number(value) / coinData.price)
+    const handleAmountChange = (value: number) => {
+        if (isEnterWithSelectedRate && selectedRate && coinData) {
+            setAmount(Number(value) / selectedRate.rate / coinData.price)
         }
         if (isEnterWithCoin && coinData) {
             setAmount(Number(value))
@@ -81,9 +82,9 @@ const SearchBox: React.FC<Props> = ({ coin, type }) => {
         <View style={{ width: '92%', backgroundColor: 'white', alignSelf: 'center', marginTop: 10, borderRadius: 5 }}>
             <Input
                 height={40}
-                hint={isEnterWithUSD ? t(`Search amount of money to ${type === 'buy' ? 'buy' : 'sell'} ${coin}`) : t(`Search ${coin} amount to ${type === 'buy' ? 'buy' : 'sell'}`)}
-                onChangeText={setAmount}
+                hint={isEnterWithSelectedRate ? t(`Search amount of money to ${type === 'buy' ? 'buy' : 'sell'} ${coin}`) : t(`Search ${coin} amount to ${type === 'buy' ? 'buy' : 'sell'}`)}
                 value={amount}
+                onChangeText={handleAmountChange}
                 hintColor={colors.black2}
                 iconTwo={require('../../../assets/images/setting/search.png')}
                 sizeIcon={18}
@@ -92,9 +93,9 @@ const SearchBox: React.FC<Props> = ({ coin, type }) => {
             />
             <View style={{ flexDirection: 'row', justifyContent: 'space-between', margin: 10 }}>
                 <TouchableOpacity
-                    style={{ backgroundColor: isEnterWithUSD ? colors.violet : colors.black3, padding: 10, borderRadius: 5, }}
+                    style={{ backgroundColor: isEnterWithSelectedRate ? colors.violet : colors.black3, padding: 10, borderRadius: 5, }}
                     onPress={() => {
-                        setIsEnterWithUSD(true);
+                        setIsEnterWithSelectedRate(true);
                         setIsEnterWithCoin(false);
                     }}
                 >
@@ -104,13 +105,13 @@ const SearchBox: React.FC<Props> = ({ coin, type }) => {
                         color={'white'}
                         center
                     >
-                        {t('Enter with USD')}
+                        {t('Enter with') + ' ' + selectedRate?.title}
                     </Txt>
                 </TouchableOpacity>
                 <TouchableOpacity
                     style={{ backgroundColor: isEnterWithCoin ? colors.violet : colors.black3, padding: 10, borderRadius: 5 }}
                     onPress={() => {
-                        setIsEnterWithUSD(false);
+                        setIsEnterWithSelectedRate(false);
                         setIsEnterWithCoin(true);
                     }}
                 >

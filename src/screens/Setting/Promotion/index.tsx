@@ -13,18 +13,16 @@ import { navigate } from '@utils/navigationRef'
 import { screens } from '@contants/screens'
 import Coins from './Coins'
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
+import Icon from '@commom/Icon'
+import { keys } from '@contants/keys'
 
 const Promotion = () => {
     const { t } = useTranslation()
     const userWallet = useAppSelector(userWalletUserSelector)
     const coins = useAppSelector(coinListSelector)
-    const selectedRate = useAppSelector(selectedRateSelector)
-    const totalValueInUSD = Object.keys(userWallet ?? {}).reduce((total, coinKey) => {
-        const coin = coins.find(coin => coin?.symbolWallet?.toLowerCase() === coinKey.split('_')[0])
-        return total + ((coin?.price ?? 0) * (userWallet?.[coinKey] ?? 0))
-    }, 0)
-    const transferPrice = totalValueInUSD * selectedRate.rate
-
+    const balanceOfUSDT = userWallet?.usdt_balance ?? 0
+    const iconUSDT = coins.find(item => item.name === 'USDT')?.image
+    // console.log('balanceOfUSDT', iconUSDT)
     return (
         <Safe flex={1} backgroundColor='white'>
             <Box
@@ -36,8 +34,17 @@ const Promotion = () => {
             >
                 <Box row>
                     <Box padding={10}>
-                        <Txt size={14} color='black' center fontFamily={fonts.AS}>{t('Estimated assets value')}</Txt>
-                        <Txt center marginTop={15} size={14} color='black' fontFamily={fonts.AS}>{transferPrice.toLocaleString()} {selectedRate.title} </Txt>
+                        <Txt size={14} color='black' center fontFamily={fonts.AS}>{t('Estimated assets value of USDT')}</Txt>
+                        <Box row
+                        justifyCenter={true}
+                        alignCenter={true} 
+                        marginTop={10}
+                        >
+                            <Txt center size={14} color='black' fontFamily={fonts.AS}>{balanceOfUSDT.toLocaleString()} USDT </Txt>
+
+                            <Icon source={{ uri: `${keys.HOSTING_API}${iconUSDT}` }}
+                                width={wp('5%')} height={wp('5%')} marginLeft={5} />
+                        </Box>
                     </Box>
                 </Box>
 
