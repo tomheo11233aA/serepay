@@ -5,22 +5,22 @@ import { getListAdsBuyPenddingToUser } from '@utils/userCallApi'
 import { getListAdsSellToUser } from "@utils/userCallApi";
 import { getListAdsSellPenddingToUser } from "@utils/userCallApi";
 
-export const fetchListAdsBuy = createAsyncThunk('adsBuy/fetchListAdsBuy', async () => {
+export const fetchListAdsBuyToUser = createAsyncThunk('adsBuyToUser/fetchListAdsBuy', async () => {
     const response = await getListAdsBuyToUser({ page: 1, limit: 10 });
     return response?.data?.array;
 });
 
-export const fetchListAdsBuyPendding = createAsyncThunk('adsBuy/fetchListAdsBuyPendding', async () => {
+export const fetchListAdsBuyPendding = createAsyncThunk('adsBuyToUser/fetchListAdsBuyPendding', async () => {
     const response = await getListAdsBuyPenddingToUser({ page: 1, limit: 10 });
     return response?.data?.array;
 });
 
-export const fetchListAdsSell = createAsyncThunk('adsSell/fetchListAdsSell', async () => {
+export const fetchListAdsSell = createAsyncThunk('adsSellToUser/fetchListAdsSell', async () => {
     const response = await getListAdsSellToUser({ page: 1, limit: 10 });
     return response?.data?.array;
 });
 
-export const fetchListAdsSellPendding = createAsyncThunk('adsSell/fetchListAdsSellPendding', async () => {
+export const fetchListAdsSellPendding = createAsyncThunk('adsSellToUser/fetchListAdsSellPendding', async () => {
     const response = await getListAdsSellPenddingToUser({ page: 1, limit: 10 });
     return response?.data?.array;
 });
@@ -58,7 +58,7 @@ const advertisingSlice = createSlice({
 
     },
     extraReducers: (builder) => {
-        builder.addCase(fetchListAdsBuy.fulfilled, (state, action: PayloadAction<any>) => {
+        builder.addCase(fetchListAdsBuyToUser.fulfilled, (state, action: PayloadAction<any>) => {
             return { ...state, listAdsBuyToUser: action.payload }
         })
         builder.addCase(fetchListAdsBuyPendding.fulfilled, (state, action: PayloadAction<any>) => {

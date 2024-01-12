@@ -14,6 +14,7 @@ import { fonts } from '@themes/fonts'
 import { coinListSelector } from '@redux/selector/userSelector'
 import { useAppSelector } from '@hooks/redux'
 import { selectedRateSelector } from '@redux/selector/userSelector'
+
 interface Props {
     coin: string
     type?: 'buy' | 'sell'

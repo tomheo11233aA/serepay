@@ -13,10 +13,11 @@ import { fonts } from '@themes/fonts'
 import { useAppSelector } from '@hooks/redux'
 import { listAdsBuyToUserSelector } from '@redux/selector/userSelector'
 import { listAdsBuyPenddingToUserSelector } from '@redux/selector/userSelector'
-import { fetchListAdsBuy } from '@redux/slice/advertisingSlice'
+import { fetchListAdsBuyToUser } from '@redux/slice/advertisingSlice'
 import { fetchListAdsBuyPendding } from '@redux/slice/advertisingSlice'
 import { AppDispatch } from '@redux/store/store'
 import { useAppDispatch } from '@hooks/redux'
+import { fetchListAdsBuy } from '@redux/slice/historySlice'
 
 const Buy = () => {
     const { t } = useTranslation()
@@ -30,9 +31,12 @@ const Buy = () => {
     const dispatch: AppDispatch = useAppDispatch()
 
     useEffect(() => {
-        dispatch(fetchListAdsBuy())
+        dispatch(fetchListAdsBuyToUser())
         dispatch(fetchListAdsBuyPendding())
     }, [])
+
+    // console.log('listAdsBuyToUser', listAdsBuyToUser);
+    // console.log('listAdsBuyPenddingToUser', listAdsBuyPenddingToUser);
 
     const loadMoreData = async () => {
         if (!loading && hasMore) {
@@ -82,7 +86,11 @@ const Buy = () => {
         }
     }, [listAdsBuyToUser, listAdsBuyPenddingToUser, isChecked])
 
+    useEffect(() => {
+        setData(listAdsBuyToUser)
+    }, [listAdsBuyToUser])
 
+    // console.log('data', listAdsBuyToUser);
     if (data.length === 0) {
         return (
             <>

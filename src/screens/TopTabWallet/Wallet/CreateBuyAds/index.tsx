@@ -25,7 +25,7 @@ import { ICompanyAddAds } from '@models/P2P/COMPANY/companyAddAds'
 import { selectedRateSelector } from '@redux/selector/userSelector'
 import { useAppDispatch } from '@hooks/redux'
 import { AppDispatch } from '@redux/store/store'
-import { fetchListAdsBuy } from '@redux/slice/advertisingSlice'
+import { fetchListAdsBuyToUser } from '@redux/slice/advertisingSlice'
 import { fetchListAdsBuyPendding } from '@redux/slice/advertisingSlice'
 
 const CreateBuyAds = () => {
@@ -90,7 +90,7 @@ const CreateBuyAds = () => {
                     {
                         text: 'OK',
                         onPress: () => {
-                            dispatch(fetchListAdsBuy())
+                            dispatch(fetchListAdsBuyToUser())
                             dispatch(fetchListAdsBuyPendding())
                             goBack();
                         }
