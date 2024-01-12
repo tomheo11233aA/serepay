@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { View, StyleSheet, Alert } from 'react-native';
+import { View, StyleSheet, Alert, ActivityIndicator } from 'react-native';
 import { IAdvertising } from '.';
 import moment from 'moment';
 import Box from '@commom/Box';
@@ -29,6 +29,7 @@ const TransactionItem = ({ item, side, isPending }: TransactionItemProps) => {
     const { t } = useTranslation()
     const dispatch: AppDispatch = useAppDispatch()
     const [hasP2PInfo, setHasP2PInfo] = React.useState(false)
+    const [isLoading, setIsLoading] = React.useState(false)
     const formatTime = (time: string) => {
         return moment(time, "DD/MM/YYYY H:m:s").format('DD/MM/YYYY')
     }
@@ -104,6 +105,7 @@ const TransactionItem = ({ item, side, isPending }: TransactionItemProps) => {
                                     text: 'OK',
                                     onPress: async () => {
                                         try {
+                                            setIsLoading(true)
                                             await cancelP2p({ idP2p: item.id })
                                             Alert.alert("Cancel success")
                                             if (side === 'buy') {
@@ -119,6 +121,8 @@ const TransactionItem = ({ item, side, isPending }: TransactionItemProps) => {
                                             }
                                         } catch (error) {
                                             console.log(error)
+                                        } finally {
+                                            setIsLoading(false)
                                         }
                                     }
                                 },
@@ -143,6 +147,7 @@ const TransactionItem = ({ item, side, isPending }: TransactionItemProps) => {
                                     text: 'OK',
                                     onPress: async () => {
                                         try {
+                                            setIsLoading(true)
                                             await cancelP2p({ idP2p: item.id })
                                             Alert.alert("Cancel success")
                                             if (side === 'buy') {
@@ -158,6 +163,8 @@ const TransactionItem = ({ item, side, isPending }: TransactionItemProps) => {
                                             }
                                         } catch (error) {
                                             console.log(error)
+                                        } finally {
+                                            setIsLoading(false)
                                         }
                                     }
                                 },
@@ -172,6 +179,9 @@ const TransactionItem = ({ item, side, isPending }: TransactionItemProps) => {
                     <Btn backgroundColor={colors.green} radius={5} padding={5} marginTop={5} onPress={() => navigate(screens.CONFIRM_TRANSACTION, { idP2p: item.id })}>
                         <Txt fontFamily={fonts.AS} color={colors.blue}>Info</Txt>
                     </Btn>
+                )}
+                {isLoading && (
+                    <ActivityIndicator size="small" color={colors.blue} />
                 )}
             </Box>
         </View>

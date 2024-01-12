@@ -21,7 +21,7 @@ import { useAppDispatch } from '@hooks/redux'
 const Buy = () => {
     const { t } = useTranslation()
     const [data, setData] = useState<any[]>([]);
-    const [page, setPage] = useState(1);
+    const [page, setPage] = useState(2);
     const [loading, setLoading] = useState(false);
     const [hasMore, setHasMore] = useState(true);
     const [isChecked, setIsChecked] = useState(false);
@@ -76,21 +76,16 @@ const Buy = () => {
 
     useEffect(() => {
         if (isChecked) {
-            loadMoreDataPending()
+            setData(listAdsBuyPenddingToUser)
         } else {
-            loadMoreData()
+            setData(listAdsBuyToUser)
         }
-    }, [isChecked])
+        return () => {
+            setData([])
+        }
+    }, [listAdsBuyToUser, listAdsBuyPenddingToUser, isChecked])
 
-    useEffect(() => {
-        setPage(1)
-        setHasMore(true)
-        if (isChecked) {
-            loadMoreDataPending();
-        } else {
-            loadMoreData();
-        }
-    }, [listAdsBuyToUser, listAdsBuyPenddingToUser])
+
 
     if (data.length === 0) {
         return (
@@ -161,7 +156,7 @@ const Buy = () => {
                     marginTop: hp('2%'),
                     marginBottom: hp('27%'),
                 }}
-                data={isChecked ? listAdsBuyPenddingToUser : listAdsBuyToUser}
+                data={data}
                 keyExtractor={(item) => item.id.toString()}
                 onEndReached={isChecked ? loadMoreDataPending : loadMoreData}
                 onEndReachedThreshold={0.1}
