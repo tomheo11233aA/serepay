@@ -12,14 +12,13 @@ import { navigate } from '@utils/navigationRef';
 import { screens } from '@contants/screens';
 import { getInfoP2p } from '@utils/userCallApi';
 import { useTranslation } from 'react-i18next';
-import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 
 interface TransactionItemProps {
     item: IAdvertising;
     refreshData?: () => void;
 }
 
-const TransactionItem = ({ item, refreshData }: TransactionItemProps) => {
+const TransactionItem = ({ item }: TransactionItemProps) => {
     const { t } = useTranslation()
     const [hasP2PInfo, setHasP2PInfo] = React.useState(false)
     const formatTime = (time: string) => {
@@ -106,6 +105,35 @@ const TransactionItem = ({ item, refreshData }: TransactionItemProps) => {
                         <Txt fontFamily={fonts.AS} color={'white'}>{t('Cancel')}</Txt>
                     </Btn>
                 )}
+                {item.type === 2 && (
+                    <Btn backgroundColor={colors.red} padding={5} radius={5} onPress={() => {
+                        Alert.alert(
+                            t('Confirmation'),
+                            t('Are you sure you want to cancel?'),
+                            [
+                                {
+                                    text: 'Cancel',
+                                    style: 'destructive',
+                                },
+                                {
+                                    text: 'OK',
+                                    onPress: async () => {
+                                        try {
+                                            await cancelP2p({ idP2p: item.id })
+                                            Alert.alert("Cancel success")
+                                            navigate(screens.SETTING)
+                                        } catch (error) {
+                                            console.log(error)
+                                        }
+                                    }
+                                },
+                            ],
+                            { cancelable: false },
+                        );
+                    }} >
+                        <Txt fontFamily={fonts.AS} color={'white'}>{t('Cancel')}</Txt>
+                    </Btn>
+                )}
                 {hasP2PInfo && (
                     <Btn backgroundColor={colors.green} radius={5} padding={5} marginTop={5} onPress={() => navigate(screens.CONFIRM_TRANSACTION, { idP2p: item.id })}>
                         <Txt fontFamily={fonts.AS} color={colors.blue}>Info</Txt>
@@ -133,5 +161,5 @@ const styles = StyleSheet.create({
     },
 });
 
-export default TransactionItem;
+export default React.memo(TransactionItem);
 

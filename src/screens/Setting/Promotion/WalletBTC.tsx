@@ -50,7 +50,6 @@ const WalletBTC: React.FC<Props> = ({ route }) => {
     }
 
     const [page, setPage] = React.useState<number>(1)
-    const [hasMore, setHasMore] = useState(true);
     const handleSend = async (inputData: any) => {
         const { address, note, amount } = inputData;
         const data: ITransferToAddress = {
@@ -83,21 +82,17 @@ const WalletBTC: React.FC<Props> = ({ route }) => {
             limit: '5',
             symbol: route?.params?.symbol ?? 'BTC',
         }
-        if (!isLoading && hasMore) {
+        if (!isLoading) {
             setIsLoading(true);
             const response = await getHistoryWidthdraw(data);
             if (Array.isArray(response?.data?.array)) {
-                // setHistory(prevData => [...prevData, ...response.data.array] as []);
                 setHistory(response.data.array);
-                if (response.data.array.length === 0) {
-                    setHasMore(false);
-                }
             } else {
                 console.error('response.data.array is not an array:', response?.data?.array);
             }
             setPage(page + 1);
             setIsLoading(false);
-        }
+        } 
     };
     const loadPreviousData = async () => {
         if (page > 1) {
@@ -111,20 +106,20 @@ const WalletBTC: React.FC<Props> = ({ route }) => {
             const response = await getHistoryWidthdraw(data);
             if (Array.isArray(response?.data?.array)) {
                 setHistory(response.data.array);
-                if (response.data.array.length === 0) {
-                    setHasMore(false);
-                }
             } else {
                 console.error('response.data.array is not an array:', response?.data?.array);
             }
             setPage(newPage);
             setIsLoading(false);
+        } else {
+            console.log('page is 1, cannot load previous data');
         }
     }
     const handleLoadMore = () => {
-        if (!isLoading && hasMore) {
-            loadMoreData();
-        }
+        loadMoreData();
+    }
+    const handleLoadPrevious = () => {
+        loadPreviousData();
     }
     useEffect(() => {
         loadMoreData();
@@ -246,9 +241,9 @@ const WalletBTC: React.FC<Props> = ({ route }) => {
                             </>
                         )}
                         <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
-                            {page > 1 && (
+                            {page > 0 && (
                                 <Btn
-                                    onPress={loadPreviousData}
+                                    onPress={handleLoadPrevious}
                                     marginTop={20}
                                     height={hp(5)}
                                     padding={10}

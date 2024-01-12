@@ -45,7 +45,6 @@ const Aliases: React.FC<Props> = ({ route }) => {
     const [, setUserName] = useState<string>('')
     const [, setMessage] = useState<string>('')
     const [page, setPage] = useState<number>(1)
-    const [hasMore, setHasMore] = useState(true);
     const balanceKey = `${route?.params?.symbol.toLocaleLowerCase()}_balance`;
     const maxAvailable = userWallet?.[balanceKey] || 0;
     const [isLoading, setIsLoading] = useState(false);
@@ -103,15 +102,11 @@ const Aliases: React.FC<Props> = ({ route }) => {
             limit: '5',
             symbol: route?.params?.symbol ?? 'BTC',
         }
-        if (!isLoading && hasMore) {
+        if (!isLoading) {
             setIsLoading(true);
             const response = await historytransfer(data);
             if (Array.isArray(response?.data?.array)) {
-                // setHistory(prevData => [...prevData, ...response.data.array] as []);
                 setHistory(response.data.array);
-                if (response.data.array.length === 0) {
-                    setHasMore(false);
-                }
             } else {
                 console.error('response.data.array is not an array:', response?.data?.array);
             }
@@ -131,9 +126,6 @@ const Aliases: React.FC<Props> = ({ route }) => {
             const response = await historytransfer(data);
             if (Array.isArray(response?.data?.array)) {
                 setHistory(response.data.array);
-                if (response.data.array.length === 0) {
-                    setHasMore(false);
-                }
             } else {
                 console.error('response.data.array is not an array:', response?.data?.array);
             }
@@ -142,9 +134,7 @@ const Aliases: React.FC<Props> = ({ route }) => {
         }
     }
     const handleLoadMore = () => {
-        if (!isLoading && hasMore) {
-            loadMoreData();
-        }
+        loadMoreData();
     }
     useEffect(() => {
         loadMoreData();
@@ -264,7 +254,7 @@ const Aliases: React.FC<Props> = ({ route }) => {
                             </>
                         )}
                         <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
-                            {page > 1 && (
+                            {page > 0 && (
                                 <Btn
                                     onPress={loadPreviousData}
                                     marginTop={20}
@@ -276,18 +266,16 @@ const Aliases: React.FC<Props> = ({ route }) => {
                                     <Txt color={'white'} size={18} bold fontFamily={fonts.LR}>{t('Previous page')}</Txt>
                                 </Btn>
                             )}
-                            {hasMore && (
-                                <Btn
-                                    onPress={handleLoadMore}
-                                    marginTop={20}
-                                    height={hp(5)}
-                                    padding={10}
-                                    width={'48%'}
-                                    radius={5}
-                                    backgroundColor={colors.lviolet}>
-                                    <Txt color={'white'} size={18} bold fontFamily={fonts.LR}>{t('Next page')}</Txt>
-                                </Btn>
-                            )}
+                            <Btn
+                                onPress={handleLoadMore}
+                                marginTop={20}
+                                height={hp(5)}
+                                padding={10}
+                                width={'48%'}
+                                radius={5}
+                                backgroundColor={colors.lviolet}>
+                                <Txt color={'white'} size={18} bold fontFamily={fonts.LR}>{t('Next page')}</Txt>
+                            </Btn>
                         </View>
                     </View>
                 )}
