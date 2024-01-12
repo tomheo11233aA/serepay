@@ -25,6 +25,10 @@ import { selectedRateSelector } from '@redux/selector/userSelector'
 import BuyAdvertisementInput from '../CreateBuyAds/BuyAdvertisementInput'
 import Dropdown from './DropDown'
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen'
+import { useAppDispatch } from '@hooks/redux'
+import { AppDispatch } from '@redux/store/store'
+import {fetchListAdsSell} from '@redux/slice/advertisingSlice'
+import {fetchListAdsSellPendding} from '@redux/slice/advertisingSlice'
 
 const CreateBuyAds = () => {
     const { t } = useTranslation()
@@ -42,6 +46,7 @@ const CreateBuyAds = () => {
     const [visible, setVisible] = React.useState(false);
     const showModal = useCallback(() => setVisible(true), []);
     const hideModal = useCallback(() => setVisible(false), []);
+    const dispatch: AppDispatch = useAppDispatch()
 
     const handleBankChange = async (value: any) => {
         setSelectedBank(value);
@@ -99,7 +104,12 @@ const CreateBuyAds = () => {
                 Alert.alert('Success', 'Create new sell advertisement success', [
                     {
                         text: 'OK',
-                        onPress: () => goBack()
+                        // onPress: () => goBack()
+                        onPress: () => {
+                            dispatch(fetchListAdsSell())
+                            dispatch(fetchListAdsSellPendding())
+                            goBack();
+                        }
                     }
                 ])
             }

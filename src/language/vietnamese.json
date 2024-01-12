@@ -218,6 +218,10 @@
         "Card number is required": "Số thẻ là bắt buộc",
         "Card holder name is required": "Tên chủ thẻ là bắt buộc",
         "User name is required": "Tên người dùng là bắt buộc",
-        "Message is required": "Tin nhắn là bắt buộc"
+        "Message is required": "Tin nhắn là bắt buộc",
+        "Create new buy advertisement success": "Tạo quảng cáo mua mới thành công",
+        "Create new sell advertisement success": "Tạo quảng cáo bán mới thành công",
+        "Success": "Thành công",
+        "Error": "Lỗi"
     }
 }

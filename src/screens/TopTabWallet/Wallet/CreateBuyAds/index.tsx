@@ -1,4 +1,4 @@
-import { TouchableOpacity, SafeAreaView } from 'react-native'
+import { TouchableOpacity, SafeAreaView, Alert } from 'react-native'
 import React, { useEffect, useMemo, useCallback } from 'react'
 import LinearGradient from 'react-native-linear-gradient'
 import { colors } from '@themes/colors'
@@ -23,6 +23,10 @@ import { configSelector } from '@redux/selector/userSelector'
 import { companyAddAds } from '@utils/userCallApi'
 import { ICompanyAddAds } from '@models/P2P/COMPANY/companyAddAds'
 import { selectedRateSelector } from '@redux/selector/userSelector'
+import { useAppDispatch } from '@hooks/redux'
+import { AppDispatch } from '@redux/store/store'
+import { fetchListAdsBuy } from '@redux/slice/advertisingSlice'
+import { fetchListAdsBuyPendding } from '@redux/slice/advertisingSlice'
 
 const CreateBuyAds = () => {
     const { t } = useTranslation()
@@ -41,6 +45,7 @@ const CreateBuyAds = () => {
         setSelectedCoin(coin);
         hideModal();
     }, [hideModal]);
+    const dispatch: AppDispatch = useAppDispatch()
 
     useEffect(() => {
         if (config) {
@@ -71,8 +76,8 @@ const CreateBuyAds = () => {
     }, [selectedCoin, coins])
 
     const handleBuyAds = useCallback(async (data: any) => {
-        const { amount, amountMinimum } = data; 
-        try { 
+        const { amount, amountMinimum } = data;
+        try {
             const body: ICompanyAddAds = {
                 amount: amount,
                 amountMinimum: amountMinimum,
@@ -81,10 +86,21 @@ const CreateBuyAds = () => {
             }
             const res = await companyAddAds(body);
             if (res?.status) {
-                goBack();
+                Alert.alert(t('Success'), t('Create new buy advertisement success'), [
+                    {
+                        text: 'OK',
+                        onPress: () => {
+                            dispatch(fetchListAdsBuy())
+                            dispatch(fetchListAdsBuyPendding())
+                            goBack();
+                        }
+                    }
+                ])
+            } else {
+                Alert.alert(t('Error'), t('Create new buy advertisement fail'))
             }
-        } catch (error) {   
-            console.log('error', error);    
+        } catch (error) {
+            console.log('error', error);
         }
     }, [])
     return (
@@ -122,7 +138,7 @@ const CreateBuyAds = () => {
                     <SafeAreaView>
                         <Txt fontFamily={fonts.LR} onPress={() => navigate(screens.CREATE_SELL_ADS)}>{t('Do you want to sell ?')}</Txt>
                         <Box row justifySpaceBetween={true} marginTop={20}>
-                            <Txt size={20} fontFamily={fonts.LR}>{t(`ADS to Buy `) + selectedCoin?.name}</Txt>                      
+                            <Txt size={20} fontFamily={fonts.LR}>{t(`ADS to Buy `) + selectedCoin?.name}</Txt>
                             <TouchableOpacity onPress={() => { showModal() }}>
                                 <Icon
                                     size={25}
@@ -136,7 +152,7 @@ const CreateBuyAds = () => {
                         </Box>
                         <Txt size={20} marginTop={20} fontFamily={fonts.LR}>{t('Amount')}</Txt>
                         <Box marginTop={20} style={{ alignItem: 'center' }}>
-                            <Txt size={20} fontFamily={fonts.LR}>{t(`Amount of `) + selectedCoin?.name}</Txt>                            
+                            <Txt size={20} fontFamily={fonts.LR}>{t(`Amount of `) + selectedCoin?.name}</Txt>
                             <BuyAdvertisementInput
                                 placeholder={t('Enter amount')}
                                 maxLength={100}
