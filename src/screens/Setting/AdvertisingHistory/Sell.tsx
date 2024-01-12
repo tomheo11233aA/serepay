@@ -80,9 +80,6 @@ const Sell = () => {
         } else {
             setData(listAdsSellToUser)
         }
-        return () => {
-            setData([])
-        }
     }, [listAdsSellToUser, listAdsSellPenddingToUser, isChecked])
 
     if (data.length === 0) {

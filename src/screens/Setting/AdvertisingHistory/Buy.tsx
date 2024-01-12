@@ -80,11 +80,7 @@ const Buy = () => {
         } else {
             setData(listAdsBuyToUser)
         }
-        return () => {
-            setData([])
-        }
     }, [listAdsBuyToUser, listAdsBuyPenddingToUser, isChecked])
-
 
 
     if (data.length === 0) {
