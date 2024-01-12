@@ -76,21 +76,14 @@ const Sell = () => {
 
     useEffect(() => {
         if (isChecked) {
-            loadMoreDataPending()
+            setData(listAdsSellPenddingToUser)
         } else {
-            loadMoreData()
+            setData(listAdsSellToUser)
         }
-    }, [isChecked])
-
-    useEffect(() => {
-        setPage(1)
-        setHasMore(true)
-        if (isChecked) {
-            loadMoreDataPending();
-        } else {
-            loadMoreData();
+        return () => {
+            setData([])
         }
-    }, [listAdsSellPenddingToUser, listAdsSellToUser])
+    }, [listAdsSellToUser, listAdsSellPenddingToUser, isChecked])
 
     if (data.length === 0) {
         return (
