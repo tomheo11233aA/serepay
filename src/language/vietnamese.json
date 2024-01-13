@@ -222,6 +222,9 @@
         "Create new buy advertisement success": "Tạo quảng cáo mua mới thành công",
         "Create new sell advertisement success": "Tạo quảng cáo bán mới thành công",
         "Success": "Thành công",
-        "Error": "Lỗi" 
+        "Error": "Lỗi",
+        "UserName": "Tên người dùng",
+        "Waiting for admin confirm": "Đang chờ admin xác nhận",
+        "Cancel": "Hủy"
     }
 }
