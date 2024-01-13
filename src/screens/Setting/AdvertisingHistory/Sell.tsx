@@ -21,7 +21,7 @@ import { useAppDispatch } from '@hooks/redux'
 const Sell = () => {
     const { t } = useTranslation()
     const [data, setData] = useState<any[]>([]);
-    const [page, setPage] = useState(1);
+    const [page, setPage] = useState(2);
     const [loading, setLoading] = useState(false);
     const [hasMore, setHasMore] = useState(true);
     const [isChecked, setIsChecked] = useState(false);
@@ -31,8 +31,11 @@ const Sell = () => {
 
     useEffect(() => {
         dispatch(fetchListAdsSell())
-        dispatch(fetchListAdsSellPendding())
     }, [])
+
+    useEffect(() => {
+        setData(listAdsSellToUser)
+    }, [listAdsSellToUser])
 
     const loadMoreData = async () => {
         if (!loading && hasMore) {
@@ -84,11 +87,12 @@ const Sell = () => {
 
     useEffect(() => {
         if (isChecked) {
+            dispatch(fetchListAdsSellPendding())
             setData(listAdsSellPenddingToUser)
         } else {
-            setData(listAdsSellToUser)
+            dispatch(fetchListAdsSell())
         }
-    }, [listAdsSellToUser, listAdsSellPenddingToUser, isChecked])
+    }, [isChecked, listAdsSellPenddingToUser])
 
     if (data.length === 0) {
         return (
@@ -159,13 +163,12 @@ const Sell = () => {
                     marginTop: hp('2%'),
                     marginBottom: hp('27%'),
                 }}
-                // data={data}
-                data={isChecked ? listAdsSellPenddingToUser : listAdsSellToUser}
+                data={data}
                 keyExtractor={(item) => item.id.toString()}
                 onEndReached={isChecked ? loadMoreDataPending : loadMoreData}
                 onEndReachedThreshold={0.1}
                 ListFooterComponent={() => loading && hasMore && <ActivityIndicator size="large" color={colors.blue} />}
-                renderItem={({ item }) => <AdvertisingItem item={item} side='sell' />}
+                renderItem={({ item }) => <AdvertisingItem item={item} side='sell' isPending={isChecked} />}
             />
         </>
     )

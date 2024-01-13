@@ -170,7 +170,7 @@ const Buy = () => {
                 onEndReached={isChecked ? loadMoreDataPending : loadMoreData}
                 onEndReachedThreshold={0.1}
                 ListFooterComponent={() => loading && hasMore && <ActivityIndicator size="large" color={colors.blue} />}
-                renderItem={({ item }) => <AdvertisingItem item={item} side='buy' />}
+                renderItem={({ item }) => <AdvertisingItem item={item} side='buy' isPending={isChecked} />}
             />
         </>
     )
