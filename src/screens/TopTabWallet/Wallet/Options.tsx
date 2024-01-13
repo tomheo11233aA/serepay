@@ -25,8 +25,8 @@ const Options = ({ t }: Props) => {
     const exchangeRate = useSelector(exchangeRateSelector)
     const showModal = () => setVisible(true);
     const hideModal = () => setVisible(false);
-    const sortedexExchangeRate = useMemo(()=>{
-        return [...exchangeRate].sort((a,b)=>a.title.localeCompare(b.title))
+    const sortedexExchangeRate = useMemo(() => {
+        return [...exchangeRate].sort((a, b) => a.title.localeCompare(b.title))
     }, [exchangeRate])
 
     const handleRateSelect = (rate: any) => {
@@ -36,13 +36,13 @@ const Options = ({ t }: Props) => {
 
     const options = [
         {
-            title: 'Create Your Buy Ads',
+            title: 'Send',
             icon: require('@images/wallet/upload.png'),
             onPress: () => navigate(screens.CREATE_BUY_ADS),
 
         },
         {
-            title: 'Create Your Sell Ads',
+            title: 'Receive',
             icon: require('@images/wallet/download.png'),
             onPress: () => navigate(screens.CREATE_SELL_ADS),
         },
@@ -111,7 +111,7 @@ const Options = ({ t }: Props) => {
                 alignSelf={'center'}
             >
                 {options.map((option) =>
-                    <Btn key={option.title} onPress={option.onPress}>
+                    <Btn key={option.title} onPress={option.onPress} width={wp(33)}>
                         <Icon
                             tintColor={colors.violet}
                             size={25}
