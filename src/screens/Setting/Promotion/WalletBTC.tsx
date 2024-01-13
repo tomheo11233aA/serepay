@@ -48,7 +48,6 @@ const WalletBTC: React.FC<Props> = ({ route }) => {
         setValue('amount', value)
         setAmount(value)
     }
-
     const [page, setPage] = React.useState<number>(1)
     const handleSend = async (inputData: any) => {
         const { address, note, amount } = inputData;

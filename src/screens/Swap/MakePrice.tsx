@@ -22,6 +22,7 @@ import { fetchUserWallet } from '@redux/slice/userSlice'
 import { useAppDispatch } from '@hooks/redux'
 import { AppDispatch } from '@redux/store/store'
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen'
+import AsyncStorage from '@react-native-async-storage/async-storage'
 
 interface Props {
     t: any;
@@ -71,13 +72,15 @@ const MakePrice = ({ t }: Props) => {
         showModal();
     }, [showModal]);
 
-    const changeCoin = useCallback((coin: ICoin) => {
+    const changeCoin = useCallback(async (coin: ICoin) => {
         if (isChoosingForSymbolTo) {
             setSymbolTo(coin?.name ?? 'ETH')
             setIconTo(coin?.image ?? '')
+            await AsyncStorage.setItem('coinTo', coin?.name ?? 'ETH')
         } else {
             setSymbolForm(coin?.name ?? 'BTC')
             setIconForm(coin?.image ?? '')
+            await AsyncStorage.setItem('coinFrom', coin?.name ?? 'BTC')
         }
         hideModal()
     }, [hideModal, isChoosingForSymbolTo])
@@ -90,7 +93,7 @@ const MakePrice = ({ t }: Props) => {
         } catch (error) {
             Alert.alert('Insufficient balance! ')
             console.log(error)
-        } 
+        }
         setIsLoading(false)
     }, [])
 
@@ -103,8 +106,8 @@ const MakePrice = ({ t }: Props) => {
                     text: "Cancel",
                     style: "destructive"
                 },
-                { 
-                    text: "Swap", 
+                {
+                    text: "Swap",
                     style: "default",
                     onPress: () => {
                         swapCoin({
@@ -113,7 +116,7 @@ const MakePrice = ({ t }: Props) => {
                             amountForm: amountForm,
                         })
                         setAmountForm('0')
-                    } 
+                    }
                 }
             ]
         );
