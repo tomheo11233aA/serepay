@@ -118,7 +118,7 @@ const Options = ({ t }: Props) => {
                             source={option.icon}
                         />
                         <Txt marginTop={10} fontFamily={fonts.IBMPM}
-                            width={wp(33)}
+                            width={wp(21)}
                             center
                         >
                             {t(option.title)}
