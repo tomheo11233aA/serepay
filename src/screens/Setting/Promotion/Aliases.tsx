@@ -1,6 +1,6 @@
 // React and React Native imports
 import React, { useEffect, memo, useState } from 'react'
-import { Text, View } from 'react-native'
+import { Text, View, TouchableOpacity } from 'react-native'
 
 // Redux imports
 import { useAppDispatch, useAppSelector } from '@hooks/redux'
@@ -33,23 +33,31 @@ import { useTranslation } from 'react-i18next'
 import { useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { heightPercentageToDP as hp } from 'react-native-responsive-screen'
+import QRCode from 'react-native-qrcode-svg'
+import { Modal, Portal } from 'react-native-paper'
 
 interface Props {
     route?: WithdrawProps['route'];
 }
+
+const BASE_URL = 'https://demo.dk-technical.vn/wallet-2'
+
 const Aliases: React.FC<Props> = ({ route }) => {
     const { t } = useTranslation()
     const dispatch: AppDispatch = useAppDispatch()
     const userWallet = useAppSelector(userWalletUserSelector)
     const [amount, setAmount] = useState<string>('')
-    const [, setUserName] = useState<string>('')
-    const [, setMessage] = useState<string>('')
+    const [userName, setUserName] = useState<string>('')
+    const [message, setMessage] = useState<string>('')
     const [page, setPage] = useState<number>(1)
     const balanceKey = `${route?.params?.symbol.toLocaleLowerCase()}_balance`;
     const maxAvailable = userWallet?.[balanceKey] || 0;
     const [isLoading, setIsLoading] = useState(false);
     const [history, setHistory] = useState<[]>([]);
     const coinList = useAppSelector(coinListSelector)
+    const [qrData, setQrData] = useState('');
+    const [visible, setVisible] = useState(false);
+
     const { handleSubmit, formState: { errors }, setValue } = useForm({
         resolver: yupResolver(aliasesSchema)
     });
@@ -139,14 +147,45 @@ const Aliases: React.FC<Props> = ({ route }) => {
     useEffect(() => {
         loadMoreData();
     }, []);
+
+    const showModal = (userName: string, amount: string, message: string) => {
+        const qrValue = generateQRCode(userName, amount, route?.params?.symbol, message);
+        setQrData(qrValue);
+        setVisible(true);
+    };
+
+    const generateQRCode = (userName: string, amount: string, coin: any, message: string) => {
+        const data = `${BASE_URL}?username=${encodeURIComponent(userName)}&coin=${encodeURIComponent(coin)}&amountCoin=${encodeURIComponent(amount)}&note=${encodeURIComponent(message)}`;
+        return data;
+    };
+    const hideModal = () => setVisible(false);
+
     return (
         <View>
+            <Portal>
+                <Modal visible={visible} onDismiss={hideModal} contentContainerStyle={{ alignItems: 'center' }}>
+                    <View style={{ padding: 20, backgroundColor: 'white', borderRadius: 20 }}>
+                        <Txt center fontFamily={fonts.LR} size={16} bold style={{ marginBottom: 10 }}>{t('Scan QR code to send')}</Txt>
+                        <QRCode value={qrData} size={200} />
+                    </View>
+                    <Btn
+                        onPress={hideModal}
+                        marginTop={20}
+                        height={50}
+                        width={200}
+                        radius={5}
+                        backgroundColor={colors.lviolet}>
+                        <Txt color={'white'} size={18} bold fontFamily={fonts.LR}>{t('Close')}</Txt>
+                    </Btn>
+                </Modal>
+            </Portal>
             <View>
                 <Text style={{ fontFamily: fonts.LR, color: 'black', marginTop: 20, fontSize: 18 }}>{t('User Name')}</Text>
                 <WalletCoinInput
                     placeholder={t('Enter user name')}
                     onChangeText={handleChangeUserName}
                     maxLength={100}
+                    value={userName}
                 />
                 {errors.userName && <Txt size={12} color={colors.red} style={{ zIndex: -1 }} marginTop={7} bold>
                     {t(`${errors.userName?.message}`)}
@@ -175,11 +214,19 @@ const Aliases: React.FC<Props> = ({ route }) => {
                     onChangeText={handleChangeMessage}
                     maxLength={100}
                     height={150}
+                    value={message}
                 />
                 {errors.message && <Txt size={12} color={colors.red} style={{ zIndex: -1 }} marginTop={7} bold>
                     {t(`${errors.message?.message}`)}
                 </Txt>}
-
+                <TouchableOpacity
+                    onPress={() => showModal(userName, amount, message)}
+                >
+                    <View style={{ flexDirection: 'row', alignItems: 'center', marginTop: 20 }}>
+                        <Icon source={require('@images/setting/eye-review.png')} tintColor={colors.gray5} marginRight={10} style={{ tintColor: 'black' }} />
+                        <Txt fontFamily={fonts.LR} size={16} bold>{t('Quick send')}</Txt>
+                    </View>
+                </TouchableOpacity>
                 <Btn
                     onPress={handleSubmit(handleSend)}
                     marginTop={20}
@@ -280,7 +327,7 @@ const Aliases: React.FC<Props> = ({ route }) => {
                     </View>
                 )}
             </View>
-        </View>
+        </View >
 
     )
 }
