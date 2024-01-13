@@ -42,8 +42,12 @@ const Sell = () => {
                 page,
             });
             if (Array.isArray(response?.data?.array)) {
-                setData(prevData => [...prevData, ...response.data.array]);
-                if (response.data.array.length === 0) {
+                const newData = response.data.array;
+                const isDuplicate = newData.some((item: any) => data.some((item2: any) => item.id === item2.id));
+                if (!isDuplicate) {
+                    setData(prevData => [...prevData, ...newData]);
+                }
+                if (newData.length === 0) {
                     setHasMore(false);
                 }
             } else {
@@ -62,8 +66,12 @@ const Sell = () => {
                 page,
             });
             if (Array.isArray(response?.data?.array)) {
-                setData(prevData => [...prevData, ...response.data.array]);
-                if (response.data.array.length === 0) {
+                const newData = response.data.array;
+                const isDuplicate = newData.some((item: any) => data.some((item2: any) => item.id === item2.id));
+                if (!isDuplicate) {
+                    setData(prevData => [...prevData, ...newData]);
+                }
+                if (newData.length === 0) {
                     setHasMore(false);
                 }
             } else {

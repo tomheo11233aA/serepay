@@ -17,7 +17,6 @@ import { fetchListAdsBuyToUser } from '@redux/slice/advertisingSlice'
 import { fetchListAdsBuyPendding } from '@redux/slice/advertisingSlice'
 import { AppDispatch } from '@redux/store/store'
 import { useAppDispatch } from '@hooks/redux'
-import { fetchListAdsBuy } from '@redux/slice/historySlice'
 
 const Buy = () => {
     const { t } = useTranslation()
@@ -32,8 +31,11 @@ const Buy = () => {
 
     useEffect(() => {
         dispatch(fetchListAdsBuyToUser())
-        dispatch(fetchListAdsBuyPendding())
     }, [])
+
+    useEffect(() => {
+        setData(listAdsBuyToUser)
+    }, [listAdsBuyToUser])
 
     const loadMoreData = async () => {
         if (!loading && hasMore) {
@@ -43,8 +45,12 @@ const Buy = () => {
                 page,
             });
             if (Array.isArray(response?.data?.array)) {
-                setData(prevData => [...prevData, ...response.data.array]);
-                if (response.data.array.length === 0) {
+                const newData = response.data.array;
+                const isDuplicate = newData.some((item: any) => data.some((item2: any) => item.id === item2.id));
+                if (!isDuplicate) {
+                    setData(prevData => [...prevData, ...newData]);
+                }
+                if (newData.length === 0) {
                     setHasMore(false);
                 }
             } else {
@@ -63,8 +69,12 @@ const Buy = () => {
                 page,
             });
             if (Array.isArray(response?.data?.array)) {
-                setData(prevData => [...prevData, ...response.data.array]);
-                if (response.data.array.length === 0) {
+                const newData = response.data.array;
+                const isDuplicate = newData.some((item: any) => data.some((item2: any) => item.id === item2.id));
+                if (!isDuplicate) {
+                    setData(prevData => [...prevData, ...newData]);
+                }
+                if (newData.length === 0) {
                     setHasMore(false);
                 }
             } else {
@@ -77,17 +87,15 @@ const Buy = () => {
 
     useEffect(() => {
         if (isChecked) {
+            dispatch(fetchListAdsBuyPendding())
             setData(listAdsBuyPenddingToUser)
         } else {
-            setData(listAdsBuyToUser)
+            dispatch(fetchListAdsBuyToUser())
         }
-    }, [listAdsBuyToUser, listAdsBuyPenddingToUser, isChecked])
+    }, [isChecked, listAdsBuyPenddingToUser])
 
-    useEffect(() => {
-        setData(listAdsBuyToUser)
-    }, [listAdsBuyToUser])
 
-    // console.log('data', listAdsBuyToUser);
+
     if (data.length === 0) {
         return (
             <>
@@ -162,7 +170,7 @@ const Buy = () => {
                 onEndReached={isChecked ? loadMoreDataPending : loadMoreData}
                 onEndReachedThreshold={0.1}
                 ListFooterComponent={() => loading && hasMore && <ActivityIndicator size="large" color={colors.blue} />}
-                renderItem={({ item }) => <AdvertisingItem item={item} side='buy' isPending={isChecked} />}
+                renderItem={({ item }) => <AdvertisingItem item={item} side='buy' />}
             />
         </>
     )
