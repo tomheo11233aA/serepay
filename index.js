@@ -8,9 +8,11 @@ import {name as appName} from './app.json';
 import store from '@redux/store/store';
 import { Provider } from 'react-redux';
 import i18n from './src/language/i18n'
+
+// ignore specific warnings
 LogBox.ignoreLogs(['Warning: Failed prop type: Invalid prop `value` of type `number` supplied to `TextInput`, expected `string`.'])
-//  WARN  ReactImageView: Image source "null" doesn't exist
 LogBox.ignoreLogs(['ReactImageView: Image source "null" doesn\'t exist'])
+
 const Root = () => (
     <Provider store={store}>
         <App />
