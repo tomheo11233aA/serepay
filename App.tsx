@@ -3,7 +3,8 @@ import React from 'react'
 import Animated from 'react-native-reanimated'
 import { SafeAreaProvider } from 'react-native-safe-area-context'
 import { PaperProvider } from 'react-native-paper'
-import codePush from "react-native-code-push";
+import CodePush from "react-native-code-push";
+import { View } from 'react-native'
 
 const App = () => {
   return (
@@ -17,4 +18,4 @@ const App = () => {
   )
 }
 
-export default codePush(App);
+export default CodePush(App);

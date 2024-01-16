@@ -2,6 +2,5 @@
     <string name="app_name">Swaptobe</string>
     <string name="appCenterCrashes_whenToSendCrashes" moduleConfig="true" translatable="false">DO_NOT_ASK_JAVASCRIPT</string>
     <string name="appCenterAnalytics_whenToEnableAnalytics" moduleConfig="true" translatable="false">ALWAYS_SEND</string>
-     <!-- <string name="app_name">AppName</string> -->
-     <string moduleConfig="true" name="CodePushDeploymentKey">ZYb2RXGnitg_RiQ5Z3H4P2-b2K6H5s1DTfBZf</string>
+     <string moduleConfig="true" name="CodePushDeploymentKey">pN5NMiMcw_GRQNsFeUrNjJIXod3W43M_trAOV</string>
 </resources>
