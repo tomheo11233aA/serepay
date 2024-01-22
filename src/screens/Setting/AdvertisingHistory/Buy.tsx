@@ -1,7 +1,5 @@
 import { FlatList, View, Text } from 'react-native'
 import React, { useEffect, memo, useState } from 'react'
-import { getListAdsBuyToUser } from '@utils/userCallApi'
-import { getListAdsBuyPenddingToUser } from '@utils/userCallApi'
 import LottieView from 'lottie-react-native'
 import { colors } from '@themes/colors'
 import { ActivityIndicator } from 'react-native'
@@ -11,12 +9,14 @@ import { useTranslation } from 'react-i18next';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import { fonts } from '@themes/fonts'
 import { useAppSelector } from '@hooks/redux'
-import { listAdsBuyToUserSelector } from '@redux/selector/userSelector'
-import { listAdsBuyPenddingToUserSelector } from '@redux/selector/userSelector'
-import { fetchListAdsBuyToUser } from '@redux/slice/advertisingSlice'
-import { fetchListAdsBuyPendding } from '@redux/slice/advertisingSlice'
 import { AppDispatch } from '@redux/store/store'
 import { useAppDispatch } from '@hooks/redux'
+import { getListAdsSellToUser } from '@utils/userCallApi'
+import { getListAdsSellPenddingToUser } from '@utils/userCallApi'
+import { listAdsSellToUserSelector } from '@redux/selector/userSelector'
+import { listAdsSellPenddingToUserSelector } from '@redux/selector/userSelector'
+import { fetchListAdsSell } from '@redux/slice/advertisingSlice'
+import { fetchListAdsSellPendding } from '@redux/slice/advertisingSlice'
 
 const Buy = () => {
     const { t } = useTranslation()
@@ -25,12 +25,12 @@ const Buy = () => {
     const [loading, setLoading] = useState(false);
     const [hasMore, setHasMore] = useState(true);
     const [isChecked, setIsChecked] = useState(false);
-    const listAdsBuyToUser = useAppSelector(listAdsBuyToUserSelector)
-    const listAdsBuyPenddingToUser = useAppSelector(listAdsBuyPenddingToUserSelector)
+    const listAdsBuyToUser = useAppSelector(listAdsSellToUserSelector)
+    const listAdsBuyPenddingToUser = useAppSelector(listAdsSellPenddingToUserSelector)
     const dispatch: AppDispatch = useAppDispatch()
 
     useEffect(() => {
-        dispatch(fetchListAdsBuyToUser())
+        dispatch(fetchListAdsSell())
     }, [])
 
     useEffect(() => {
@@ -40,7 +40,7 @@ const Buy = () => {
     const loadMoreData = async () => {
         if (!loading && hasMore) {
             setLoading(true);
-            const response = await getListAdsBuyToUser({
+            const response = await getListAdsSellToUser({
                 limit: 10,
                 page,
             });
@@ -64,7 +64,7 @@ const Buy = () => {
     const loadMoreDataPending = async () => {
         if (!loading && hasMore) {
             setLoading(true);
-            const response = await getListAdsBuyPenddingToUser({
+            const response = await getListAdsSellPenddingToUser({
                 limit: 10,
                 page,
             });
@@ -87,14 +87,12 @@ const Buy = () => {
 
     useEffect(() => {
         if (isChecked) {
-            dispatch(fetchListAdsBuyPendding())
+            dispatch(fetchListAdsSellPendding())
             setData(listAdsBuyPenddingToUser)
         } else {
-            dispatch(fetchListAdsBuyToUser())
+            dispatch(fetchListAdsSell())
         }
     }, [isChecked, listAdsBuyPenddingToUser])
-
-
 
     if (data.length === 0) {
         return (

@@ -86,7 +86,6 @@ const CurrentBank = () => {
                 showsVerticalScrollIndicator={false}
                 style={{
                     marginTop: hp('2%'),
-                    marginBottom: hp('7%'),
                 }}
                 keyExtractor={(item, index) => index.toString()}
                 data={data}

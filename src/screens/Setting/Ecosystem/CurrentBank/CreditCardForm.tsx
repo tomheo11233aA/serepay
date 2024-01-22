@@ -88,8 +88,8 @@ const CreditCardForm: React.FC<CreditCardFormProps> = ({ item }) => {
 const styles = StyleSheet.create({
     container: {
         position: 'relative',
-        width: 300,
-        height: 300,
+        width: wp('80%'),
+        height: hp('30%'),
         alignSelf: 'center',
     }
 });

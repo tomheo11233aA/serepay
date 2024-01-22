@@ -50,7 +50,6 @@ const Wallet = () => {
           <Icon size={30} source={require('@images/wallet/dollar.png')} />
           <Txt color={'white'} size={30} marginLeft={10}
             justify
-            maxWidth={wp('80%')}
           >
             {transferPrice.toLocaleString()} {selectedRate.title}
           </Txt>
