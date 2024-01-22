@@ -225,6 +225,9 @@
         "Error": "Lỗi",
         "UserName": "Tên người dùng",
         "Waiting for admin confirm": "Đang chờ admin xác nhận",
-        "Cancel": "Hủy"
+        "Cancel": "Hủy",
+        "You cannot withdraw money to your wallet address": "Bạn không thể rút tiền vào địa chỉ ví của mình",
+        "Something went wrong": "Đã xảy ra lỗi",
+        "Message": "Tin nhắn"
     }
 }

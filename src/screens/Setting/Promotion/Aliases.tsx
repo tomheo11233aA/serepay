@@ -207,7 +207,9 @@ const Aliases: React.FC<Props> = ({ route }) => {
                     <Text style={{ fontFamily: fonts.LR, color: 'black', marginTop: 20, fontSize: 18 }}>{t('Max available:')}</Text>
                     <Text style={{ fontFamily: fonts.LR, color: 'black', marginTop: 20, fontSize: 18 }}>{roundDecimalValues(maxAvailable, 10001)} {route?.params?.symbol}</Text>
                 </View>
-                <Text style={{ fontFamily: fonts.LR, color: 'black', marginTop: 20, fontSize: 18 }}>Message</Text>
+                <Text style={{ fontFamily: fonts.LR, color: 'black', marginTop: 20, fontSize: 18, marginBottom: 5}}>
+                    {t('Message')}
+                </Text>
                 <WalletCoinInput
                     placeholder={t('I\'m fine, thank you. And you?')}
                     onChangeText={handleChangeMessage}

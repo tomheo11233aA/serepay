@@ -56,7 +56,7 @@ const Coins: React.FC<Props> = ({ style }) => {
     }, [])
 
     return (
-        <Box flex={1} marginBottom={50}>
+        <Box flex={1} marginBottom={hp('10%')}>
             <Scroll style={style} showsVerticalScrollIndicator={false}>
                 {coins.map((coin) => {
                     const priceOfCoin = coin.price * selectedRate.rate

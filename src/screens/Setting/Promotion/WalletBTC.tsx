@@ -1,4 +1,4 @@
-import { Text, View } from 'react-native'
+import { Alert, Text, View } from 'react-native'
 import React, { useState, useEffect } from 'react'
 import { WithdrawProps } from './Withdraw'
 import { useAppSelector } from '@hooks/redux'
@@ -53,7 +53,7 @@ const WalletBTC: React.FC<Props> = ({ route }) => {
         const { address, note, amount } = inputData;
         const data: ITransferToAddress = {
             to_address: address,
-            symbol: route?.params?.symbol ?? 'BTC',
+            symbol: route?.params?.symbol ?? 'USDT',
             amount: amount,
             note: note,
             type: '1',
@@ -68,8 +68,8 @@ const WalletBTC: React.FC<Props> = ({ route }) => {
                 setValue('amount', '')
                 dispatch(fetchUserWallet())
             }
-        } catch (error) {
-            console.log(error)
+        } catch (error: any) {
+            Alert.alert(t('Error'), t(error?.response?.data?.message) ?? t('Something went wrong'))
             setIsLoading(false)
         } finally {
             setIsLoading(false)
