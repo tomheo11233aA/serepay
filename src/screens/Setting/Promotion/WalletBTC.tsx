@@ -111,7 +111,7 @@ const WalletBTC: React.FC<Props> = ({ route }) => {
             setPage(newPage);
             setIsLoading(false);
         } else {
-            console.log('page is 1, cannot load previous data');
+            // console.log('page is 1, cannot load previous data');
         }
     }
     const handleLoadMore = () => {
