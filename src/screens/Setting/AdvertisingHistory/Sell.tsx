@@ -17,12 +17,15 @@ import { listAdsBuyToUserSelector } from '@redux/selector/userSelector'
 import { listAdsBuyPenddingToUserSelector } from '@redux/selector/userSelector'
 import { fetchListAdsBuyToUser } from '@redux/slice/advertisingSlice'
 import { fetchListAdsBuyPendding } from '@redux/slice/advertisingSlice'
+import Safe from '@reuse/Safe'
+import Txt from '@commom/Txt'
 
 const Sell = () => {
     const { t } = useTranslation()
     const [data, setData] = useState<any[]>([]);
     const [page, setPage] = useState(2);
     const [loading, setLoading] = useState(false);
+    const [appLoading, setAppLoading] = useState(false);
     const [hasMore, setHasMore] = useState(true);
     const [isChecked, setIsChecked] = useState(false);
     const dispatch: AppDispatch = useAppDispatch()
@@ -30,8 +33,17 @@ const Sell = () => {
     const listAdsSellPenddingToUser = useAppSelector(listAdsBuyPenddingToUserSelector)
 
     useEffect(() => {
-        dispatch(fetchListAdsBuyToUser())
-    }, [])
+        const fetchData = async () => {
+            setAppLoading(true);
+            try {
+                await dispatch(fetchListAdsBuyToUser());
+            } catch (error) {
+                console.error('Failed to fetch ads:', error);
+            }
+            setAppLoading(false);
+        };
+        fetchData();
+    }, [dispatch]);
 
     useEffect(() => {
         setData(listAdsSellToUser)
@@ -130,7 +142,24 @@ const Sell = () => {
             </>
         );
     }
-
+    if (appLoading) {
+        return (
+            <Safe backgroundColor='white'>
+                <View style={{
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                    height: '80%',
+                }}>
+                    <LottieView
+                        source={require('../../../assets/lottie/loading.json')}
+                        style={{ width: 200, height: 200, alignSelf: 'center' }}
+                        autoPlay
+                        loop />
+                    <Txt size={18} fontFamily={fonts.AS}>Loading...</Txt>
+                </View>
+            </Safe>
+        );
+    }
     return (
         <>
             <View style={{

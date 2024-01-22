@@ -17,12 +17,15 @@ import { listAdsSellToUserSelector } from '@redux/selector/userSelector'
 import { listAdsSellPenddingToUserSelector } from '@redux/selector/userSelector'
 import { fetchListAdsSell } from '@redux/slice/advertisingSlice'
 import { fetchListAdsSellPendding } from '@redux/slice/advertisingSlice'
+import Safe from '@reuse/Safe'
+import Txt from '@commom/Txt'
 
 const Buy = () => {
     const { t } = useTranslation()
     const [data, setData] = useState<any[]>([]);
     const [page, setPage] = useState(2);
     const [loading, setLoading] = useState(false);
+    const [appLoading, setAppLoading] = useState(false);
     const [hasMore, setHasMore] = useState(true);
     const [isChecked, setIsChecked] = useState(false);
     const listAdsBuyToUser = useAppSelector(listAdsSellToUserSelector)
@@ -30,8 +33,17 @@ const Buy = () => {
     const dispatch: AppDispatch = useAppDispatch()
 
     useEffect(() => {
-        dispatch(fetchListAdsSell())
-    }, [])
+        const fetchData = async () => {
+            setAppLoading(true);
+            try {
+                await dispatch(fetchListAdsSell());
+            } catch (error) {
+                console.error('Failed to fetch ads:', error);
+            }
+            setAppLoading(false);
+        };
+        fetchData();
+    }, [dispatch]);
 
     useEffect(() => {
         setData(listAdsBuyToUser)
@@ -131,6 +143,24 @@ const Buy = () => {
         );
     }
 
+    if (appLoading) {
+        return (
+            <Safe backgroundColor='white'>
+                <View style={{
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                    height: '80%',
+                }}>
+                    <LottieView
+                        source={require('../../../assets/lottie/loading.json')}
+                        style={{ width: 200, height: 200, alignSelf: 'center' }}
+                        autoPlay
+                        loop />
+                    <Txt size={18} fontFamily={fonts.AS}>Loading...</Txt>
+                </View>
+            </Safe>
+        );
+    }
     return (
         <>
             <View style={{

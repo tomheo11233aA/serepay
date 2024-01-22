@@ -40,15 +40,26 @@ const TransactionItem = ({ item, side, isPending }: TransactionItemProps) => {
     useEffect(() => {
         const getInfo = async () => {
             try {
+                setIsLoading(true)
                 const response = await getInfoP2p({ idP2p: item.id })
                 if (response?.data) {
                     setHasP2PInfo(true)
                 }
             } catch (error) {
+            } finally {
+                setIsLoading(false)
             }
         }
         getInfo()
     }, [])
+
+    if (isLoading === true) {
+        return (
+            <View style={styles.container}>
+                <ActivityIndicator size="small" color={colors.blue} />
+            </View>
+        )
+    }
     return (
         <View style={styles.container}>
             <Box justifySpaceBetween>

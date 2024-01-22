@@ -112,15 +112,4 @@ const AllHistory = () => {
   );
 };
 
-const styles = StyleSheet.create({
-  container: {
-    backgroundColor: 'green',
-  },
-  item: {
-    padding: 10,
-    fontSize: 18,
-    height: 44,
-  },
-});
-
 export default React.memo(AllHistory);
