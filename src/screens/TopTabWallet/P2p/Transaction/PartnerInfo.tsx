@@ -3,6 +3,7 @@ import { View, Text } from 'react-native';
 import { colors } from '@themes/colors';
 import { fonts } from '@themes/fonts';
 import { useTranslation } from 'react-i18next';
+import { heightPercentageToDP as hp } from 'react-native-responsive-screen';
 
 interface PartnerInfoProps {
     item: any;
@@ -11,7 +12,10 @@ interface PartnerInfoProps {
 const PartnerInfo: React.FC<PartnerInfoProps> = ({ item }) => {
     const { t } = useTranslation()
     return (
-        <View style={{ marginTop: 10 }}>
+        <View style={{
+            marginTop: 10,
+            marginBottom: hp(5),
+        }}>
             <Text style={{ color: colors.black2, fontWeight: 'bold', fontSize: 16 }}>{t('Partner Informations')}</Text>
             <View style={{ padding: 10, backgroundColor: colors.gray8, borderRadius: 5, marginTop: 10, justifyContent: 'center' }}>
                 <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>

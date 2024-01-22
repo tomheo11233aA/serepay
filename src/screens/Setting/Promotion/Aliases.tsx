@@ -89,7 +89,6 @@ const Aliases: React.FC<Props> = ({ route }) => {
         try {
             setIsLoading(true)
             const res = await transferToUsername(data)
-            console.log(res)
             if (res?.status) {
                 setIsLoading(false)
                 dispatch(fetchUserWallet())

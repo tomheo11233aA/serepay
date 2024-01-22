@@ -25,6 +25,7 @@ import Box from '@commom/Box';
 import Txt from '@commom/Txt';
 import { fonts } from '@themes/fonts';
 import { useTranslation } from 'react-i18next';
+import { heightPercentageToDP as hp } from 'react-native-responsive-screen';
 
 const Transaction = () => {
     const { t } = useTranslation();
@@ -34,7 +35,7 @@ const Transaction = () => {
     const [amount, setAmount] = useState('');
     const [isChecked, setIsChecked] = useState(false);
     const [bankList, setBankList] = useState([]);
-    const [selected, setSelected] = React.useState();
+    const [_, setSelected] = React.useState();
     const [receiveAmount, setReceiveAmount] = useState('');
     const [coin, setCoin] = useState<any>();
     const dispatch = useDispatch<AppDispatch>();
@@ -138,7 +139,7 @@ const Transaction = () => {
                     const rateDollar = exchangeRate.find((item) => item.title === 'VND')?.rate ?? 1;
                     const coinPrice = coin.price ?? 0;
                     const amountVND = myAmount * coinPrice * rateDollar;
-                    setAmount(amountVND.toString());
+                    setAmount(amountVND.toPrecision(8));
                 }
             }
 
@@ -153,12 +154,12 @@ const Transaction = () => {
                 if (item.side === 'sell') {
                     const coinPrice = coin.price ?? 0;
                     const amountCoin = amountNumber * coinPrice * rateDollar;
-                    setReceiveAmount(amountCoin.toLocaleString());
+                    setReceiveAmount(amountCoin.toFixed(3));
                 } else {
                     const inputValueDollar = amountNumber / rateDollar;
                     const coinPrice = coin.price ?? 0;
                     const amountCoin = inputValueDollar / coinPrice;
-                    setReceiveAmount(amountCoin.toFixed(8));
+                    setReceiveAmount(amountCoin.toFixed(3));
                 }
             }
         }
@@ -171,6 +172,7 @@ const Transaction = () => {
             }
         }
     }, [item, coins]);
+
     if (loading) {
         return (
             <Loading />
@@ -205,7 +207,9 @@ const Transaction = () => {
                 </Box>
             </Box>
 
-            <ScrollView showsVerticalScrollIndicator={false} style={{ padding: 20 }}>
+            <ScrollView showsVerticalScrollIndicator={false} style={{
+                padding: 20,
+            }}>
                 <TransactionForm
                     amount={amount}
                     setAmount={setAmount}
@@ -218,6 +222,7 @@ const Transaction = () => {
                     handleBuyNow={handleBuyNow}
                     item={item}
                     coin={coin}
+                    setMaxAmount={setMyAmount}
                 />
                 <AdvertisementInfo item={item} coin={coin} />
                 <PartnerInfo item={item} />

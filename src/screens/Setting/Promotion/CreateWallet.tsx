@@ -76,7 +76,6 @@ const CreateWallet: React.FC<DepositProps> = ({ route }) => {
             setIsLoading(true)
             try {
                 const res = await getDepositHistory(data)
-                console.log(res)
                 if (res?.data) {
                     setHistory(res?.data?.array)
                 }

@@ -19,6 +19,7 @@ interface TransactionFormProps {
     handleBuyNow: () => void;
     item: any;
     coin: any;
+    setMaxAmount?: (amount: number) => void;
 }
 
 const TransactionForm: React.FC<TransactionFormProps> = ({
@@ -32,12 +33,13 @@ const TransactionForm: React.FC<TransactionFormProps> = ({
     setIsChecked,
     handleBuyNow,
     item,
-    coin
+    coin,
+    setMaxAmount
 }) => {
     const { t } = useTranslation()
     return (
         <View style={{ padding: 10, backgroundColor: colors.gray8, borderRadius: 5, marginTop: 10 }}>
-            <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+            <View style={{justifyContent: 'space-between' }}>
                 <View style={{ flex: 1 }}>
                     <Text style={{ fontFamily: fonts.AS }}>{t('I will pay')}</Text>
                     <Input
@@ -47,7 +49,11 @@ const TransactionForm: React.FC<TransactionFormProps> = ({
                         onChangeText={setAmount}
                         radius={3}
                         coin={item.side === 'sell' ? coin?.name : 'VND'}
-
+                        onPress={() => {
+                            if (setMaxAmount) {
+                                setMaxAmount(item.amount)
+                            }
+                        }}
                     />
                 </View>
                 <View style={{ padding: 5 }}></View>
