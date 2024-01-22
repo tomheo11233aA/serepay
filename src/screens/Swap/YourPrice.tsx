@@ -69,7 +69,7 @@ const YourPrice: React.FC<Props> = ({ t }) => {
     let fakeLoad = setTimeout(() => {
       loadMoreData()
       setFakeLoading(false)
-    }, 1000)
+    }, 500)
     return () => {
       setData([])
       setPage(1)
