@@ -119,7 +119,7 @@ const CreateWallet: React.FC<DepositProps> = ({ route }) => {
             const formattedData = coinList.map((item) => ({
                 label: `${item.name} (${item.token_key})`,
                 value: item.symbolWallet,
-                // disabled: item.symbolWallet !== symbol,
+                disabled: item.symbolWallet !== symbol,
                 icon: () => <Image source={{ uri: `${keys.HOSTING_API}${item.image}` }}
                     style={{ width: 18, height: 18 }} resizeMode='contain' />,
             }));
