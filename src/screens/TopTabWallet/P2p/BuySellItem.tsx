@@ -43,9 +43,13 @@ const BuySellItem = ({
     const price = useMemo(() => {
         let price = 0;
         if (type === 'buy') {
-            price = selectedCoin && selectedCoin.price !== undefined ? selectedCoin.price - (selectedCoin.price * (value / 100)) : 0;
-        } else {
+            // price = selectedCoin && selectedCoin.price !== undefined ? selectedCoin.price - (selectedCoin.price * (value / 100)) : 0;
             price = selectedCoin && selectedCoin.price !== undefined ? selectedCoin.price + (selectedCoin.price * (value / 100)) : 0;
+
+        } else {
+            // price = selectedCoin && selectedCoin.price !== undefined ? selectedCoin.price + (selectedCoin.price * (value / 100)) : 0;
+            price = selectedCoin && selectedCoin.price !== undefined ? selectedCoin.price - (selectedCoin.price * (value / 100)) : 0;
+
         }
         return price * selectedRate.rate;
     }, [type, selectedCoin, value, selectedRate]);
@@ -71,8 +75,9 @@ const BuySellItem = ({
                 bold
                 size={15}
                 marginVertical={15}
+                color={type === 'buy' ? 'green' : 'red'}
             >
-                {price ? price.toLocaleString() : 0} {selectedRate.title} 
+                {price ? price.toFixed(2) : 0} {selectedRate.title} 
             </Txt>
             <Btn
                 radius={5}

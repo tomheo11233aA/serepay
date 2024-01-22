@@ -33,7 +33,11 @@ const CoinChoosed: React.FC<Props> = ({ setSelectedCoin, selectedCoin }) => {
     }, [setSelectedCoin, hideModal]);
     return (
         <Box paddingHorizontal={15} marginTop={20}>
-            <CoinModal visible={visible} hideModal={hideModal} handleChooseCoin={handleChooseCoin} t={t} />
+            <CoinModal
+                visible={visible}
+                hideModal={hideModal}
+                // handleChooseCoin={handleChooseCoin}
+                t={t} />
             <Box
                 row
                 radius={5}
