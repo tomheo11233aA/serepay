@@ -33,7 +33,7 @@ const CardInput: React.FC<CardInputProps> = ({
     );
 };
 
-export default CardInput;
+export default React.memo(CardInput);
 
 const styles = StyleSheet.create({
     inputContainer: {

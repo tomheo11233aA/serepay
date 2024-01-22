@@ -20,10 +20,11 @@ import CardInput from './Validation/CardInput'
 import { formatCardNumber, formatExpiryDate } from './CreditCardForm'
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen'
 import KeyBoardSafe from '@reuse/KeyBoardSafe'
+import Loading from '@screens/TopTabWallet/P2p/Transaction/Loading'
 
 const Ecosystem = () => {
     const { t } = useTranslation()
-    const [selectedBank, setSelectedBank] = React.useState(null);
+    const [_, setSelectedBank] = React.useState(null);
     const [isLoading, setIsLoading] = React.useState(false);
     const [logo, setLogo] = React.useState('');
     const [error, setError] = React.useState('')
@@ -36,10 +37,22 @@ const Ecosystem = () => {
     });
 
     const handleBankChange = async (value: any) => {
-        await AsyncStorage.getItem('@selected_bank')
-        setSelectedBank(value);
-        setNameBanking(value);
-        setValue('bankName', value);
+        // await AsyncStorage.getItem('@selected_bank')
+        // setSelectedBank(value);
+        // setNameBanking(value);
+        // setValue('bankName', value);
+
+        try {
+            setIsLoading(true);
+            await AsyncStorage.setItem('@selected_bank', value);
+            setSelectedBank(value);
+            setNameBanking(value);
+            setValue('bankName', value);
+        } catch (error) {
+            console.log(error)
+        } finally {
+            setIsLoading(false);
+        }
     };
 
     const handleLogoChange = async (value: any) => {
@@ -81,6 +94,12 @@ const Ecosystem = () => {
         setValue('cardExpiryDate', value);
     }
 
+    if (isLoading) {
+        return (
+            <Loading />
+        );
+    }
+
     return (
         <KeyBoardSafe
          styles={{marginBottom: hp('10%')}}
@@ -90,11 +109,6 @@ const Ecosystem = () => {
                 height: hp('85%'),
                 width: wp('100%'),
             }}>
-                <Spinner
-                    visible={isLoading}
-                    textContent={'Loading...'}
-                    textStyle={{ color: '#FFF' }}
-                />
                 <CreditCardForm
                     bankLogo={logo}
                     onChangeCardNumber={handleCardNumber}
@@ -178,4 +192,4 @@ const Ecosystem = () => {
     )
 }
 
-export default Ecosystem
+export default React.memo(Ecosystem)

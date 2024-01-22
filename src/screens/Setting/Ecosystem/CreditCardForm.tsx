@@ -50,10 +50,7 @@ const CreditCardForm: React.FC<CreditCardFormProps> = ({ bankLogo, cardNumber, c
 
             <TextInput
                 style={{
-                    // height: 40,
-                    // height: hp('5%'),
                     position: 'absolute',
-                    // top: 100,
                     top: hp('11%'),
                     width: '95%',
                     fontFamily: fonts.OSB,
@@ -99,11 +96,9 @@ const styles = StyleSheet.create({
         position: 'relative',
         width: wp('85%'),
         height: hp('30%'),
-        // width: 300,
-        // height: 300,
         alignSelf: 'center',
         marginTop: 20,
     }
 });
 
-export default CreditCardForm;
+export default React.memo(CreditCardForm);

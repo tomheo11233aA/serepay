@@ -1,14 +1,9 @@
-import Box from '@commom/Box'
-import Icon from '@commom/Icon'
-import Txt from '@commom/Txt'
-import { colors } from '@themes/colors'
 import React from 'react'
 import { ImageSourcePropType } from 'react-native'
 import Animated from 'react-native-reanimated'
 import Item from './Item'
 import { useAppDispatch } from '@hooks/redux'
 import { setLogin } from '@redux/slice/userSlice'
-import { useNavigation } from '@react-navigation/native'
 import { screens } from '@contants/screens'
 import { navigate } from '@utils/navigationRef'
 import AsyncStorage from '@react-native-async-storage/async-storage'
@@ -16,8 +11,6 @@ import { keys } from '@contants/keys'
 import { useTranslation } from 'react-i18next'
 import { convertLanguage } from '@utils/convert'
 import { setLanguage } from '@redux/slice/userSlice'
-import { languageUserSelector } from '@redux/selector/userSelector'
-import { useAppSelector } from '@hooks/redux'
 
 export interface IOption {
   title: string;
@@ -32,7 +25,6 @@ interface Props {
 const List = ({ t }: Props) => {
   const dispatch = useAppDispatch()
   const { i18n } = useTranslation()
-  const language = useAppSelector(languageUserSelector)
 
   const handleChangeLanguage = async () => {
     const lng = i18n.language == 'en' ? 'vn' : 'en'
