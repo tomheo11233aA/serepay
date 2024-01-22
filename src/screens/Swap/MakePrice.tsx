@@ -200,7 +200,7 @@ const MakePrice = ({ t }: Props) => {
                 </Txt>
             </Btn>
             <Warn
-                title={t('The final ETH amount you receive may be slightly different due to market volatility')}
+                title={t('The final amount you receive may be slightly different due to market volatility')}
             />
             <Warn
                 title={t('Swap Fee 0.25% implementation and has been deducted from the estimate above')}

@@ -228,6 +228,7 @@
         "Cancel": "Hủy",
         "You cannot withdraw money to your wallet address": "Bạn không thể rút tiền vào địa chỉ ví của mình",
         "Something went wrong": "Đã xảy ra lỗi",
-        "Message": "Tin nhắn"
+        "Message": "Tin nhắn",
+        "The final amount you receive may be slightly different due to market volatility": "Số tiền cuối cùng bạn nhận có thể khác nhau một chút do biến động thị trường"
     }
 }
