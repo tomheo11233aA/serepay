@@ -18,6 +18,7 @@ import { fetchListAdsBuyToUser } from '@redux/slice/advertisingSlice';
 import { fetchListAdsSell } from '@redux/slice/advertisingSlice';
 import { fetchListAdsBuyPendding } from '@redux/slice/advertisingSlice';
 import { fetchListAdsSellPendding } from '@redux/slice/advertisingSlice';
+import { heightPercentageToDP as hp } from 'react-native-responsive-screen';
 
 interface TransactionItemProps {
     item: IAdvertising;
@@ -199,7 +200,7 @@ const styles = StyleSheet.create({
         backgroundColor: '#fff',
         justifyContent: 'space-between',
         flexDirection: 'row',
-        marginBottom: 10,
+        marginBottom: hp('2%'),
     },
     text: {
         fontSize: 16,

@@ -106,8 +106,11 @@ const YourPrice: React.FC<Props> = ({ t }) => {
     )
   }
   return (
-    <Box marginBottom={hp('35%')} marginTop={hp('3%')}>
+    <Box marginBottom={hp('5%')} marginTop={hp('3%')}>
       <FlatList
+        style={{
+          marginBottom: hp('38%')
+        }}
         showsVerticalScrollIndicator={false}
         data={data}
         keyExtractor={(item, index) => item.id.toString()}
@@ -116,27 +119,98 @@ const YourPrice: React.FC<Props> = ({ t }) => {
           const coin_key = coinList.find((coin) => coin.name === item.coin_key)
           return (
             <View key={index} style={{ marginBottom: 20 }}>
-              <View style={{ backgroundColor: 'black', padding: 7, borderTopLeftRadius: 10, borderTopRightRadius: 10, flexDirection: 'row', alignItems: 'center' }}>
-                <Icon size={16} tintColor={'white'} source={require('@images/setting/calendar.png')} marginRight={10} />
-                <Txt fontFamily={fonts.LR} size={16} color={'white'} bold>{item?.created_at}</Txt>
+              <View style={{
+                backgroundColor: 'black',
+                padding: 7,
+                borderTopLeftRadius: 10,
+                borderTopRightRadius: 10,
+                flexDirection: 'row',
+                alignItems: 'center'
+              }}>
+                <Icon
+                  size={16}
+                  tintColor={'white'}
+                  source={require('@images/setting/calendar.png')}
+                  marginRight={10} />
+                <Txt fontFamily={fonts.LR}
+                  size={16}
+                  color={'white'}
+                  bold>{item?.created_at}</Txt>
               </View>
-              <View style={{ backgroundColor: colors.gray5, padding: 7, borderBottomLeftRadius: 10, borderBottomRightRadius: 10 }}>
-                <View style={{ flexDirection: 'row', alignContent: 'center' }}>
-                  <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-                    <Txt fontFamily={fonts.LR} size={16} color={'black'} bold>{item?.coin_key}: </Txt>
-                    <Txt fontFamily={fonts.LR} size={16} color={'red'} bold> -{item?.amount}</Txt>
-                    <Icon marginLeft={5} size={15} source={{ uri: `${keys.HOSTING_API}${coin_key?.image}` }} />
+              <View style={{
+                backgroundColor: colors.gray5,
+                padding: 7,
+                borderBottomLeftRadius: 10,
+                borderBottomRightRadius: 10
+              }}>
+                <View style={{
+                  flexDirection: 'row',
+                  alignContent: 'center'
+                }}>
+                  <View style={{
+                    flexDirection: 'row',
+                    alignItems: 'center'
+                  }}>
+                    <Txt
+                      fontFamily={fonts.LR}
+                      size={16}
+                      color={'black'}
+                      bold>{item?.coin_key}: </Txt>
+                    <Txt
+                      fontFamily={fonts.LR}
+                      size={16}
+                      color={'red'}
+                      bold
+                    > -{item?.amount}</Txt>
+                    <Icon
+                      marginLeft={5}
+                      size={15}
+                      source={{ uri: `${keys.HOSTING_API}${coin_key?.image}` }} />
                   </View>
-                  <View style={{ flexDirection: 'row', alignItems: 'center', marginLeft: 15 }}>
-                    <Txt fontFamily={fonts.LR} size={16} color={'black'} bold>{item?.wallet}: </Txt>
-                    <Txt fontFamily={fonts.LR} size={16} color={'green'} bold> +{item?.wallet_amount}</Txt>
-                    <Icon marginLeft={5} size={15} source={{ uri: `${keys.HOSTING_API}${wallet?.image}` }} />
+                  <View style={{
+                    flexDirection: 'row',
+                    alignItems: 'center',
+                    marginLeft: 15
+                  }}>
+                    <Txt
+                      fontFamily={fonts.LR}
+                      size={16}
+                      color={'black'}
+                      bold
+                    >{item?.wallet}: </Txt>
+                    <Txt
+                      fontFamily={fonts.LR}
+                      size={16}
+                      color={'green'}
+                      bold> +{item?.wallet_amount}</Txt>
+                    <Icon
+                      marginLeft={5}
+                      size={15}
+                      source={{ uri: `${keys.HOSTING_API}${wallet?.image}` }} />
                   </View>
                 </View>
-                <View style={{ flexDirection: 'row', alignContent: 'center', marginTop: 10, alignItems: 'center', marginBottom: 10 }}>
-                  <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-                    <Txt fontFamily={fonts.LR} size={16} color={'black'} bold> Rate {item?.wallet}: </Txt>
-                    <Txt fontFamily={fonts.LR} size={16} color={'black'} bold>{item?.rate.toLocaleString()}</Txt>
+                <View style={{
+                  flexDirection: 'row',
+                  alignContent: 'center',
+                  marginTop: 10,
+                  alignItems: 'center',
+                  marginBottom: 10
+                }}>
+                  <View style={{
+                    flexDirection: 'row',
+                    alignItems: 'center'
+                  }}>
+                    <Txt
+                      fontFamily={fonts.LR}
+                      size={16}
+                      color={'black'}
+                      bold> Rate {item?.wallet}: </Txt>
+                    <Txt
+                      fontFamily={fonts.LR}
+                      size={16}
+                      color={'black'}
+                      bold
+                    >{item?.rate.toLocaleString()}</Txt>
                   </View>
                 </View>
               </View>

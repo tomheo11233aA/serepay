@@ -161,7 +161,7 @@ const Sell = () => {
                 showsVerticalScrollIndicator={false}
                 style={{
                     marginTop: hp('2%'),
-                    marginBottom: hp('27%'),
+                    marginBottom: hp('30%'),
                 }}
                 data={data}
                 keyExtractor={(item) => item.id.toString()}
