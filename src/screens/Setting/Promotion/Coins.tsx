@@ -2,7 +2,7 @@ import Box from '@commom/Box'
 import Icon from '@commom/Icon'
 import Scroll from '@commom/Scroll'
 import { colors } from '@themes/colors'
-import React, { useCallback } from 'react'
+import React, { useCallback, useEffect } from 'react'
 import { useSelector } from 'react-redux';
 import { coinListSelector } from '@redux/selector/userSelector'
 import { keys } from '@contants/keys'
@@ -21,6 +21,9 @@ import { ActivityIndicator } from 'react-native'
 import { navigate } from '@utils/navigationRef'
 import { screens } from '@contants/screens'
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
+import Safe from '@reuse/Safe'
+import Txt from '@commom/Txt'
+import LottieView from 'lottie-react-native'
 
 type Props = {
     style?: any
@@ -34,6 +37,16 @@ const Coins: React.FC<Props> = ({ style }) => {
     const selectedRate = useSelector(selectedRateSelector)
     const [loadingStates, setLoadingStates] = React.useState<Record<string, boolean>>({})
     const [loadingWithdraw, setLoadingWithdraw] = React.useState<Record<string, boolean>>({})
+    const [isLoadingCoins, setIsLoadingCoins] = React.useState(true);
+
+    useEffect(() => {
+        const timer = setTimeout(() => {
+            setIsLoadingCoins(false);
+        }, 500);
+
+        return () => clearTimeout(timer);
+    }, []);
+
     const handleDeposit = useCallback(async (symbol: string) => {
         setLoadingStates(prev => ({ ...prev, [symbol]: true }))
         try {
@@ -49,11 +62,32 @@ const Coins: React.FC<Props> = ({ style }) => {
     }, [])
     const handelWithdraw = useCallback(async (symbol: string) => {
         setLoadingWithdraw(prev => ({ ...prev, [symbol]: true }))
-        setTimeout(() => {
-            navigate(screens.WITHDRAW, { symbol })
-            setLoadingWithdraw(prev => ({ ...prev, [symbol]: false }))
+        let timeoutId = setTimeout(() => {
+            navigate(screens.WITHDRAW, { symbol });
+            setLoadingWithdraw(prev => ({ ...prev, [symbol]: false }));
         }, 250);
+
+        return () => clearTimeout(timeoutId);
     }, [])
+
+    if (isLoadingCoins) {
+        return (
+            <Safe backgroundColor='white'>
+                <View style={{
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                    height: '80%',
+                }}>
+                    <LottieView
+                        source={require('../../../assets/lottie/loading.json')}
+                        style={{ width: 200, height: 200, alignSelf: 'center' }}
+                        autoPlay
+                        loop />
+                    <Txt size={18} fontFamily={fonts.AS}>Loading...</Txt>
+                </View>
+            </Safe>
+        );
+    }
 
     return (
         <Box flex={1} marginBottom={hp('10%')}>
@@ -114,7 +148,7 @@ const Coins: React.FC<Props> = ({ style }) => {
                                         )}
                                     </Btn>
                                 ) : null}
-                                
+
                                 <Btn
                                     onPress={() => handelWithdraw(coin.name ?? '')}
                                     padding={wp('1.4%')}

@@ -66,7 +66,7 @@ const YourPrice: React.FC<Props> = ({ t }) => {
   };
   useEffect(() => {
     setFakeLoading(true)
-    setTimeout(() => {
+    let fakeLoad = setTimeout(() => {
       loadMoreData()
       setFakeLoading(false)
     }, 1000)
@@ -74,6 +74,7 @@ const YourPrice: React.FC<Props> = ({ t }) => {
       setData([])
       setPage(1)
       setHasMore(true)
+      clearTimeout(fakeLoad)
     }
   }, [coinForm, coinTo])
 
