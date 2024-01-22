@@ -15,8 +15,8 @@ import { useDispatch } from 'react-redux'
 import { AppDispatch } from '@redux/store/store'
 
 interface Props {
-    setSelectedCoin: (coin: ICoin) => void
-    selectedCoin: any | null
+    setSelectedCoin?: (coin: ICoin) => void
+    selectedCoin?: any | null
 }
 const CoinChoosed: React.FC<Props> = ({ setSelectedCoin, selectedCoin }) => {
     const { t } = useTranslation()
@@ -27,10 +27,10 @@ const CoinChoosed: React.FC<Props> = ({ setSelectedCoin, selectedCoin }) => {
         setVisible(false);
         dispatch(setConnected(true))
     }
-    const handleChooseCoin = useCallback((coin: ICoin) => {
-        setSelectedCoin(coin);
-        hideModal();
-    }, [setSelectedCoin, hideModal]);
+    // const handleChooseCoin = useCallback((coin: ICoin) => {
+    //     setSelectedCoin(coin);
+    //     hideModal();
+    // }, [setSelectedCoin, hideModal]);
     return (
         <Box paddingHorizontal={15} marginTop={20}>
             <CoinModal
