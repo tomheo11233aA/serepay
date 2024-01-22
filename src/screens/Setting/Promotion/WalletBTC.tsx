@@ -91,7 +91,7 @@ const WalletBTC: React.FC<Props> = ({ route }) => {
             }
             setPage(page + 1);
             setIsLoading(false);
-        } 
+        }
     };
     const loadPreviousData = async () => {
         if (page > 1) {
@@ -170,9 +170,17 @@ const WalletBTC: React.FC<Props> = ({ route }) => {
                 {errors.amount && <Txt size={12} color={colors.red} style={{ zIndex: -1 }} marginTop={7} bold>
                     {errors.amount?.message}
                 </Txt>}
-                <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
-                    <Text style={{ fontFamily: fonts.LR, color: 'black', marginTop: 15, fontSize: 18 }}>{t('Max available:')}</Text>
-                    <Text style={{ fontFamily: fonts.LR, color: 'black', marginTop: 20, fontSize: 18 }}>{roundDecimalValues(maxAvailable, 10001)} {route?.params?.symbol}</Text>
+                <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginTop: 15 }}>
+                    <Text style={{
+                        fontFamily: fonts.LR,
+                        color: 'black',
+                        fontSize: 18
+                    }}>{t('Max available:')}</Text>
+                    <Text style={{
+                        fontFamily: fonts.LR,
+                        color: 'black',
+                        fontSize: 18
+                    }}>{roundDecimalValues(maxAvailable, 1)} {route?.params?.symbol}</Text>
                 </View>
                 <View style={{ marginTop: 15, paddingRight: wp('3%') }}>
                     <Warn title={t('You must keep a minimum of 20 TRX in your wallet to secure enough gas fees for trading TRC20 tokens.')} />
