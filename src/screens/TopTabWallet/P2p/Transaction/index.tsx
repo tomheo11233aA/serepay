@@ -42,26 +42,6 @@ const Transaction = () => {
     const [loading, setLoading] = useState(true);
     const [bankListId, setBankListId] = useState<number | null>(null);
     const [myAmount, setMyAmount] = useState(0);
-
-    useEffect(() => {
-        const fetchBanking = async () => {
-            const data = {
-                "page": 1,
-                "limit": 1000,
-            }
-            const res = await getListBanking(data);
-            const formattedData = res?.data.array.map((bank: any) => {
-                const label = `${bank.name_banking} (${bank.owner_banking}: ${bank.number_banking.toString()})`;
-                return {
-                    label,
-                    value: label,
-                    key: bank.id,
-                };
-            });
-            setBankList(formattedData);
-        };
-        fetchBanking();
-    }, []);
     const handleBuyNow = () => {
         if (!amount) {
             Alert.alert('Error', t('Please fill all fields and agree to the terms'));
@@ -110,25 +90,6 @@ const Transaction = () => {
         dispatch(fetchListExchange());
     }, [dispatch]);
     useEffect(() => {
-        const fetchData = async () => {
-            const itemString = await AsyncStorage.getItem('adsItem');
-            if (itemString) {
-                setItem(JSON.parse(itemString));
-            }
-            setLoading(false);
-        }
-        fetchData();
-    }, []);
-    useEffect(() => {
-        const fetchMyAmount = async () => {
-            const myAmountString = await AsyncStorage.getItem('myAmount');
-            if (myAmountString) {
-                setMyAmount(Number(myAmountString));
-            }
-        }
-        fetchMyAmount();
-    }, []);
-    useEffect(() => {
         if (item) {
             if (item.side === 'sell') {
                 setAmount(myAmount.toString());
@@ -171,7 +132,45 @@ const Transaction = () => {
             }
         }
     }, [item, coins]);
-
+    useEffect(() => {
+        const fetchBanking = async () => {
+            const data = {
+                "page": 1,
+                "limit": 1000,
+            }
+            const res = await getListBanking(data);
+            const formattedData = res?.data.array.map((bank: any) => {
+                const label = `${bank.name_banking} (${bank.owner_banking}: ${bank.number_banking.toString()})`;
+                return {
+                    label,
+                    value: label,
+                    key: bank.id,
+                };
+            });
+            setBankList(formattedData);
+        };
+    
+        const fetchData = async () => {
+            const itemString = await AsyncStorage.getItem('adsItem');
+            if (itemString) {
+                setItem(JSON.parse(itemString));
+            }
+        }
+    
+        const fetchMyAmount = async () => {
+            const myAmountString = await AsyncStorage.getItem('myAmount');
+            if (myAmountString) {
+                setMyAmount(Number(myAmountString));
+            }
+        }
+    
+        Promise.all([fetchBanking(), fetchData(), fetchMyAmount()])
+            .finally(() => {
+                setTimeout(() => {
+                    setLoading(false);
+                }, 500);
+            })
+    }, []);
     if (loading) {
         return (
             <Loading />

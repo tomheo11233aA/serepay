@@ -44,7 +44,7 @@ const P2p = () => {
         setSelectedCoin(coin)
       }
     }
-  }, [selectedCoin, coins])
+  }, [selectedCoin])
   return (
     <ScrollView
       showsVerticalScrollIndicator={false}
