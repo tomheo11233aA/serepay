@@ -126,6 +126,7 @@ const TransactionItem = ({ item, side, isPending }: TransactionItemProps) => {
                                                 }
                                                 dispatch(fetchListAdsBuyToUser())
                                             } else {
+
                                                 if (isPending) {
                                                     dispatch(fetchListAdsSellPendding())
                                                 }

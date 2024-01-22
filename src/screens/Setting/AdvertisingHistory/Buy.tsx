@@ -32,18 +32,23 @@ const Buy = () => {
     const listAdsBuyPenddingToUser = useAppSelector(listAdsSellPenddingToUserSelector)
     const dispatch: AppDispatch = useAppDispatch()
 
+    // useEffect(() => {
+    //     console.log('fetchData')
+    //     const fetchData = async () => {
+    //         setAppLoading(true);
+    //         try {
+    //             await dispatch(fetchListAdsSell());
+    //         } catch (error) {
+    //             console.error('Failed to fetch ads:', error);
+    //         }
+    //         setAppLoading(false);
+    //     };
+    //     fetchData();
+    // }, [fetchListAdsSell]);
+
     useEffect(() => {
-        const fetchData = async () => {
-            setAppLoading(true);
-            try {
-                await dispatch(fetchListAdsSell());
-            } catch (error) {
-                console.error('Failed to fetch ads:', error);
-            }
-            setAppLoading(false);
-        };
-        fetchData();
-    }, [dispatch]);
+        dispatch(fetchListAdsSell())
+    }, [])
 
     useEffect(() => {
         setData(listAdsBuyToUser)
@@ -198,7 +203,7 @@ const Buy = () => {
                 onEndReached={isChecked ? loadMoreDataPending : loadMoreData}
                 onEndReachedThreshold={0.1}
                 ListFooterComponent={() => loading && hasMore && <ActivityIndicator size="large" color={colors.blue} />}
-                renderItem={({ item }) => <AdvertisingItem item={item} side='buy' isPending={isChecked} />}
+                renderItem={({ item }) => <AdvertisingItem item={item} side='sell' isPending={isChecked} />}
             />
         </>
     )
