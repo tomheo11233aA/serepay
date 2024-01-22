@@ -16,7 +16,7 @@ import { heightPercentageToDP as hp } from 'react-native-responsive-screen';
 
 const BuyCoin = ({ t, type, selectedCoin }: any) => {
     const dispatch: AppDispatch = useDispatch()
-    const users: IHistory[] = type === 'buy' ? useSelector(adsSellSelector) : useSelector(adsBuySelector)
+    const users: IHistory[] = type === 'buy' ? useSelector(adsBuySelector) : useSelector(adsSellSelector)
     const symbol = selectedCoin ? selectedCoin.name : 'USDT';
     const [sellLoading, setSellLoading] = React.useState(true);
     const [buyLoading, setBuyLoading] = React.useState(true);
