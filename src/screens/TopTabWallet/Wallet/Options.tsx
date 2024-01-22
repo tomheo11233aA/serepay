@@ -36,14 +36,14 @@ const Options = ({ t }: Props) => {
 
     const options = [
         {
-            title: 'Create Your Sell Ads',
-            icon: require('@images/wallet/upload.png'),
+            title: 'Create Your Buy Ads',
+            icon: require('@images/wallet/download.png'),
             onPress: () => navigate(screens.CREATE_BUY_ADS),
 
         },
         {
-            title: 'Create Your Buy Ads',
-            icon: require('@images/wallet/download.png'),
+            title: 'Create Your Sell Ads',
+            icon: require('@images/wallet/upload.png'),
             onPress: () => navigate(screens.CREATE_SELL_ADS),
         },
         {
