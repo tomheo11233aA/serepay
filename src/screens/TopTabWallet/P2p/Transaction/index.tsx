@@ -64,12 +64,12 @@ const Transaction = () => {
                     style: 'default',
                     onPress: async () => {
                         const data: ICreateP2p = {
-                            // amount: item.side === 'sell' ? Number(receiveAmount) : Number(amount),
-                            amount: Number(amount),
+                            amount: item.side === 'buy' ? Number(amount) : Number(receiveAmount),
                             idP2p: item.id,
                             idBankingUser: bankListId,
                         }
                         setLoading(true);
+                        console.log('data', data);
                         await createP2p(data)?.then((res) => {
                             Alert.alert('Success', 'Your transaction has been created');
                             navigate(screens.CONFIRM_TRANSACTION);
@@ -92,8 +92,7 @@ const Transaction = () => {
     useEffect(() => {
         if (item) {
             if (item.side === 'sell') {
-                setAmount(myAmount.toString());
-            } else {
+                // setAmount(myAmount.toString());
                 const coin = coins.find(coin => coin?.name === item.symbol);
                 if (coin) {
                     const rateDollar = exchangeRate.find((item) => item.title === 'VND')?.rate ?? 1;
@@ -101,6 +100,15 @@ const Transaction = () => {
                     const amountVND = myAmount * coinPrice * rateDollar;
                     setAmount(amountVND.toPrecision(8));
                 }
+            } else {
+                // const coin = coins.find(coin => coin?.name === item.symbol);
+                // if (coin) {
+                //     const rateDollar = exchangeRate.find((item) => item.title === 'VND')?.rate ?? 1;
+                //     const coinPrice = coin.price ?? 0;
+                //     const amountVND = myAmount * coinPrice * rateDollar;
+                //     setAmount(amountVND.toPrecision(8));
+                // }
+                setAmount(myAmount.toString());
             }
 
         }
@@ -111,7 +119,7 @@ const Transaction = () => {
             if (coin) {
                 const amountNumber = Number(amount.replace(/,/g, ''));
                 const rateDollar = exchangeRate.find((item) => item.title === 'VND')?.rate ?? 1;
-                if (item.side === 'sell') {
+                if (item.side === 'buy') {
                     const coinPrice = coin.price ?? 0;
                     const amountCoin = amountNumber * coinPrice * rateDollar;
                     setReceiveAmount(amountCoin.toFixed(3));
@@ -119,7 +127,7 @@ const Transaction = () => {
                     const inputValueDollar = amountNumber / rateDollar;
                     const coinPrice = coin.price ?? 0;
                     const amountCoin = inputValueDollar / coinPrice;
-                    setReceiveAmount(amountCoin.toFixed(3));
+                    setReceiveAmount(amountCoin.toString());
                 }
             }
         }
@@ -149,21 +157,21 @@ const Transaction = () => {
             });
             setBankList(formattedData);
         };
-    
+
         const fetchData = async () => {
             const itemString = await AsyncStorage.getItem('adsItem');
             if (itemString) {
                 setItem(JSON.parse(itemString));
             }
         }
-    
+
         const fetchMyAmount = async () => {
             const myAmountString = await AsyncStorage.getItem('myAmount');
             if (myAmountString) {
                 setMyAmount(Number(myAmountString));
             }
         }
-    
+
         Promise.all([fetchBanking(), fetchData(), fetchMyAmount()])
             .finally(() => {
                 setTimeout(() => {

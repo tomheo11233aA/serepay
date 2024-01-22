@@ -25,7 +25,7 @@ const SearchBox: React.FC<Props> = ({ coin, type }) => {
     const [amount, setAmount] = useState<any>()
     const [data, setData] = useState<any[]>([])
     const [loading, setLoading] = useState(false)
-    const searchFunction = type === 'buy' ? searchSellQuick : searchBuyQuick
+    const searchFunction = type === 'sell' ? searchSellQuick : searchBuyQuick
     const coinList = useAppSelector(coinListSelector)
     const coinData = useMemo(() => coinList.find(item => item.name === coin), [coinList, coin]);
     const selectedRate = useAppSelector(selectedRateSelector)

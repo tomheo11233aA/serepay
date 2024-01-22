@@ -12,6 +12,8 @@ import i18n from './src/language/i18n'
 // ignore specific warnings
 LogBox.ignoreLogs(['Warning: Failed prop type: Invalid prop `value` of type `number` supplied to `TextInput`, expected `string`.'])
 LogBox.ignoreLogs(['ReactImageView: Image source "null" doesn\'t exist'])
+// Warning: Failed prop type: Invalid prop `textStyle` of type `array` supplied to `Cell`, expected `object`.
+LogBox.ignoreLogs(['Warning: Failed prop type: Invalid prop `textStyle` of type `array` supplied to `Cell`, expected `object`.'])
 
 const Root = () => (
     <Provider store={store}>

@@ -39,7 +39,7 @@ const TransactionForm: React.FC<TransactionFormProps> = ({
     const { t } = useTranslation()
     return (
         <View style={{ padding: 10, backgroundColor: colors.gray8, borderRadius: 5, marginTop: 10 }}>
-            <View style={{justifyContent: 'space-between' }}>
+            <View style={{ justifyContent: 'space-between' }}>
                 <View style={{ flex: 1 }}>
                     <Text style={{ fontFamily: fonts.AS }}>{t('I will pay')}</Text>
                     <Input
@@ -48,7 +48,7 @@ const TransactionForm: React.FC<TransactionFormProps> = ({
                         value={amount}
                         onChangeText={setAmount}
                         radius={3}
-                        coin={item.side === 'sell' ? coin?.name : 'VND'}
+                        coin={item.side === 'buy' ? coin?.name : 'VND'}
                         onPress={() => {
                             if (setMaxAmount) {
                                 setMaxAmount(item.amount)
@@ -65,7 +65,12 @@ const TransactionForm: React.FC<TransactionFormProps> = ({
                         backgroundColor={colors.gray7}
                         readonly
                         radius={3}
-                        coin={item.side === 'sell' ? 'VND' : coin?.name}
+                        coin={item.side === 'buy' ? 'VND' : coin?.name}
+                        onPress={() => {
+                            if (setMaxAmount) {
+                                setMaxAmount(item.amount - item.amountSuccess ?? 0)
+                            }
+                        }}
                     />
                 </View>
             </View>
