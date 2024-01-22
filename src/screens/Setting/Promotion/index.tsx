@@ -22,7 +22,6 @@ const Promotion = () => {
     const coins = useAppSelector(coinListSelector)
     const balanceOfUSDT = userWallet?.usdt_balance ?? 0
     const iconUSDT = coins.find(item => item.name === 'USDT')?.image
-    // console.log('balanceOfUSDT', iconUSDT)
     return (
         <Safe flex={1} backgroundColor='white'>
             <Box
