@@ -44,10 +44,12 @@ const CoinModal: React.FC<Props> = ({ visible, hideModal, handleChooseCoin, t })
                   padding={20}
                   key={coin.id}
                   justifySpaceBetween
-                  // onPress={async () => {
-                  //   handleChooseCoin(coin)
-                  //   await AsyncStorage.setItem('coin_token_key', coin.name ?? 'BTC')
-                  // }}
+                  onPress={async () => {
+                    if (handleChooseCoin) {
+                      handleChooseCoin(coin)
+                      // await AsyncStorage.setItem('coin_token_key', coin.name ?? 'BTC')
+                    }
+                  }} 
                 >
                   <Box row alignCenter>
                     <Icon

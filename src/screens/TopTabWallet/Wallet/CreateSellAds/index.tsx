@@ -75,7 +75,7 @@ const CreateBuyAds = () => {
 
     useEffect(() => {
         if (!selectedCoin) {
-            const btc = coins.find((coin: ICoin) => coin.name === 'BTC')
+            const btc = coins.find((coin: ICoin) => coin.name === 'USDT')
             if (btc) {
                 setSelectedCoin(btc)
             }

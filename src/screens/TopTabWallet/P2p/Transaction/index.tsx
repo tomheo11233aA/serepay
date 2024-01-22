@@ -25,7 +25,6 @@ import Box from '@commom/Box';
 import Txt from '@commom/Txt';
 import { fonts } from '@themes/fonts';
 import { useTranslation } from 'react-i18next';
-import { heightPercentageToDP as hp } from 'react-native-responsive-screen';
 
 const Transaction = () => {
     const { t } = useTranslation();
