@@ -244,7 +244,7 @@ const WalletBTC: React.FC<Props> = ({ route }) => {
                                 <Btn
                                     onPress={handleLoadPrevious}
                                     marginTop={20}
-                                    height={hp(5)}
+                                    height={hp(6)}
                                     padding={10}
                                     radius={5}
                                     width={'48%'}
@@ -256,7 +256,7 @@ const WalletBTC: React.FC<Props> = ({ route }) => {
                             <Btn
                                 onPress={handleLoadMore}
                                 marginTop={20}
-                                height={hp(5)}
+                                height={hp(6)}
                                 padding={10}
                                 width={'48%'}
                                 radius={5}
