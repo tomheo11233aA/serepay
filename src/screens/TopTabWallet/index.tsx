@@ -11,7 +11,7 @@ import P2p from './P2p'
 import Staking from './Staking'
 import Lending from './Lending'
 import { useTranslation } from 'react-i18next'
-import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen'
+import { heightPercentageToDP as hp } from 'react-native-responsive-screen'
 import { Platform } from 'react-native'
 
 const TopTabWallet = () => {
@@ -21,9 +21,10 @@ const TopTabWallet = () => {
 
     return (
         <LinearGradient
-            style={{ flex: 1,
+            style={{
+                flex: 1,
                 marginBottom: Platform.OS === 'ios' ? 0 : hp('10%'),
-             }}
+            }}
             end={{ x: 1, y: 0.5 }}
             start={{ x: 0, y: 0.5 }}
             colors={[colors.darkViolet, colors.violet]}
