@@ -29,6 +29,11 @@ const PaymentModal: React.FC<PaymentModalProps> = ({ visible, hideModal, selecte
             Alert.alert(`Copied ${text} to clipboard`);
         }
     }
+    const [bankNameSuccess, setBankNameSuccess] = React.useState(false);
+    const [bankNumberSuccess, setBankNumberSuccess] = React.useState(false);
+    const [bankOwnerSuccess, setBankOwnerSuccess] = React.useState(false);
+    const [contentSuccess, setContentSuccess] = React.useState(false);
+    const [paySuccess, setPaySuccess] = React.useState(false);
     return (
         <Portal>
             <Modal visible={visible} onDismiss={hideModal} contentContainerStyle={{ backgroundColor: 'white', padding: 20, width: '90%', alignSelf: 'center', borderRadius: 10 }}>
@@ -48,11 +53,12 @@ const PaymentModal: React.FC<PaymentModalProps> = ({ visible, hideModal, selecte
                                 const bankName = selectedBankName;
                                 Clipboard.setString(bankName);
                                 notifyMessage(bankName);
+                                setBankNameSuccess(true);
                             }}>
-                            <Icon source={require('@images/setting/copy.png')}
-                                size={20}
-                                style={{ marginLeft: 10 }}
-                            />
+                            <Icon size={20} style={{ marginLeft: 10 }}
+                                source={bankNameSuccess ? require('@images/unAuth/check.png')
+                                    : require('@images/setting/copy.png')} />
+
                         </TouchableOpacity>
                     </View>
 
@@ -66,11 +72,11 @@ const PaymentModal: React.FC<PaymentModalProps> = ({ visible, hideModal, selecte
                                 const bankNumber = selectedBankNumber;
                                 Clipboard.setString(bankNumber);
                                 notifyMessage(bankNumber);
+                                setBankNumberSuccess(true);
                             }}>
-                            <Icon source={require('@images/setting/copy.png')}
-                                size={20}
-                                style={{ marginLeft: 10 }}
-                            />
+                            <Icon size={20} style={{ marginLeft: 10 }}
+                                source={bankNumberSuccess ? require('@images/unAuth/check.png')
+                                    : require('@images/setting/copy.png')} />
                         </TouchableOpacity>
                     </View>
 
@@ -84,11 +90,11 @@ const PaymentModal: React.FC<PaymentModalProps> = ({ visible, hideModal, selecte
                                 const bankOwner = selectedBankOwner;
                                 Clipboard.setString(bankOwner);
                                 notifyMessage(bankOwner);
+                                setBankOwnerSuccess(true);
                             }}>
-                            <Icon source={require('../../../.././assets/images/setting/copy.png')}
-                                size={20}
-                                style={{ marginLeft: 10 }}
-                            />
+                            <Icon size={20} style={{ marginLeft: 10 }}
+                                source={bankOwnerSuccess ? require('@images/unAuth/check.png')
+                                    : require('@images/setting/copy.png')} />
                         </TouchableOpacity>
                     </View>
 
@@ -102,11 +108,11 @@ const PaymentModal: React.FC<PaymentModalProps> = ({ visible, hideModal, selecte
                                 const text = content;
                                 Clipboard.setString(text);
                                 notifyMessage(text);
+                                setContentSuccess(true);
                             }}>
-                            <Icon source={require('../../../.././assets/images/setting/copy.png')}
-                                size={20}
-                                style={{ marginLeft: 10 }}
-                            />
+                            <Icon size={20} style={{ marginLeft: 10 }}
+                                source={contentSuccess ? require('@images/unAuth/check.png')
+                                    : require('@images/setting/copy.png')} />
                         </TouchableOpacity>
                     </View>
 
@@ -120,11 +126,11 @@ const PaymentModal: React.FC<PaymentModalProps> = ({ visible, hideModal, selecte
                                 const value = pay;
                                 Clipboard.setString(value.toString());
                                 notifyMessage(value.toLocaleString());
+                                setPaySuccess(true);
                             }}>
-                            <Icon source={require('../../../.././assets/images/setting/copy.png')}
-                                size={20}
-                                style={{ marginLeft: 10 }}
-                            />
+                            <Icon size={20} style={{ marginLeft: 10 }}
+                                source={paySuccess ? require('@images/unAuth/check.png')
+                                    : require('@images/setting/copy.png')} />
                         </TouchableOpacity>
                     </View>
                 </View>
