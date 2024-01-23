@@ -124,7 +124,9 @@ const Form = ({ t }: Props) => {
                     {t('LOGIN')}
                 </Txt>
             </Btn>
-            <Btn marginVertical={20}>
+            <Btn marginVertical={20}
+                onPress={() => navigate(screens.FORGOT_PASSWORD)}
+            >
                 <Txt color={colors.violet}>
                     {t('Forgot password ?')}
                 </Txt>

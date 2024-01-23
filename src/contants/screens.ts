@@ -4,6 +4,7 @@ export const screens = {
     SWAP: 'Swap',
     HELLO: 'Hello',
     LOGIN: 'Login',
+    FORGOT_PASSWORD: 'ForgotPassword',
     WALLET: 'Wallet',
     SETTING: 'Setting',
     AD_STACK: 'ADStack',
