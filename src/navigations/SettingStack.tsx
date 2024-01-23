@@ -18,7 +18,15 @@ const Stack = createNativeStackNavigator()
 
 const SettingStack = () => {
     return (
-        <Stack.Navigator screenOptions={{ headerShown: false }}>
+        <Stack.Navigator
+            screenOptions={{
+                headerShown: false,
+                gestureEnabled: true,
+                gestureDirection: 'horizontal',
+                animation: 'ios'
+            }}
+
+        >
             <Stack.Screen name={screens.SETTING} component={Setting} />
             <Stack.Screen name={screens.TURN_ON_2FA} component={TurnOn2FA} />
             <Stack.Screen name={screens.VERIFY2FA} component={Verify2FA} />

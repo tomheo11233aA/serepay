@@ -61,7 +61,7 @@ const AuthNavigation = () => {
           borderTopWidth: 1,
           backgroundColor: '#f8f8f8',
           position: 'absolute',
-        }
+        },
       }}
     >
       {tabs.map((tab) => {
