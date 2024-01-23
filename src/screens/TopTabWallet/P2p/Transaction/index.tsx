@@ -91,8 +91,7 @@ const Transaction = () => {
     }, [dispatch]);
     useEffect(() => {
         if (item) {
-            if (item.side === 'sell') {
-                // setAmount(myAmount.toString());
+            if (item.side === 'sell') {                // setAmount(myAmount.toString());
                 const coin = coins.find(coin => coin?.name === item.symbol);
                 if (coin) {
                     const rateDollar = exchangeRate.find((item) => item.title === 'VND')?.rate ?? 1;
@@ -110,7 +109,6 @@ const Transaction = () => {
                 // }
                 setAmount(myAmount.toString());
             }
-
         }
     }, [item, exchangeRate, myAmount]);
     useEffect(() => {

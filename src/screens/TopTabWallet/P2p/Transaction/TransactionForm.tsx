@@ -21,6 +21,7 @@ interface TransactionFormProps {
     coin: any;
     setMaxAmount?: (amount: number) => void;
     setMaxReceiveAmount?: (amount: number) => void;
+    txtLoading?: boolean;
 }
 
 const TransactionForm: React.FC<TransactionFormProps> = ({
@@ -36,7 +37,8 @@ const TransactionForm: React.FC<TransactionFormProps> = ({
     item,
     coin,
     setMaxAmount,
-    setMaxReceiveAmount
+    setMaxReceiveAmount,
+    txtLoading
 }) => {
     const { t } = useTranslation()
     return (
