@@ -20,6 +20,7 @@ interface TransactionFormProps {
     item: any;
     coin: any;
     setMaxAmount?: (amount: number) => void;
+    setMaxReceiveAmount?: (amount: number) => void;
 }
 
 const TransactionForm: React.FC<TransactionFormProps> = ({
@@ -34,7 +35,8 @@ const TransactionForm: React.FC<TransactionFormProps> = ({
     handleBuyNow,
     item,
     coin,
-    setMaxAmount
+    setMaxAmount,
+    setMaxReceiveAmount
 }) => {
     const { t } = useTranslation()
     return (
@@ -52,6 +54,7 @@ const TransactionForm: React.FC<TransactionFormProps> = ({
                         onPress={() => {
                             if (setMaxAmount) {
                                 setMaxAmount(item.amount)
+                                console.log(item.amount, 'item.amount')
                             }
                         }}
                     />
@@ -67,8 +70,8 @@ const TransactionForm: React.FC<TransactionFormProps> = ({
                         radius={3}
                         coin={item.side === 'buy' ? 'VND' : coin?.name}
                         onPress={() => {
-                            if (setMaxAmount) {
-                                setMaxAmount(item.amount - item.amountSuccess ?? 0)
+                            if (setMaxReceiveAmount) {
+                                setMaxReceiveAmount(item.amount - item.amountSuccess ?? 0)
                             }
                         }}
                     />

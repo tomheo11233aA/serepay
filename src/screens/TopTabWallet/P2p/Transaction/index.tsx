@@ -98,7 +98,7 @@ const Transaction = () => {
                     const rateDollar = exchangeRate.find((item) => item.title === 'VND')?.rate ?? 1;
                     const coinPrice = coin.price ?? 0;
                     const amountVND = myAmount * coinPrice * rateDollar;
-                    setAmount(amountVND.toPrecision(8));
+                    setAmount(amountVND.toString());
                 }
             } else {
                 // const coin = coins.find(coin => coin?.name === item.symbol);
@@ -122,7 +122,7 @@ const Transaction = () => {
                 if (item.side === 'buy') {
                     const coinPrice = coin.price ?? 0;
                     const amountCoin = amountNumber * coinPrice * rateDollar;
-                    setReceiveAmount(amountCoin.toFixed(3));
+                    setReceiveAmount(amountCoin.toString());
                 } else {
                     const inputValueDollar = amountNumber / rateDollar;
                     const coinPrice = coin.price ?? 0;
@@ -229,6 +229,7 @@ const Transaction = () => {
                     item={item}
                     coin={coin}
                     setMaxAmount={setMyAmount}
+                    setMaxReceiveAmount={setMyAmount}
                 />
                 <AdvertisementInfo item={item} coin={coin} />
                 <PartnerInfo item={item} />
