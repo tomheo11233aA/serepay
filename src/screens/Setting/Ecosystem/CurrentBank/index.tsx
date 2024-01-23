@@ -65,7 +65,7 @@ const CurrentBank = () => {
                         flex: 1,
                         marginBottom: hp('10%'),
                     }}
-                    
+
                 />
             </Safe>
         )
@@ -86,8 +86,9 @@ const CurrentBank = () => {
                 showsVerticalScrollIndicator={false}
                 style={{
                     marginTop: hp('2%'),
+                    marginBottom: hp('10%'),
                 }}
-                keyExtractor={(item, index) => index.toString()}
+                keyExtractor={(index) => index.toString()}
                 data={data}
                 onEndReached={loadMoreData}
                 onEndReachedThreshold={0.1}

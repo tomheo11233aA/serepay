@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, Suspense } from 'react';
 import { TextInput, View, StyleSheet, Text, Image } from 'react-native';
 import CreditCard from '../../../assets/images/setting/bg-card3.svg';
 import { fonts } from '@themes/fonts';
@@ -38,11 +38,16 @@ export const formatExpiryDate = (value: string) => {
     }
     return v;
 };
+
+const LazyCreditCardSVG = React.lazy(() => import('../../../assets/images/setting/bg-card3.svg'));
+
 const CreditCardForm: React.FC<CreditCardFormProps> = ({ bankLogo, cardNumber, cardHolder, expiryDate, onChangeCardHolder, onChangeCardNumber, onChangeExpiryDate }) => {
     const { t } = useTranslation();
     return (
         <View style={styles.container}>
-            <CreditCard width={width * 0.9} height={height * 0.3} style={{ alignSelf: 'center' }} />
+            <Suspense fallback={<View style={{ width: width * 0.9, height: height * 0.3, backgroundColor: 'green' }} />}>
+                <LazyCreditCardSVG width={width * 0.9} height={height * 0.3} style={{ alignSelf: 'center' }} />
+            </Suspense>
             <Image
                 source={bankLogo ? { uri: bankLogo } : {}}
                 style={{ width: 160, height: 100, position: 'absolute', resizeMode: 'contain', right: width * 0.37, top: 10 }}
