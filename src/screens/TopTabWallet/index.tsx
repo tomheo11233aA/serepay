@@ -4,7 +4,7 @@ import Icon from '@commom/Icon'
 import Txt from '@commom/Txt'
 import Safe from '@reuse/Safe'
 import { colors } from '@themes/colors'
-import React, { useState } from 'react'
+import React, { useState, useRef } from 'react'
 import LinearGradient from 'react-native-linear-gradient'
 import Wallet from './Wallet'
 import P2p from './P2p'
@@ -13,12 +13,39 @@ import Lending from './Lending'
 import { useTranslation } from 'react-i18next'
 import { heightPercentageToDP as hp } from 'react-native-responsive-screen'
 import { Platform } from 'react-native'
+import { Animated } from 'react-native';
 
 const TopTabWallet = () => {
     const { t } = useTranslation()
     const [tabChoosed, setTabChoosed] = useState<string>('WALLET')
     const tabs = ['WALLET', 'P2P', 'STAKING', 'LENDING']
+    const fadeAnim = useRef(new Animated.Value(0)).current; // Initial value for opacity: 0
 
+    const fadeIn = () => {
+        // Will change fadeAnim value to 1 in 5 seconds
+        Animated.timing(fadeAnim, {
+            toValue: 1,
+            duration: 500,
+            useNativeDriver: true,
+        }).start();
+    };
+
+    const fadeOut = () => {
+        // Will change fadeAnim value to 0 in 5 seconds
+        Animated.timing(fadeAnim, {
+            toValue: 0,
+            duration: 500,
+            useNativeDriver: true,
+        }).start();
+    };
+
+    const handleTabChange = (tab: string) => {
+        fadeOut();
+        setTimeout(() => {
+            setTabChoosed(tab);
+            fadeIn();
+        }, 150);
+    };
     return (
         <LinearGradient
             style={{
