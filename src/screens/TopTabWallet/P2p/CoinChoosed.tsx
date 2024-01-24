@@ -21,12 +21,6 @@ const CoinChoosed: React.FC<Props> = ({ setSelectedCoin, selectedCoin }) => {
     const { t } = useTranslation()
     const dispatch: AppDispatch = useDispatch()
     const [visible, setVisible] = React.useState(false);
-    // const showModal = () => setVisible(true);
-    // const hideModal = () => {
-    //     setVisible(false);
-    //     dispatch(setConnected(true))
-    // }
-
     const showModal = useCallback(() => setVisible(true), [])
     const hideModal = useCallback(() => {
         setVisible(false)
