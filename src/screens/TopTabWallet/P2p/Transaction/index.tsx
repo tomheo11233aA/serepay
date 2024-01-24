@@ -25,6 +25,7 @@ import Box from '@commom/Box';
 import Txt from '@commom/Txt';
 import { fonts } from '@themes/fonts';
 import { useTranslation } from 'react-i18next';
+import { setCount } from '@redux/slice/notificationSlice';
 
 const Transaction = () => {
     const { t } = useTranslation();
@@ -69,9 +70,9 @@ const Transaction = () => {
                             idBankingUser: bankListId,
                         }
                         setLoading(true);
-                        console.log('data', data);
                         await createP2p(data)?.then((res) => {
                             Alert.alert('Success', 'Your transaction has been created');
+                            dispatch(setCount(1));
                             navigate(screens.CONFIRM_TRANSACTION);
                             setLoading(false);
                         }).catch((err: any) => {

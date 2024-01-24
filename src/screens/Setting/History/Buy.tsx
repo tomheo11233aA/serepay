@@ -29,12 +29,10 @@ const BuyHistory = () => {
   useEffect(() => {
     loadMoreData();
     socket.on("createP2p", (res) => {
-      console.log(res, "createP2p");
       refreshData();
     });
     return () => {
       socket.off("createP2p");
-      console.log("leave createP2p");
     }
   }, []);
 

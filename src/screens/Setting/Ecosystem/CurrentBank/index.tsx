@@ -28,7 +28,6 @@ const CurrentBank = () => {
             });
             if (Array.isArray(response?.data?.array)) {
                 setData(prevData => [...prevData, ...response.data.array]);
-                console.log(response?.data?.array?.length)
                 if (response.data.array.length === 0) {
                     setHasMore(false);
                 }

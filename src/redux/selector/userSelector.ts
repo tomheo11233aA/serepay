@@ -31,3 +31,5 @@ export const listAdsBuyPenddingToUserSelector = (state: RootState) => state.adve
 export const listAdsSellToUserSelector = (state: RootState) => state.advertising.listAdsSellToUser
 
 export const listAdsSellPenddingToUserSelector = (state: RootState) => state.advertising.listAdsSellPenddingToUser
+
+export const notificationSelector = (state: RootState) => state.notification.count

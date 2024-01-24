@@ -5,7 +5,6 @@ import { colors } from '@themes/colors';
 import TransactionItem from './TransactionItem';
 import LottieView from 'lottie-react-native';
 import { socket } from '../../../helper/AxiosInstance';
-
 export interface Transaction {
   id: number;
   userid: number;
@@ -54,14 +53,12 @@ const AllHistory = () => {
   useEffect(() => {
     loadMoreData();
     socket.on("createP2p", (res) => {
-      console.log(res, "createP2p");
       refreshData();
     });
   }, [refreshData]);
 
   useEffect(() => {
     socket.on("operationP2p", (idP2p) => {
-      console.log(idP2p, "operationP2p");
       refreshData();
     });
   }, [refreshData]);
@@ -90,7 +87,7 @@ const AllHistory = () => {
   if (data.length === 0) {
     return (
       <LottieView
-        source={require('../../../assets/lottie/nodataanimation.json')}
+        source={require('@lottie/nodataanimation.json')}
         autoPlay
         loop
         style={{ alignSelf: 'center', width: 200, height: 200, marginTop: 200 }}

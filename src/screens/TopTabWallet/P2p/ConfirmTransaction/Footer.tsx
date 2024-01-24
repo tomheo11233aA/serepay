@@ -11,6 +11,10 @@ import { Alert } from 'react-native';
 import { navigate } from '@utils/navigationRef';
 import { screens } from '@contants/screens';
 import { useTranslation } from 'react-i18next';
+import { useAppDispatch, useAppSelector } from '@hooks/redux';
+import { AppDispatch } from '@redux/store/store';
+import { setCount } from '@redux/slice/notificationSlice';
+import { notificationSelector } from '@redux/selector/userSelector';
 interface FooterButtonsProps {
     typeUser: number;
     userid: number;
@@ -20,11 +24,14 @@ interface FooterButtonsProps {
 
 const FooterButtons: React.FC<FooterButtonsProps> = ({ typeUser, userid, loginUserid, idP2p }) => {
     const { t } = useTranslation();
+    const dispatch: AppDispatch = useAppDispatch();
+    const notification = useAppSelector(notificationSelector);
     const handleCancelOrder = async () => {
         const data: IUserCancelP2pCommand = {
             idP2p: idP2p,
         };
         const response = await userCancelP2pCommand(data);
+        dispatch(setCount(notification - 1));
         if (response?.status) {
             Alert.alert('Success', 'Cancel order successfully');
             navigate(screens.SETTING_STACK, {

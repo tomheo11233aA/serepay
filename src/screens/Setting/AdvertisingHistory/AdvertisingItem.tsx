@@ -171,7 +171,6 @@ const TransactionItem = ({ item, side, isPending }: TransactionItemProps) => {
                                             } else {
                                                 if (isPending) {
                                                     dispatch(fetchListAdsSellPendding())
-                                                    console.log('fetchListAdsSellPendding')
                                                 }
                                                 dispatch(fetchListAdsSell())
                                             }

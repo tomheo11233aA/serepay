@@ -17,22 +17,23 @@ import { getListHistoryP2pPendding } from '@utils/userCallApi';
 import LottieView from 'lottie-react-native';
 import { navigate } from '@utils/navigationRef';
 import { screens } from '@contants/screens';
+import { useAppSelector } from '@hooks/redux';
+import { notificationSelector } from '@redux/selector/userSelector';
+import { useAppDispatch } from '@hooks/redux';
+import { AppDispatch } from '@redux/store/store';
+import { setCount } from '@redux/slice/notificationSlice';
 
 const TopTabWallet = () => {
     const { t } = useTranslation()
+    const dispatch: AppDispatch = useAppDispatch()
+    const notification = useAppSelector(notificationSelector)
     const [tabChoosed, setTabChoosed] = useState<string>('WALLET')
     const tabs = ['WALLET', 'P2P', 'STAKING', 'LENDING']
-    const [total, setTotal] = React.useState(0)
-    const fetchListHistoryP2pPendding = useCallback(async () => {
-        const data = await getListHistoryP2pPendding({
-            page: 1,
-            limit: 10,
-        })
-        setTotal(data?.data?.total)
-    }, [])
+    
     useEffect(() => {
-        fetchListHistoryP2pPendding()
+        dispatch(setCount(notification))
     }, [])
+
     return (
         <LinearGradient
             style={{
@@ -49,7 +50,7 @@ const TopTabWallet = () => {
                     alignCenter
                     paddingHorizontal={15}
                 >
-                    {total > 0 ?
+                    {notification > 0 ?
                         <Btn
                             radius={15}
                             onPress={() => navigate(screens.HISTORY_TRANSACTION)}
