@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import { Modal, Portal } from 'react-native-paper';
 import { ICoin } from '@models/coin';
 import { useCoinSocket } from '../../../helper/useCoinSocket'
@@ -11,7 +11,6 @@ import Txt from '@commom/Txt';
 import Icon from '@commom/Icon';
 import { keys } from '@contants/keys';
 import { colors } from '@themes/colors';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 
 interface Props {
   visible: boolean;
@@ -20,9 +19,48 @@ interface Props {
   t: any;
 }
 
+const CoinItem = ({ coin, handleChooseCoin }: { coin: ICoin; handleChooseCoin: any }) => {
+  return (
+    <Btn
+      row
+      alignCenter
+      padding={20}
+      key={coin.id}
+      justifySpaceBetween
+      onPress={handleChooseCoin}>
+      <Box row alignCenter>
+        <Icon
+          size={35}
+          marginRight={10}
+          source={{ uri: `${keys.HOSTING_API}${coin.image}` }}
+        />
+        <Box>
+          <Txt bold size={16} color={colors.darkGreen}>
+            {coin.name}
+          </Txt>
+          <Txt marginTop={9} size={14} color={colors.darkGreen}>
+            {`$${coin.price}  `}
+            <Txt color={coin.percent >= 0 ? '#75c1a8' : '#c94d4d'}>
+              {coin.percent >= 0 ? `+${coin.percent}%` : `${coin.percent}%`}
+            </Txt>
+          </Txt>
+        </Box>
+      </Box>
+      <Txt bold color={colors.darkGreen}>
+        {`${coin.volume} ${coin.symbolWallet}`}
+      </Txt>
+    </Btn>
+  );
+}
+
 const CoinModal: React.FC<Props> = ({ visible, hideModal, handleChooseCoin, t }) => {
   useCoinSocket()
   const coins = useSelector(coinListSelector)
+  const handleChoose = useCallback((coin: ICoin) => {
+    if (handleChooseCoin) {
+      handleChooseCoin(coin)
+    }
+  }, [handleChooseCoin])
   return (
     <Portal>
       <Modal
@@ -38,43 +76,12 @@ const CoinModal: React.FC<Props> = ({ visible, hideModal, handleChooseCoin, t })
           <Scroll showsVerticalScrollIndicator={false}>
             {coins.map((coin) => {
               return (
-                <Btn
-                  row
-                  alignCenter
-                  padding={20}
+                <CoinItem
                   key={coin.id}
-                  justifySpaceBetween
-                  onPress={async () => {
-                    if (handleChooseCoin) {
-                      handleChooseCoin(coin)
-                      // await AsyncStorage.setItem('coin_token_key', coin.name ?? 'BTC')
-                    }
-                  }} 
-                >
-                  <Box row alignCenter>
-                    <Icon
-                      size={35}
-                      marginRight={10}
-                      source={{ uri: `${keys.HOSTING_API}${coin.image}` }}
-                    />
-                    <Box>
-                      <Txt bold size={16} color={colors.darkGreen}>
-                        {coin.name}
-                      </Txt>
-                      <Txt marginTop={9} size={14} color={colors.darkGreen}>
-                        {`$${coin.price}  `}
-                        <Txt color={coin.percent >= 0 ? '#75c1a8' : '#c94d4d'}>
-                          {coin.percent >= 0 ? `+${coin.percent}%` : `${coin.percent}%`}
-                        </Txt>
-                      </Txt>
-
-                    </Box>
-                  </Box>
-                  <Txt bold color={colors.darkGreen}>
-                    {`${coin.volume} ${coin.symbolWallet}`}
-                  </Txt>
-                </Btn>
-              )
+                  coin={coin}
+                  handleChooseCoin={handleChoose}
+                />
+              );
             })}
           </Scroll>
         </Box>
