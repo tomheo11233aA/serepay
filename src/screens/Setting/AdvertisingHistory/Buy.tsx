@@ -25,26 +25,12 @@ const Buy = () => {
     const [data, setData] = useState<any[]>([]);
     const [page, setPage] = useState(2);
     const [loading, setLoading] = useState(false);
-    const [appLoading, setAppLoading] = useState(false);
     const [hasMore, setHasMore] = useState(true);
     const [isChecked, setIsChecked] = useState(false);
     const listAdsBuyToUser = useAppSelector(listAdsSellToUserSelector)
     const listAdsBuyPenddingToUser = useAppSelector(listAdsSellPenddingToUserSelector)
     const dispatch: AppDispatch = useAppDispatch()
-
-    // useEffect(() => {
-    //     console.log('fetchData')
-    //     const fetchData = async () => {
-    //         setAppLoading(true);
-    //         try {
-    //             await dispatch(fetchListAdsSell());
-    //         } catch (error) {
-    //             console.error('Failed to fetch ads:', error);
-    //         }
-    //         setAppLoading(false);
-    //     };
-    //     fetchData();
-    // }, [fetchListAdsSell]);
+    const [fakeLoading, setFakeLoading] = React.useState<boolean>(false)
 
     useEffect(() => {
         dispatch(fetchListAdsSell())
@@ -111,6 +97,13 @@ const Buy = () => {
         }
     }, [isChecked, listAdsBuyPenddingToUser])
 
+    useEffect(() => {
+        setFakeLoading(true)
+        setTimeout(() => {
+            setFakeLoading(false)
+        }, 1000)
+    }, [])
+
     if (data.length === 0) {
         return (
             <>
@@ -148,17 +141,21 @@ const Buy = () => {
         );
     }
 
-    if (appLoading) {
+    if (fakeLoading) {
         return (
             <Safe backgroundColor='white'>
                 <View style={{
                     justifyContent: 'center',
                     alignItems: 'center',
-                    height: '80%',
+                    height: '90%',
                 }}>
                     <LottieView
                         source={require('@lottie/loading.json')}
-                        style={{ width: 200, height: 200, alignSelf: 'center' }}
+                        style={{
+                            width: '50%',
+                            height: '50%',
+                            alignSelf: 'center',
+                        }}
                         autoPlay
                         loop />
                     <Txt size={18} fontFamily={fonts.AS}>Loading...</Txt>

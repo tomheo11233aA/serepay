@@ -31,19 +31,11 @@ const Sell = () => {
     const dispatch: AppDispatch = useAppDispatch()
     const listAdsSellToUser = useAppSelector(listAdsBuyToUserSelector)
     const listAdsSellPenddingToUser = useAppSelector(listAdsBuyPenddingToUserSelector)
-
+    const [fakeLoading, setFakeLoading] = React.useState<boolean>(false)
+    
     useEffect(() => {
-        const fetchData = async () => {
-            setAppLoading(true);
-            try {
-                await dispatch(fetchListAdsBuyToUser());
-            } catch (error) {
-                console.error('Failed to fetch ads:', error);
-            }
-            setAppLoading(false);
-        };
-        fetchData();
-    }, [dispatch]);
+        dispatch(fetchListAdsBuyToUser())
+    }, [])
 
     useEffect(() => {
         setData(listAdsSellToUser)
@@ -106,6 +98,13 @@ const Sell = () => {
         }
     }, [isChecked, listAdsSellPenddingToUser])
 
+    useEffect(() => {
+        setFakeLoading(true)
+        setTimeout(() => {
+            setFakeLoading(false)
+        }, 1000)
+    }, [])
+
     if (data.length === 0) {
         return (
             <>
@@ -142,17 +141,22 @@ const Sell = () => {
             </>
         );
     }
-    if (appLoading) {
+
+    if (fakeLoading) {
         return (
             <Safe backgroundColor='white'>
                 <View style={{
                     justifyContent: 'center',
                     alignItems: 'center',
-                    height: '80%',
+                    height: '90%',
                 }}>
                     <LottieView
                         source={require('@lottie/loading.json')}
-                        style={{ width: 200, height: 200, alignSelf: 'center' }}
+                        style={{
+                            width: '50%',
+                            height: '50%',
+                            alignSelf: 'center',
+                        }}
                         autoPlay
                         loop />
                     <Txt size={18} fontFamily={fonts.AS}>Loading...</Txt>
@@ -160,6 +164,7 @@ const Sell = () => {
             </Safe>
         );
     }
+    
     return (
         <>
             <View style={{
