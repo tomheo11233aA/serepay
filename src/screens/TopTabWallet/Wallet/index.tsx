@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useMemo } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useTranslation } from 'react-i18next'
 import Box from '@commom/Box'
@@ -10,7 +10,7 @@ import { AppDispatch } from '@redux/store/store'
 import { fetchUserInfo, fetchUserWallet } from '@redux/slice/userSlice'
 import { fetchListExchange } from '../../../redux/slice/exchangeRateSlice'
 import { userWalletUserSelector, userInfoUserSelector, coinListSelector, selectedRateSelector } from '@redux/selector/userSelector'
-import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen'
+import { heightPercentageToDP as hp } from 'react-native-responsive-screen'
 
 const Wallet = () => {
   const { t } = useTranslation()
@@ -26,13 +26,37 @@ const Wallet = () => {
     dispatch(fetchListExchange())
   }, [dispatch])
 
-  const totalValueInUSD = Object.keys(userWallet ?? {}).reduce((total, coinKey) => {
-    const coin = coins.find(coin => coin?.symbolWallet?.toLowerCase() === coinKey.split('_')[0])
-    return total + ((coin?.price ?? 0) * (userWallet?.[coinKey] ?? 0))
-  }, 0)
+  const coinMap = useMemo(() => {
+    const map = new Map();
+    coins.forEach(coin => {
+      if (coin?.symbolWallet) {
+        map.set(coin?.symbolWallet?.toLowerCase(), coin);
+      }
+    })
+    return map;
+  }, [coins]);
 
-  const totalValueInBTC = totalValueInUSD / (coins.find(coin => coin.name === 'BTC')?.price ?? 1)
-  const transferPrice = totalValueInUSD * selectedRate.rate
+  const totalValueInUSD = useMemo(() => {
+    if (!userWallet) return 0;
+
+    return Object.keys(userWallet).reduce((total, coinKey) => {
+      const coinSymbol = coinKey.split('_')[0];
+      const coin = coinMap.get(coinSymbol);
+      const coinPrice = coin?.price ?? 0;
+      const coinAmount = userWallet[coinKey] ?? 0;
+
+      return total + coinPrice * coinAmount;
+    }, 0);
+  }, [userWallet, coinMap]);
+
+  const totalValueInBTC = useMemo(() => {
+    const btcPrice = coins.find(coin => coin.name === 'BTC')?.price ?? 1;
+    return totalValueInUSD / btcPrice;
+  }, [totalValueInUSD, coins]);
+
+  const transferPrice = useMemo(() => {
+    return totalValueInUSD * selectedRate.rate;
+  }, [totalValueInUSD, selectedRate]);
 
   return (
     <Box flex={1} marginTop={50}>
@@ -46,7 +70,7 @@ const Wallet = () => {
             {totalValueInBTC.toFixed(8)}
           </Txt>
         </Box>
-        <Box marginTop={10} row justifyCenter alignCenter style={{alignSelf: 'center'}}>
+        <Box marginTop={10} row justifyCenter alignCenter style={{ alignSelf: 'center' }}>
           <Icon size={30} source={require('@images/wallet/dollar.png')} />
           <Txt color={'white'} size={30} marginLeft={10}
             justify
