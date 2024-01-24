@@ -1,36 +1,38 @@
+import React, { useCallback, useEffect, useMemo, useState } from 'react'
+import { useSelector } from 'react-redux'
+import { ScrollView, View } from 'react-native'
+import AsyncStorage from '@react-native-async-storage/async-storage'
+import { heightPercentageToDP as hp } from 'react-native-responsive-screen'
 import Box from '@commom/Box'
 import { colors } from '@themes/colors'
-import React, { useEffect, useState } from 'react'
 import BuySellItem from './BuySellItem'
 import Note from './Note'
 import BuyCoin from './BuyCoin'
 import { useTranslation } from 'react-i18next'
 import CoinChoosed from './CoinChoosed'
 import { ICoin } from '@models/coin'
-import { useSelector } from 'react-redux'
 import { coinListSelector } from '@redux/selector/userSelector'
-import { ScrollView, View } from 'react-native'
 import { useCoinSocket } from '../../../helper/useCoinSocket'
 import SearchBox from './SearchBox'
-import AsyncStorage from '@react-native-async-storage/async-storage'
-import { heightPercentageToDP as hp } from 'react-native-responsive-screen'
 
 const P2p = () => {
   useCoinSocket()
   const { t } = useTranslation()
-  const [selectedCoin, setSelectedCoin] = React.useState<ICoin | null>(null)
+  const [selectedCoin, setSelectedCoin] = useState<ICoin | null>(null)
   const [searchType, setSearchType] = useState<'buy' | 'sell' | null>(null)
   const coins = useSelector(coinListSelector)
-  // useEffect(() => {
-  //   const fetchCoin = async () => {
-  //     const mycoin = await AsyncStorage.getItem('coin_token_key')
-  //     const selectCoin = coins.find((coin: ICoin) => coin.name == mycoin?.trim())
-  //     if (selectCoin) {
-  //       setSelectedCoin(selectCoin)
-  //     }
+
+  // const fetchCoin = useCallback(async () => {
+  //   const mycoin = await AsyncStorage.getItem('coin_token_key')
+  //   const selectCoin = coins.find((coin: ICoin) => coin.name == mycoin?.trim())
+  //   if (selectCoin) {
+  //     setSelectedCoin(selectCoin)
   //   }
+  // }, [coins])
+
+  // useEffect(() => {
   //   fetchCoin()
-  // }, [])
+  // }, [fetchCoin])
 
   useEffect(() => {
     if (!selectedCoin) {
@@ -44,7 +46,10 @@ const P2p = () => {
         setSelectedCoin(coin)
       }
     }
-  }, [selectedCoin])
+  }, [selectedCoin, coins])
+
+  const coinName = useMemo(() => selectedCoin?.name || '', [selectedCoin])
+
   return (
     <ScrollView
       showsVerticalScrollIndicator={false}
@@ -73,7 +78,7 @@ const P2p = () => {
           onPress={() => setSearchType('sell')}
         />
       </Box>
-      {searchType && <SearchBox coin={selectedCoin?.name || ''} type={searchType} />}
+      {searchType && <SearchBox coin={coinName} type={searchType} />}
       <View
         style={{
           marginTop: 20,
