@@ -26,6 +26,7 @@ const FooterButtons: React.FC<FooterButtonsProps> = ({ typeUser, userid, loginUs
     const { t } = useTranslation();
     const dispatch: AppDispatch = useAppDispatch();
     const notification = useAppSelector(notificationSelector);
+
     const handleCancelOrder = async () => {
         const data: IUserCancelP2pCommand = {
             idP2p: idP2p,

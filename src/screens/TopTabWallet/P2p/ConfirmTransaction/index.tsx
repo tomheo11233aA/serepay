@@ -24,6 +24,7 @@ import { useTranslation } from 'react-i18next'
 import moment from 'moment'
 import { fonts } from '@themes/fonts'
 import Txt from '@commom/Txt'
+import { socket } from '@helper/AxiosInstance'
 interface IResponse {
     amount: number;
     bankName: string;
@@ -87,6 +88,7 @@ const ConfirmTransaction: React.FC<ConfirmTransactionProps> = ({ route }) => {
                 const adsItem = await AsyncStorage.getItem('adsItem');
                 if (adsItem) {
                     const adsItemParse = JSON.parse(adsItem);
+                    console.log("adsItemParse", adsItemParse);
                     setIdP2p(adsItemParse.id);
                     setSide(adsItemParse.side);
                 }
@@ -99,6 +101,17 @@ const ConfirmTransaction: React.FC<ConfirmTransactionProps> = ({ route }) => {
         }
         fetchData();
     }, [])
+
+
+    React.useEffect(() => {
+        socket.on("operationP2p", (idP2p) => {
+            fetchP2pInfo();
+        }
+        );
+        return () => {
+            socket.off("operationP2p");
+        }
+    }, [idP2p])
 
     const fetchP2pInfo = async () => {
         if (idP2p) {
@@ -241,7 +254,11 @@ const ConfirmTransaction: React.FC<ConfirmTransactionProps> = ({ route }) => {
                     type={side === 'sell' ? t('selling') : t('buying')}
                 />
                 <View style={styles.viewFooter}>
-                    <FooterButtons typeUser={typeUser} userid={userId} loginUserid={loginUserid} idP2p={selectedidP2p} />
+                    <FooterButtons
+                        typeUser={typeUser}
+                        userid={userId}
+                        loginUserid={loginUserid}
+                        idP2p={selectedidP2p} />
                 </View>
                 <PaymentModal
                     visible={visible}
