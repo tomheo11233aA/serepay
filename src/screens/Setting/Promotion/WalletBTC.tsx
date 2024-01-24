@@ -1,5 +1,5 @@
 import { Alert, Text, View } from 'react-native'
-import React, { useState, useEffect } from 'react'
+import React, { useEffect } from 'react'
 import { WithdrawProps } from './Withdraw'
 import { useAppSelector } from '@hooks/redux'
 import { userWalletUserSelector } from '@redux/selector/userSelector'
@@ -223,14 +223,29 @@ const WalletBTC: React.FC<Props> = ({ route }) => {
                                                 <Txt fontFamily={fonts.LR} size={16}>Coin: </Txt>
                                                 <Txt fontFamily={fonts.LR} size={16}>{item?.coin_key.toUpperCase()}</Txt>
                                             </View>
+                                            <View style={{ flexDirection: 'row', alignContent: 'center', marginTop: 10, alignItems: 'center' }}>
+                                                <Txt fontFamily={fonts.LR} size={16}>Status: </Txt>
+
+                                                {item?.status === 2 ? (
+                                                    <Txt fontFamily={fonts.LR} size={16} color={'orange'}>Pending</Txt>
+                                                ) : item?.status === 1 ? (
+                                                    <Txt fontFamily={fonts.LR} size={16} color={colors.green}>Success</Txt>
+                                                ) : (
+                                                    <Txt fontFamily={fonts.LR} size={16} color={colors.red}>Reject</Txt>
+                                                )}
+                                            </View>
                                             <View style={{ flexDirection: 'row', alignContent: 'center', marginTop: 10, alignItems: 'center', marginBottom: 10 }}>
                                                 <Txt fontFamily={fonts.LR} size={16}>Note: </Txt>
                                                 <Txt fontFamily={fonts.LR} size={16}>{item?.note}</Txt>
                                             </View>
-                                            <View style={{ flexDirection: 'row', alignContent: 'center', alignItems: 'center', marginBottom: 7 }}>
+                                            <View style={{ flexDirection: 'row', alignContent: 'center', alignItems: 'center', marginBottom: 10}}>
                                                 <Txt fontFamily={fonts.LR} size={16}>{t('Final Amount:')}</Txt>
                                                 <Txt marginLeft={5} color={colors.green} fontFamily={fonts.OSB} size={16}> {item?.amount}</Txt>
                                                 <Icon marginLeft={5} size={15} source={{ uri: `${keys.HOSTING_API}${coin?.image}` }} />
+                                            </View>
+                                            <View style={{ flexDirection: 'row', alignContent: 'center', alignItems: 'center', marginBottom: 7 }}>
+                                                <Txt fontFamily={fonts.LR} size={16}>To Address: </Txt>
+                                                <Txt fontFamily={fonts.LR} size={16}>{item?.to_address}</Txt>
                                             </View>
                                         </View>
                                     </View>
