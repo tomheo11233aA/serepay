@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View } from 'react-native'
+import { Text, View, StyleSheet } from 'react-native'
 import React, { useEffect } from 'react'
 import Safe from '@reuse/Safe'
 import Scroll from '@commom/Scroll'
@@ -14,7 +14,6 @@ import { AppDispatch } from '@redux/store/store';
 import { userInfoUserSelector } from '@redux/selector/userSelector'
 import FooterButtons from './Footer';
 import PaymentModal from './PaymentModal';
-import TransactionTable from './TransactionTable';
 import { RouteProp } from '@react-navigation/native';
 import Countdown from './Countdown'
 import { goBack } from '@utils/navigationRef';
@@ -25,28 +24,8 @@ import moment from 'moment'
 import { fonts } from '@themes/fonts'
 import Txt from '@commom/Txt'
 import { socket } from '@helper/AxiosInstance'
-interface IResponse {
-    amount: number;
-    bankName: string;
-    code: string;
-    created_at: string;
-    email: string;
-    emailAds: string;
-    id: number;
-    idP2p: number;
-    numberBank: string;
-    ownerAccount: string;
-    pay: number;
-    rate: number;
-    side: string;
-    symbol: string;
-    typeP2p: number;
-    typeUser: number;
-    userName: string;
-    userNameAds: string;
-    userid: number;
-    useridAds: number;
-}
+import { Table, Row } from 'react-native-table-component';
+import { Dimensions } from 'react-native';
 
 type RootStackParamList = {
     ConfirmTransaction: { idP2p: number };
@@ -60,7 +39,6 @@ export interface ConfirmTransactionProps {
 
 const ConfirmTransaction: React.FC<ConfirmTransactionProps> = ({ route }) => {
     const [idP2p, setIdP2p] = React.useState(route?.params?.idP2p || '');
-    const [tableData, setTableData] = React.useState([]);
     const padding = 20;
     const [visible, setVisible] = React.useState(false);
     const showModal = () => setVisible(true);
@@ -69,28 +47,43 @@ const ConfirmTransaction: React.FC<ConfirmTransactionProps> = ({ route }) => {
     const [selectedBankNumber, setSelectedBankNumber] = React.useState('');
     const [selectedBankOwner, setSelectedBankOwner] = React.useState('');
     const [loginUserid, setLoginUserid] = React.useState(0);
-    const [typeUser, setTypeUser] = React.useState(0);
-    const [userId, setUserId] = React.useState(0);
     const dispatch: AppDispatch = useDispatch();
     const userInfo = useSelector(userInfoUserSelector)
-    const [loading, setLoading] = React.useState<boolean>(true);
-    const [selectedidP2p, setSelectedidP2p] = React.useState<number>(0);
+    const [_, setLoading] = React.useState<boolean>(true);
     const [content, setContent] = React.useState<string>('');
     const [side, setSide] = React.useState<string>('');
     const [amount, setAmount] = React.useState<number>(0);
     const [pay, setPay] = React.useState<number>(0);
     const { t } = useTranslation();
     const [fakeLoading, setFakeLoading] = React.useState<boolean>(false)
+    const [p2pInfoData, setP2pInfoData] = React.useState<any[]>([]);
+    const [type] = React.useState<string>('');
+    const windowWidth = Dimensions.get('window').width;
+    const borderWidth = 1;
+    const adjustedWidth = windowWidth - 2 * (padding + borderWidth);
+    const columnWidthRatios = [0.33, 0.67];
+    const tableHead = [
+        { title: t('Transaction Code'), data: 'code' },
+        { title: t('Trader'), data: 'userName' },
+        { title: t('Status'), data: 'typeP2p' },
+        { title: t('Payment'), data: 'pay' },
+        { title: t('You are ') + (type === 'sell' ? t('buying') : t('selling')), data: 'side' },
+        { title: t('Exchange rate'), data: 'rate' },
+        { title: t('Amount'), data: 'amount' },
+        { title: t('Time'), data: 'created_at' },
+        { title: t('Note'), data: 'content' }
+    ];
 
-    React.useEffect(() => {
+    useEffect(() => {
         const fetchData = async () => {
             try {
                 const adsItem = await AsyncStorage.getItem('adsItem');
                 if (adsItem) {
                     const adsItemParse = JSON.parse(adsItem);
-                    console.log("adsItemParse", adsItemParse);
                     setIdP2p(adsItemParse.id);
                     setSide(adsItemParse.side);
+                } else {
+                    setIdP2p(route?.params?.idP2p || '');
                 }
             } catch (error) {
                 console.log("lỗi 1", error);
@@ -102,9 +95,8 @@ const ConfirmTransaction: React.FC<ConfirmTransactionProps> = ({ route }) => {
         fetchData();
     }, [])
 
-
-    React.useEffect(() => {
-        socket.on("operationP2p", (idP2p) => {
+    useEffect(() => {
+        socket.on("operationP2p", (_idP2p) => {
             fetchP2pInfo();
         }
         );
@@ -121,66 +113,7 @@ const ConfirmTransaction: React.FC<ConfirmTransactionProps> = ({ route }) => {
                 }
                 const p2pInfo = await getInfoP2p(data);
                 if (p2pInfo?.status) {
-                    setTypeUser(p2pInfo?.data[0]?.typeUser);
-                    setUserId(p2pInfo?.data[0]?.userid);
-                    setSelectedidP2p(p2pInfo?.data[0]?.id);
-                    setSide(p2pInfo?.data[0]?.side);
-                    setPay(p2pInfo?.data[0]?.pay);
-                    setAmount(p2pInfo?.data[0]?.amount);
-                    const date = moment.utc(p2pInfo?.data[0]?.created_at).format('DD/MM/YYYY HH:mm:ss');
-                    const formattedData = p2pInfo?.data?.map((item: IResponse) => [
-                        item.code,
-                        <View style={{ alignItems: 'center' }}>
-                            <View style={{ flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'flex-start' }}>
-                                <Text style={{ color: 'black' }}>{t('If you need assistance, please contact the ')}
-                                    <Text style={{ color: 'green', fontWeight: 'bold' }}>{item.userNameAds}</Text>
-                                </Text>
-                                <Text style={{ color: 'black' }}>{t('Email: ')}
-                                    <Text style={{ color: 'green', fontWeight: 'bold' }}>{item.emailAds}</Text>
-                                </Text>
-                            </View>
-                        </View>
-                        ,
-                        <View style={{ marginRight: 20 }}>
-                            <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-                                <LottieView
-                                    style={{ width: 35, height: 35 }}
-                                    source={require('@lottie/smallloading.json')}
-                                    autoPlay
-                                    loop
-                                />
-                                <Text style={{ color: 'black', flexShrink: 1 }}>{t('Waiting for payment from the bank')}</Text>
-                            </View>
-                            <Countdown createdAt={item.created_at} />
-                        </View>,
-                        <Btn
-                            padding={10}
-                            backgroundColor={colors.darkGreen}
-                            onPress={() => {
-                                setSelectedBankName(item.bankName);
-                                setSelectedBankNumber(item.numberBank);
-                                setSelectedBankOwner(item.ownerAccount);
-                                setContent(item.code.toString());
-                                showModal();
-                            }}>
-                            <Text style={{ color: 'white', fontWeight: 'bold', flexShrink: 1 }}>{t('Open payment screen')}</Text>
-                        </Btn>,
-                        item.amount + ' ' + item.symbol,
-                        item.rate,
-                        item.pay.toFixed(3),
-                        <Text style={{ color: colors.green, fontWeight: 'bold', marginLeft: 5, flexShrink: 1 }}>
-                            {date}
-                        </Text>,
-                        <View style={{ alignItems: 'center', paddingVertical: 15, paddingHorizontal: 10 }}>
-                            <Text style={{ flexShrink: 1, textAlign: 'justify', color: 'black' }}>
-                                {t('• Please pay the correct information on the payment screen within the prescribed time. If you have paid, you can message the seller immediately for them to check.')}{"\n"}
-                                {t('• We only buy and sell cryptocurrencies, not related to any project.')}{"\n"}
-                                {t('• Customers should note that only transactions on the website. Transactions outside our website are not responsible.')}{"\n"}
-                                {t('• If the customer payment is delayed, bank error ... please contact the seller for support')}
-                            </Text>
-                        </View>,
-                    ]);
-                    setTableData(formattedData);
+                    setP2pInfoData(p2pInfo?.data);
                 }
             } catch (error) {
                 console.log("lỗi 2", error);
@@ -190,7 +123,7 @@ const ConfirmTransaction: React.FC<ConfirmTransactionProps> = ({ route }) => {
         }
     }
 
-    React.useEffect(() => {
+    useEffect(() => {
         fetchP2pInfo();
         setFakeLoading(true);
         const timer = setTimeout(() => {
@@ -199,11 +132,11 @@ const ConfirmTransaction: React.FC<ConfirmTransactionProps> = ({ route }) => {
         return () => clearTimeout(timer);
     }, [idP2p])
 
-    React.useEffect(() => {
+    useEffect(() => {
         setLoginUserid(userInfo?.id ?? 0);
     }, [userInfo])
 
-    React.useEffect(() => {
+    useEffect(() => {
         dispatch(fetchUserInfo())
     }, [dispatch]);
 
@@ -230,36 +163,121 @@ const ConfirmTransaction: React.FC<ConfirmTransactionProps> = ({ route }) => {
         )
     }
 
+    const renderRowData = (header: any, item: any) => {
+        const date = moment(item.created_at).format('DD/MM/YYYY HH:mm:ss');
+        if (header.data === 'code') {
+            return (
+                <Text style={{ color: 'black', flexShrink: 1 }}>{item.code}</Text>
+            );
+        }
+        if (header.data === 'userName') {
+            return (
+                <View style={{ alignItems: 'center' }}>
+                    <View style={{ flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'flex-start' }}>
+                        <Text style={{ color: 'black' }}>{t('If you need assistance, please contact the ')}
+                            <Text style={{ color: 'green', fontWeight: 'bold' }}>{item.userName}</Text>
+                        </Text>
+                        <Text style={{ color: 'black' }}>{t('Email: ')}
+                            <Text style={{ color: 'green', fontWeight: 'bold' }}>{item.email}</Text>
+                        </Text>
+                    </View>
+                </View>
+            );
+        }
+        if (header.data === 'typeP2p') {
+            return (
+                <View style={{ marginRight: 20 }}>
+                    <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+                        <LottieView
+                            style={{ width: 35, height: 35 }}
+                            source={require('@lottie/smallloading.json')}
+                            autoPlay
+                            loop
+                        />
+                        <Text style={{ color: 'black', flexShrink: 1 }}>{t('Waiting for payment from the bank')}</Text>
+                    </View>
+                    <Countdown createdAt={item.created_at} />
+                </View>
+            );
+        }
+        if (header.data === 'pay') {
+            return (
+                <Btn
+                    padding={10}
+                    backgroundColor={colors.darkGreen}
+                    onPress={() => {
+                        setSelectedBankName(item.bankName);
+                        setSelectedBankNumber(item.numberBank);
+                        setSelectedBankOwner(item.ownerAccount);
+                        setContent(item.code.toString());
+                        setSide(item.side);
+                        setAmount(item.amount);
+                        setPay(item.pay);
+                        showModal();
+                    }}>
+                    <Text style={{ color: 'white', fontWeight: 'bold', flexShrink: 1 }}>{t('Open payment screen')}</Text>
+                </Btn>
+            );
+        }
+        if (header.data === 'side') {
+            return (
+                <Text style={{ color: 'black', flexShrink: 1 }}>{item.amount + ' ' + item.symbol}</Text>
+            );
+        }
+        if (header.data === 'rate') {
+            return (
+                <Text style={{ color: 'black', flexShrink: 1 }}>{item.rate}</Text>
+            );
+        }
+        if (header.data === 'amount') {
+            return (
+                <Text style={{ color: 'black', flexShrink: 1 }}>{item.pay.toFixed(3)}</Text>
+            );
+        }
+        if (header.data === 'created_at') {
+            return (
+                <Text style={{ color: colors.green, fontWeight: 'bold', marginLeft: 5, flexShrink: 1 }}>
+                    {date}
+                </Text>
+            );
+        }
+        if (header.data === 'content') {
+            return (
+                <View style={{ alignItems: 'center', paddingVertical: 15, paddingHorizontal: 10 }}>
+                    <Text style={{ flexShrink: 1, textAlign: 'justify', color: 'black' }}>
+                        {t('• Please pay the correct information on the payment screen within the prescribed time. If you have paid, you can message the seller immediately for them to check.')}{"\n"}
+                        {t('• We only buy and sell cryptocurrencies, not related to any project.')}{"\n"}
+                        {t('• Customers should note that only transactions on the website. Transactions outside our website are not responsible.')}{"\n"}
+                        {t('• If the customer payment is delayed, bank error ... please contact the seller for support')}
+                    </Text>
+                </View>
+            );
+        }
+    }
+    
     return (
         <Safe flex={1} backgroundColor={'white'}>
-            <Scroll justifyCenter padding={padding}>
+            <Scroll>
                 <Box
                     row
                     alignCenter
                     justifySpaceBetween
                     paddingVertical={15}
                     maxWidth={'80%'}
+                    marginLeft={10}
                 >
-                    <Btn onPress={() => goBack()}>
+                    <Btn
+                        width={25}
+                        height={25}
+                        radius={25}
+                        onPress={() => goBack()}
+                    >
                         <Icon
                             size={20}
                             source={require('@images/unAuth/left.png')}
                         />
                     </Btn>
                 </Box>
-                <View style={styles.header}>
-                    <Text style={styles.tableTitle}>{t('BTC Transaction')}</Text>
-                </View>
-                <TransactionTable tableData={tableData} showModal={showModal}
-                    type={side === 'sell' ? t('selling') : t('buying')}
-                />
-                <View style={styles.viewFooter}>
-                    <FooterButtons
-                        typeUser={typeUser}
-                        userid={userId}
-                        loginUserid={loginUserid}
-                        idP2p={selectedidP2p} />
-                </View>
                 <PaymentModal
                     visible={visible}
                     hideModal={hideModal}
@@ -271,6 +289,39 @@ const ConfirmTransaction: React.FC<ConfirmTransactionProps> = ({ route }) => {
                     amount={amount}
                     pay={pay}
                 />
+                {p2pInfoData.map((item: any, index) => (
+                    <Box
+                        key={index}
+                        alignCenter
+                        marginBottom={50}
+                    >
+                        <View style={styles.header}>
+                            <Text style={styles.tableTitle}>{t('BTC Transaction')}</Text>
+                        </View>
+                        <Table borderStyle={{ borderWidth: 1, borderColor: colors.gray8, borderRadius: 5 }}>
+                            {
+                                tableHead.map((header, index) => (
+                                    <Row
+                                        key={index}
+                                        data={[header.title, renderRowData(header, item)]}
+                                        style={{ ...styles.row, ...(index % 2 ? styles.rowAlternate : {}) }}
+                                        textStyle={{ margin: 6, flexShrink: 1, fontWeight: 'bold' }}
+                                        widthArr={columnWidthRatios.map(ratio => adjustedWidth * ratio)}
+                                    />
+                                ))
+                            }
+                        </Table>
+                        <View style={styles.viewFooter}>
+                            <FooterButtons
+                                typeUser={item.typeUser}
+                                userid={item.userid}
+                                loginUserid={loginUserid}
+                                idP2p={item.id}
+                            />
+                        </View>
+                    </Box>
+                ))}
+
             </Scroll>
         </Safe>
     )
@@ -279,18 +330,31 @@ const ConfirmTransaction: React.FC<ConfirmTransactionProps> = ({ route }) => {
 export default ConfirmTransaction
 
 const styles = StyleSheet.create({
-    header: { backgroundColor: colors.gray7, padding: 5, borderTopLeftRadius: 5, borderTopRightRadius: 5 },
+    tableBorder: { borderWidth: 1, borderColor: colors.gray8 },
+    row: { minHeight: 40, backgroundColor: 'white' },
+    rowAlternate: { backgroundColor: colors.gray5 },
+    header: {
+        width: '90%',
+        backgroundColor: colors.gray7,
+        padding: 5,
+        borderTopLeftRadius: 5,
+        borderTopRightRadius: 5
+    },
     tableTitle: {
         fontWeight: 'bold',
         fontSize: 18,
         justifyContent: 'center',
-        padding: 5
+        padding: 5,
+        color: 'black'
     },
     viewFooter: {
-        padding: 10,
-        backgroundColor: colors.gray3,
+        width: '90%',
+        height: 60,
+        alignItems: 'center',
         justifyContent: 'center',
+        backgroundColor: colors.gray7,
+        padding: 5,
         borderBottomLeftRadius: 5,
-        borderBottomRightRadius: 5,
+        borderBottomRightRadius: 5
     },
 })

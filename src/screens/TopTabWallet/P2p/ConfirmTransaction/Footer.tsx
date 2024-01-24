@@ -15,6 +15,7 @@ import { useAppDispatch, useAppSelector } from '@hooks/redux';
 import { AppDispatch } from '@redux/store/store';
 import { setCount } from '@redux/slice/notificationSlice';
 import { notificationSelector } from '@redux/selector/userSelector';
+import { fonts } from '@themes/fonts';
 interface FooterButtonsProps {
     typeUser: number;
     userid: number;
@@ -58,6 +59,7 @@ const FooterButtons: React.FC<FooterButtonsProps> = ({ typeUser, userid, loginUs
         };
         const response = await companyConfirmP2pCommand(data);
         if (response?.status) {
+            console.log('response', data);
             Alert.alert('Success', 'Confirm order successfully');
             navigate(screens.SETTING_STACK, {
                 screen: screens.HISTORY_TRANSACTION
@@ -70,6 +72,7 @@ const FooterButtons: React.FC<FooterButtonsProps> = ({ typeUser, userid, loginUs
         };
         const response = await companyCancelP2pCommand(data);
         if (response?.status) {
+            console.log('response', data);
             Alert.alert('Success', 'Cancel order successfully');
             navigate(screens.SETTING_STACK, {
                 screen: screens.HISTORY_TRANSACTION
@@ -89,14 +92,14 @@ const FooterButtons: React.FC<FooterButtonsProps> = ({ typeUser, userid, loginUs
                     <Btn backgroundColor={colors.red} padding={8} radius={3} marginLeft={10} onPress={
                         handleCancelOrder
                     }>
-                        <Text style={{ color: 'white' }}>{t('Cancel Transaction')}</Text>
+                        <Text style={{ color: 'white', fontFamily: fonts.AS }}>{t('Cancel Transaction')}</Text>
                     </Btn>
                 </View>
             );
         } else {
             return (
                 <Btn radius={3} padding={8} disabled>
-                    <Text style={{ color: 'black' }}>{t('Waiting for the other party to transfer money')}</Text>
+                    <Text style={{ color: 'black', fontFamily: fonts.AS }}>{t('Waiting for the other party to transfer money')}</Text>
                 </Btn>
             );
         }
@@ -104,23 +107,29 @@ const FooterButtons: React.FC<FooterButtonsProps> = ({ typeUser, userid, loginUs
         if (userid === loginUserid) {
             return (
                 <Btn backgroundColor={colors.black3} radius={3} padding={8} disabled>
-                    <Text style={{ color: 'white' }}>{t('Waiting for the other party to confirm')}</Text>
+                    <Text style={{ color: 'white', fontFamily: fonts.AS }}>{t('Waiting for the other party to confirm')}</Text>
                 </Btn>
             );
         } else {
             return (
                 <View style={{ flexDirection: 'row' }}>
                     <Btn backgroundColor={colors.darkGreen} radius={3} padding={8} onPress={handleCompanyConfirmOrder}>
-                        <Text style={{ color: 'white' }}>{t('Received Money')}</Text>
+                        <Text style={{ color: 'white', fontFamily: fonts.AS }}>{t('Received Money')}</Text>
                     </Btn>
                     <Btn backgroundColor={colors.red} padding={8} radius={3} marginLeft={10} onPress={handleCompanyCancelOrder}>
-                        <Text style={{ color: 'white' }}>{t('Not Received Money')}</Text>
+                        <Text style={{ color: 'white', fontFamily: fonts.AS }}>{t('Not Received Money')}</Text>
                     </Btn>
                 </View>
             );
         }
     }
-    return null;
+    return (
+        <View>
+            <Text style={{ color: 'white', fontFamily: fonts.AS }}>
+                {t('This is a bug please report to the admin')}
+            </Text>
+        </View>
+    )
 }
 
 export default FooterButtons;
