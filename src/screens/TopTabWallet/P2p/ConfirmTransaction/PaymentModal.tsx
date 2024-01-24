@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text, View, TouchableOpacity } from 'react-native';
+import { View, TouchableOpacity } from 'react-native';
 import { Modal, Portal } from 'react-native-paper';
 import Btn from '@commom/Btn';
 import { colors } from '@themes/colors';
@@ -7,6 +7,8 @@ import Icon from '@commom/Icon';
 import Clipboard from '@react-native-clipboard/clipboard';
 import { ToastAndroid, Platform, Alert } from 'react-native';
 import { useTranslation } from 'react-i18next';
+import Txt from '@commom/Txt';
+import { fonts } from '@themes/fonts';
 
 interface PaymentModalProps {
     visible: boolean;
@@ -22,11 +24,11 @@ interface PaymentModalProps {
 
 const PaymentModal: React.FC<PaymentModalProps> = ({ visible, hideModal, selectedBankName, selectedBankNumber, selectedBankOwner, content, side, amount, pay }) => {
     const { t } = useTranslation();
-    const notifyMessage = (text: string) => {
+    const notifyMessage = (Txt: string) => {
         if (Platform.OS === 'android') {
             ToastAndroid.show('Copied to clipboard', ToastAndroid.SHORT);
         } else {
-            Alert.alert(`Copied ${text} to clipboard`);
+            Alert.alert(`Copied ${Txt} to clipboard`);
         }
     }
     const [bankNameSuccess, setBankNameSuccess] = React.useState(false);
@@ -37,16 +39,44 @@ const PaymentModal: React.FC<PaymentModalProps> = ({ visible, hideModal, selecte
     return (
         <Portal>
             <Modal visible={visible} onDismiss={hideModal} contentContainerStyle={{ backgroundColor: 'white', padding: 20, width: '90%', alignSelf: 'center', borderRadius: 10 }}>
-                <Text style={{ fontWeight: 'bold', fontSize: 16, marginBottom: 10 }}>{t('Payment info')}</Text>
-                <Text style={{ marginBottom: 5 }}>{t('You are')} {side} {amount} {t('through Serepay.')}</Text>
-                <Text style={{ fontWeight: 'bold', fontSize: 14, marginBottom: 10 }}>{t('Please make the payment for the correct amount, content, and account number below')}</Text>
+                <Txt
+                    fontFamily={fonts.OSB}
+                    style={{
+                        fontSize: 16,
+                        marginBottom: 10
+                    }}>
+                    {t('Payment info')}
+                </Txt>
+                <Txt
+                    fontFamily={fonts.LR}
+                    size={14}
+                    style={{
+                        marginBottom: 5,
+                        height: 20
+                    }}>
+                    {t('You are')} {side} {amount} {t('through Serepay.')
+                    }</Txt>
+
+                <Txt
+                    fontFamily={fonts.OSB}
+                    style={{
+                        fontSize: 14,
+                        marginBottom: 10
+                    }}>
+                    {t('Please make the payment for the correct amount, content, and account number below')}
+                </Txt>
 
                 <View style={{ borderBottomColor: 'black', borderBottomWidth: 1, marginBottom: 10 }} />
                 <View style={{ paddingVertical: 15 }}>
                     <View style={{ flexDirection: 'row', marginBottom: 5, justifyContent: 'space-between' }}>
                         <View style={{ flexDirection: 'row', marginBottom: 5 }}>
-                            <Text style={{ marginBottom: 5 }}>{t('Bank name: ')}</Text>
-                            <Text style={{ marginBottom: 5, color: colors.blue, fontWeight: 'bold' }}>{selectedBankName}</Text>
+                            <Txt
+                                fontFamily={fonts.OSB}
+                                style={{ marginBottom: 5 }}
+                            >
+                                {t('Bank name: ')}
+                            </Txt>
+                            <Txt style={{ marginBottom: 5, color: colors.blue, fontWeight: 'bold' }}>{selectedBankName}</Txt>
                         </View>
                         <TouchableOpacity
                             onPress={() => {
@@ -64,8 +94,13 @@ const PaymentModal: React.FC<PaymentModalProps> = ({ visible, hideModal, selecte
 
                     <View style={{ flexDirection: 'row', marginBottom: 5, justifyContent: 'space-between' }}>
                         <View style={{ flexDirection: 'row', marginBottom: 5 }}>
-                            <Text style={{ marginBottom: 5 }}>{t('Account number: ')}</Text>
-                            <Text style={{ marginBottom: 5, color: colors.green, fontWeight: 'bold' }}>{selectedBankNumber}</Text>
+                            <Txt
+                                fontFamily={fonts.OSB}
+                                style={{ marginBottom: 5 }}
+                            >
+                                {t('Account number: ')}
+                            </Txt>
+                            <Txt style={{ marginBottom: 5, color: colors.green, fontWeight: 'bold' }}>{selectedBankNumber}</Txt>
                         </View>
                         <TouchableOpacity
                             onPress={() => {
@@ -82,8 +117,13 @@ const PaymentModal: React.FC<PaymentModalProps> = ({ visible, hideModal, selecte
 
                     <View style={{ flexDirection: 'row', marginBottom: 5, justifyContent: 'space-between' }}>
                         <View style={{ flexDirection: 'row', marginBottom: 5 }}>
-                            <Text style={{ marginBottom: 5 }}>{t('Account owner: ')}</Text>
-                            <Text style={{ marginBottom: 5, color: colors.red, fontWeight: 'bold' }}>{selectedBankOwner}</Text>
+                            <Txt
+                                fontFamily={fonts.OSB}
+                                style={{ marginBottom: 5 }}
+                            >
+                                {t('Account owner: ')}
+                            </Txt>
+                            <Txt style={{ marginBottom: 5, color: colors.red, fontWeight: 'bold' }}>{selectedBankOwner}</Txt>
                         </View>
                         <TouchableOpacity
                             onPress={() => {
@@ -100,14 +140,14 @@ const PaymentModal: React.FC<PaymentModalProps> = ({ visible, hideModal, selecte
 
                     <View style={{ flexDirection: 'row', marginBottom: 5, justifyContent: 'space-between' }}>
                         <View style={{ flexDirection: 'row', marginBottom: 5 }}>
-                            <Text style={{ marginBottom: 5 }}>{t('Transfer content: ')}</Text>
-                            <Text style={{ marginBottom: 5, color: colors.green, fontWeight: 'bold' }}>{content}</Text>
+                            <Txt fontFamily={fonts.OSB} style={{ marginBottom: 5 }}>{t('Transfer content: ')}</Txt>
+                            <Txt fontFamily={fonts.OSB} style={{ marginBottom: 5, color: colors.green, fontWeight: 'bold' }}>{content}</Txt>
                         </View>
                         <TouchableOpacity
                             onPress={() => {
-                                const text = content;
-                                Clipboard.setString(text);
-                                notifyMessage(text);
+                                const Txt = content;
+                                Clipboard.setString(Txt);
+                                notifyMessage(Txt);
                                 setContentSuccess(true);
                             }}>
                             <Icon size={20} style={{ marginLeft: 10 }}
@@ -118,8 +158,8 @@ const PaymentModal: React.FC<PaymentModalProps> = ({ visible, hideModal, selecte
 
                     <View style={{ flexDirection: 'row', marginBottom: 5, justifyContent: 'space-between' }}>
                         <View style={{ flexDirection: 'row', marginBottom: 5 }}>
-                            <Text style={{ marginBottom: 5 }}>{t('With amount: ')}</Text>
-                            <Text style={{ marginBottom: 5, color: colors.green, fontWeight: 'bold' }}>{pay.toLocaleString()}đ</Text>
+                            <Txt fontFamily={fonts.OSB} style={{ marginBottom: 5 }}>{t('With amount: ')}</Txt>
+                            <Txt style={{ marginBottom: 5, color: colors.green, fontWeight: 'bold' }}>{pay.toLocaleString()}đ</Txt>
                         </View>
                         <TouchableOpacity
                             onPress={() => {
@@ -143,7 +183,7 @@ const PaymentModal: React.FC<PaymentModalProps> = ({ visible, hideModal, selecte
                     padding={7}
                     radius={3}
                 >
-                    <Text style={{ fontWeight: 'bold', color: colors.gray8 }}>Close</Text>
+                    <Txt style={{ fontWeight: 'bold', color: colors.gray8 }}>Close</Txt>
                 </Btn>
             </Modal>
         </Portal>

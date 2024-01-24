@@ -100,9 +100,12 @@ const Sell = () => {
 
     useEffect(() => {
         setFakeLoading(true)
-        setTimeout(() => {
-            setFakeLoading(false)
-        }, 1000)
+        const timer = setTimeout(() => {
+            setFakeLoading(false);
+        }, 1000);
+        return () => {
+            clearTimeout(timer)
+        }
     }, [])
 
     if (data.length === 0) {

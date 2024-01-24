@@ -5,6 +5,7 @@ import LottieView from 'lottie-react-native';
 import moment from 'moment';
 import Btn from '@commom/Btn';
 import Countdown from './Countdown';
+import { fonts } from '@themes/fonts';
 
 type RowDataProps = {
     header: any;
@@ -20,7 +21,7 @@ type RowDataProps = {
     showModal: () => void;
 };
 
-const RowData:React.FC<RowDataProps> = ({
+const RowData: React.FC<RowDataProps> = ({
     header,
     item,
     t,
@@ -36,17 +37,21 @@ const RowData:React.FC<RowDataProps> = ({
     const date = moment(item.created_at).format('DD/MM/YYYY HH:mm:ss');
     if (header.data === 'code') {
         return (
-            <Text style={{ color: 'black', flexShrink: 1 }}>{item.code}</Text>
+            <Text style={{ color: 'black', flexShrink: 1, fontFamily: fonts.AS, marginLeft: 5 }}>{item.code}</Text>
         );
     }
     if (header.data === 'userName') {
         return (
             <View style={{ alignItems: 'center' }}>
                 <View style={{ flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'flex-start' }}>
-                    <Text style={{ color: 'black' }}>{t('If you need assistance, please contact the ')}</Text>
-                    <Text style={{ color: 'green', fontWeight: 'bold' }}>{item.userName}</Text>
-                    <Text style={{ color: 'black' }}>{t('Email: ')}</Text>
-                    <Text style={{ color: 'green', fontWeight: 'bold' }}>{item.email}</Text>
+                    <Text style={{ color: 'black', fontFamily: fonts.AS, marginLeft: 5 }}>{t('If you need assistance, please contact the ')}
+                        <Text style={{ color: 'green', fontFamily: fonts.AS, marginLeft: 5, fontWeight: 'bold' }}>
+                            {item.userName}
+                        </Text>
+                    </Text>
+
+                    <Text style={{ color: 'black', fontFamily: fonts.AS, marginLeft: 5 }}>{t('Email: ')}</Text>
+                    <Text style={{ color: 'green', fontWeight: 'bold', fontFamily: fonts.AS }}>{item.email}</Text>
                 </View>
             </View>
         );
@@ -61,7 +66,7 @@ const RowData:React.FC<RowDataProps> = ({
                         autoPlay
                         loop
                     />
-                    <Text style={{ color: 'black', flexShrink: 1 }}>{t('Waiting for payment from the bank')}</Text>
+                    <Text style={{ color: 'black', flexShrink: 1, fontFamily: fonts.AS, marginLeft: 5 }}>{t('Waiting for payment from the bank')}</Text>
                 </View>
                 <Countdown createdAt={item.created_at} />
             </View>
@@ -82,28 +87,28 @@ const RowData:React.FC<RowDataProps> = ({
                     setPay(item.pay);
                     showModal();
                 }}>
-                <Text style={{ color: 'white', fontWeight: 'bold', flexShrink: 1 }}>{t('Open payment screen')}</Text>
+                <Text style={{ color: 'white', fontWeight: 'bold', flexShrink: 1, fontFamily: fonts.AS, marginLeft: 5 }}>{t('Open payment screen')}</Text>
             </Btn>
         );
     }
     if (header.data === 'side') {
         return (
-            <Text style={{ color: 'black', flexShrink: 1 }}>{item.amount + ' ' + item.symbol}</Text>
+            <Text style={{ color: 'black', flexShrink: 1, fontFamily: fonts.AS, marginLeft: 5 }}>{item.amount + ' ' + item.symbol}</Text>
         );
     }
     if (header.data === 'rate') {
         return (
-            <Text style={{ color: 'black', flexShrink: 1 }}>{item.rate}</Text>
+            <Text style={{ color: 'black', flexShrink: 1, fontFamily: fonts.AS, marginLeft: 5 }}>{item.rate}</Text>
         );
     }
     if (header.data === 'amount') {
         return (
-            <Text style={{ color: 'black', flexShrink: 1 }}>{item.pay.toFixed(3)}</Text>
+            <Text style={{ color: 'black', flexShrink: 1, fontFamily: fonts.AS, marginLeft: 5 }}>{item.pay.toFixed(3)}</Text>
         );
     }
     if (header.data === 'created_at') {
         return (
-            <Text style={{ color: colors.green, fontWeight: 'bold', marginLeft: 5, flexShrink: 1 }}>
+            <Text style={{ color: colors.green, fontWeight: 'bold', marginLeft: 5, flexShrink: 1, fontFamily: fonts.AS }}>
                 {date}
             </Text>
         );
@@ -111,7 +116,7 @@ const RowData:React.FC<RowDataProps> = ({
     if (header.data === 'content') {
         return (
             <View style={{ alignItems: 'center', paddingVertical: 15, paddingHorizontal: 10 }}>
-                <Text style={{ flexShrink: 1, textAlign: 'justify', color: 'black' }}>
+                <Text style={{ flexShrink: 1, textAlign: 'justify', color: 'black', fontFamily: fonts.AS, marginLeft: 5 }}>
                     {t('• Please pay the correct information on the payment screen within the prescribed time. If you have paid, you can message the seller immediately for them to check.')}{"\n"}
                     {t('• We only buy and sell cryptocurrencies, not related to any project.')}{"\n"}
                     {t('• Customers should note that only transactions on the website. Transactions outside our website are not responsible.')}{"\n"}
