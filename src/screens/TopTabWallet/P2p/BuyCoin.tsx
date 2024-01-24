@@ -2,10 +2,10 @@ import Box from '@commom/Box'
 import Icon from '@commom/Icon'
 import Txt from '@commom/Txt'
 import { colors } from '@themes/colors'
-import React, { useEffect } from 'react'
+import React, { useEffect, useCallback, useMemo } from 'react'
 import ItemBuyCoin from './ItemBuyCoin'
 import Scroll from '@commom/Scroll'
-import { useSelector, useDispatch, shallowEqual } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 import { fetchListAdsBuy, fetchListAdsSell } from '@redux/slice/historySlice'
 import { adsBuySelector, adsSellSelector } from '@redux/selector/userSelector'
 import { AppDispatch } from '@redux/store/store'
@@ -14,32 +14,40 @@ import { Image } from 'react-native'
 import Spinner from 'react-native-loading-spinner-overlay'
 import { heightPercentageToDP as hp } from 'react-native-responsive-screen';
 
+const fetchListAds = async (
+    type: string,
+    symbol: string,
+    dispatch: AppDispatch,
+    setBuyLoading: any,
+    setSellLoading: any
+) => {
+    if (type === 'buy') {
+        await dispatch(fetchListAdsBuy({
+            page: 1,
+            limit: 5,
+            symbol: symbol
+        }))
+        setBuyLoading(false)
+    } else {
+        await dispatch(fetchListAdsSell({
+            page: 1,
+            limit: 5,
+            symbol: symbol
+        }))
+        setSellLoading(false)
+    }
+}
 const BuyCoin = ({ t, type, selectedCoin }: any) => {
     const dispatch: AppDispatch = useDispatch()
     const users: IHistory[] = type === 'buy' ? useSelector(adsSellSelector) : useSelector(adsBuySelector)
-    const symbol = selectedCoin ? selectedCoin.name : 'USDT';
+    // const symbol = selectedCoin ? selectedCoin.name : 'USDT';
+    const symbol = useMemo(() => selectedCoin ? selectedCoin.name : 'USDT', [selectedCoin]);
     const [sellLoading, setSellLoading] = React.useState(true);
     const [buyLoading, setBuyLoading] = React.useState(true);
+    const fetchAds = useCallback(() => fetchListAds(type, symbol, dispatch, setBuyLoading, setSellLoading), [type, symbol, dispatch]);
     useEffect(() => {
-        const fetchListAds = async () => {
-            if (type === 'buy') {
-                await dispatch(fetchListAdsBuy({
-                    page: 1,
-                    limit: 5,
-                    symbol: symbol
-                }))
-                setBuyLoading(false)
-            } else {
-                await dispatch(fetchListAdsSell({
-                    page: 1,
-                    limit: 5,
-                    symbol: symbol
-                }))
-                setSellLoading(false)
-            }
-        }
-        fetchListAds()
-    }, [dispatch, type, selectedCoin])
+        fetchAds()
+    }, [fetchAds])
 
     return (
         <Box paddingHorizontal={15}>
