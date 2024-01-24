@@ -15,17 +15,16 @@ import { userInfoUserSelector } from '@redux/selector/userSelector'
 import FooterButtons from './Footer';
 import PaymentModal from './PaymentModal';
 import { RouteProp } from '@react-navigation/native';
-import Countdown from './Countdown'
 import { goBack } from '@utils/navigationRef';
 import Box from '@commom/Box'
 import Icon from '@commom/Icon'
 import { useTranslation } from 'react-i18next'
-import moment from 'moment'
 import { fonts } from '@themes/fonts'
 import Txt from '@commom/Txt'
 import { socket } from '@helper/AxiosInstance'
 import { Table, Row } from 'react-native-table-component';
 import { Dimensions } from 'react-native';
+import RowData from './RowData'
 
 type RootStackParamList = {
     ConfirmTransaction: { idP2p: number };
@@ -163,98 +162,6 @@ const ConfirmTransaction: React.FC<ConfirmTransactionProps> = ({ route }) => {
         )
     }
 
-    const renderRowData = (header: any, item: any) => {
-        const date = moment(item.created_at).format('DD/MM/YYYY HH:mm:ss');
-        if (header.data === 'code') {
-            return (
-                <Text style={{ color: 'black', flexShrink: 1 }}>{item.code}</Text>
-            );
-        }
-        if (header.data === 'userName') {
-            return (
-                <View style={{ alignItems: 'center' }}>
-                    <View style={{ flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'flex-start' }}>
-                        <Text style={{ color: 'black' }}>{t('If you need assistance, please contact the ')}
-                            <Text style={{ color: 'green', fontWeight: 'bold' }}>{item.userName}</Text>
-                        </Text>
-                        <Text style={{ color: 'black' }}>{t('Email: ')}
-                            <Text style={{ color: 'green', fontWeight: 'bold' }}>{item.email}</Text>
-                        </Text>
-                    </View>
-                </View>
-            );
-        }
-        if (header.data === 'typeP2p') {
-            return (
-                <View style={{ marginRight: 20 }}>
-                    <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-                        <LottieView
-                            style={{ width: 35, height: 35 }}
-                            source={require('@lottie/smallloading.json')}
-                            autoPlay
-                            loop
-                        />
-                        <Text style={{ color: 'black', flexShrink: 1 }}>{t('Waiting for payment from the bank')}</Text>
-                    </View>
-                    <Countdown createdAt={item.created_at} />
-                </View>
-            );
-        }
-        if (header.data === 'pay') {
-            return (
-                <Btn
-                    padding={10}
-                    backgroundColor={colors.darkGreen}
-                    onPress={() => {
-                        setSelectedBankName(item.bankName);
-                        setSelectedBankNumber(item.numberBank);
-                        setSelectedBankOwner(item.ownerAccount);
-                        setContent(item.code.toString());
-                        setSide(item.side);
-                        setAmount(item.amount);
-                        setPay(item.pay);
-                        showModal();
-                    }}>
-                    <Text style={{ color: 'white', fontWeight: 'bold', flexShrink: 1 }}>{t('Open payment screen')}</Text>
-                </Btn>
-            );
-        }
-        if (header.data === 'side') {
-            return (
-                <Text style={{ color: 'black', flexShrink: 1 }}>{item.amount + ' ' + item.symbol}</Text>
-            );
-        }
-        if (header.data === 'rate') {
-            return (
-                <Text style={{ color: 'black', flexShrink: 1 }}>{item.rate}</Text>
-            );
-        }
-        if (header.data === 'amount') {
-            return (
-                <Text style={{ color: 'black', flexShrink: 1 }}>{item.pay.toFixed(3)}</Text>
-            );
-        }
-        if (header.data === 'created_at') {
-            return (
-                <Text style={{ color: colors.green, fontWeight: 'bold', marginLeft: 5, flexShrink: 1 }}>
-                    {date}
-                </Text>
-            );
-        }
-        if (header.data === 'content') {
-            return (
-                <View style={{ alignItems: 'center', paddingVertical: 15, paddingHorizontal: 10 }}>
-                    <Text style={{ flexShrink: 1, textAlign: 'justify', color: 'black' }}>
-                        {t('• Please pay the correct information on the payment screen within the prescribed time. If you have paid, you can message the seller immediately for them to check.')}{"\n"}
-                        {t('• We only buy and sell cryptocurrencies, not related to any project.')}{"\n"}
-                        {t('• Customers should note that only transactions on the website. Transactions outside our website are not responsible.')}{"\n"}
-                        {t('• If the customer payment is delayed, bank error ... please contact the seller for support')}
-                    </Text>
-                </View>
-            );
-        }
-    }
-    
     return (
         <Safe flex={1} backgroundColor={'white'}>
             <Scroll>
@@ -288,7 +195,8 @@ const ConfirmTransaction: React.FC<ConfirmTransactionProps> = ({ route }) => {
                     side={side === 'sell' ? t('selling') : t('buying')}
                     amount={amount}
                     pay={pay}
-                />
+                >
+                </PaymentModal>
                 {p2pInfoData.map((item: any, index) => (
                     <Box
                         key={index}
@@ -303,7 +211,22 @@ const ConfirmTransaction: React.FC<ConfirmTransactionProps> = ({ route }) => {
                                 tableHead.map((header, index) => (
                                     <Row
                                         key={index}
-                                        data={[header.title, renderRowData(header, item)]}
+                                        data={[
+                                            header.title,
+                                            <RowData
+                                                header={header}
+                                                item={item}
+                                                t={t}
+                                                setSelectedBankName={setSelectedBankName}
+                                                setSelectedBankNumber={setSelectedBankNumber}
+                                                setSelectedBankOwner={setSelectedBankOwner}
+                                                setContent={setContent}
+                                                setSide={setSide}
+                                                setAmount={setAmount}
+                                                setPay={setPay}
+                                                showModal={showModal}
+                                            />
+                                        ]}
                                         style={{ ...styles.row, ...(index % 2 ? styles.rowAlternate : {}) }}
                                         textStyle={{ margin: 6, flexShrink: 1, fontWeight: 'bold' }}
                                         widthArr={columnWidthRatios.map(ratio => adjustedWidth * ratio)}
@@ -321,7 +244,6 @@ const ConfirmTransaction: React.FC<ConfirmTransactionProps> = ({ route }) => {
                         </View>
                     </Box>
                 ))}
-
             </Scroll>
         </Safe>
     )
