@@ -37,6 +37,12 @@ const TransactionItem = ({ item, side, isPending }: TransactionItemProps) => {
     const capitalizeFirstLetter = (string: string) => {
         return string.charAt(0).toUpperCase() + string.slice(1);
     }
+    const formatText = (text: string) => {
+        if (text.length > 11) {
+            return text.slice(0, 11) + '...'
+        }
+        return text
+    }
     useEffect(() => {
         const getInfo = async () => {
             try {
@@ -65,39 +71,39 @@ const TransactionItem = ({ item, side, isPending }: TransactionItemProps) => {
             <Box justifySpaceBetween>
                 <Box row>
                     {side === "buy" && (
-                        <Txt color={colors.gray2} fontFamily={fonts.AS}>{t('UserName')}: </Txt>
+                        <Txt color={colors.gray2} fontFamily={fonts.OSB}>{t('UserName')}: </Txt>
 
                     )}
-                    <Txt fontFamily={fonts.AS}>{capitalizeFirstLetter(item.userName)}</Txt>
+                    <Txt fontFamily={fonts.OSB}>{formatText(capitalizeFirstLetter(item.userName))}</Txt>
                     {side === 'sell' && (
                         <Box row marginLeft={20}>
-                            <Txt fontFamily={fonts.AS}>{item.bankName ? item.bankName : "Unknown"}: </Txt>
-                            <Txt fontFamily={fonts.AS} color={colors.gray2}>{item.numberBank ? item.numberBank : "Unknown"}</Txt>
+                            <Txt fontFamily={fonts.OSB}>{item.bankName ? formatText(item.bankName) : "Unknown"}: </Txt>
+                            <Txt fontFamily={fonts.OSB} color={colors.gray2}>{item.numberBank ? formatText(item.numberBank) : "Unknown"}</Txt>
                         </Box>
                     )}
                 </Box>
-                <Box row>
-                    <Txt color={colors.gray2} fontFamily={fonts.AS}>{t('Available')}: </Txt>
-                    <Txt fontFamily={fonts.AS}>{parseFloat((item.amount - item.amountSuccess).toFixed(8))} {item.symbol}</Txt>
+                <Box row marginTop={5}>
+                    <Txt color={colors.gray2} fontFamily={fonts.OSB}>{t('Available')}: </Txt>
+                    <Txt fontFamily={fonts.OSB}>{formatText(parseFloat((item.amount - item.amountSuccess).toFixed(8)).toString())} {item.symbol}</Txt>
                 </Box>
-                <Box row>
+                <Box row marginTop={5}>
                     <Box row>
-                        <Txt color={colors.gray2} fontFamily={fonts.AS}>{t('Min')}: </Txt>
-                        <Txt fontFamily={fonts.AS}>{item.amountMinimum}</Txt>
+                        <Txt color={colors.gray2} fontFamily={fonts.OSB}>{t('Min')}: </Txt>
+                        <Txt fontFamily={fonts.OSB}>{item.amountMinimum}</Txt>
                     </Box>
                     <Box row marginLeft={10}>
-                        <Txt color={colors.gray2} fontFamily={fonts.AS}>{t('Max')}: </Txt>
-                        <Txt fontFamily={fonts.AS}>{item.amount}</Txt>
+                        <Txt color={colors.gray2} fontFamily={fonts.OSB}>{t('Max')}: </Txt>
+                        <Txt fontFamily={fonts.OSB}>{item.amount}</Txt>
                     </Box>
                 </Box>
-                <Box row>
-                    <Txt color={colors.gray2} fontFamily={fonts.AS}>{t('Created at')}: </Txt>
-                    <Txt fontFamily={fonts.AS}>{formatTime(item.created_at)}</Txt>
+                <Box row marginTop={5}>
+                    <Txt color={colors.gray2} fontFamily={fonts.OSB}>{t('Created at')}: </Txt>
+                    <Txt fontFamily={fonts.OSB}>{formatText(formatTime(item.created_at))}</Txt>
                 </Box>
                 {item.type === 2 && (
                     <Txt
                         marginTop={3}
-                        fontFamily={fonts.AS} color={colors.red2}>
+                        fontFamily={fonts.OSB} color={colors.red2}>
                         {t('Waiting for admin confirm')}
                     </Txt>
                 )}
@@ -143,54 +149,65 @@ const TransactionItem = ({ item, side, isPending }: TransactionItemProps) => {
                             { cancelable: false },
                         );
                     }} >
-                        <Txt fontFamily={fonts.AS} color={'white'}>{t('Cancel')}</Txt>
+                        <Txt fontFamily={fonts.OSB} color={'white'}>{t('Cancel')}</Txt>
                     </Btn>
                 )}
                 {item.type === 2 && (
-                    <Btn backgroundColor={colors.red} padding={5} radius={5} onPress={() => {
-                        Alert.alert(
-                            t('Confirmation'),
-                            t('Are you sure you want to cancel?'),
-                            [
-                                {
-                                    text: 'Cancel',
-                                    style: 'destructive',
-                                },
-                                {
-                                    text: 'OK',
-                                    onPress: async () => {
-                                        try {
-                                            setIsLoading(true)
-                                            await cancelP2p({ idP2p: item.id })
-                                            Alert.alert("Cancel success")
-                                            if (side === 'buy') {
-                                                if (isPending) {
-                                                    dispatch(fetchListAdsBuyPendding())
+                    <Btn
+                        backgroundColor={colors.red}
+                        padding={5}
+                        radius={5}
+                        onPress={() => {
+                            Alert.alert(
+                                t('Confirmation'),
+                                t('Are you sure you want to cancel?'),
+                                [
+                                    {
+                                        text: 'Cancel',
+                                        style: 'destructive',
+                                    },
+                                    {
+                                        text: 'OK',
+                                        onPress: async () => {
+                                            try {
+                                                setIsLoading(true)
+                                                await cancelP2p({ idP2p: item.id })
+                                                Alert.alert("Cancel success")
+                                                if (side === 'buy') {
+                                                    if (isPending) {
+                                                        dispatch(fetchListAdsBuyPendding())
+                                                    }
+                                                    dispatch(fetchListAdsBuyToUser())
+                                                } else {
+                                                    if (isPending) {
+                                                        dispatch(fetchListAdsSellPendding())
+                                                    }
+                                                    dispatch(fetchListAdsSell())
                                                 }
-                                                dispatch(fetchListAdsBuyToUser())
-                                            } else {
-                                                if (isPending) {
-                                                    dispatch(fetchListAdsSellPendding())
-                                                }
-                                                dispatch(fetchListAdsSell())
+                                            } catch (error) {
+                                                console.log(error)
+                                            } finally {
+                                                setIsLoading(false)
                                             }
-                                        } catch (error) {
-                                            console.log(error)
-                                        } finally {
-                                            setIsLoading(false)
                                         }
-                                    }
-                                },
-                            ],
-                            { cancelable: false },
-                        );
-                    }} >
-                        <Txt fontFamily={fonts.AS} color={'white'}>{t('Cancel')}</Txt>
+                                    },
+                                ],
+                                { cancelable: false },
+                            );
+                        }} >
+                        <Txt fontFamily={fonts.OSB} color={'white'}>{t('Cancel')}</Txt>
                     </Btn>
                 )}
                 {hasP2PInfo && (
-                    <Btn backgroundColor={colors.green} radius={5} padding={5} marginTop={5} onPress={() => navigate(screens.CONFIRM_TRANSACTION, { idP2p: item.id })}>
-                        <Txt fontFamily={fonts.AS} color={colors.blue}>Info</Txt>
+                    <Btn
+                        width={70}
+                        backgroundColor={colors.green}
+                        radius={5}
+                        padding={5}
+                        marginTop={15}
+                        onPress={() => navigate(screens.CONFIRM_TRANSACTION, { idP2p: item.id })}
+                    >
+                        <Txt fontFamily={fonts.OSB} color={colors.darkViolet}>{t('Info')}</Txt>
                     </Btn>
                 )}
                 {isLoading && (
