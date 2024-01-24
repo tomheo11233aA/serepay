@@ -128,7 +128,7 @@ const SearchBox: React.FC<Props> = ({ coin, type }) => {
             </View>
             {loading ? (
                 <LottieView
-                    source={require('../../../assets/lottie/loading.json')}
+                    source={require('@lottie/loading.json')}
                     autoPlay
                     loop
                     style={{ width: 200, height: 200, alignSelf: 'center' }}

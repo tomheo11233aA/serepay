@@ -201,7 +201,7 @@ const WalletBTC: React.FC<Props> = ({ route }) => {
                 {isLoading ? (
                     <View style={{ justifyContent: 'center', alignItems: 'center', marginTop: 50 }}>
                         <LottieView
-                            source={require('../../../assets/lottie/loading.json')}
+                            source={require('@lottie/loading.json')}
                             autoPlay
                             loop
                             style={{ width: 100, height: 100 }}
@@ -238,7 +238,7 @@ const WalletBTC: React.FC<Props> = ({ route }) => {
                                                 <Txt fontFamily={fonts.LR} size={16}>Note: </Txt>
                                                 <Txt fontFamily={fonts.LR} size={16}>{item?.note}</Txt>
                                             </View>
-                                            <View style={{ flexDirection: 'row', alignContent: 'center', alignItems: 'center', marginBottom: 10}}>
+                                            <View style={{ flexDirection: 'row', alignContent: 'center', alignItems: 'center', marginBottom: 10 }}>
                                                 <Txt fontFamily={fonts.LR} size={16}>{t('Final Amount:')}</Txt>
                                                 <Txt marginLeft={5} color={colors.green} fontFamily={fonts.OSB} size={16}> {item?.amount}</Txt>
                                                 <Icon marginLeft={5} size={15} source={{ uri: `${keys.HOSTING_API}${coin?.image}` }} />

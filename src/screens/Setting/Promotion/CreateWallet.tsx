@@ -195,7 +195,7 @@ const CreateWallet: React.FC<DepositProps> = ({ route }) => {
                     {isLoading ? (
                         <View style={{ justifyContent: 'center', alignItems: 'center', marginTop: 50 }}>
                             <LottieView
-                                source={require('../../../assets/lottie/loading.json')}
+                                source={require('@lottie/loading.json')}
                                 autoPlay
                                 loop
                                 style={{ width: 100, height: 100 }}

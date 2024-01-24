@@ -1,5 +1,5 @@
 import { StyleSheet, Text, View } from 'react-native'
-import React from 'react'
+import React, { useEffect } from 'react'
 import Safe from '@reuse/Safe'
 import Scroll from '@commom/Scroll'
 import { colors } from '@themes/colors'
@@ -22,7 +22,8 @@ import Box from '@commom/Box'
 import Icon from '@commom/Icon'
 import { useTranslation } from 'react-i18next'
 import moment from 'moment'
-
+import { fonts } from '@themes/fonts'
+import Txt from '@commom/Txt'
 interface IResponse {
     amount: number;
     bankName: string;
@@ -71,16 +72,16 @@ const ConfirmTransaction: React.FC<ConfirmTransactionProps> = ({ route }) => {
     const [userId, setUserId] = React.useState(0);
     const dispatch: AppDispatch = useDispatch();
     const userInfo = useSelector(userInfoUserSelector)
-    const [loading, setLoading] = React.useState<boolean>(false);
+    const [loading, setLoading] = React.useState<boolean>(true);
     const [selectedidP2p, setSelectedidP2p] = React.useState<number>(0);
     const [content, setContent] = React.useState<string>('');
     const [side, setSide] = React.useState<string>('');
     const [amount, setAmount] = React.useState<number>(0);
     const [pay, setPay] = React.useState<number>(0);
     const { t } = useTranslation();
+    const [fakeLoading, setFakeLoading] = React.useState<boolean>(false)
 
     React.useEffect(() => {
-        setLoading(true);
         const fetchData = async () => {
             try {
                 const adsItem = await AsyncStorage.getItem('adsItem');
@@ -101,7 +102,6 @@ const ConfirmTransaction: React.FC<ConfirmTransactionProps> = ({ route }) => {
 
     const fetchP2pInfo = async () => {
         if (idP2p) {
-            setLoading(true);
             try {
                 const data: IGetInfoP2p = {
                     idP2p: Number(idP2p),
@@ -115,7 +115,6 @@ const ConfirmTransaction: React.FC<ConfirmTransactionProps> = ({ route }) => {
                     setPay(p2pInfo?.data[0]?.pay);
                     setAmount(p2pInfo?.data[0]?.amount);
                     const date = moment.utc(p2pInfo?.data[0]?.created_at).format('DD/MM/YYYY HH:mm:ss');
-                    console.log(p2pInfo?.data[0]?.created_at)
                     const formattedData = p2pInfo?.data?.map((item: IResponse) => [
                         item.code,
                         <View style={{ alignItems: 'center' }}>
@@ -133,7 +132,7 @@ const ConfirmTransaction: React.FC<ConfirmTransactionProps> = ({ route }) => {
                             <View style={{ flexDirection: 'row', alignItems: 'center' }}>
                                 <LottieView
                                     style={{ width: 35, height: 35 }}
-                                    source={require('../../../../assets/lottie/smallloading.json')}
+                                    source={require('@lottie/smallloading.json')}
                                     autoPlay
                                     loop
                                 />
@@ -157,7 +156,6 @@ const ConfirmTransaction: React.FC<ConfirmTransactionProps> = ({ route }) => {
                         item.rate,
                         item.pay.toFixed(3),
                         <Text style={{ color: colors.green, fontWeight: 'bold', marginLeft: 5, flexShrink: 1 }}>
-                            {/* {new Date(item.created_at).toLocaleString()} */}
                             {date}
                         </Text>,
                         <View style={{ alignItems: 'center', paddingVertical: 15, paddingHorizontal: 10 }}>
@@ -181,6 +179,11 @@ const ConfirmTransaction: React.FC<ConfirmTransactionProps> = ({ route }) => {
 
     React.useEffect(() => {
         fetchP2pInfo();
+        setFakeLoading(true);
+        const timer = setTimeout(() => {
+            setFakeLoading(false);
+        }, 1000);
+        return () => clearTimeout(timer);
     }, [idP2p])
 
     React.useEffect(() => {
@@ -191,56 +194,67 @@ const ConfirmTransaction: React.FC<ConfirmTransactionProps> = ({ route }) => {
         dispatch(fetchUserInfo())
     }, [dispatch]);
 
+    if (fakeLoading) {
+        return (
+            <View style={{
+                flex: 1,
+                justifyContent: 'center',
+                alignItems: 'center'
+            }}>
+                <LottieView
+                    style={{
+                        width: '100%',
+                        height: '50%',
+                        alignSelf: 'center',
+                    }}
+                    source={require('@lottie/loading.json')}
+                    autoPlay
+                    loop
+                />
+                <Txt size={18} fontFamily={fonts.AS}>Loading...</Txt>
+            </View>
+        )
+    }
+
     return (
         <Safe flex={1} backgroundColor={'white'}>
-            {loading ? (
-                <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-                    <LottieView
-                        style={{ width: 100, height: 100 }}
-                        source={require('../../../../assets/lottie/loading.json')}
-                        autoPlay
-                        loop
-                    />
+            <Scroll justifyCenter padding={padding}>
+                <Box
+                    row
+                    alignCenter
+                    justifySpaceBetween
+                    paddingVertical={15}
+                    maxWidth={'80%'}
+                >
+                    <Btn onPress={() => goBack()}>
+                        <Icon
+                            size={20}
+                            source={require('@images/unAuth/left.png')}
+                        />
+                    </Btn>
+                </Box>
+                <View style={styles.header}>
+                    <Text style={styles.tableTitle}>{t('BTC Transaction')}</Text>
                 </View>
-            ) : (
-                <Scroll justifyCenter padding={padding}>
-                    <Box
-                        row
-                        alignCenter
-                        justifySpaceBetween
-                        paddingVertical={15}
-                        maxWidth={'80%'}
-                    >
-                        <Btn onPress={() => goBack()}>
-                            <Icon
-                                size={20}
-                                source={require('@images/unAuth/left.png')}
-                            />
-                        </Btn>
-                    </Box>
-                    <View style={styles.header}>
-                        <Text style={styles.tableTitle}>{t('BTC Transaction')}</Text>
-                    </View>
-                    <TransactionTable tableData={tableData} showModal={showModal}
-                        type={side === 'sell' ? t('selling') : t('buying')}
-                    />
-                    <View style={styles.viewFooter}>
-                        <FooterButtons typeUser={typeUser} userid={userId} loginUserid={loginUserid} idP2p={selectedidP2p} />
-                    </View>
-                    <PaymentModal
-                        visible={visible}
-                        hideModal={hideModal}
-                        selectedBankName={selectedBankName}
-                        selectedBankNumber={selectedBankNumber}
-                        selectedBankOwner={selectedBankOwner}
-                        content={content}
-                        side={side === 'sell' ? t('selling') : t('buying')}
-                        amount={amount}
-                        pay={pay}
-                    />
-                </Scroll>
-            )}
-        </Safe >
+                <TransactionTable tableData={tableData} showModal={showModal}
+                    type={side === 'sell' ? t('selling') : t('buying')}
+                />
+                <View style={styles.viewFooter}>
+                    <FooterButtons typeUser={typeUser} userid={userId} loginUserid={loginUserid} idP2p={selectedidP2p} />
+                </View>
+                <PaymentModal
+                    visible={visible}
+                    hideModal={hideModal}
+                    selectedBankName={selectedBankName}
+                    selectedBankNumber={selectedBankNumber}
+                    selectedBankOwner={selectedBankOwner}
+                    content={content}
+                    side={side === 'sell' ? t('selling') : t('buying')}
+                    amount={amount}
+                    pay={pay}
+                />
+            </Scroll>
+        </Safe>
     )
 }
 

@@ -13,7 +13,7 @@ const Loading = () => (
             alignItems: 'center'
         }}>
             <LottieView
-                source={require('../../../../assets/lottie/loading.json')}
+                source={require('@lottie/loading.json')}
                 style={{ width: 200, height: 200, alignSelf: 'center' }}
                 autoPlay
                 loop />

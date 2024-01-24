@@ -126,7 +126,7 @@ const MakePrice = ({ t }: Props) => {
         <Box>
             {isLoading && (
                 <LottieView
-                    source={require('../../assets/lottie/loading.json')}
+                    source={require('@lottie/loading.json')}
                     autoPlay
                     loop
                 />
