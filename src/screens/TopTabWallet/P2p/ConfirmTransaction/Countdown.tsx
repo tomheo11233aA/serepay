@@ -6,20 +6,18 @@ const Countdown = ({ createdAt }: any) => {
     const [timeLeft, setTimeLeft] = useState<string>('');
     useEffect(() => {
         const countdown = setInterval(() => {
-            const expirationTime = moment(createdAt).add(15, 'minutes');
+            const expirationTime = moment(createdAt).add(15, 'minute');
             const now = moment();
+            const nowFormatted = now.format('YYYY-MM-DD HH:mm:ss');
+            const expirationTimeFormatted = expirationTime.utc().format('YYYY-MM-DD HH:mm:ss');
             const duration = moment.duration(expirationTime.diff(now));
             const minutes = duration.minutes();
             const seconds = duration.seconds();
-            // if now > expirationTime => expired
-            if (now.isAfter(expirationTime)) {
-                setTimeLeft('00:00');
-                clearInterval(countdown);
-            } else if (minutes === 0 && seconds === 0) {
+            if (nowFormatted >= expirationTimeFormatted) {
                 setTimeLeft('00:00');
                 clearInterval(countdown);
             } else {
-                setTimeLeft(`${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`);
+                setTimeLeft(`${minutes}:${seconds}`);
             }
         }, 1000);
 
