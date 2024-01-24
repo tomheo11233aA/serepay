@@ -199,12 +199,13 @@ const ConfirmTransaction: React.FC<ConfirmTransactionProps> = ({ route }) => {
             <View style={{
                 flex: 1,
                 justifyContent: 'center',
-                alignItems: 'center'
+                alignItems: 'center',
+                backgroundColor: 'white'
             }}>
                 <LottieView
                     style={{
-                        width: '100%',
-                        height: '50%',
+                        width: '80%',
+                        height: '30%',
                         alignSelf: 'center',
                     }}
                     source={require('@lottie/loading.json')}
