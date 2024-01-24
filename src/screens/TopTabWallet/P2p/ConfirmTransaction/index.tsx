@@ -159,7 +159,7 @@ const ConfirmTransaction: React.FC<ConfirmTransactionProps> = ({ route }) => {
                             {date}
                         </Text>,
                         <View style={{ alignItems: 'center', paddingVertical: 15, paddingHorizontal: 10 }}>
-                            <Text style={{ flexShrink: 1, textAlign: 'justify' }}>
+                            <Text style={{ flexShrink: 1, textAlign: 'justify', color: 'black' }}>
                                 {t('• Please pay the correct information on the payment screen within the prescribed time. If you have paid, you can message the seller immediately for them to check.')}{"\n"}
                                 {t('• We only buy and sell cryptocurrencies, not related to any project.')}{"\n"}
                                 {t('• Customers should note that only transactions on the website. Transactions outside our website are not responsible.')}{"\n"}
