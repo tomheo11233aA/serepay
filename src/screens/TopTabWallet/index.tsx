@@ -1,51 +1,38 @@
-import Box from '@commom/Box'
-import Btn from '@commom/Btn'
-import Icon from '@commom/Icon'
-import Txt from '@commom/Txt'
-import Safe from '@reuse/Safe'
-import { colors } from '@themes/colors'
-import React, { useState, useRef } from 'react'
-import LinearGradient from 'react-native-linear-gradient'
-import Wallet from './Wallet'
-import P2p from './P2p'
-import Staking from './Staking'
-import Lending from './Lending'
-import { useTranslation } from 'react-i18next'
-import { heightPercentageToDP as hp } from 'react-native-responsive-screen'
-import { Platform } from 'react-native'
-import { Animated } from 'react-native';
+import React, { useState, useCallback, useEffect } from 'react';
+import LinearGradient from 'react-native-linear-gradient';
+import { useTranslation } from 'react-i18next';
+import { heightPercentageToDP as hp } from 'react-native-responsive-screen';
+import { Platform } from 'react-native';
+import Box from '@commom/Box';
+import Btn from '@commom/Btn';
+import Icon from '@commom/Icon';
+import Txt from '@commom/Txt';
+import Safe from '@reuse/Safe';
+import Wallet from './Wallet';
+import P2p from './P2p';
+import Staking from './Staking';
+import Lending from './Lending';
+import { colors } from '@themes/colors';
+import { getListHistoryP2pPendding } from '@utils/userCallApi';
+import LottieView from 'lottie-react-native';
+import { navigate } from '@utils/navigationRef';
+import { screens } from '@contants/screens';
 
 const TopTabWallet = () => {
     const { t } = useTranslation()
     const [tabChoosed, setTabChoosed] = useState<string>('WALLET')
     const tabs = ['WALLET', 'P2P', 'STAKING', 'LENDING']
-    const fadeAnim = useRef(new Animated.Value(0)).current; // Initial value for opacity: 0
-
-    const fadeIn = () => {
-        // Will change fadeAnim value to 1 in 5 seconds
-        Animated.timing(fadeAnim, {
-            toValue: 1,
-            duration: 500,
-            useNativeDriver: true,
-        }).start();
-    };
-
-    const fadeOut = () => {
-        // Will change fadeAnim value to 0 in 5 seconds
-        Animated.timing(fadeAnim, {
-            toValue: 0,
-            duration: 500,
-            useNativeDriver: true,
-        }).start();
-    };
-
-    const handleTabChange = (tab: string) => {
-        fadeOut();
-        setTimeout(() => {
-            setTabChoosed(tab);
-            fadeIn();
-        }, 150);
-    };
+    const [total, setTotal] = React.useState(0)
+    const fetchListHistoryP2pPendding = useCallback(async () => {
+        const data = await getListHistoryP2pPendding({
+            page: 1,
+            limit: 10,
+        })
+        setTotal(data?.data?.total)
+    }, [])
+    useEffect(() => {
+        fetchListHistoryP2pPendding()
+    }, [])
     return (
         <LinearGradient
             style={{
@@ -62,12 +49,30 @@ const TopTabWallet = () => {
                     alignCenter
                     paddingHorizontal={15}
                 >
-                    <Icon
-                        size={23}
-                        marginRight={10}
-                        tintColor={'white'}
-                        source={require('@images/wallet/bell.png')}
-                    />
+                    {total > 0 ?
+                        <Btn
+                            radius={15}
+                            onPress={() => navigate(screens.HISTORY_TRANSACTION)}
+                        >
+                            <LottieView
+                                source={require('@lottie/notification.json')}
+                                autoPlay
+                                loop
+                                style={{
+                                    width: 28,
+                                    height: 28,
+                                    marginRight: 5
+                                }}
+                            />
+                        </Btn> :
+                        <Icon
+                            size={23}
+                            marginRight={10}
+                            tintColor={'white'}
+                            source={require('@images/wallet/bell.png')}
+                        />
+                    }
+
                     <Box
                         row
                         flex={1}
