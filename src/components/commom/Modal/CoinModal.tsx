@@ -27,7 +27,11 @@ const CoinItem = ({ coin, handleChooseCoin }: { coin: ICoin; handleChooseCoin: a
       padding={20}
       key={coin.id}
       justifySpaceBetween
-      onPress={handleChooseCoin}>
+      onPress={() => {
+        if (handleChooseCoin) {
+          handleChooseCoin(coin)
+        }
+      }}>
       <Box row alignCenter>
         <Icon
           size={35}
@@ -53,7 +57,7 @@ const CoinItem = ({ coin, handleChooseCoin }: { coin: ICoin; handleChooseCoin: a
   );
 }
 
-const CoinModal: React.FC<Props> = ({ visible, hideModal, handleChooseCoin, t }) => {
+const CoinModal: React.FC<Props> = ({ visible, hideModal, handleChooseCoin }) => {
   useCoinSocket()
   const coins = useSelector(coinListSelector)
   const handleChoose = useCallback((coin: ICoin) => {
