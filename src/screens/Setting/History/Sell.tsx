@@ -27,12 +27,11 @@ const SellHistory = () => {
     const loadAgain = async () => {
       if (!loading && hasMore) {
         setLoading(true);
-        const response = await
-          getListHistoryP2pWhere({
-            page: 1,
-            limit: 10,
-            where: "side='sell'"
-          });
+        const response = await getListHistoryP2pWhere({
+          page: 1,
+          limit: 10,
+          where: "side='sell'"
+        });
         if (Array.isArray(response?.data?.array)) {
           setData(response.data.array);
           if (response.data.array.length === 0) {
@@ -47,7 +46,8 @@ const SellHistory = () => {
     socket.on("createP2p", (res) => {
       dispatch(setCount(notification + 1));
       setData([]);
-      loadMoreData();
+      loadAgain();
+      setPage(2)
     });
     socket.on("operationP2p", (idP2p) => {
       dispatch(setCount(notification - 1));
@@ -60,7 +60,6 @@ const SellHistory = () => {
       socket.off("operationP2p");
     }
   }, [socket, notification]);
-
   const loadMoreData = async () => {
     if (!loading && hasMore) {
       setLoading(true);

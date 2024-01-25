@@ -27,11 +27,10 @@ const PendingHistory = () => {
     const loadAgain = async () => {
       if (!loading && hasMore) {
         setLoading(true);
-        const response = await
-          getListHistoryP2pPendding({
-            page: 1,
-            limit: 10,
-          });
+        const response = await getListHistoryP2pPendding({
+          page: 1,
+          limit: 10,
+        });
         if (Array.isArray(response?.data?.array)) {
           setData(response.data.array);
           if (response.data.array.length === 0) {
@@ -46,7 +45,8 @@ const PendingHistory = () => {
     socket.on("createP2p", (res) => {
       dispatch(setCount(notification + 1));
       setData([]);
-      loadMoreData();
+      loadAgain();
+      setPage(2)
     });
     socket.on("operationP2p", (idP2p) => {
       dispatch(setCount(notification - 1));

@@ -9,6 +9,7 @@ import { setCount } from '@redux/slice/notificationSlice';
 import { useAppDispatch, useAppSelector } from '@hooks/redux';
 import { AppDispatch } from '@redux/store/store';
 import { notificationSelector } from '@redux/selector/userSelector';
+import { useNavigation } from '@react-navigation/native';
 
 const BuyHistory = () => {
   const [data, setData] = useState<any[]>([]);
@@ -27,12 +28,11 @@ const BuyHistory = () => {
     const loadAgain = async () => {
       if (!loading && hasMore) {
         setLoading(true);
-        const response = await
-          getListHistoryP2pWhere({
-            page: 1,
-            limit: 10,
-            where: "side='buy'"
-          });
+        const response = await getListHistoryP2pWhere({
+          page: 1,
+          limit: 10,
+          where: "side='buy'"
+        });
         if (Array.isArray(response?.data?.array)) {
           setData(response.data.array);
           if (response.data.array.length === 0) {
@@ -47,7 +47,8 @@ const BuyHistory = () => {
     socket.on("createP2p", (res) => {
       dispatch(setCount(notification + 1));
       setData([]);
-      loadMoreData();
+      loadAgain();
+      setPage(2)
     });
     socket.on("operationP2p", (idP2p) => {
       dispatch(setCount(notification - 1));

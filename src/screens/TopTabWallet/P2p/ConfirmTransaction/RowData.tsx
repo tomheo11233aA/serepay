@@ -21,6 +21,7 @@ type RowDataProps = {
     setAmount: (value: any) => void;
     setPay: (value: any) => void;
     showModal: () => void;
+    setId: (value: any) => void;
 };
 
 const RowData: React.FC<RowDataProps> = ({
@@ -34,7 +35,8 @@ const RowData: React.FC<RowDataProps> = ({
     setSide,
     setAmount,
     setPay,
-    showModal
+    showModal,
+    setId
 }) => {
     const userInfo = useAppSelector(userInfoUserSelector);
     const [profileId, setProfileId] = useState<number | null>(null);
@@ -44,6 +46,10 @@ const RowData: React.FC<RowDataProps> = ({
         }
     }, [userInfo]);
     const date = moment(item.created_at).format('DD/MM/YYYY HH:mm:ss');
+    const id = item.id;
+    useEffect(() => {
+        setId(id);
+    }, [id]);
     if (header.data === 'code') {
         return (
             <Text style={{ color: 'black', flexShrink: 1, fontFamily: fonts.AS, marginLeft: 5 }}>{item.code}</Text>

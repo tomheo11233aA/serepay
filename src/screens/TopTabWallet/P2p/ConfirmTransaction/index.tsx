@@ -51,6 +51,7 @@ const ConfirmTransaction: React.FC<ConfirmTransactionProps> = ({ route }) => {
     const dispatch: AppDispatch = useDispatch();
     const userInfo = useSelector(userInfoUserSelector)
     const [_, setLoading] = React.useState<boolean>(true);
+    const [id, setId] = React.useState<number>(0);
     const [content, setContent] = React.useState<string>('');
     const [side, setSide] = React.useState<string>('');
     const [amount, setAmount] = React.useState<number>(0);
@@ -103,8 +104,8 @@ const ConfirmTransaction: React.FC<ConfirmTransactionProps> = ({ route }) => {
         return () => {
             socket.off("operationP2p");
         }
-    }, [idP2p])
-
+    }, [id])
+    
     const fetchP2pInfo = async () => {
         if (idP2p) {
             try {
@@ -116,7 +117,6 @@ const ConfirmTransaction: React.FC<ConfirmTransactionProps> = ({ route }) => {
                     setP2pInfoData(p2pInfo?.data);
                 }
             } catch (error) {
-                console.log("lỗi 2", error);
                 navigate(screens.SETTING_STACK, {
                     screen: screens.HISTORY_TRANSACTION,
                 })
@@ -229,6 +229,7 @@ const ConfirmTransaction: React.FC<ConfirmTransactionProps> = ({ route }) => {
                                                 setAmount={setAmount}
                                                 setPay={setPay}
                                                 showModal={showModal}
+                                                setId={setId}
                                             />
                                         ]}
                                         style={{ ...styles.row, ...(index % 2 ? styles.rowAlternate : {}) }}
