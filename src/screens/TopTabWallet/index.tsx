@@ -80,7 +80,9 @@ const TopTabWallet = () => {
                     {notification > 0 ?
                         <Btn
                             radius={15}
-                            onPress={() => navigate(screens.HISTORY_TRANSACTION)}
+                            onPress={() => navigate(screens.SETTING_STACK, {
+                                screen: screens.HISTORY_TRANSACTION,
+                            })}
                         >
                             <LottieView
                                 source={require('@lottie/notification.json')}
@@ -140,7 +142,7 @@ const TopTabWallet = () => {
                             <Staking /> : <Lending />
                 }
             </Safe>
-        </LinearGradient>
+        </LinearGradient >
     )
 }
 

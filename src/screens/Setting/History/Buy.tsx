@@ -23,6 +23,27 @@ const BuyHistory = () => {
   }, []);
 
   useEffect(() => {
+    setPage(1);
+    const loadAgain = async () => {
+      if (!loading && hasMore) {
+        setLoading(true);
+        const response = await
+          getListHistoryP2pWhere({
+            page: 1,
+            limit: 10,
+            where: "side='buy'"
+          });
+        if (Array.isArray(response?.data?.array)) {
+          setData(response.data.array);
+          if (response.data.array.length === 0) {
+            setHasMore(false);
+          }
+        } else {
+          console.error('response.data.array is not an array:', response?.data?.array);
+        }
+        setLoading(false);
+      }
+    }
     socket.on("createP2p", (res) => {
       dispatch(setCount(notification + 1));
       setData([]);
@@ -31,21 +52,22 @@ const BuyHistory = () => {
     socket.on("operationP2p", (idP2p) => {
       dispatch(setCount(notification - 1));
       setData([]);
-      loadMoreData();
+      loadAgain();
+      setPage(2)
     });
     return () => {
       socket.off("createP2p");
       socket.off("operationP2p");
     }
-  }, [notification, socket]);
+  }, [socket, notification]);
 
   const loadMoreData = async () => {
     if (!loading && hasMore) {
       setLoading(true);
-      const response = await getListHistoryP2pWhere({ 
-        limit: 10, 
-        page, 
-        where: "side='buy'" 
+      const response = await getListHistoryP2pWhere({
+        limit: 10,
+        page,
+        where: "side='buy'"
       });
       if (Array.isArray(response?.data?.array)) {
         setData(prevData => [...prevData, ...response.data.array]);
@@ -66,7 +88,7 @@ const BuyHistory = () => {
         source={require('../../../assets/lottie/nodataanimation.json')}
         autoPlay
         loop
-        style={{alignSelf: 'center', width: 200, height: 200, marginTop: 200}}
+        style={{ alignSelf: 'center', width: 200, height: 200, marginTop: 200 }}
       />
     );
   }

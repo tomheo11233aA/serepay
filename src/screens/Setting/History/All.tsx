@@ -9,7 +9,6 @@ import { setCount } from '@redux/slice/notificationSlice';
 import { useAppDispatch, useAppSelector } from '@hooks/redux';
 import { AppDispatch } from '@redux/store/store';
 import { notificationSelector } from '@redux/selector/userSelector';
-import { useNavigation } from '@react-navigation/native';
 
 export interface Transaction {
   id: number;
@@ -41,23 +40,28 @@ const AllHistory = () => {
   const [hasMore, setHasMore] = useState(true);
   const dispatch: AppDispatch = useAppDispatch();
   const notification = useAppSelector(notificationSelector);
-  const navigation = useNavigation();
-
-  useEffect(() => {
-    const unsubscribe = navigation.addListener('focus', () => {
-      setData([]);
-      setPage(1);
-      setHasMore(true);
-      loadMoreData();
-    });
-    return unsubscribe;
-  }, [navigation]);
 
   useEffect(() => {
     loadMoreData();
   }, []);
 
   useEffect(() => {
+    setPage(1);
+    const loadAgain = async () => {
+      if (!loading && hasMore) {
+        setLoading(true);
+        const response = await getListHistoryP2p({ page: 1, limit: 10 });
+        if (Array.isArray(response?.data?.array)) {
+          setData(response.data.array);
+          if (response.data.array.length === 0) {
+            setHasMore(false);
+          }
+        } else {
+          console.error('response.data.array is not an array:', response?.data?.array);
+        }
+        setLoading(false);
+      }
+    }
     socket.on("createP2p", (res) => {
       dispatch(setCount(notification + 1));
       setData([]);
@@ -66,13 +70,16 @@ const AllHistory = () => {
     socket.on("operationP2p", (idP2p) => {
       dispatch(setCount(notification - 1));
       setData([]);
-      loadMoreData();
+      loadAgain();
+      setPage(2)
     });
     return () => {
       socket.off("createP2p");
       socket.off("operationP2p");
     }
-  }, [notification, socket]);
+  }, [socket, notification]);
+
+
 
   const loadMoreData = useCallback(async () => {
     if (!loading && hasMore) {

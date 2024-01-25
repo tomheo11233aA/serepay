@@ -6,9 +6,9 @@ import React, {useState} from 'react'
 import LinearGradient from 'react-native-linear-gradient'
 import Tab from './Tab'
 import { useTranslation } from 'react-i18next'
-import { goBack } from '@utils/navigationRef'
+import { goBack, navigate} from '@utils/navigationRef'
 import { TouchableOpacity } from 'react-native'
-
+import { screens } from '@contants/screens'
 
 const History = () => {
   const { t } = useTranslation()
@@ -32,7 +32,7 @@ const History = () => {
           alignCenter
           paddingTop={10}
         >
-          <TouchableOpacity onPress={() => goBack()}>
+          <TouchableOpacity onPress={() => navigate(screens.SETTING)}>
             <Icon
               size={25}
               source={require('@images/unAuth/left.png')}
