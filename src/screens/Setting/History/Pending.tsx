@@ -18,29 +18,24 @@ const PendingHistory = () => {
   const dispatch: AppDispatch = useAppDispatch();
   const notification = useAppSelector(notificationSelector);
 
-  const refreshData = async () => {
-    setLoading(true);
-    setPage(1);
-    setHasMore(true);
-    const response = await getListHistoryP2pPendding({ page: 1, limit: 10 });
-    if (Array.isArray(response?.data?.array)) {
-      setData(response.data.array);
-      if (response.data.array.length === 0) {
-        setHasMore(false);
-      }
-    } else {
-      console.error('response.data.array is not an array:', response?.data?.array);
-    }
-    setLoading(false);
-  };
   useEffect(() => {
     loadMoreData();
+  }, []);
+
+  useEffect(() => {
     socket.on("createP2p", (res) => {
       dispatch(setCount(notification + 1));
-      refreshData();
+      setData([]);
+      loadMoreData();
+    });
+    socket.on("operationP2p", (idP2p) => {
+      dispatch(setCount(notification - 1));
+      setData([]);
+      loadMoreData();
     });
     return () => {
       socket.off("createP2p");
+      socket.off("operationP2p");
     }
   }, []);
 

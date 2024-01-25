@@ -40,35 +40,26 @@ const AllHistory = () => {
   const dispatch: AppDispatch = useAppDispatch();
   const notification = useAppSelector(notificationSelector);
 
-  const refreshData = useCallback(async () => {
-    setLoading(true);
-    setPage(1);
-    setHasMore(true);
-    const response = await getListHistoryP2p({ page: 1, limit: 10 });
-    if (Array.isArray(response?.data?.array)) {
-      setData(response.data.array);
-      if (response.data.array.length === 0) {
-        setHasMore(false);
-      }
-    } else {
-      console.error('response.data.array is not an array:', response?.data?.array);
-    }
-    setLoading(false);
+  useEffect(() => {
+    loadMoreData();
   }, []);
 
   useEffect(() => {
-    loadMoreData();
     socket.on("createP2p", (res) => {
       dispatch(setCount(notification + 1));
-      refreshData();
+      setData([]);
+      loadMoreData();
     });
-  }, [refreshData]);
-
-  useEffect(() => {
     socket.on("operationP2p", (idP2p) => {
-      refreshData();
+      dispatch(setCount(notification - 1));
+      setData([]);
+      loadMoreData();
     });
-  }, [refreshData]);
+    return () => {
+      socket.off("createP2p");
+      socket.off("operationP2p");
+    }
+  }, []);
 
   const loadMoreData = useCallback(async () => {
     if (!loading && hasMore) {
