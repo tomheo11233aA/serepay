@@ -60,7 +60,7 @@ const AllHistory = () => {
         }
       }
       setData([]);
-      setPage(1);
+      setPage(2);
       setHasMore(true);
       loadAgain();
       setLoading(false);
