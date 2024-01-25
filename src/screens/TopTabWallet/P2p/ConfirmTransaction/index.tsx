@@ -25,6 +25,8 @@ import { socket } from '@helper/AxiosInstance'
 import { Table, Row } from 'react-native-table-component';
 import { Dimensions } from 'react-native';
 import RowData from './RowData'
+import { navigate } from '@utils/navigationRef'
+import { screens } from '@contants/screens'
 
 type RootStackParamList = {
     ConfirmTransaction: { idP2p: number };
@@ -97,8 +99,7 @@ const ConfirmTransaction: React.FC<ConfirmTransactionProps> = ({ route }) => {
     useEffect(() => {
         socket.on("operationP2p", (_idP2p) => {
             fetchP2pInfo();
-        }
-        );
+        });
         return () => {
             socket.off("operationP2p");
         }
@@ -111,11 +112,15 @@ const ConfirmTransaction: React.FC<ConfirmTransactionProps> = ({ route }) => {
                     idP2p: Number(idP2p),
                 }
                 const p2pInfo = await getInfoP2p(data);
+                console.log("p2pInfo", p2pInfo);
                 if (p2pInfo?.status) {
                     setP2pInfoData(p2pInfo?.data);
                 }
             } catch (error) {
                 console.log("lỗi 2", error);
+                navigate(screens.SETTING_STACK, {
+                    screen: screens.HISTORY_TRANSACTION,
+                })
             } finally {
                 setLoading(false);
             }
