@@ -27,7 +27,6 @@ const TransactionItem: React.FC<TransactionItemProps> = ({ item }) => {
                     borderWidth={1}
                     onPress={() => {
                         navigate(screens.CONFIRM_TRANSACTION, { idP2p });
-                        socket.emit("operationP2p", idP2p)
                     }}
                 >
                     <Text style={{ color: colors.blue }}>{t('Pending Transaction')}</Text>

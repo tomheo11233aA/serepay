@@ -1,10 +1,14 @@
-import React, { useState, useEffect, useCallback, useMemo} from 'react';
+import React, { useState, useEffect, useCallback, useMemo } from 'react';
 import { FlatList, StyleSheet, ActivityIndicator } from 'react-native';
 import { getListHistoryP2p } from '@utils/userCallApi';
 import { colors } from '@themes/colors';
 import TransactionItem from './TransactionItem';
 import LottieView from 'lottie-react-native';
 import { socket } from '../../../helper/AxiosInstance';
+import { setCount } from '@redux/slice/notificationSlice';
+import { useAppDispatch, useAppSelector } from '@hooks/redux';
+import { AppDispatch } from '@redux/store/store';
+import { notificationSelector } from '@redux/selector/userSelector';
 export interface Transaction {
   id: number;
   userid: number;
@@ -33,6 +37,8 @@ const AllHistory = () => {
   const [page, setPage] = useState(1);
   const [loading, setLoading] = useState(false);
   const [hasMore, setHasMore] = useState(true);
+  const dispatch: AppDispatch = useAppDispatch();
+  const notification = useAppSelector(notificationSelector);
 
   const refreshData = useCallback(async () => {
     setLoading(true);
@@ -53,6 +59,7 @@ const AllHistory = () => {
   useEffect(() => {
     loadMoreData();
     socket.on("createP2p", (res) => {
+      dispatch(setCount(notification + 1));
       refreshData();
     });
   }, [refreshData]);

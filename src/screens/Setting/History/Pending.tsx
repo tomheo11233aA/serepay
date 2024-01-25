@@ -5,12 +5,18 @@ import { colors } from '@themes/colors';
 import TransactionItem from './TransactionItem';
 import LottieView from 'lottie-react-native';
 import { socket } from '../../../helper/AxiosInstance';
+import { setCount } from '@redux/slice/notificationSlice';
+import { useAppDispatch, useAppSelector } from '@hooks/redux';
+import { AppDispatch } from '@redux/store/store';
+import { notificationSelector } from '@redux/selector/userSelector';
 
 const PendingHistory = () => {
   const [data, setData] = useState<any[]>([]);
   const [page, setPage] = useState(1);
   const [loading, setLoading] = useState(false);
   const [hasMore, setHasMore] = useState(true);
+  const dispatch: AppDispatch = useAppDispatch();
+  const notification = useAppSelector(notificationSelector);
 
   const refreshData = async () => {
     setLoading(true);
@@ -30,6 +36,7 @@ const PendingHistory = () => {
   useEffect(() => {
     loadMoreData();
     socket.on("createP2p", (res) => {
+      dispatch(setCount(notification + 1));
       refreshData();
     });
     return () => {
