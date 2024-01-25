@@ -112,7 +112,6 @@ const ConfirmTransaction: React.FC<ConfirmTransactionProps> = ({ route }) => {
                     idP2p: Number(idP2p),
                 }
                 const p2pInfo = await getInfoP2p(data);
-                console.log("p2pInfo", p2pInfo);
                 if (p2pInfo?.status) {
                     setP2pInfoData(p2pInfo?.data);
                 }
