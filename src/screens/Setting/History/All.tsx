@@ -9,6 +9,8 @@ import { setCount } from '@redux/slice/notificationSlice';
 import { useAppDispatch, useAppSelector } from '@hooks/redux';
 import { AppDispatch } from '@redux/store/store';
 import { notificationSelector } from '@redux/selector/userSelector';
+import { useNavigation } from '@react-navigation/native';
+
 export interface Transaction {
   id: number;
   userid: number;
@@ -39,6 +41,17 @@ const AllHistory = () => {
   const [hasMore, setHasMore] = useState(true);
   const dispatch: AppDispatch = useAppDispatch();
   const notification = useAppSelector(notificationSelector);
+  const navigation = useNavigation();
+
+  useEffect(() => {
+    const unsubscribe = navigation.addListener('focus', () => {
+      setData([]);
+      setPage(1);
+      setHasMore(true);
+      loadMoreData();
+    });
+    return unsubscribe;
+  }, [navigation]);
 
   useEffect(() => {
     loadMoreData();
@@ -59,7 +72,7 @@ const AllHistory = () => {
       socket.off("createP2p");
       socket.off("operationP2p");
     }
-  }, []);
+  }, [notification, socket]);
 
   const loadMoreData = useCallback(async () => {
     if (!loading && hasMore) {

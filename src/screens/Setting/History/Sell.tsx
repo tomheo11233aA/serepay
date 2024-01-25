@@ -37,7 +37,7 @@ const SellHistory = () => {
       socket.off("createP2p");
       socket.off("operationP2p");
     }
-  }, []);
+  }, [notification, socket]);
 
   const loadMoreData = async () => {
     if (!loading && hasMore) {
