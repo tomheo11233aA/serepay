@@ -1,7 +1,6 @@
 import { ILanguage, IUserSlice, IUserInfo, IUserWallet, IRate } from "@models/user";
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import AxiosInstance from "../../helper/AxiosInstance";
 import { getWalletApi, getProfile } from "@utils/userCallApi";
 
 const initialState: IUserSlice = {

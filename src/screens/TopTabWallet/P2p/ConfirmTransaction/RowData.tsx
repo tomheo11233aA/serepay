@@ -1,11 +1,13 @@
 import { Text, View } from 'react-native'
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { colors } from '@themes/colors';
 import LottieView from 'lottie-react-native';
 import moment from 'moment';
 import Btn from '@commom/Btn';
 import Countdown from './Countdown';
 import { fonts } from '@themes/fonts';
+import { useAppSelector } from "@hooks/redux";
+import { userInfoUserSelector } from "@redux/selector/userSelector";
 
 type RowDataProps = {
     header: any;
@@ -34,6 +36,13 @@ const RowData: React.FC<RowDataProps> = ({
     setPay,
     showModal
 }) => {
+    const userInfo = useAppSelector(userInfoUserSelector);
+    const [profileId, setProfileId] = useState<number | null>(null);
+    useEffect(() => {
+        if (userInfo) {
+            setProfileId(userInfo.id)
+        }
+    }, [userInfo]);
     const date = moment(item.created_at).format('DD/MM/YYYY HH:mm:ss');
     if (header.data === 'code') {
         return (
@@ -46,12 +55,15 @@ const RowData: React.FC<RowDataProps> = ({
                 <View style={{ flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'flex-start' }}>
                     <Text style={{ color: 'black', fontFamily: fonts.AS, marginLeft: 5 }}>{t('If you need assistance, please contact the ')}
                         <Text style={{ color: 'green', fontFamily: fonts.AS, marginLeft: 5, fontWeight: 'bold' }}>
-                            {item.userName}
+                            {item.userid === profileId ? item.userNameAds : item.userName}
                         </Text>
                     </Text>
 
                     <Text style={{ color: 'black', fontFamily: fonts.AS, marginLeft: 5 }}>{t('Email: ')}</Text>
-                    <Text style={{ color: 'green', fontWeight: 'bold', fontFamily: fonts.AS }}>{item.email}</Text>
+                    <Text style={{ color: 'green', fontWeight: 'bold', fontFamily: fonts.AS }}>
+                        {/* {item.email} */}
+                        {item.userid === profileId ? item.emailAds : item.email}
+                    </Text>
                 </View>
             </View>
         );
