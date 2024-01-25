@@ -13,7 +13,6 @@ import P2p from './P2p';
 import Staking from './Staking';
 import Lending from './Lending';
 import { colors } from '@themes/colors';
-import { getListHistoryP2pPendding } from '@utils/userCallApi';
 import LottieView from 'lottie-react-native';
 import { navigate } from '@utils/navigationRef';
 import { screens } from '@contants/screens';
@@ -22,6 +21,8 @@ import { notificationSelector } from '@redux/selector/userSelector';
 import { useAppDispatch } from '@hooks/redux';
 import { AppDispatch } from '@redux/store/store';
 import { setCount } from '@redux/slice/notificationSlice';
+import { socket } from '@helper/AxiosInstance';
+import { getListHistoryP2pPendding } from '@utils/userCallApi';
 
 const TopTabWallet = () => {
     const { t } = useTranslation()
@@ -29,10 +30,36 @@ const TopTabWallet = () => {
     const notification = useAppSelector(notificationSelector)
     const [tabChoosed, setTabChoosed] = useState<string>('WALLET')
     const tabs = ['WALLET', 'P2P', 'STAKING', 'LENDING']
-    
+
     useEffect(() => {
         dispatch(setCount(notification))
     }, [])
+
+    useEffect(() => {
+        const fetch = async () => {
+            const response = await getListHistoryP2pPendding({
+                limit: 1000,
+                page: 1,
+            });
+            if (response?.status) {
+                dispatch(setCount(notification + response?.data?.total ?? 0));
+            }
+        }
+        fetch();
+    }, [])
+
+    useEffect(() => {
+        socket.on("createP2p", (res) => {
+            dispatch(setCount(notification + 1));
+        });
+        socket.on("operationP2p", (idP2p) => {
+            dispatch(setCount(notification - 1));
+        });
+        return () => {
+            socket.off("createP2p");
+            socket.off("operationP2p");
+        };
+    }, [socket, notification]);
 
     return (
         <LinearGradient

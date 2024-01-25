@@ -25,7 +25,6 @@ const SettingStack = () => {
                 gestureDirection: 'horizontal',
                 animation: 'ios'
             }}
-
         >
             <Stack.Screen name={screens.SETTING} component={Setting} />
             <Stack.Screen name={screens.TURN_ON_2FA} component={TurnOn2FA} />

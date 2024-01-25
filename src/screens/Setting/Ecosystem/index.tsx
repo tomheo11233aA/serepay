@@ -1,5 +1,5 @@
 import { View, SafeAreaView } from 'react-native'
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
 import { colors } from '@themes/colors'
 import { screens } from '@contants/screens'
@@ -10,7 +10,6 @@ import { IAddListBanking } from '@models/BANKING/addListBanking';
 import { addListBanking } from '@utils/userCallApi';
 import Btn from '@commom/Btn'
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import Spinner from 'react-native-loading-spinner-overlay'
 import { fonts } from '@themes/fonts'
 import CreditCardForm from './CreditCardForm'
 import { useForm } from 'react-hook-form';
@@ -20,7 +19,8 @@ import CardInput from './Validation/CardInput'
 import { formatCardNumber, formatExpiryDate } from './CreditCardForm'
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen'
 import KeyBoardSafe from '@reuse/KeyBoardSafe'
-import Loading from '@screens/TopTabWallet/P2p/Transaction/Loading'
+import LottieView from 'lottie-react-native'
+import Safe from '@reuse/Safe'
 
 const Ecosystem = () => {
     const { t } = useTranslation()
@@ -32,10 +32,11 @@ const Ecosystem = () => {
     const [cardHolder, setCardHolder] = React.useState('')
     const [expiryDate, setExpiryDate] = React.useState('')
     const [nameBanking, setNameBanking] = React.useState('')
+    const [fakeLoading, setFakeLoading] = React.useState<boolean>(true)
     const { handleSubmit, formState: { errors }, setValue } = useForm({
         resolver: yupResolver(cardSchema)
     });
-
+    
     const handleBankChange = async (value: any) => {
         // await AsyncStorage.getItem('@selected_bank')
         // setSelectedBank(value);
@@ -94,15 +95,41 @@ const Ecosystem = () => {
         setValue('cardExpiryDate', value);
     }
 
-    if (isLoading) {
+    useEffect(() => {
+        const timer = setTimeout(() => {
+            setFakeLoading(false);
+        }, 300);
+        return () => {
+            clearTimeout(timer);
+        }
+    }, [])
+
+    if (fakeLoading) {
         return (
-            <Loading />
+            <Safe backgroundColor='white'>
+                <View style={{
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                    height: '96%',
+                }}>
+                    <LottieView
+                        source={require('@lottie/loading.json')}
+                        style={{
+                            width: 300,
+                            height: 300,
+                            alignSelf: 'center',
+                        }}
+                        autoPlay
+                        loop />
+                    <Txt size={18} fontFamily={fonts.AS}>Loading...</Txt>
+                </View>
+            </Safe>
         );
     }
 
     return (
         <KeyBoardSafe
-         styles={{marginBottom: hp('10%')}}
+            styles={{ marginBottom: hp('10%') }}
         >
             <SafeAreaView style={{
                 justifyContent: 'space-between',
