@@ -47,7 +47,7 @@ const AllHistory = () => {
       setData([]);
       setPage(1);
       setHasMore(true);
-      loadMoreData();
+      // loadMoreData();
       setLoading(false);
     });
     return unsubscribe;

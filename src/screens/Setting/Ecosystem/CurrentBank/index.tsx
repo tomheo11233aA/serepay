@@ -87,7 +87,7 @@ const CurrentBank = () => {
                     marginTop: hp('2%'),
                     marginBottom: hp('10%'),
                 }}
-                keyExtractor={(index) => index.toString()}
+                keyExtractor={(item, index) => item.id.toString()}
                 data={data}
                 onEndReached={loadMoreData}
                 onEndReachedThreshold={0.1}
