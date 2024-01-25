@@ -44,10 +44,25 @@ const AllHistory = () => {
 
   useEffect(() => {
     const unsubscribe = navigation.addListener('focus', () => {
+      const loadAgain = async () => {
+        if (!loading && hasMore) {
+          setLoading(true);
+          const response = await getListHistoryP2p({ page: 1, limit: 10 });
+          if (Array.isArray(response?.data?.array)) {
+            setData(response.data.array);
+            if (response.data.array.length === 0) {
+              setHasMore(false);
+            }
+          } else {
+            console.error('response.data.array is not an array:', response?.data?.array);
+          }
+          setLoading(false);
+        }
+      }
       setData([]);
       setPage(1);
       setHasMore(true);
-      // loadMoreData();
+      loadAgain();
       setLoading(false);
     });
     return unsubscribe;
