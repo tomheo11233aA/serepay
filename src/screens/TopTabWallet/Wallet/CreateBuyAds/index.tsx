@@ -169,6 +169,7 @@ const CreateBuyAds = () => {
                                 returnKeyType={'next'}
                                 onSubmitEditing={() => amountMinimumInputRef.current.focus()}
                                 ref={amountInputRef}
+                                keyboardType={'numeric'}
                             />
                             {errors.amount && <Txt size={12} color={colors.red} style={{ zIndex: -1 }} marginTop={7} bold>
                                 {errors.amount.message && t(errors.amount.message)}
@@ -182,6 +183,7 @@ const CreateBuyAds = () => {
                                 onChangeText={(value: number) => setValue('amountMinimum', value)}
                                 returnKeyType={'done'}
                                 ref={amountMinimumInputRef}
+                                keyboardType={'numeric'}
                             />
                             {errors.amount && <Txt size={12} color={colors.red} style={{ zIndex: -1 }} marginTop={7} bold>
                                 {errors.amountMinimum?.message && t(errors.amountMinimum.message)}

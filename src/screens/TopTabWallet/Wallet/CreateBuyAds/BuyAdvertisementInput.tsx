@@ -15,6 +15,7 @@ interface WalletBTCProps {
     height?: number;
     returnKeyType?: any;
     onSubmitEditing?: any;
+    keyboardType?: any;
 }
 
 const BuyAdvertisementInput = forwardRef<TextInput, WalletBTCProps>(({
@@ -27,6 +28,7 @@ const BuyAdvertisementInput = forwardRef<TextInput, WalletBTCProps>(({
     height,
     returnKeyType = 'done',
     onSubmitEditing,
+    keyboardType = 'default'
 }, ref) => {
     return (
         <View style={styles.inputContainer}>
@@ -40,6 +42,7 @@ const BuyAdvertisementInput = forwardRef<TextInput, WalletBTCProps>(({
                 returnKeyType={returnKeyType}
                 onSubmitEditing={onSubmitEditing}
                 ref={ref}
+                keyboardType={keyboardType}
             />
             {coin &&
                 <Btn onPress={onPress}>

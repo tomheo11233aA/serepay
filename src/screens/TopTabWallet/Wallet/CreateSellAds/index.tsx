@@ -48,7 +48,7 @@ const CreateBuyAds = () => {
     const showModal = useCallback(() => setVisible(true), []);
     const hideModal = useCallback(() => setVisible(false), []);
     const dispatch: AppDispatch = useAppDispatch()
-    
+
     const handleBankChange = async (value: any) => {
         setSelectedBank(value);
         setNameBanking(value);
@@ -186,6 +186,7 @@ const CreateBuyAds = () => {
                                 returnKeyType={'next'}
                                 onSubmitEditing={() => amountMinimumInputRef?.current?.focus()}
                                 ref={amountInputRef}
+                                keyboardType={'numeric'}
                             />
                             {errors.amount && <Txt size={12} color={colors.red} style={{ zIndex: -1 }} marginTop={7} bold>
                                 {errors.amount.message && t(errors.amount.message)}
@@ -200,6 +201,7 @@ const CreateBuyAds = () => {
                                 returnKeyType={'next'}
                                 onSubmitEditing={() => fullNameInputRef?.current?.focus()}
                                 ref={amountMinimumInputRef}
+                                keyboardType={'numeric'}
                             />
                             {errors.amount && <Txt size={12} color={colors.red} style={{ zIndex: -1 }} marginTop={7} bold>
                                 {errors.amountMinimum?.message && t(errors.amountMinimum?.message)}
