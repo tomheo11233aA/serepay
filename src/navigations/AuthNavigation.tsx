@@ -62,6 +62,7 @@ const AuthNavigation = () => {
           backgroundColor: '#f8f8f8',
           position: 'absolute',
         },
+        tabBarHideOnKeyboard: true,
       }}
     >
       {tabs.map((tab) => {

@@ -1,5 +1,5 @@
-import { TouchableOpacity, SafeAreaView, Alert, View, ScrollView } from 'react-native'
-import React, { useEffect, useMemo, useCallback } from 'react'
+import { TouchableOpacity, SafeAreaView, Alert, ScrollView, Platform } from 'react-native'
+import React, { useEffect, useMemo, useCallback, useRef } from 'react'
 import LinearGradient from 'react-native-linear-gradient'
 import { colors } from '@themes/colors'
 import Box from '@commom/Box'
@@ -24,11 +24,12 @@ import { ICompanyAddAds } from '@models/P2P/COMPANY/companyAddAds'
 import { selectedRateSelector } from '@redux/selector/userSelector'
 import BuyAdvertisementInput from '../CreateBuyAds/BuyAdvertisementInput'
 import Dropdown from './DropDown'
-import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen'
+import { heightPercentageToDP as hp } from 'react-native-responsive-screen'
 import { useAppDispatch } from '@hooks/redux'
 import { AppDispatch } from '@redux/store/store'
-import {fetchListAdsSell} from '@redux/slice/advertisingSlice'
-import {fetchListAdsSellPendding} from '@redux/slice/advertisingSlice'
+import { fetchListAdsSell } from '@redux/slice/advertisingSlice'
+import { fetchListAdsSellPendding } from '@redux/slice/advertisingSlice'
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 
 const CreateBuyAds = () => {
     const { t } = useTranslation()
@@ -36,9 +37,9 @@ const CreateBuyAds = () => {
     const selectedRate = useAppSelector(selectedRateSelector)
     const config = useAppSelector(configSelector);
     const [myValue, setMyValue] = React.useState(0);
-    const [selectedBank, setSelectedBank] = React.useState(null);
-    const [logo, setLogo] = React.useState('');
-    const [nameBanking, setNameBanking] = React.useState('')
+    const [, setSelectedBank] = React.useState(null);
+    // const [logo, setLogo] = React.useState('');
+    const [, setNameBanking] = React.useState('')
     const { handleSubmit, formState: { errors }, setValue } = useForm({
         resolver: yupResolver(sellAdvertisementSchema)
     });
@@ -47,17 +48,12 @@ const CreateBuyAds = () => {
     const showModal = useCallback(() => setVisible(true), []);
     const hideModal = useCallback(() => setVisible(false), []);
     const dispatch: AppDispatch = useAppDispatch()
-
+    
     const handleBankChange = async (value: any) => {
         setSelectedBank(value);
         setNameBanking(value);
         setValue('bankName', value);
     }
-
-    const handleChooseCoin = useCallback((coin: ICoin) => {
-        setSelectedCoin(coin);
-        hideModal();
-    }, [hideModal]);
 
     useEffect(() => {
         if (config) {
@@ -71,7 +67,6 @@ const CreateBuyAds = () => {
         price = selectedCoin && selectedCoin.price !== undefined ? selectedCoin.price + (selectedCoin.price * (myValue / 100)) : 0;
         return price * selectedRate.rate;
     }, [selectedCoin, myValue]);
-
 
     useEffect(() => {
         if (!selectedCoin) {
@@ -118,6 +113,11 @@ const CreateBuyAds = () => {
         }
     }, [])
 
+    const amountInputRef = useRef<any>(null);
+    const amountMinimumInputRef = useRef<any>(null);
+    const fullNameInputRef = useRef<any>(null);
+    const accountNumberInputRef = useRef<any>(null);
+
     return (
         <LinearGradient
             style={{ flex: 1 }}
@@ -125,8 +125,12 @@ const CreateBuyAds = () => {
             start={{ x: 0, y: 0.5 }}
             colors={[colors.darkViolet, colors.violet]}
         >
-            <ScrollView
+            <KeyboardAwareScrollView
                 showsVerticalScrollIndicator={false}
+                keyboardShouldPersistTaps="handled"
+                extraScrollHeight={20}
+                enableOnAndroid={true}
+                enableAutomaticScroll={Platform.OS === 'ios'}
                 style={{
                     flex: 1,
                     marginTop: 60,
@@ -135,7 +139,12 @@ const CreateBuyAds = () => {
                     borderTopRightRadius: 20,
                     backgroundColor: 'white'
                 }}>
-                <CoinModal visible={visible} hideModal={hideModal} handleChooseCoin={handleChooseCoin} t={t} />
+                <CoinModal
+                    visible={visible}
+                    hideModal={hideModal}
+                    // handleChooseCoin={handleChooseCoin}
+                    t={t}
+                />
                 <Box
                     row
                     alignCenter
@@ -174,6 +183,9 @@ const CreateBuyAds = () => {
                                 placeholder={t('Enter amount')}
                                 maxLength={100}
                                 onChangeText={(value: number) => setValue('amount', value)}
+                                returnKeyType={'next'}
+                                onSubmitEditing={() => amountMinimumInputRef?.current?.focus()}
+                                ref={amountInputRef}
                             />
                             {errors.amount && <Txt size={12} color={colors.red} style={{ zIndex: -1 }} marginTop={7} bold>
                                 {errors.amount.message && t(errors.amount.message)}
@@ -185,6 +197,9 @@ const CreateBuyAds = () => {
                                 placeholder={t('Enter minimum amount')}
                                 maxLength={100}
                                 onChangeText={(value: number) => setValue('amountMinimum', value)}
+                                returnKeyType={'next'}
+                                onSubmitEditing={() => fullNameInputRef?.current?.focus()}
+                                ref={amountMinimumInputRef}
                             />
                             {errors.amount && <Txt size={12} color={colors.red} style={{ zIndex: -1 }} marginTop={7} bold>
                                 {errors.amountMinimum?.message && t(errors.amountMinimum?.message)}
@@ -204,6 +219,9 @@ const CreateBuyAds = () => {
                                 placeholder={t('Enter full name')}
                                 maxLength={100}
                                 onChangeText={(value: string) => setValue('ownerAccount', value)}
+                                returnKeyType={'next'}
+                                onSubmitEditing={() => accountNumberInputRef?.current?.focus()}
+                                ref={fullNameInputRef}
                             />
                             {errors.ownerAccount && <Txt size={12} color={colors.red} style={{ zIndex: -1 }} marginTop={7} bold>
                                 {errors.ownerAccount?.message && t(errors.ownerAccount?.message)}
@@ -215,6 +233,8 @@ const CreateBuyAds = () => {
                                 placeholder={t('Enter account number')}
                                 maxLength={100}
                                 onChangeText={(value: string) => setValue('numberBank', value)}
+                                returnKeyType={'done'}
+                                ref={accountNumberInputRef}
                             />
                             {errors.numberBank && <Txt size={12} color={colors.red} style={{ zIndex: -1 }} marginTop={7} bold>
                                 {errors.numberBank?.message && t(errors.numberBank?.message)}
@@ -231,7 +251,7 @@ const CreateBuyAds = () => {
                     backgroundColor={colors.violet}>
                     <Txt color={'white'} bold>{t('Create')}</Txt>
                 </Btn>
-            </ScrollView>
+            </KeyboardAwareScrollView>
         </LinearGradient>
     )
 }

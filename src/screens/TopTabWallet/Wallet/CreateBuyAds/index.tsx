@@ -1,5 +1,5 @@
 import { TouchableOpacity, SafeAreaView, Alert } from 'react-native'
-import React, { useEffect, useMemo, useCallback } from 'react'
+import React, { useEffect, useMemo, useCallback, useRef } from 'react'
 import LinearGradient from 'react-native-linear-gradient'
 import { colors } from '@themes/colors'
 import Box from '@commom/Box'
@@ -27,6 +27,7 @@ import { useAppDispatch } from '@hooks/redux'
 import { AppDispatch } from '@redux/store/store'
 import { fetchListAdsBuyToUser } from '@redux/slice/advertisingSlice'
 import { fetchListAdsBuyPendding } from '@redux/slice/advertisingSlice'
+import KeyBoardSafe from '@reuse/KeyBoardSafe'
 
 const CreateBuyAds = () => {
     const { t } = useTranslation()
@@ -46,7 +47,6 @@ const CreateBuyAds = () => {
         hideModal();
     }, [hideModal]);
     const dispatch: AppDispatch = useAppDispatch()
-
     useEffect(() => {
         if (config) {
             const newValue = config.length > 0 ? config[0].value : 0;
@@ -103,6 +103,10 @@ const CreateBuyAds = () => {
             console.log('error', error);
         }
     }, [])
+
+    const amountInputRef = useRef<any>(null);
+    const amountMinimumInputRef = useRef<any>(null);
+
     return (
         <LinearGradient
             style={{ flex: 1 }}
@@ -110,15 +114,20 @@ const CreateBuyAds = () => {
             start={{ x: 0, y: 0.5 }}
             colors={[colors.darkViolet, colors.violet]}
         >
-            <Box
-                flex={1}
-                marginTop={60}
-                paddingHorizontal={15}
-                borderTopLeftRadius={20}
-                borderTopRightRadius={20}
-                backgroundColor={'white'}
-            >
-                <CoinModal visible={visible} hideModal={hideModal} handleChooseCoin={handleChooseCoin} t={t} />
+            <KeyBoardSafe
+                bg='white'
+                styles={{
+                    marginTop: 60,
+                    paddingHorizontal: 15,
+                    borderTopLeftRadius: 20,
+                    borderTopRightRadius: 20,
+                }}>
+                <CoinModal
+                    visible={visible}
+                    hideModal={hideModal}
+                    // handleChooseCoin={handleChooseCoin}
+                    t={t}
+                />
                 <Box
                     row
                     alignCenter
@@ -157,6 +166,9 @@ const CreateBuyAds = () => {
                                 placeholder={t('Enter amount')}
                                 maxLength={100}
                                 onChangeText={(value: number) => setValue('amount', value)}
+                                returnKeyType={'next'}
+                                onSubmitEditing={() => amountMinimumInputRef.current.focus()}
+                                ref={amountInputRef}
                             />
                             {errors.amount && <Txt size={12} color={colors.red} style={{ zIndex: -1 }} marginTop={7} bold>
                                 {errors.amount.message && t(errors.amount.message)}
@@ -168,6 +180,8 @@ const CreateBuyAds = () => {
                                 placeholder={t('Enter minimum amount')}
                                 maxLength={100}
                                 onChangeText={(value: number) => setValue('amountMinimum', value)}
+                                returnKeyType={'done'}
+                                ref={amountMinimumInputRef}
                             />
                             {errors.amount && <Txt size={12} color={colors.red} style={{ zIndex: -1 }} marginTop={7} bold>
                                 {errors.amountMinimum?.message && t(errors.amountMinimum.message)}
@@ -178,13 +192,14 @@ const CreateBuyAds = () => {
                 <Btn
                     onPress={handleSubmit(handleBuyAds)}
                     radius={5}
-                    marginBottom={100}
+                    marginBottom={50}
+                    marginTop={30}
                     paddingVertical={15}
                     backgroundColor={colors.violet}
                 >
                     <Txt color={'white'} bold>{t('Create')}</Txt>
                 </Btn>
-            </Box>
+            </KeyBoardSafe>
         </LinearGradient>
     )
 }

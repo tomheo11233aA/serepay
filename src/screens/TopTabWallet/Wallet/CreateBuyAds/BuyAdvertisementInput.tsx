@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { forwardRef } from 'react';
 import { StyleSheet, View, TextInput } from 'react-native';
 import { colors } from '@themes/colors';
 import { fonts } from '@themes/fonts';
@@ -13,9 +13,11 @@ interface WalletBTCProps {
     coin?: any;
     onPress?: () => void;
     height?: number;
+    returnKeyType?: any;
+    onSubmitEditing?: any;
 }
 
-const BuyAdvertisementInput: React.FC<WalletBTCProps> = ({
+const BuyAdvertisementInput = forwardRef<TextInput, WalletBTCProps>(({
     placeholder,
     onChangeText,
     maxLength,
@@ -23,7 +25,9 @@ const BuyAdvertisementInput: React.FC<WalletBTCProps> = ({
     coin,
     onPress,
     height,
-}) => {
+    returnKeyType = 'done',
+    onSubmitEditing,
+}, ref) => {
     return (
         <View style={styles.inputContainer}>
             <TextInput
@@ -33,6 +37,9 @@ const BuyAdvertisementInput: React.FC<WalletBTCProps> = ({
                 onChangeText={onChangeText}
                 maxLength={maxLength}
                 value={value}
+                returnKeyType={returnKeyType}
+                onSubmitEditing={onSubmitEditing}
+                ref={ref}
             />
             {coin &&
                 <Btn onPress={onPress}>
@@ -47,7 +54,7 @@ const BuyAdvertisementInput: React.FC<WalletBTCProps> = ({
             }
         </View>
     );
-};
+});
 
 export default BuyAdvertisementInput;
 
