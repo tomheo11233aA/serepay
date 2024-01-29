@@ -200,9 +200,9 @@ const Transaction = () => {
                 <Box row>
                     <Txt
                         size={18}
-                        color={item.side === 'sell' ? 'red' : 'green'}
+                        color={item.side === 'buy' ? 'red' : 'green'}
                         fontFamily={fonts.OSB}
-                    > {item.side === 'sell' ? t('Sell') : t('Buy')} </Txt>
+                    > {item.side === 'sell' ? t('Buy') : t('Sell')} </Txt>
                     <Txt
                         size={18}
                         color={'black'}

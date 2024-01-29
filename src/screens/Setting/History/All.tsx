@@ -107,8 +107,6 @@ const AllHistory = () => {
     }
   }, [socket, notification]);
 
-
-
   const loadMoreData = useCallback(async () => {
     if (!loading && hasMore) {
       setLoading(true);

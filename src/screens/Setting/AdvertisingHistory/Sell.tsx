@@ -17,6 +17,13 @@ import { listAdsBuyToUserSelector } from '@redux/selector/userSelector'
 import { listAdsBuyPenddingToUserSelector } from '@redux/selector/userSelector'
 import { fetchListAdsBuyToUser } from '@redux/slice/advertisingSlice'
 import { fetchListAdsBuyPendding } from '@redux/slice/advertisingSlice'
+
+import { getListAdsSellToUser } from '@utils/userCallApi'
+import { getListAdsSellPenddingToUser } from '@utils/userCallApi'
+import { listAdsSellToUserSelector } from '@redux/selector/userSelector'
+import { listAdsSellPenddingToUserSelector } from '@redux/selector/userSelector'
+import { fetchListAdsSell } from '@redux/slice/advertisingSlice'
+import { fetchListAdsSellPendding } from '@redux/slice/advertisingSlice'
 import Safe from '@reuse/Safe'
 import Txt from '@commom/Txt'
 
@@ -25,26 +32,43 @@ const Sell = () => {
     const [data, setData] = useState<any[]>([]);
     const [page, setPage] = useState(2);
     const [loading, setLoading] = useState(false);
-    const [appLoading, setAppLoading] = useState(false);
     const [hasMore, setHasMore] = useState(true);
     const [isChecked, setIsChecked] = useState(false);
     const dispatch: AppDispatch = useAppDispatch()
-    const listAdsSellToUser = useAppSelector(listAdsBuyToUserSelector)
-    const listAdsSellPenddingToUser = useAppSelector(listAdsBuyPenddingToUserSelector)
+
+    // const listAdsSellToUser = useAppSelector(listAdsBuyToUserSelector)
+    // const listAdsSellPenddingToUser = useAppSelector(listAdsBuyPenddingToUserSelector)
+
+    // sửa
+    const listAdsBuyToUser = useAppSelector(listAdsSellToUserSelector)
+    const listAdsBuyPenddingToUser = useAppSelector(listAdsSellPenddingToUserSelector)
+
     const [fakeLoading, setFakeLoading] = React.useState<boolean>(false)
-    
+
+    // useEffect(() => {
+    //     dispatch(fetchListAdsBuyToUser())
+    // }, [])
+
+    // useEffect(() => {
+    //     setData(listAdsSellToUser)
+    // }, [listAdsSellToUser])
+
     useEffect(() => {
-        dispatch(fetchListAdsBuyToUser())
+        dispatch(fetchListAdsSell())
     }, [])
 
     useEffect(() => {
-        setData(listAdsSellToUser)
-    }, [listAdsSellToUser])
+        setData(listAdsBuyToUser)
+    }, [listAdsBuyToUser])
 
     const loadMoreData = async () => {
         if (!loading && hasMore) {
             setLoading(true);
-            const response = await getListAdsBuyToUser({
+            // const response = await getListAdsBuyToUser({
+            //     limit: 10,
+            //     page,
+            // });
+            const response = await getListAdsSellToUser({
                 limit: 10,
                 page,
             });
@@ -68,7 +92,11 @@ const Sell = () => {
     const loadMoreDataPending = async () => {
         if (!loading && hasMore) {
             setLoading(true);
-            const response = await getListAdsBuyPenddingToUser({
+            // const response = await getListAdsBuyPenddingToUser({
+            //     limit: 10,
+            //     page,
+            // });
+            const response = await getListAdsSellPenddingToUser({
                 limit: 10,
                 page,
             });
@@ -89,14 +117,23 @@ const Sell = () => {
         }
     }
 
+    // useEffect(() => {
+    //     if (isChecked) {
+    //         dispatch(fetchListAdsBuyPendding())
+    //         setData(listAdsSellPenddingToUser)
+    //     } else {
+    //         dispatch(fetchListAdsBuyToUser())
+    //     }
+    // }, [isChecked, listAdsSellPenddingToUser])
+
     useEffect(() => {
         if (isChecked) {
-            dispatch(fetchListAdsBuyPendding())
-            setData(listAdsSellPenddingToUser)
+            dispatch(fetchListAdsSellPendding())
+            setData(listAdsBuyPenddingToUser)
         } else {
-            dispatch(fetchListAdsBuyToUser())
+            dispatch(fetchListAdsSell())
         }
-    }, [isChecked, listAdsSellPenddingToUser])
+    }, [isChecked, listAdsBuyPenddingToUser])
 
     useEffect(() => {
         setFakeLoading(true)
@@ -167,7 +204,7 @@ const Sell = () => {
             </Safe>
         );
     }
-    
+
     return (
         <>
             <View style={{

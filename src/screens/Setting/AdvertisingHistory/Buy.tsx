@@ -17,6 +17,14 @@ import { listAdsSellToUserSelector } from '@redux/selector/userSelector'
 import { listAdsSellPenddingToUserSelector } from '@redux/selector/userSelector'
 import { fetchListAdsSell } from '@redux/slice/advertisingSlice'
 import { fetchListAdsSellPendding } from '@redux/slice/advertisingSlice'
+
+import { getListAdsBuyToUser } from '@utils/userCallApi'
+import { getListAdsBuyPenddingToUser } from '@utils/userCallApi'
+import { listAdsBuyToUserSelector } from '@redux/selector/userSelector'
+import { listAdsBuyPenddingToUserSelector } from '@redux/selector/userSelector'
+import { fetchListAdsBuyToUser } from '@redux/slice/advertisingSlice'
+import { fetchListAdsBuyPendding } from '@redux/slice/advertisingSlice'
+
 import Safe from '@reuse/Safe'
 import Txt from '@commom/Txt'
 
@@ -27,26 +35,45 @@ const Buy = () => {
     const [loading, setLoading] = useState(false);
     const [hasMore, setHasMore] = useState(true);
     const [isChecked, setIsChecked] = useState(false);
-    const listAdsBuyToUser = useAppSelector(listAdsSellToUserSelector)
-    const listAdsBuyPenddingToUser = useAppSelector(listAdsSellPenddingToUserSelector)
+        
+    // const listAdsBuyToUser = useAppSelector(listAdsSellToUserSelector)
+    // const listAdsBuyPenddingToUser = useAppSelector(listAdsSellPenddingToUserSelector)
+
+    // sửa
+    const listAdsSellToUser = useAppSelector(listAdsBuyToUserSelector)
+    const listAdsSellPenddingToUser = useAppSelector(listAdsBuyPenddingToUserSelector)
+
     const dispatch: AppDispatch = useAppDispatch()
     const [fakeLoading, setFakeLoading] = React.useState<boolean>(false)
 
+    // useEffect(() => {
+    //     dispatch(fetchListAdsSell())
+    // }, [])
+
+    // useEffect(() => {
+    //     setData(listAdsBuyToUser)
+    // }, [listAdsBuyToUser])
+
     useEffect(() => {
-        dispatch(fetchListAdsSell())
+        dispatch(fetchListAdsBuyToUser())
     }, [])
 
     useEffect(() => {
-        setData(listAdsBuyToUser)
-    }, [listAdsBuyToUser])
+        setData(listAdsSellToUser)
+    }, [listAdsSellToUser])
 
     const loadMoreData = async () => {
         if (!loading && hasMore) {
             setLoading(true);
-            const response = await getListAdsSellToUser({
+            // const response = await getListAdsSellToUser({
+            //     limit: 10,
+            //     page,
+            // });
+            const response = await getListAdsBuyToUser({
                 limit: 10,
                 page,
             });
+
             if (Array.isArray(response?.data?.array)) {
                 const newData = response.data.array;
                 const isDuplicate = newData.some((item: any) => data.some((item2: any) => item.id === item2.id));
@@ -67,7 +94,11 @@ const Buy = () => {
     const loadMoreDataPending = async () => {
         if (!loading && hasMore) {
             setLoading(true);
-            const response = await getListAdsSellPenddingToUser({
+            // const response = await getListAdsSellPenddingToUser({
+            //     limit: 10,
+            //     page,
+            // });
+            const response = await getListAdsBuyPenddingToUser({
                 limit: 10,
                 page,
             });
@@ -88,14 +119,23 @@ const Buy = () => {
         }
     };
 
+    // useEffect(() => {
+    //     if (isChecked) {
+    //         dispatch(fetchListAdsSellPendding())
+    //         setData(listAdsBuyPenddingToUser)
+    //     } else {
+    //         dispatch(fetchListAdsSell())
+    //     }
+    // }, [isChecked, listAdsBuyPenddingToUser])
+
     useEffect(() => {
         if (isChecked) {
-            dispatch(fetchListAdsSellPendding())
-            setData(listAdsBuyPenddingToUser)
+            dispatch(fetchListAdsBuyPendding())
+            setData(listAdsSellPenddingToUser)
         } else {
-            dispatch(fetchListAdsSell())
+            dispatch(fetchListAdsBuyToUser())
         }
-    }, [isChecked, listAdsBuyPenddingToUser])
+    }, [isChecked, listAdsSellPenddingToUser])
 
     useEffect(() => {
         setFakeLoading(true)
