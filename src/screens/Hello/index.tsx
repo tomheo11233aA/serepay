@@ -11,19 +11,11 @@ import { convertLanguage } from '@utils/convert'
 import { width } from '@utils/responsive'
 import React, { useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
-import { fetchUserInfo, fetchUserWallet } from '@redux/slice/userSlice'
-import { fetchListExchange } from '@redux/slice/exchangeRateSlice'
 
 const Hello = () => {
   const dispatch = useAppDispatch()
   const { i18n } = useTranslation()
   const navigation = useNavigation<any>()
-
-  React.useEffect(() => {
-    dispatch(fetchUserWallet())
-    dispatch(fetchUserInfo())
-    dispatch(fetchListExchange())
-  }, [dispatch])
 
   useEffect(() => {
     const timeOut = setTimeout(async () => {
@@ -31,7 +23,6 @@ const Hello = () => {
       i18n.changeLanguage(lng)
       const lngObj = convertLanguage(lng)
       dispatch(setLanguage(lngObj))
-
       navigation.replace(screens.MAIN)
     }, 2000)
 

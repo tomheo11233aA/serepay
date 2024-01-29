@@ -20,11 +20,11 @@ const Wallet = () => {
   const coins = useSelector(coinListSelector)
   const selectedRate = useSelector(selectedRateSelector)
 
-  // React.useEffect(() => {
-  //   dispatch(fetchUserWallet())
-  //   dispatch(fetchUserInfo())
-  //   dispatch(fetchListExchange())
-  // }, [dispatch])
+  React.useEffect(() => {
+    dispatch(fetchUserWallet())
+    dispatch(fetchUserInfo())
+    dispatch(fetchListExchange())
+  }, [dispatch])
 
   const coinMap = useMemo(() => {
     const map = new Map();
