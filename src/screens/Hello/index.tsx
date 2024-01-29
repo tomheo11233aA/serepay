@@ -11,11 +11,16 @@ import { convertLanguage } from '@utils/convert'
 import { width } from '@utils/responsive'
 import React, { useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
+import { fetchBanks } from '@redux/slice/bankSlice'
 
 const Hello = () => {
   const dispatch = useAppDispatch()
   const { i18n } = useTranslation()
   const navigation = useNavigation<any>()
+
+  useEffect(() => {
+    dispatch(fetchBanks())
+  }, [])
 
   useEffect(() => {
     const timeOut = setTimeout(async () => {

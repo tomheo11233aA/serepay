@@ -59,7 +59,7 @@ const BuyAdvertisementInput = forwardRef<TextInput, WalletBTCProps>(({
     );
 });
 
-export default BuyAdvertisementInput;
+export default React.memo(BuyAdvertisementInput);
 
 const styles = StyleSheet.create({
     inputContainer: {

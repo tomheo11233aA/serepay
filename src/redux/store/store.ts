@@ -6,6 +6,7 @@ import historySlice from "@redux/slice/historySlice";
 import configSlice from "@redux/slice/getConfig";
 import advertisingSlice from "@redux/slice/advertisingSlice";
 import notificationSlice from "@redux/slice/notificationSlice";
+import bankSlice from "@redux/slice/bankSlice";
 
 export const store = configureStore({
     reducer: {
@@ -16,6 +17,7 @@ export const store = configureStore({
         config : configSlice.reducer,
         advertising : advertisingSlice.reducer,
         notification : notificationSlice.reducer,
+        bank : bankSlice.reducer,
     },
 })
 

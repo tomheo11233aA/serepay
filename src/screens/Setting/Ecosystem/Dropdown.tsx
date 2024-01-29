@@ -5,7 +5,8 @@ import { Dispatch, SetStateAction } from 'react';
 import { useTranslation } from 'react-i18next';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { fonts } from '@themes/fonts';
-
+import { useAppSelector } from '@hooks/redux';
+import { bankSelector } from '@redux/selector/userSelector';
 interface Bank {
     id: number;
     name: string;
@@ -13,8 +14,8 @@ interface Bank {
     logo: string;
 }
 
-const containerStyle: StyleProp<ViewStyle> = { width: '90%'};
-const dropdownStyle: StyleProp<ViewStyle> = { backgroundColor: '#fafafa'};
+const containerStyle: StyleProp<ViewStyle> = { width: '90%' };
+const dropdownStyle: StyleProp<ViewStyle> = { backgroundColor: '#fafafa' };
 const imageStyle: StyleProp<ImageStyle> = { width: 100, height: 50 };
 
 interface Props {
@@ -29,6 +30,7 @@ const Dropdown: FC<Props> = ({ onChange, onLogoChange, myContainerStyle, isStore
     const [value, setValue] = useState<string | null>(null);
     const [items, setItems] = useState<any>([]);
     const { t } = useTranslation();
+    const bank = useAppSelector(bankSelector);
 
     const storeData = async (value: string) => {
         try {
@@ -39,22 +41,15 @@ const Dropdown: FC<Props> = ({ onChange, onLogoChange, myContainerStyle, isStore
     }
 
     useEffect(() => {
-        fetch('https://api.vietqr.io/v2/banks')
-            .then((response) => response.json())
-            .then((json) => {
-                if (json && json.data) {
-                    const formattedData = json.data.map((item: Bank) => ({
-                        label: item.shortName,
-                        value: item.shortName,
-                        icon: () => <Image source={{ uri: item.logo }} style={imageStyle} resizeMode='contain' />,
-                        logo: item.logo,
-                    }));
-                    setItems(formattedData);
-                }
-            })
-            .catch((error) => {
-                console.error(error);
-            });
+        if (bank) {
+            const formattedData = bank.map((item: Bank) => ({
+                label: item.shortName,
+                value: item.shortName,
+                icon: () => <Image source={{ uri: item.logo }} style={imageStyle} resizeMode='contain' />,
+                logo: item.logo,
+            }));
+            setItems(formattedData);
+        }
     }, []);
 
     return (
@@ -72,11 +67,11 @@ const Dropdown: FC<Props> = ({ onChange, onLogoChange, myContainerStyle, isStore
                     placeholder={t('Choose your bank')}
                     onChangeValue={(value: any) => {
                         onChange(value);
-                        if (isStoreData) {
+                        if (isStoreData && value) {
                             storeData(value);
                         }
                         const selectedItem = items.find((item: any) => item.value === value);
-                        if (selectedItem && onLogoChange) { 
+                        if (selectedItem && onLogoChange) {
                             onLogoChange(selectedItem.logo);
                         }
                     }}

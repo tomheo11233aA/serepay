@@ -4,6 +4,8 @@ import DropDownPicker from 'react-native-dropdown-picker';
 import { Dispatch, SetStateAction } from 'react';
 import { useTranslation } from 'react-i18next';
 import { fonts } from '@themes/fonts';
+import { useAppSelector } from '@hooks/redux';
+import { bankSelector } from '@redux/selector/userSelector';
 
 interface Bank {
     id: number;
@@ -26,27 +28,21 @@ const Dropdown: FC<Props> = ({ onChange, myContainerStyle }) => {
     const [value, setValue] = useState<string | null>(null);
     const [items, setItems] = useState<any>([]);
     const { t } = useTranslation();
+    const bank = useAppSelector(bankSelector);
 
     useEffect(() => {
-        fetch('https://api.vietqr.io/v2/banks')
-            .then((response) => response.json())
-            .then((json) => {
-                if (json && json.data) {
-                    const formattedData = json.data.map((item: Bank) => ({
-                        label: item.shortName,
-                        value: item.shortName,
-                        icon: () => <Image source={{ uri: item.logo }} style={imageStyle} resizeMode='contain' />,
-                        logo: item.logo,
-                    }));
-                    setItems(formattedData);
-                    if (formattedData.length > 0) {
-                        setValue(formattedData[1].value);
-                    }
-                }
-            })
-            .catch((error) => {
-                console.error(error);
-            });
+        if (bank) {
+            const formattedData = bank.map((item: Bank) => ({
+                label: item.shortName,
+                value: item.shortName,
+                icon: () => <Image source={{ uri: item.logo }} style={imageStyle} resizeMode='contain' />,
+                logo: item.logo,
+            }));
+            setItems(formattedData);
+            if (formattedData.length > 0) {
+                setValue(formattedData[1].value);
+            }
+        }
     }, []);
 
     return (
@@ -69,7 +65,7 @@ const Dropdown: FC<Props> = ({ onChange, myContainerStyle }) => {
                         fontWeight: 'bold',
                         fontFamily: fonts.JR,
                     }}
-                    dropDownContainerStyle={{ backgroundColor: '#fafafa', borderWidth: 1, borderColor: 'black'}}
+                    dropDownContainerStyle={{ backgroundColor: '#fafafa', borderWidth: 1, borderColor: 'black' }}
                     zIndex={1}
                     listMode='SCROLLVIEW'
                     searchable={true}
