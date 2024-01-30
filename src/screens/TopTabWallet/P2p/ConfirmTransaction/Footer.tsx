@@ -61,7 +61,6 @@ const FooterButtons: React.FC<FooterButtonsProps> = ({ typeUser, userid, loginUs
         const response = await companyConfirmP2pCommand(data);
         dispatch(setCount(notification - 1));
         if (response?.status) {
-            console.log('response', data);
             Alert.alert('Success', 'Confirm order successfully');
             navigate(screens.SETTING_STACK, {
                 screen: screens.HISTORY_TRANSACTION
@@ -75,7 +74,6 @@ const FooterButtons: React.FC<FooterButtonsProps> = ({ typeUser, userid, loginUs
         const response = await companyCancelP2pCommand(data);
         dispatch(setCount(notification - 1));
         if (response?.status) {
-            console.log('response', data);
             Alert.alert('Success', 'Cancel order successfully');
             navigate(screens.SETTING_STACK, {
                 screen: screens.HISTORY_TRANSACTION

@@ -54,7 +54,6 @@ const TransactionForm: React.FC<TransactionFormProps> = ({
                         onPress={() => {
                             if (setMaxAmount) {
                                 setMaxAmount(item.amount)
-                                console.log(item.amount, 'item.amount')
                             }
                         }}
                     />
