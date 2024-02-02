@@ -36,42 +36,42 @@ const Sell = () => {
     const [isChecked, setIsChecked] = useState(false);
     const dispatch: AppDispatch = useAppDispatch()
 
-    // const listAdsSellToUser = useAppSelector(listAdsBuyToUserSelector)
-    // const listAdsSellPenddingToUser = useAppSelector(listAdsBuyPenddingToUserSelector)
+    const listAdsSellToUser = useAppSelector(listAdsBuyToUserSelector)
+    const listAdsSellPenddingToUser = useAppSelector(listAdsBuyPenddingToUserSelector)
 
     // sửa
-    const listAdsBuyToUser = useAppSelector(listAdsSellToUserSelector)
-    const listAdsBuyPenddingToUser = useAppSelector(listAdsSellPenddingToUserSelector)
+    // const listAdsBuyToUser = useAppSelector(listAdsSellToUserSelector)
+    // const listAdsBuyPenddingToUser = useAppSelector(listAdsSellPenddingToUserSelector)
 
     const [fakeLoading, setFakeLoading] = React.useState<boolean>(false)
 
-    // useEffect(() => {
-    //     dispatch(fetchListAdsBuyToUser())
-    // }, [])
-
-    // useEffect(() => {
-    //     setData(listAdsSellToUser)
-    // }, [listAdsSellToUser])
-
     useEffect(() => {
-        dispatch(fetchListAdsSell())
+        dispatch(fetchListAdsBuyToUser())
     }, [])
 
     useEffect(() => {
-        setData(listAdsBuyToUser)
-    }, [listAdsBuyToUser])
+        setData(listAdsSellToUser)
+    }, [listAdsSellToUser])
+
+    // useEffect(() => {
+    //     dispatch(fetchListAdsSell())
+    // }, [])
+
+    // useEffect(() => {
+    //     setData(listAdsBuyToUser)
+    // }, [listAdsBuyToUser])
 
     const loadMoreData = async () => {
         if (!loading && hasMore) {
             setLoading(true);
-            // const response = await getListAdsBuyToUser({
-            //     limit: 10,
-            //     page,
-            // });
-            const response = await getListAdsSellToUser({
+            const response = await getListAdsBuyToUser({
                 limit: 10,
                 page,
             });
+            // const response = await getListAdsSellToUser({
+            //     limit: 10,
+            //     page,
+            // });
             if (Array.isArray(response?.data?.array)) {
                 const newData = response.data.array;
                 const isDuplicate = newData.some((item: any) => data.some((item2: any) => item.id === item2.id));
@@ -92,14 +92,14 @@ const Sell = () => {
     const loadMoreDataPending = async () => {
         if (!loading && hasMore) {
             setLoading(true);
-            // const response = await getListAdsBuyPenddingToUser({
-            //     limit: 10,
-            //     page,
-            // });
-            const response = await getListAdsSellPenddingToUser({
+            const response = await getListAdsBuyPenddingToUser({
                 limit: 10,
                 page,
             });
+            // const response = await getListAdsSellPenddingToUser({
+            //     limit: 10,
+            //     page,
+            // });
             if (Array.isArray(response?.data?.array)) {
                 const newData = response.data.array;
                 const isDuplicate = newData.some((item: any) => data.some((item2: any) => item.id === item2.id));
@@ -117,23 +117,23 @@ const Sell = () => {
         }
     }
 
-    // useEffect(() => {
-    //     if (isChecked) {
-    //         dispatch(fetchListAdsBuyPendding())
-    //         setData(listAdsSellPenddingToUser)
-    //     } else {
-    //         dispatch(fetchListAdsBuyToUser())
-    //     }
-    // }, [isChecked, listAdsSellPenddingToUser])
-
     useEffect(() => {
         if (isChecked) {
-            dispatch(fetchListAdsSellPendding())
-            setData(listAdsBuyPenddingToUser)
+            dispatch(fetchListAdsBuyPendding())
+            setData(listAdsSellPenddingToUser)
         } else {
-            dispatch(fetchListAdsSell())
+            dispatch(fetchListAdsBuyToUser())
         }
-    }, [isChecked, listAdsBuyPenddingToUser])
+    }, [isChecked, listAdsSellPenddingToUser])
+
+    // useEffect(() => {
+    //     if (isChecked) {
+    //         dispatch(fetchListAdsSellPendding())
+    //         setData(listAdsBuyPenddingToUser)
+    //     } else {
+    //         dispatch(fetchListAdsSell())
+    //     }
+    // }, [isChecked, listAdsBuyPenddingToUser])
 
     useEffect(() => {
         setFakeLoading(true)
