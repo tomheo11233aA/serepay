@@ -47,6 +47,7 @@ const ConfirmTransaction: React.FC<ConfirmTransactionProps> = ({ route }) => {
     const [selectedBankName, setSelectedBankName] = React.useState('');
     const [selectedBankNumber, setSelectedBankNumber] = React.useState('');
     const [selectedBankOwner, setSelectedBankOwner] = React.useState('');
+    const [acqId, setAcqId] = React.useState<string | null>(null);
     const [loginUserid, setLoginUserid] = React.useState(0);
     const dispatch: AppDispatch = useDispatch();
     const userInfo = useSelector(userInfoUserSelector)
@@ -75,7 +76,6 @@ const ConfirmTransaction: React.FC<ConfirmTransactionProps> = ({ route }) => {
         { title: t('Time'), data: 'created_at' },
         { title: t('Note'), data: 'content' }
     ];
-
     useEffect(() => {
         const fetchData = async () => {
             try {
@@ -105,7 +105,7 @@ const ConfirmTransaction: React.FC<ConfirmTransactionProps> = ({ route }) => {
             socket.off("operationP2p");
         }
     }, [id])
-    
+
     const fetchP2pInfo = async () => {
         if (idP2p) {
             try {
@@ -198,6 +198,7 @@ const ConfirmTransaction: React.FC<ConfirmTransactionProps> = ({ route }) => {
                     content={content}
                     side={side === 'sell' ? t('selling') : t('buying')}
                     amount={amount}
+                    acqId={acqId}
                     pay={pay}
                 >
                 </PaymentModal>
@@ -229,6 +230,7 @@ const ConfirmTransaction: React.FC<ConfirmTransactionProps> = ({ route }) => {
                                                 setAmount={setAmount}
                                                 setPay={setPay}
                                                 showModal={showModal}
+                                                setAcqId={setAcqId}
                                                 setId={setId}
                                             />
                                         ]}

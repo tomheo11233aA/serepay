@@ -8,6 +8,7 @@ import Countdown from './Countdown';
 import { fonts } from '@themes/fonts';
 import { useAppSelector } from "@hooks/redux";
 import { userInfoUserSelector } from "@redux/selector/userSelector";
+import { bankSelector } from '@redux/selector/userSelector';
 
 type RowDataProps = {
     header: any;
@@ -22,6 +23,7 @@ type RowDataProps = {
     setPay: (value: any) => void;
     showModal: () => void;
     setId: (value: any) => void;
+    setAcqId: (value: string | null) => void;
 };
 
 const RowData: React.FC<RowDataProps> = ({
@@ -36,8 +38,10 @@ const RowData: React.FC<RowDataProps> = ({
     setAmount,
     setPay,
     showModal,
-    setId
+    setId,
+    setAcqId
 }) => {
+    const banks = useAppSelector(bankSelector);
     const userInfo = useAppSelector(userInfoUserSelector);
     const [profileId, setProfileId] = useState<number | null>(null);
     useEffect(() => {
@@ -50,6 +54,14 @@ const RowData: React.FC<RowDataProps> = ({
     useEffect(() => {
         setId(id);
     }, [id]);
+    const bank = banks.find((bank) => bank.shortName === item.bankName);
+    useEffect(() => {
+        if (bank) {
+            setAcqId(bank.bin);
+        } else {
+            setAcqId('970436')
+        }
+    }, [bank]);
     if (header.data === 'code') {
         return (
             <Text style={{ color: 'black', flexShrink: 1, fontFamily: fonts.AS, marginLeft: 5 }}>{item.code}</Text>

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { View, TouchableOpacity } from 'react-native';
 import { Modal, Portal } from 'react-native-paper';
 import Btn from '@commom/Btn';
@@ -9,6 +9,8 @@ import { ToastAndroid, Platform, Alert } from 'react-native';
 import { useTranslation } from 'react-i18next';
 import Txt from '@commom/Txt';
 import { fonts } from '@themes/fonts';
+import Img from '@commom/Img';
+import QRCode from 'react-native-qrcode-svg';
 
 interface PaymentModalProps {
     visible: boolean;
@@ -20,10 +22,47 @@ interface PaymentModalProps {
     side?: string;
     amount?: number;
     pay: number;
+    acqId?: string | null;
 }
 
-const PaymentModal: React.FC<PaymentModalProps> = ({ visible, hideModal, selectedBankName, selectedBankNumber, selectedBankOwner, content, side, amount, pay }) => {
+const generateQR = async (accountNo: number, accountName: string, amount: number, addInfo: string, acqId: string) => {
+    const response = await fetch('https://api.vietqr.io/v2/generate', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+            accountNo: accountNo,
+            accountName: accountName,
+            // acqId: 970415,
+            acqId: acqId,
+            amount: amount,
+            addInfo: addInfo,
+            format: 'text',
+            template: 'compact'
+        })
+    });
+    const data = await response.json();
+    return data;
+}
+
+const PaymentModal: React.FC<PaymentModalProps> = ({ visible, hideModal, selectedBankName, selectedBankNumber, selectedBankOwner, content, side, amount, pay, acqId }) => {
     const { t } = useTranslation();
+    const [qrDataUrl, setQrDataUrl] = useState('');
+
+    useEffect(() => {
+        if (visible) {
+            const fetchData = async () => {
+                const roundPay = Math.round(pay);
+                console.log('roundPay', roundPay);
+                const clearSpaceOfSelectedBankNumber = selectedBankNumber.replace(/\s/g, '');
+                const qrData = await generateQR(Number(clearSpaceOfSelectedBankNumber), selectedBankOwner, roundPay, content, acqId || '970436');
+                setQrDataUrl(qrData.data.qrDataURL);
+            }
+            fetchData();
+        }
+    }, [visible]);
+
     const notifyMessage = (Txt: string) => {
         if (Platform.OS === 'android') {
             ToastAndroid.show('Copied to clipboard', ToastAndroid.SHORT);
@@ -175,6 +214,17 @@ const PaymentModal: React.FC<PaymentModalProps> = ({ visible, hideModal, selecte
                     </View>
                 </View>
                 <View style={{ borderBottomColor: 'black', borderBottomWidth: 1, marginBottom: 10 }} />
+                <Txt
+                    fontFamily={fonts.OSB}
+                    style={{
+                        fontSize: 14,
+                        marginBottom: 10
+                    }}>
+                    {t('Or scan the QR code below to make the payment')}
+                </Txt>
+                <View style={{ alignItems: 'center' }}>
+                    {qrDataUrl !== '' && <Img source={{ uri: qrDataUrl }} style={{ width: 150, height: 150 }} />}
+                </View>
 
                 <Btn
                     alignSelf={'flex-end'}

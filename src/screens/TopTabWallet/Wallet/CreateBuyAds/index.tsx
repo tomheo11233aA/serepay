@@ -81,7 +81,7 @@ const CreateBuyAds = () => {
             const body: ICompanyAddAds = {
                 amount: amount,
                 amountMinimum: amountMinimum,
-                symbol: selectedCoin?.name || 'BTC',
+                symbol: selectedCoin?.name || 'USDT',
                 side: 'buy',
             }
             const res = await companyAddAds(body);
