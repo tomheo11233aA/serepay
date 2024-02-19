@@ -29,7 +29,6 @@ const Form = () => {
   const hideModal = () => setVisible(false)
 
   const handleChangeLanguage = async (lng: string) => {
-    console.log('lng', lng)
     i18n.changeLanguage(lng)
     await AsyncStorage.setItem(keys.LANGUAGE, lng)
     const lngObj = convertLanguage(lng)
