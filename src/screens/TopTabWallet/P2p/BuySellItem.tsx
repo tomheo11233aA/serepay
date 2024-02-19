@@ -5,8 +5,8 @@ import { fonts } from '@themes/fonts'
 import React, { useCallback, useEffect, useState, useMemo, memo } from 'react'
 import { ICoin } from '@models/coin'
 import { useSelector, useDispatch } from 'react-redux'
-import { configSelector } from '@redux/selector/userSelector'
-import { fetchConfig } from '@redux/slice/getConfig'
+import { configSelector, config2Selector } from '@redux/selector/userSelector'
+import { fetchConfig, fetchConfig2 } from '@redux/slice/getConfig'
 import { AppDispatch } from '@redux/store/store'
 import { selectedRateSelector } from '@redux/selector/userSelector'
 
@@ -27,33 +27,39 @@ const BuySellItem = ({
     onPress
 }: Props) => {
     const config = useSelector(configSelector);
+    const config2 = useSelector(config2Selector);
+    const selectedRate = useSelector(selectedRateSelector);
+
     const dispatch = useDispatch<AppDispatch>();
     const [value, setValue] = React.useState(0);
-    const selectedRate = useSelector(selectedRateSelector);
-    React.useEffect(() => {
+    const [value2, setValue2] = React.useState(0);
+
+    useEffect(() => {
         dispatch(fetchConfig({ "name": "exchangeRate" }))
+        dispatch(fetchConfig2())
     }, [])
 
-    React.useEffect(() => {
+    useEffect(() => {
         if (config) {
             const newValue = config.length > 0 ? config[0].value : 0;
             setValue(newValue);
         }
+        if (config2) {
+            const newValue2 = config2.length > 0 ? config2[0].value : 0;
+            setValue2(newValue2);
+        }
     }, [config])
+
     const price = useMemo(() => {
         let price = 0;
         if (type === 'buy') {
-            // price = selectedCoin && selectedCoin.price !== undefined ? selectedCoin.price - (selectedCoin.price * (value / 100)) : 0;
             price = selectedCoin && selectedCoin.price !== undefined ? selectedCoin.price + (selectedCoin.price * (value / 100)) : 0;
-
         } else {
-            // price = selectedCoin && selectedCoin.price !== undefined ? selectedCoin.price + (selectedCoin.price * (value / 100)) : 0;
-            price = selectedCoin && selectedCoin.price !== undefined ? selectedCoin.price - (selectedCoin.price * (value / 100)) : 0;
-
+            price = selectedCoin && selectedCoin.price !== undefined ? selectedCoin.price - (selectedCoin.price * (value2 / 100)) : 0;
         }
         return price * selectedRate.rate;
     }, [type, selectedCoin, value, selectedRate]);
-    
+
     return (
         <Box
             radius={5}
@@ -77,7 +83,7 @@ const BuySellItem = ({
                 marginVertical={15}
                 color={type === 'buy' ? 'green' : 'red'}
             >
-                {price ? price.toFixed(2) : 0} {selectedRate.title} 
+                {price ? price.toFixed(2) : 0} {selectedRate.title}
             </Txt>
             <Btn
                 radius={5}

@@ -82,29 +82,29 @@ const TransactionItem: React.FC<TransactionItemProps> = ({ item }) => {
 
     return (
         <View style={{ padding: 10, backgroundColor: colors.gray3, marginBottom: 20, borderRadius: 10, paddingVertical: 15 }}>
-            <Text style={{ fontWeight: 'bold' }}>{item.email} ({item.userName})</Text>
+            <Text style={{ fontWeight: 'bold', color: 'black' }}>{item.email} ({item.userName})</Text>
 
             <View style={{ marginTop: 10 }}>
                 <View style={{ flexDirection: 'row' }}>
-                    <Text style={{ fontWeight: 'bold', flex: 1 }}>{t('Amount')}</Text>
-                    <Text style={{ fontWeight: 'bold', flex: 1 }}>{t('Coin')}</Text>
-                    <Text style={{ fontWeight: 'bold', flex: 1 }}>{t('Price')}</Text>
+                    <Text style={{ fontWeight: 'bold', flex: 1, color: 'black' }}>{t('Amount')}</Text>
+                    <Text style={{ fontWeight: 'bold', flex: 1, color: 'black' }}>{t('Coin')}</Text>
+                    <Text style={{ fontWeight: 'bold', flex: 1, color: 'black' }}>{t('Price')}</Text>
                 </View>
                 <View style={{ flexDirection: 'row' }}>
-                    <Text style={{ flex: 1 }}>{item.amount}</Text>
-                    <Text style={{ flex: 1 }}>{item.symbol}</Text>
-                    <Text style={{ flex: 1 }}>{item.rate}</Text>
+                    <Text style={{ flex: 1, color: 'black' }}>{item.amount}</Text>
+                    <Text style={{ flex: 1, color: 'black' }}>{item.symbol}</Text>
+                    <Text style={{ flex: 1, color: 'black' }}>{item.rate}</Text>
                 </View>
             </View>
 
             <View style={{ marginTop: 10 }}>
                 <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
-                    <Text style={{ fontWeight: 'bold', flex: 1 }}>{t('Pay')}</Text>
-                    <Text style={{ fontWeight: 'bold', flex: 1 }}>{t('Created at')}</Text>
+                    <Text style={{ fontWeight: 'bold', flex: 1, color: 'black' }}>{t('Pay')}</Text>
+                    <Text style={{ fontWeight: 'bold', flex: 1, color: 'black' }}>{t('Created at')}</Text>
                 </View>
                 <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
-                    <Text style={{ flex: 1 }}>{item.pay}</Text>
-                    <Text style={{ flex: 1 }}>{item.created_at}</Text>
+                    <Text style={{ flex: 1, color: 'black' }}>{item.pay}</Text>
+                    <Text style={{ flex: 1, color: 'black' }}>{item.created_at}</Text>
                 </View>
             </View>
             <View style={{ marginTop: 10 }}>

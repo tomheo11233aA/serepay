@@ -1,4 +1,4 @@
-import { TouchableOpacity, SafeAreaView, Alert } from 'react-native'
+import { TouchableOpacity, SafeAreaView, Alert, Text } from 'react-native'
 import React, { useEffect, useMemo, useCallback, useRef } from 'react'
 import LinearGradient from 'react-native-linear-gradient'
 import { colors } from '@themes/colors'
@@ -145,7 +145,7 @@ const CreateBuyAds = () => {
                 </Box>
                 <Box flex={1} marginTop={20}>
                     <SafeAreaView>
-                        <Txt fontFamily={fonts.LR} onPress={() => navigate(screens.CREATE_SELL_ADS)}>{t('Do you want to sell ?')}</Txt>
+                        <Txt lineHeight={18} line fontFamily={fonts.LR} onPress={() => navigate(screens.CREATE_SELL_ADS)}>{t('Do you want to sell ?')}</Txt>
                         <Box row justifySpaceBetween={true} marginTop={20}>
                             <Txt size={20} fontFamily={fonts.LR}>{t(`ADS to Buy `) + selectedCoin?.name}</Txt>
                             <TouchableOpacity onPress={() => { showModal() }}>
@@ -159,9 +159,9 @@ const CreateBuyAds = () => {
                             <Txt fontFamily={fonts.LR}>{t('Market Buy Price:')}</Txt>
                             <Txt marginLeft={5} fontFamily={fonts.OSB}>{`${price.toLocaleString()} ${selectedRate.title}`}</Txt>
                         </Box>
-                        <Txt size={20} marginTop={20} fontFamily={fonts.LR}>{t('Amount')}</Txt>
-                        <Box marginTop={20} style={{ alignItem: 'center' }}>
-                            <Txt size={20} fontFamily={fonts.LR}>{t(`Amount of `) + selectedCoin?.name}</Txt>
+                        <Txt size={20} marginTop={20} fontFamily={fonts.LR} lineHeight={25}>{t('Amount')}</Txt>
+                        <Box marginTop={20} style={{ alignItem: 'center' }} >
+                            <Txt size={20} fontFamily={fonts.LR} lineHeight={25}>{t(`Amount of `) + selectedCoin?.name}</Txt>
                             <BuyAdvertisementInput
                                 placeholder={t('Enter amount')}
                                 maxLength={100}
@@ -176,7 +176,7 @@ const CreateBuyAds = () => {
                             </Txt>}
                         </Box>
                         <Box marginTop={20} style={{ alignItem: 'center' }}>
-                            <Txt size={20} fontFamily={fonts.LR}>{t(`Minimum `) + selectedCoin?.name + t('Amount:')}</Txt>
+                            <Txt size={20} fontFamily={fonts.LR} lineHeight={25}>{t(`Minimum `) + selectedCoin?.name + t('Amount:')}</Txt>
                             <BuyAdvertisementInput
                                 placeholder={t('Enter minimum amount')}
                                 maxLength={100}

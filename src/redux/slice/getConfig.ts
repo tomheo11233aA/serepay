@@ -15,17 +15,31 @@ interface IConfigState {
     data: IConfig[];
     status: 'idle' | 'loading' | 'succeeded' | 'failed';
     error: string | null;
+    data2?: any;
 }
 
 const initialState: IConfigState = {
     data: [],
     status: 'idle',
-    error: null
+    error: null,
+    data2: []
 };
 
 export const fetchConfig = createAsyncThunk('config/fetchConfig', async (data: IExchangeRateDisparity) => {
     const response = await exchangeRateDisparity(data);
     return response?.data;
+});
+
+export const fetchConfig2 = createAsyncThunk('config/fetchConfig2', async () => {
+    const response = await fetch('https://serepay.net/api/p2pBank/getConfig', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ "name": "exchangeRateSell" })
+    });
+    const json = await response.json();
+    return json.data;
 });
 
 const configSlice = createSlice({
@@ -43,6 +57,11 @@ const configSlice = createSlice({
         builder.addCase(fetchConfig.rejected, (state, action) => {
             state.status = 'failed';
             state.error = action.error.message ?? null;
+        });
+
+        builder.addCase(fetchConfig2.fulfilled, (state, action: PayloadAction<IConfig[]>) => {
+            state.status = 'succeeded';
+            state.data2 = action.payload;
         });
     }
 });
