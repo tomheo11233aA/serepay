@@ -15,32 +15,32 @@ interface Props {
 const Item = ({ item, t, onClick }: Props) => {
     return (
         <TouchableOpacity onPress={onClick}>
-        <Box
-            row
-            alignCenter
-            key={item.title}
-            justifySpaceBetween
-            paddingHorizontal={10}
-            paddingVertical={10}
-            borderBottomWidth={1}
-            borderColor={colors.gray}
-        >
-            <Box row alignCenter>
-                <Icon
-                    size={25}
-                    marginRight={10}
-                    source={item.icon}
-                />
-                <Txt size={16}>{t(item.title)}</Txt>
+            <Box
+                row
+                alignCenter
+                key={item.title}
+                justifySpaceBetween
+                paddingHorizontal={10}
+                paddingVertical={10}
+                borderBottomWidth={1}
+                borderColor={colors.gray}
+            >
+                <Box row alignCenter>
+                    <Icon
+                        size={25}
+                        marginRight={10}
+                        source={item.icon}
+                    />
+                    <Txt size={16}>{t(item.title)}</Txt>
+                </Box>
+                <Box rotateZ={'180deg'}>
+                    <Icon
+                        size={20}
+                        tintColor={colors.gray4}
+                        source={require('@images/unAuth/left.png')}
+                    />
+                </Box>
             </Box>
-            <Box rotateZ={'180deg'}>
-                <Icon
-                    size={20}
-                    tintColor={colors.gray4}
-                    source={require('@images/unAuth/left.png')}
-                />
-            </Box>
-        </Box>
         </TouchableOpacity>
     )
 }
