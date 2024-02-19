@@ -1,6 +1,7 @@
 // React and React Native imports
 import React, { useEffect, memo, useState } from 'react'
-import { Text, View, TouchableOpacity } from 'react-native'
+import { Text, View, TouchableOpacity, Alert } from 'react-native'
+import { roundCoin } from '@screens/Swap/MakePrice'
 
 // Redux imports
 import { useAppDispatch, useAppSelector } from '@hooks/redux'
@@ -35,6 +36,7 @@ import { yupResolver } from '@hookform/resolvers/yup'
 import { heightPercentageToDP as hp } from 'react-native-responsive-screen'
 import QRCode from 'react-native-qrcode-svg'
 import { Modal, Portal } from 'react-native-paper'
+import { forwardRef } from 'react'
 
 interface Props {
     route?: WithdrawProps['route'];
@@ -53,7 +55,7 @@ const Aliases: React.FC<Props> = ({ route }) => {
     const balanceKey = `${route?.params?.symbol.toLocaleLowerCase()}_balance`;
     const maxAvailable = userWallet?.[balanceKey] || 0;
     const [isLoading, setIsLoading] = useState(false);
-    const [history, setHistory] = useState<[]>([]);
+    const [history, setHistory] = useState<any[]>([]);
     const coinList = useAppSelector(coinListSelector)
     const [qrData, setQrData] = useState('');
     const [visible, setVisible] = useState(false);
@@ -81,7 +83,7 @@ const Aliases: React.FC<Props> = ({ route }) => {
     const handleSend = async (inputData: any) => {
         const { userName, amount, message } = inputData;
         const data: ITransferToUserName = {
-            symbol: route?.params?.symbol ?? 'BTC',
+            symbol: route?.params?.symbol ?? 'USDT',
             userName: userName,
             amount: amount,
             note: message,
@@ -95,6 +97,10 @@ const Aliases: React.FC<Props> = ({ route }) => {
                 setAmount('')
                 setUserName('')
                 setMessage('')
+                Alert.alert(t('Success'), t('Transfer success'))
+                setPage(1)
+                setHistory([])
+                loadMoreData()
             }
         } catch (error) {
             console.log(error)
@@ -105,44 +111,23 @@ const Aliases: React.FC<Props> = ({ route }) => {
     }
     const loadMoreData = async () => {
         const data: IHistoryTransfer = {
-            page: page,
-            limit: '5',
-            symbol: route?.params?.symbol ?? 'BTC',
+            page: 1,
+            limit: '1000',
+            symbol: route?.params?.symbol ?? 'USDT',
         }
         if (!isLoading) {
             setIsLoading(true);
             const response = await historytransfer(data);
             if (Array.isArray(response?.data?.array)) {
-                setHistory(response.data.array);
+                // setHistory(response.data.array);
+                setHistory(prevData => [...prevData, ...response.data.array]);
+                setPage(page + 1);
             } else {
                 console.error('response.data.array is not an array:', response?.data?.array);
             }
-            setPage(page + 1);
             setIsLoading(false);
         }
     };
-    const loadPreviousData = async () => {
-        if (page > 1) {
-            const newPage = page - 1;
-            const data: IHistoryTransfer = {
-                page: newPage,
-                limit: '5',
-                symbol: route?.params?.symbol ?? 'BTC',
-            }
-            setIsLoading(true);
-            const response = await historytransfer(data);
-            if (Array.isArray(response?.data?.array)) {
-                setHistory(response.data.array);
-            } else {
-                console.error('response.data.array is not an array:', response?.data?.array);
-            }
-            setPage(newPage);
-            setIsLoading(false);
-        }
-    }
-    const handleLoadMore = () => {
-        loadMoreData();
-    }
     useEffect(() => {
         loadMoreData();
     }, []);
@@ -205,9 +190,9 @@ const Aliases: React.FC<Props> = ({ route }) => {
                 </Txt>}
                 <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
                     <Text style={{ fontFamily: fonts.LR, color: 'black', marginTop: 20, fontSize: 18 }}>{t('Max available:')}</Text>
-                    <Text style={{ fontFamily: fonts.LR, color: 'black', marginTop: 20, fontSize: 18 }}>{roundDecimalValues(maxAvailable, 10001)} {route?.params?.symbol}</Text>
+                    <Text style={{ fontFamily: fonts.LR, color: 'black', marginTop: 20, fontSize: 18 }}>{roundCoin(maxAvailable)} {route?.params?.symbol}</Text>
                 </View>
-                <Text style={{ fontFamily: fonts.LR, color: 'black', marginTop: 20, fontSize: 18, marginBottom: 5}}>
+                <Text style={{ fontFamily: fonts.LR, color: 'black', marginTop: 20, fontSize: 18, marginBottom: 5 }}>
                     {t('Message')}
                 </Text>
                 <WalletCoinInput
@@ -242,14 +227,14 @@ const Aliases: React.FC<Props> = ({ route }) => {
                 {isLoading ? (
                     <View style={{ justifyContent: 'center', alignItems: 'center', marginTop: 50 }}>
                         <LottieView
-                        source={require('@lottie/loading.json')}
-                        autoPlay
+                            source={require('@lottie/loading.json')}
+                            autoPlay
                             loop
                             style={{ width: 100, height: 100 }}
                         />
                     </View>
                 ) : (
-                    <View style={{ alignSelf: 'center', width: '100%' }}>
+                    <View style={{ alignSelf: 'center', width: '100%', marginBottom: hp(20) }}>
                         {history.length > 0 ? (
                             history.map((item: any, index: number) => {
                                 const coin = coinList.find((coin) => coin?.name === item?.coin_key.toUpperCase())
@@ -289,7 +274,6 @@ const Aliases: React.FC<Props> = ({ route }) => {
                                     </View>
                                 )
                             })
-
                         ) : (
                             <>
                                 <LottieView
@@ -301,30 +285,6 @@ const Aliases: React.FC<Props> = ({ route }) => {
                                 <Txt center fontFamily={fonts.AS} size={16} bold>{t('No data')}</Txt>
                             </>
                         )}
-                        <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
-                            {page > 0 && (
-                                <Btn
-                                    onPress={loadPreviousData}
-                                    marginTop={20}
-                                    height={hp(6)}
-                                    padding={10}
-                                    radius={5}
-                                    width={'48%'}
-                                    backgroundColor={colors.darkViolet}>
-                                    <Txt color={'white'} size={18} bold fontFamily={fonts.LR}>{t('Previous page')}</Txt>
-                                </Btn>
-                            )}
-                            <Btn
-                                onPress={handleLoadMore}
-                                marginTop={20}
-                                height={hp(6)}
-                                padding={10}
-                                width={'48%'}
-                                radius={5}
-                                backgroundColor={colors.lviolet}>
-                                <Txt color={'white'} size={18} bold fontFamily={fonts.LR}>{t('Next page')}</Txt>
-                            </Btn>
-                        </View>
                     </View>
                 )}
             </View>

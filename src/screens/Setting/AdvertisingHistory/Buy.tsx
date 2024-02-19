@@ -35,7 +35,7 @@ const Buy = () => {
     const [loading, setLoading] = useState(false);
     const [hasMore, setHasMore] = useState(true);
     const [isChecked, setIsChecked] = useState(false);
-        
+
     const listAdsBuyToUser = useAppSelector(listAdsSellToUserSelector)
     const listAdsBuyPenddingToUser = useAppSelector(listAdsSellPenddingToUserSelector)
 
@@ -173,7 +173,7 @@ const Buy = () => {
                         }
                         isChecked={isChecked}
                     />
-                    <Text style={{ fontFamily: fonts.JR }}>{t('Pending')}</Text>
+                    <Text style={{ fontFamily: fonts.JR, color: 'black' }}>{t('Pending')}</Text>
                 </View>
                 <LottieView
                     source={require('../../../assets/lottie/searchNodata.json')}
@@ -231,7 +231,7 @@ const Buy = () => {
                     }
                     isChecked={isChecked}
                 />
-                <Text style={{ fontFamily: fonts.JR }}>{t('Pending')}</Text>
+                <Text style={{ fontFamily: fonts.JR, color: 'black' }}>{t('Pending')}</Text>
             </View>
             <FlatList
                 showsVerticalScrollIndicator={false}

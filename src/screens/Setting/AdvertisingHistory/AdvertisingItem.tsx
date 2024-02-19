@@ -38,8 +38,8 @@ const TransactionItem = ({ item, side, isPending }: TransactionItemProps) => {
         return string.charAt(0).toUpperCase() + string.slice(1);
     }
     const formatText = (text: string) => {
-        if (text.length > 11) {
-            return text.slice(0, 11) + '...'
+        if (text.length > 7) {
+            return text.slice(0, 7) + '...'
         }
         return text
     }
@@ -66,6 +66,14 @@ const TransactionItem = ({ item, side, isPending }: TransactionItemProps) => {
             </View>
         )
     }
+
+    const formatBankName = (name: string) => {
+        const matches = name.match(/\(([^)]+)\)/);
+        if (matches) {
+            return matches[1];
+        }
+        return name;
+    };
     return (
         <View style={styles.container}>
             <Box justifySpaceBetween>
@@ -77,7 +85,8 @@ const TransactionItem = ({ item, side, isPending }: TransactionItemProps) => {
                     <Txt fontFamily={fonts.OSB}>{formatText(capitalizeFirstLetter(item.userName))}</Txt>
                     {side === 'sell' && (
                         <Box row marginLeft={20}>
-                            <Txt fontFamily={fonts.OSB}>{item.bankName ? formatText(item.bankName) : "Unknown"}: </Txt>
+                            {/* <Txt fontFamily={fonts.OSB}>{item.bankName ? formatText(item.bankName) : "Unknown"}: </Txt> */}
+                            <Txt fontFamily={fonts.OSB}>{formatBankName(item.bankName ? item.bankName : "Unknown")}: </Txt>
                             <Txt fontFamily={fonts.OSB} color={colors.gray2}>{item.numberBank ? formatText(item.numberBank) : "Unknown"}</Txt>
                         </Box>
                     )}

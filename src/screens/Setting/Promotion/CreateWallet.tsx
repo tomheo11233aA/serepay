@@ -70,7 +70,7 @@ const CreateWallet: React.FC<DepositProps> = ({ route }) => {
         const data: IHistoryRecharge = {
             page: 1,
             limit: '10',
-            symbol: symbol || 'BTC',
+            symbol: symbol || 'USDT.BEP20',
         }
         const getHistory = async () => {
             setIsLoading(true)

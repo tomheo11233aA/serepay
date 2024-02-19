@@ -36,6 +36,13 @@ export const formatExpiryDate = (value: string) => {
     return v;
 };
 const CreditCardForm: React.FC<CreditCardFormProps> = ({ item }) => {
+    const formatBankName = (name: string) => {
+        const matches = name.match(/\(([^)]+)\)/);
+        if (matches) {
+            return matches[1];
+        }
+        return name;
+    };
     const { t } = useTranslation();
     const creditCards = [CreditCard, CreditCard2, CreditCard3, CreditCard4]
     const SelectedCard = useState(() => creditCards[Math.floor(Math.random() * creditCards.length)])[0];
@@ -52,7 +59,7 @@ const CreditCardForm: React.FC<CreditCardFormProps> = ({ item }) => {
                     fontSize: 25,
                     fontWeight: 'bold',
                 }}>
-                {item?.name_banking}
+                {formatBankName(item?.name_banking) ?? item?.name_banking}
             </Text>
 
             <Text

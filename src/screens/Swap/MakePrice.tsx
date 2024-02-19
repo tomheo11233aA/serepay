@@ -23,9 +23,18 @@ import { useAppDispatch } from '@hooks/redux'
 import { AppDispatch } from '@redux/store/store'
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen'
 import AsyncStorage from '@react-native-async-storage/async-storage'
-
 interface Props {
     t: any;
+}
+
+export const roundCoin = (coin: number) => {
+    if (coin > 10000) {
+        return coin.toFixed(8)
+    } else if (coin > 100) {
+        return coin.toFixed(6)
+    } else {
+        return coin.toFixed(2)
+    }
 }
 
 const MakePrice = ({ t }: Props) => {
@@ -87,12 +96,11 @@ const MakePrice = ({ t }: Props) => {
     const swapCoin = useCallback(async (swapData: ISwap) => {
         setIsLoading(true)
         try {
-            const res = await swapCoinApi(swapData)
+            const res: any = await swapCoinApi(swapData)
             dispatch(fetchUserWallet())
-            Alert.alert(res?.data?.message ?? 'Successful coin conversion!')
+            Alert.alert(t(res?.message) ?? t('Successful coin conversion! '))
         } catch (error) {
-            Alert.alert('Insufficient balance! ')
-            console.log(error)
+            Alert.alert(t('Insufficient balance!'))
         }
         setIsLoading(false)
     }, [])
@@ -103,11 +111,11 @@ const MakePrice = ({ t }: Props) => {
             t('Do you want to exchange') + ` ${amountForm} ${symbolForm} ${t('for')} ${amountTo} ${symbolTo}?`,
             [
                 {
-                    text: "Cancel",
+                    text: t("Cancel"),
                     style: "destructive"
                 },
                 {
-                    text: "Swap",
+                    text: t("Swap"),
                     style: "default",
                     onPress: () => {
                         swapCoin({
@@ -134,7 +142,7 @@ const MakePrice = ({ t }: Props) => {
             <CoinModal visible={visible} hideModal={hideModal} t={t} handleChooseCoin={changeCoin} />
             <ItemConver
                 symbol={symbolForm}
-                title={`Amount of ${symbolForm}`}
+                title={t('Amount of') + ` ${symbolForm}`}
                 icon={iconForm ? { uri: `${keys.HOSTING_API}${iconForm}` } : require('@images/wallet/bitcoin.png')}
                 value={amountForm}
                 setValue={setAmountForm}
@@ -147,13 +155,13 @@ const MakePrice = ({ t }: Props) => {
                 <Txt
                     marginTop={10}
                     color={'#999999'}>
-                    {t('Balance')} {balance} {symbolForm}
+                    {t('Balance')} {roundCoin(balance)} {symbolForm}
                 </Txt>
                 <Btn
                     radius={5}
                     padding={10}
                     backgroundColor={colors.gray5}
-                    onPress={() => setAmountForm(balance.toFixed(8))}
+                    onPress={() => setAmountForm(roundCoin(balance))}
                 >
                     <Txt>
                         {`${t('Max')} `}
@@ -164,7 +172,8 @@ const MakePrice = ({ t }: Props) => {
             <ItemConver
                 symbol={symbolTo}
                 iconConvert={true}
-                title={`Amount of ${symbolTo}`}
+                // title={`Amount of ${symbolTo}`}
+                title={t('Amount of') + ` ${symbolTo}`}
                 icon={iconTo ? { uri: `${keys.HOSTING_API}${iconTo}` } : require('@images/wallet/eth.png')}
                 readonly={true}
                 changeCoin={showModalForSymbolTo}
@@ -178,7 +187,7 @@ const MakePrice = ({ t }: Props) => {
                 <Txt
                     marginTop={10}
                     color={'#999999'}>
-                    {`1 ${symbolForm} = ${calculateConversionRate(symbolForm, symbolTo, coins)} ${symbolTo}`}
+                    {`1 ${symbolForm} = ${roundCoin(parseFloat(calculateConversionRate(symbolForm, symbolTo, coins)))} ${symbolTo}`}
                 </Txt>
             </Box>
 

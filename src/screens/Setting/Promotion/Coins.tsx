@@ -50,10 +50,11 @@ const Coins: React.FC<Props> = ({ style }) => {
     const handleDeposit = useCallback(async (symbol: string) => {
         setLoadingStates(prev => ({ ...prev, [symbol]: true }))
         try {
-            const res = await createWalletApi(symbol)
-            if (res?.data) {
-                navigate(screens.DEPOSIT, { symbol, address: res?.data?.address })
-            }
+            // const res = await createWalletApi(symbol)
+            // if (res?.data) {
+            // navigate(screens.DEPOSIT, { symbol, address: res?.data?.address })
+            navigate(screens.DEPOSIT, { symbol, address: 'USDT.BEP20' })
+            // }
         } catch (error) {
             console.log(error)
         } finally {
@@ -134,7 +135,7 @@ const Coins: React.FC<Props> = ({ style }) => {
                             <View>
                                 {coin.name === 'USDT' ? (
                                     <Btn
-                                        onPress={() => handleDeposit(coin.name ?? '')}
+                                        onPress={() => handleDeposit(coin.name ?? 'USDT')}
                                         padding={wp('1.4%')}
                                         radius={wp('1.4%')}
                                         backgroundColor={colors.violet}

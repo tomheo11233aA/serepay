@@ -1,5 +1,9 @@
 {
     "translation": {
+        "Do you want to exchange": "Bạn có muốn quy đổi",
+        "for": "sang",
+        "Successful coin conversion! ": "Quy đổi tiền điện tử thành công! ",
+        "Insufficient balance!": "Số dư không đủ!",
         "LOGIN": "Đăng nhập",
         "Vietnamese": "Việt Nam",
         "REGISTER": "Đăng ký",

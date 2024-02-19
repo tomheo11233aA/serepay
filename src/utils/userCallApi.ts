@@ -29,7 +29,7 @@ import { ICompanyCancelF2pCommand } from "@models/P2P/COMPANY/companyCancelF2pCo
 const axiosService = AxiosInstance();
 export const createWalletApi = function (coinName: string) {
   try {
-    return axiosService.post("/api/user/createWallet", {
+    return axiosService.post("/api/blockico/createWalletBEP20", {
       symbol: coinName,
     });
   } catch (error) {

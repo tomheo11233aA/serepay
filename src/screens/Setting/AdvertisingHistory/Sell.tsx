@@ -170,7 +170,7 @@ const Sell = () => {
                         }
                         isChecked={isChecked}
                     />
-                    <Text style={{ fontFamily: fonts.JR }}>{t('Pending')}</Text>
+                    <Text style={{ fontFamily: fonts.JR, color: 'black' }}>{t('Pending')}</Text>
                 </View>
                 <LottieView
                     source={require('../../../assets/lottie/searchNodata.json')}
@@ -229,7 +229,7 @@ const Sell = () => {
                     }
                     isChecked={isChecked}
                 />
-                <Text style={{ fontFamily: fonts.JR }}>{t('Pending')}</Text>
+                <Text style={{ fontFamily: fonts.JR, color: 'black' }}>{t('Pending')}</Text>
             </View>
             <FlatList
                 showsVerticalScrollIndicator={false}
