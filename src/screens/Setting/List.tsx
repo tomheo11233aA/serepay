@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { ImageSourcePropType, TouchableOpacity } from 'react-native'
 import Animated from 'react-native-reanimated'
 import Item from './Item'
@@ -33,12 +33,16 @@ const List = ({ t }: Props) => {
   const dispatch = useAppDispatch()
   const { i18n } = useTranslation()
   const [visible, setVisible] = useState(false)
+  const [languageIcon, setLanguageIcon] = useState<ImageSourcePropType>(convertLanguage(i18n.language).image)
+
+  useEffect(() => {
+    setLanguageIcon(convertLanguage(i18n.language).image)
+  }, [i18n.language])
 
   const showModal = () => setVisible(true)
   const hideModal = () => setVisible(false)
 
   const handleChangeLanguage = async (lng: string) => {
-    console.log('lng', lng)
     i18n.changeLanguage(lng)
     await AsyncStorage.setItem(keys.LANGUAGE, lng)
     const lngObj = convertLanguage(lng)
@@ -88,7 +92,7 @@ const List = ({ t }: Props) => {
     },
     {
       title: 'Change Language',
-      icon: convertLanguage(i18n.language).image,
+      icon: languageIcon,
       onClick: () => {
         showModal()
       }
