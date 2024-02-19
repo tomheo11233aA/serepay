@@ -110,6 +110,7 @@
         "Status":	"حالة",
         "Country":	"دولة",
         "Pending Transaction":	"المعاملة المعلقة",
+        "Email or password is incorrect!":	"البريد الإلكتروني أو كلمة المرور غير صحيحة!",
         "Successful Transaction":	"صفقة ناجحة",
         "Transaction Cancelled":	"تم إلغاء المعاملة",
         "Advertiser Not Received Funds":	"لم يتلق المعلن أموالاً",

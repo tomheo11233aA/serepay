@@ -14,24 +14,66 @@ import { navigate } from '@utils/navigationRef'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
 import { StyleSheet } from 'react-native'
+import { useState } from 'react'
+import { FlatList } from 'react-native'
+import { TouchableOpacity } from 'react-native'
+import { Modal, Portal } from 'react-native-paper'
 
 const Form = () => {
   const dispatch = useAppDispatch()
   const { t, i18n } = useTranslation()
   const language = useAppSelector(languageUserSelector)
+  const [visible, setVisible] = useState(false)
 
-  const handleChangeLanguage = async () => {
-    const lng = i18n.language == 'en' ? 'vn' : 'en'
+  const showModal = () => setVisible(true)
+  const hideModal = () => setVisible(false)
+
+  const handleChangeLanguage = async (lng: string) => {
+    console.log('lng', lng)
     i18n.changeLanguage(lng)
     await AsyncStorage.setItem(keys.LANGUAGE, lng)
     const lngObj = convertLanguage(lng)
     dispatch(setLanguage(lngObj))
+    hideModal()
   }
+  const languageOptions = ['en', 'vn', 'ko', 'ja', 'zh', 'th', 'km', 'lo', 'id', 'fr', 'es', 'it', 'de', 'pt', 'tr', 'ru', 'nl', 'ms', 'ar', 'he', 'el', 'pl', 'hi'];
 
   return (
     <Box width={'100%'} marginBottom={100}>
+      <Portal>
+        <Modal visible={visible} onDismiss={hideModal}
+          contentContainerStyle={{ backgroundColor: 'white', padding: 20, borderRadius: 10, marginTop: 50 }}>
+          <FlatList
+            data={languageOptions}
+            renderItem={({ item }) => (
+              <TouchableOpacity onPress={() => handleChangeLanguage(item)}>
+                <Box
+                  row
+                  alignCenter
+                  key={item}
+                  justifySpaceBetween
+                  paddingHorizontal={10}
+                  paddingVertical={10}
+                  borderBottomWidth={1}
+                  borderColor={colors.gray}
+                >
+                  <Box row alignCenter>
+                    <Icon
+                      size={25}
+                      marginRight={10}
+                      source={convertLanguage(item).image}
+                    />
+                    <Txt size={16}>{t(convertLanguage(item).title)}</Txt>
+                  </Box>
+                </Box>
+              </TouchableOpacity>
+            )}
+            keyExtractor={item => item}
+          />
+        </Modal>
+      </Portal>
       <Btn
-        onPress={handleChangeLanguage}
+        onPress={showModal}
         row
         radius={7}
         alignCenter

@@ -88,7 +88,7 @@ const List = ({ t }: Props) => {
     },
     {
       title: 'Change Language',
-      icon: i18n.language == 'en' ? require('@images/unAuth/america.png') : require('@images/unAuth/vietnam.png'),
+      icon: convertLanguage(i18n.language).image,
       onClick: () => {
         showModal()
       }
@@ -114,7 +114,7 @@ const List = ({ t }: Props) => {
     >
       <Portal>
         <Modal visible={visible} onDismiss={hideModal}
-          contentContainerStyle={{ backgroundColor: 'white', padding: 20, borderRadius: 10, marginTop: 20 }}>
+          contentContainerStyle={{ backgroundColor: 'white', padding: 20, borderRadius: 10, marginTop: 50 }}>
           <FlatList
             data={languageOptions}
             renderItem={({ item }) => (

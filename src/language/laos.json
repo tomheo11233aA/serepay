@@ -205,6 +205,7 @@
         "Transaction Code":	"ລະຫັດທຸລະກໍາ",
         "Trader":	"ພໍ່ຄ້າ",
         "You are ":	"ເຈົ້າແມ່ນ",
+        "Email or password is incorrect!":	"ອີເມວຫຼືລະຫັດຜ່ານບໍ່ຖືກຕ້ອງ!",
         "Amount is required":	"ຈໍານວນທີ່ຕ້ອງການ",
         "Minimum amount is required":	"ຕ້ອງການຈໍານວນຕໍາ່ສຸດທີ່",
         "Bank name is required":	"ຕ້ອງການຊື່ທະນາຄານ",

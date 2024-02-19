@@ -22,7 +22,7 @@ interface Props {
 const Form = ({ t }: Props) => {
     const dispatch = useAppDispatch()
     const [security, setSecurity] = useState<boolean>(true)
-    const [userName, setUserName] = useState<string>('test2fa1')
+    const [userName, setUserName] = useState<string>('test')
     const [password, setPassword] = useState<string>('123123')
     const [txtError, setTxtError] = useState<string>('')
     const [isLoading, setIsLoading] = useState<boolean>(false)
@@ -45,14 +45,18 @@ const Form = ({ t }: Props) => {
         } catch (error: any) {
             setTxtError(error.response.data.message)
             if (error.response.data.message === "Email or password is incorrect! ") {
-                setTxtError('Email hoặc mật khẩu không đúng!')
+                // setTxtError('Email hoặc mật khẩu không đúng!')
+                setTxtError(t('Email or password is incorrect!'))
             } else if (error.response.data.message === "Account is not activated! ") {
-                setTxtError('Tài khoản chưa được kích hoạt!')
+                // setTxtError('Tài khoản chưa được kích hoạt!')
+                setTxtError(t('Account is not activated!'))
             } else if (error.response.data.message === "Code Emty! ") {
                 setShow2FA(true)
-                setTxtError('Tài khoản đã được kích hoạt 2FA, vui lòng nhập mã OTP')
+                // setTxtError('Tài khoản đã được kích hoạt 2FA, vui lòng nhập mã OTP')
+                setTxtError(t('Account is not activated 2FA, please enter OTP code'))
             } else if (error.response.data.errors === 11) {
-                setTxtError('Mã OTP không đúng')
+                // setTxtError('Mã OTP không đúng')
+                setTxtError(t('OTP code is incorrect'))
             }
         } finally {
             setIsLoading(false)
