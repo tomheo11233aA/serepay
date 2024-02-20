@@ -12,6 +12,17 @@
     "Successful coin conversion! ": "«Успешная конвертация монет!»",
     "Insufficient balance": "Недостаточный баланс",
 
+    "Cancel failed": "«Отмена не удалась»",
+    "Notification": "Уведомление",
+    "Please check your email to get your password back": "«Пожалуйста, проверьте свою электронную почту, чтобы вернуть пароль»",
+    "Password and rePassword not match": "«Пароль и rePassword не совпадают»",
+    "Confirmation": "Подтверждение",
+    "Please fill all fields": "Пожалуйста заполните все поля",
+    "Cancel success": "«Отменить успех»",
+    "Update KYC fail": "«Обновление KYC не удалось»",
+    "Are you sure you want to proceed?": "Вы уверены, что хотите продолжить?",
+    "Your transaction has been created": "«Ваша транзакция создана»",
+
     "LOGIN": "АВТОРИЗОВАТЬСЯ",
     "Vietnamese": "Вьетнамский",
     "REGISTER": "РЕГИСТР",

@@ -12,6 +12,17 @@
     "Successful coin conversion! ": "การแปลงเหรียญสำเร็จ!",
     "Insufficient balance": "ยอดเงินไม่เพียงพอ",
 
+    "Cancel failed": "การยกเลิกล้มเหลว",
+    "Notification": "การแจ้งเตือน",
+    "Please check your email to get your password back": "โปรดตรวจสอบอีเมลของคุณเพื่อรับรหัสผ่านคืน",
+    "Password and rePassword not match": "รหัสผ่านและรหัสผ่านใหม่ไม่ตรงกัน",
+    "Confirmation": "การยืนยัน",
+    "Please fill all fields": "กรุณากรอกข้อมูลทุกช่อง",
+    "Cancel success": "ยกเลิกความสำเร็จ",
+    "Update KYC fail": "การอัปเดต KYC ล้มเหลว",
+    "Are you sure you want to proceed?": "คุณแน่ใจหรือว่าต้องการดำเนินการต่อ?",
+    "Your transaction has been created": "ธุรกรรมของคุณถูกสร้างขึ้นแล้ว",
+
     "LOGIN": "เข้าสู่ระบบ",
     "Vietnamese": "เวียดนาม",
     "REGISTER": "ลงทะเบียน",

@@ -19,6 +19,7 @@ import { fetchListAdsSell } from '@redux/slice/advertisingSlice';
 import { fetchListAdsBuyPendding } from '@redux/slice/advertisingSlice';
 import { fetchListAdsSellPendding } from '@redux/slice/advertisingSlice';
 import { heightPercentageToDP as hp } from 'react-native-responsive-screen';
+import { roundCoin } from '@screens/Swap/MakePrice';
 
 interface TransactionItemProps {
     item: IAdvertising;
@@ -85,7 +86,6 @@ const TransactionItem = ({ item, side, isPending }: TransactionItemProps) => {
                     <Txt fontFamily={fonts.OSB}>{formatText(capitalizeFirstLetter(item.userName))}</Txt>
                     {side === 'sell' && (
                         <Box row marginLeft={20}>
-                            {/* <Txt fontFamily={fonts.OSB}>{item.bankName ? formatText(item.bankName) : "Unknown"}: </Txt> */}
                             <Txt fontFamily={fonts.OSB}>{formatBankName(item.bankName ? item.bankName : "Unknown")}: </Txt>
                             <Txt fontFamily={fonts.OSB} color={colors.gray2}>{item.numberBank ? formatText(item.numberBank) : "Unknown"}</Txt>
                         </Box>
@@ -93,7 +93,7 @@ const TransactionItem = ({ item, side, isPending }: TransactionItemProps) => {
                 </Box>
                 <Box row marginTop={5}>
                     <Txt color={colors.gray2} fontFamily={fonts.OSB}>{t('Available')}: </Txt>
-                    <Txt fontFamily={fonts.OSB}>{formatText(parseFloat((item.amount - item.amountSuccess).toFixed(8)).toString())} {item.symbol}</Txt>
+                    <Txt fontFamily={fonts.OSB}>{formatText(roundCoin(item.amount - item.amountSuccess).toString())} {item.symbol}</Txt>
                 </Box>
                 <Box row marginTop={5}>
                     <Box row>
@@ -134,7 +134,7 @@ const TransactionItem = ({ item, side, isPending }: TransactionItemProps) => {
                                         try {
                                             setIsLoading(true)
                                             await cancelP2p({ idP2p: item.id })
-                                            Alert.alert("Cancel success")
+                                            Alert.alert(t('Cancel success'))
                                             if (side === 'buy') {
                                                 if (isPending) {
                                                     dispatch(fetchListAdsBuyPendding())
@@ -148,7 +148,7 @@ const TransactionItem = ({ item, side, isPending }: TransactionItemProps) => {
                                                 dispatch(fetchListAdsSell())
                                             }
                                         } catch (error) {
-                                            console.log(error)
+                                            Alert.alert(t('Cancel failed'))
                                         } finally {
                                             setIsLoading(false)
                                         }
@@ -194,7 +194,7 @@ const TransactionItem = ({ item, side, isPending }: TransactionItemProps) => {
                                                     dispatch(fetchListAdsSell())
                                                 }
                                             } catch (error) {
-                                                console.log(error)
+                                                Alert.alert("Cancel failed")
                                             } finally {
                                                 setIsLoading(false)
                                             }

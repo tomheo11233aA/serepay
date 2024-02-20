@@ -17,6 +17,7 @@ import { IHistoryRecharge } from '@models/WALLET/historyRecharge';
 import LottieView from 'lottie-react-native';
 import AxiosInstance from '../../../helper/AxiosInstance';
 import { colors } from '@themes/colors';
+import { Alert } from 'react-native';
 
 type RootStackParamList = {
     Deposit: { symbol: string, address: string };
@@ -80,7 +81,7 @@ const CreateWallet: React.FC<DepositProps> = ({ route }) => {
                     setHistory(res?.data?.array)
                 }
             } catch (error) {
-                console.log(error)
+                Alert.alert(t('Error'), t('Something went wrong'))
             } finally {
                 setIsLoading(false)
             }

@@ -36,10 +36,10 @@ const Form = ({ t }: Props) => {
         const axiosInstance = AxiosInstance()
         setIsLoading(true)
         if (password !== rePassword) {
-            return Alert.alert('Password and rePassword not match')
+            return Alert.alert(t('Password and rePassword not match'))
         }
         if (!userName || !password || !rePassword || !email) {
-            return Alert.alert('Please fill all fields')
+            return Alert.alert(t('Please fill all fields'))
         }
         try {
             const response = await axiosInstance.post('api/user/signup', {

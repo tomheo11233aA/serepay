@@ -12,6 +12,17 @@
     "Successful coin conversion! ": "ការបម្លែងកាក់ជោគជ័យ!",
     "Insufficient balance": "សមតុល្យមិនគ្រប់គ្រាន់",
 
+    "Cancel failed": "បោះបង់បានបរាជ័យ",
+    "Notification": "សេចក្តីជូនដំណឹង",
+    "Please check your email to get your password back": "សូមពិនិត្យអ៊ីមែលរបស់អ្នក ដើម្បីយកពាក្យសម្ងាត់របស់អ្នកមកវិញ",
+    "Password and rePassword not match": "Password និង RePassword មិនត្រូវគ្នាទេ",
+    "Confirmation": "ការបញ្ជាក់",
+    "Please fill all fields": "សូមបំពេញវាលទាំងអស់",
+    "Cancel success": "បោះបង់ភាពជោគជ័យ",
+    "Update KYC fail": "ធ្វើបច្ចុប្បន្នភាព KYC បរាជ័យ",
+    "Are you sure you want to proceed?": "តើអ្នកប្រាកដជាចង់បន្ត?",
+    "Your transaction has been created": "ប្រតិបត្តិការរបស់អ្នកត្រូវបានបង្កើត",
+
     "Email or password is incorrect!": "អ៊ីមែល ឬ ពាក្យសម្ងាត់ មិនត្រឹមត្រូវ!",
     "LOGIN": "ចូល",
     "Vietnamese": "វៀតណាម",

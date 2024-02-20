@@ -12,6 +12,17 @@
     "Successful coin conversion! ": "兑换金币成功！",
     "Insufficient balance": "余额不足",
 
+    "Cancel failed": "取消失败",
+    "Notification": "通知",
+    "Please check your email to get your password back": "请检查您的电子邮件以找回密码",
+    "Password and rePassword not match": "密码和重新密码不匹配",
+    "Confirmation": "确认",
+    "Please fill all fields": "请填写所有字段",
+    "Cancel success": "取消成功",
+    "Update KYC fail": "更新 KYC 失败",
+    "Are you sure you want to proceed?": "你确定要继续吗？",
+    "Your transaction has been created": "您的交易已创建",
+
     "Email or password is incorrect!": "电子邮件或密码不正确！",
     "LOGIN": "登录",
     "Vietnamese": "越南语",

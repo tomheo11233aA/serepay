@@ -12,6 +12,17 @@
     "Successful coin conversion! ": "Penukaran syiling yang berjaya! ",
     "Insufficient balance": "Baki tidak mencukupi",
 
+    "Cancel failed": "Gagal batal",
+    "Notification": "Pemberitahuan",
+    "Please check your email to get your password back": "Sila semak e-mel anda untuk mendapatkan kembali kata laluan anda",
+    "Password and rePassword not match": "Kata Laluan dan Kata Laluan Semula tidak sepadan",
+    "Confirmation": "Pengesahan",
+    "Please fill all fields": "Sila isi semua medan",
+    "Cancel success": "Batalkan kejayaan",
+    "Update KYC fail": "Kemas kini KYC gagal",
+    "Are you sure you want to proceed?": "Adakah anda pasti mahu meneruskan?",
+    "Your transaction has been created": "Transaksi anda telah dibuat",
+
     "LOGIN": "LOG MASUK",
     "Vietnamese": "Vietnam",
     "REGISTER": "DAFTAR",

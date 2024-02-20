@@ -12,6 +12,7 @@ import { TouchableOpacity } from 'react-native'
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { SafeAreaView, View, Text } from 'react-native'
 import { useTranslation } from 'react-i18next'
+import { Alert } from 'react-native'
 
 const TurnOn2FA = () => {
     const { t } = useTranslation()
@@ -35,7 +36,7 @@ const TurnOn2FA = () => {
                     AsyncStorage.setItem('otpAuthUrl', response?.data.otpAuth);
                 }
             } catch (error) {
-                console.log(error);
+                Alert.alert(t('Error'), t('Something went wrong'))
             }
         };
         fetchOtpAuth();

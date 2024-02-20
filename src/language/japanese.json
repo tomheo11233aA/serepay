@@ -12,6 +12,17 @@
     "Successful coin conversion! ": "「コイン変換成功！」",
     "Insufficient balance": "残高不足",
 
+    "Cancel failed": "「キャンセルに失敗しました」",
+    "Notification": "通知",
+    "Please check your email to get your password back": "「パスワードを取り戻すためにメールを確認してください。」",
+    "Password and rePassword not match": "「パスワードと再パスワードが一致しません」",
+    "Confirmation": "確認",
+    "Please fill all fields": "全ての項目を埋めてください",
+    "Cancel success": "「成功をキャンセル」",
+    "Update KYC fail": "「KYCの更新に失敗しました」",
+    "Are you sure you want to proceed?": "「続行してもよろしいですか?」",
+    "Your transaction has been created": "「トランザクションが作成されました」",
+
     "LOGIN": "ログイン",
     "Vietnamese": "ベトナム語",
     "REGISTER": "登録する",

@@ -12,6 +12,17 @@
     "Successful coin conversion! ": "تحويل العملة الناجح!",
     "Insufficient balance": "الرصيد غير كاف",
 
+    "Cancel failed": "فشل الإلغاء",
+    "Notification": "إشعار",
+    "Please check your email to get your password back": "الرجاء التحقق من بريدك الإلكتروني لاستعادة كلمة المرور الخاصة بك",
+    "Password and rePassword not match": "كلمة المرور وكلمة المرور غير متطابقتين",
+    "Confirmation": "تأكيد",
+    "Please fill all fields": "لو سمحت أملأ كل الحقول",
+    "Cancel success": "إلغاء النجاح",
+    "Update KYC fail": "فشل تحديث KYC",
+    "Are you sure you want to proceed?": "هل انت متأكد انك تريد المتابعة؟",
+    "Your transaction has been created": "تم إنشاء معاملتك",
+
     "LOGIN": "تسجيل الدخول",
     "Vietnamese": "الفيتنامية",
     "REGISTER": "يسجل",

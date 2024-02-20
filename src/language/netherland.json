@@ -12,6 +12,17 @@
     "Successful coin conversion! ": "Succesvolle muntconversie! ",
     "Insufficient balance": "Onvoldoende saldo",
 
+    "Cancel failed": "Annuleren mislukt",
+    "Notification": "Kennisgeving",
+    "Please check your email to get your password back": "Controleer uw e-mail om uw wachtwoord terug te krijgen",
+    "Password and rePassword not match": "Wachtwoord en rePassword komen niet overeen",
+    "Confirmation": "Bevestiging",
+    "Please fill all fields": "Vul alle velden in",
+    "Cancel success": "Annuleren succes",
+    "Update KYC fail": "Update KYC mislukt",
+    "Are you sure you want to proceed?": "Weet je zeker dat je verder wilt gaan?",
+    "Your transaction has been created": "Uw transactie is aangemaakt",
+
     "LOGIN": "LOG IN",
     "Vietnamese": "Vietnamees",
     "REGISTER": "REGISTER",

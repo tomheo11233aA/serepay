@@ -12,6 +12,17 @@
     "Successful coin conversion! ": "Başarılı para dönüşümü! ",
     "Insufficient balance": "Yetersiz bakiye",
 
+    "Cancel failed": "İptal başarısız oldu",
+    "Notification": "Bildiri",
+    "Please check your email to get your password back": "Şifrenizi geri almak için lütfen e-postanızı kontrol edin",
+    "Password and rePassword not match": "Şifre ve rePassword eşleşmiyor",
+    "Confirmation": "Onayla",
+    "Please fill all fields": "Lütfen tüm alanları doldurun",
+    "Cancel success": "Başarıyı iptal et",
+    "Update KYC fail": "KYC güncellemesi başarısız",
+    "Are you sure you want to proceed?": "Devam etmek istediğinizden emin misiniz?",
+    "Your transaction has been created": "İşleminiz oluşturuldu",
+
     "LOGIN": "GİRİŞ YAPMAK",
     "Vietnamese": "Vietnam",
     "REGISTER": "KAYIT OLMAK",

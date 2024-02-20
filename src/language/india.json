@@ -12,6 +12,17 @@
     "Successful coin conversion! ": "सफल सिक्का रूपांतरण!",
     "Insufficient balance": "अपर्याप्त शेषराशि",
 
+    "Cancel failed": "रद्द करना विफल",
+    "Notification": "अधिसूचना",
+    "Please check your email to get your password back": "कृपया अपना पासवर्ड वापस पाने के लिए अपना ईमेल जांचें",
+    "Password and rePassword not match": "पासवर्ड और पुनः पासवर्ड मेल नहीं खाते",
+    "Confirmation": "पुष्टि",
+    "Please fill all fields": "कृपया सभी क्षेत्रों को भरें",
+    "Cancel success": "सफलता रद्द करें",
+    "Update KYC fail": "अपडेट केवाईसी विफल",
+    "Are you sure you want to proceed?": "क्या आप सुनिश्चित रूप से आगे बढ़ना चाहते हैं?",
+    "Your transaction has been created": "आपका लेनदेन बन गया है",
+
     "LOGIN": "लॉग इन करें",
     "Vietnamese": "वियतनामी",
     "REGISTER": "पंजीकरण करवाना",

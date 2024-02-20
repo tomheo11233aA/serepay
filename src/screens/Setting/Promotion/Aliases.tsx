@@ -103,7 +103,7 @@ const Aliases: React.FC<Props> = ({ route }) => {
                 loadMoreData()
             }
         } catch (error) {
-            console.log(error)
+            Alert.alert(t('Error'), t('Something went wrong'))
             setIsLoading(false)
         } finally {
             setIsLoading(false)

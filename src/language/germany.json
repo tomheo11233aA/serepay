@@ -12,6 +12,17 @@
     "Successful coin conversion! ": "„Erfolgreiche Münzumwandlung!",
     "Insufficient balance": "Mangelhaftes Gleichgewicht",
 
+    "Cancel failed": "„Abbrechen fehlgeschlagen",
+    "Notification": "Benachrichtigung",
+    "Please check your email to get your password back": "„Bitte überprüfen Sie Ihre E-Mails, um Ihr Passwort zurückzubekommen.",
+    "Password and rePassword not match": "„Passwort und rePassword stimmen nicht überein",
+    "Confirmation": "Bestätigung",
+    "Please fill all fields": "Bitte alle Felder ausfüllen",
+    "Cancel success": "„Erfolg abbrechen",
+    "Update KYC fail": "„Update KYC fehlgeschlagen",
+    "Are you sure you want to proceed?": "Sind Sie sicher, dass Sie fortfahren möchten?",
+    "Your transaction has been created": "„Ihre Transaktion wurde erstellt",
+
     "Email or password is incorrect!": "E-Mail oder Passwort ist falsch!",
     "LOGIN": "ANMELDUNG",
     "Vietnamese": "Vietnamesisch",

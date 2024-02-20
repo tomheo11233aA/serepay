@@ -12,6 +12,17 @@
     "Successful coin conversion! ": "Επιτυχής μετατροπή νομισμάτων!",
     "Insufficient balance": "Ανεπαρκές υπόλοιπο",
 
+    "Cancel failed": "Η ακύρωση απέτυχε",
+    "Notification": "Γνωστοποίηση",
+    "Please check your email to get your password back": "Παρακαλώ ελέγξτε το email σας για να λάβετε πίσω τον κωδικό πρόσβασής σας",
+    "Password and rePassword not match": "Ο κωδικός πρόσβασης και ο νέος κωδικός δεν ταιριάζουν",
+    "Confirmation": "Επιβεβαίωση",
+    "Please fill all fields": "Παρακαλώ συμπληρώστε όλα τα πεδία",
+    "Cancel success": "Ακύρωση επιτυχίας",
+    "Update KYC fail": "Αποτυχία ενημέρωσης KYC",
+    "Are you sure you want to proceed?": "Είστε βέβαιοι ότι θέλετε να συνεχίσετε;",
+    "Your transaction has been created": "Η συναλλαγή σας δημιουργήθηκε",
+
     "Email or password is incorrect!": "Το email ή ο κωδικός πρόσβασης είναι εσφαλμένος!",
     "LOGIN": "ΣΥΝΔΕΣΗ",
     "Vietnamese": "Βιετναμέζικο",

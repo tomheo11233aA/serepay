@@ -45,11 +45,11 @@ const Transaction = () => {
     const [myAmount, setMyAmount] = useState(0);
     const handleBuyNow = () => {
         if (!amount) {
-            Alert.alert('Error', t('Please fill all fields and agree to the terms'));
+            Alert.alert(t('Error'), t('Please fill all fields and agree to the terms'));
             return;
         }
         if (!isChecked) {
-            Alert.alert('Error', t('Not yet accpet EULA'));
+            Alert.alert(t('Error'), t('Not yet accpet EULA'));
             return;
         }
         Alert.alert(
@@ -71,12 +71,12 @@ const Transaction = () => {
                         }
                         setLoading(true);
                         await createP2p(data)?.then((res) => {
-                            Alert.alert('Success', 'Your transaction has been created');
+                            Alert.alert(t('Success'), t('Your transaction has been created'));
                             dispatch(setCount(1));
                             navigate(screens.CONFIRM_TRANSACTION);
                             setLoading(false);
                         }).catch((err: any) => {
-                            Alert.alert('Error', err?.response?.data?.message);
+                            Alert.alert(t('Error'), t(err?.response?.data?.message));
                             setLoading(false);
                         }).finally(() => {
                             setLoading(false);

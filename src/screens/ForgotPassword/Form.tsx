@@ -32,10 +32,10 @@ const Form = ({ t }: Props) => {
                 email: email,
             })
             if (response.status) {
-                Alert.alert('Thông báo', 'Vui lòng kiểm tra email để lấy lại mật khẩu')
+                Alert.alert(t('Notification'), t('Please check your email to get your password back'))
             }
         } catch (error: any) {
-            setTxtError(error.response.message)
+            setTxtError(t(error.response.message))
         } finally {
             setIsLoading(false)
         }

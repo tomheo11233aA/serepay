@@ -12,6 +12,17 @@
     "Successful coin conversion! ": "המרת מטבעות מוצלחת!",
     "Insufficient balance": "איזון לא מספיק",
 
+    "Cancel failed": "הביטול נכשל",
+    "Notification": "הוֹדָעָה",
+    "Please check your email to get your password back": "אנא בדוק את האימייל שלך כדי להחזיר את הסיסמה שלך",
+    "Password and rePassword not match": "הסיסמה והסיסמה מחדש אינן תואמות",
+    "Confirmation": "אִשׁוּר",
+    "Please fill all fields": "בבקשה תמלא את כל השדות",
+    "Cancel success": "בטל הצלחה",
+    "Update KYC fail": "עדכון KYC נכשל",
+    "Are you sure you want to proceed?": "אתה בטוח שאתה רוצה להמשיך?",
+    "Your transaction has been created": "העסקה שלך נוצרה",
+
     "LOGIN": "התחברות",
     "Vietnamese": "וייטנאמי",
     "REGISTER": "הירשם",

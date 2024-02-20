@@ -10,6 +10,7 @@ import { fonts } from '@themes/fonts';
 import { navigate } from '@utils/navigationRef';
 import { screens } from '@contants/screens';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { Alert } from 'react-native';
 
 interface Props {
     t: any;
@@ -23,7 +24,7 @@ const ItemBuyCoin = ({ user, t, adType }: Props) => {
             await AsyncStorage.setItem('adsItem', JSON.stringify(item))
             navigate(screens.TRANSACTION)
         } catch (error) {
-            console.log(error)
+            Alert.alert(t('Error'), t('Something went wrong'))
         }
     }
     return (

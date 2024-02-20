@@ -12,6 +12,17 @@
     "Successful coin conversion! ": "Conversão de moedas com sucesso!",
     "Insufficient balance": "Saldo insuficiente",
 
+    "Cancel failed": "Cancelamento falhou",
+    "Notification": "Notificação",
+    "Please check your email to get your password back": "Por favor, verifique seu e-mail para recuperar sua senha",
+    "Password and rePassword not match": "Senha e rePassword não coincidem",
+    "Confirmation": "Confirmação",
+    "Please fill all fields": "Por favor preencha todos os campos",
+    "Cancel success": "Cancelar sucesso",
+    "Update KYC fail": "Falha na atualização do KYC",
+    "Are you sure you want to proceed?": "Tem certeza de que deseja continuar?",
+    "Your transaction has been created": "Sua transação foi criada",
+
     "LOGIN": "CONECTE-SE",
     "Vietnamese": "Vietnamita",
     "REGISTER": "REGISTRO",

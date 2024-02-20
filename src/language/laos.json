@@ -12,6 +12,17 @@
     "Successful coin conversion! ": "ການແປງຫຼຽນທີ່ປະສົບຜົນສໍາເລັດ! ",
     "Insufficient balance": "ຍອດເງິນບໍ່ພຽງພໍ",
 
+    "Cancel failed": "ຍົກເລີກບໍ່ສຳເລັດ",
+    "Notification": "ແຈ້ງການ",
+    "Please check your email to get your password back": "ກະລຸນາກວດເບິ່ງອີເມວຂອງທ່ານເພື່ອເອົາລະຫັດຜ່ານຂອງທ່ານຄືນ",
+    "Password and rePassword not match": "ລະຫັດຜ່ານແລະ rePassword ບໍ່ກົງກັນ",
+    "Confirmation": "ການຢືນຢັນ",
+    "Please fill all fields": "ກະລຸນາຕື່ມຂໍ້ມູນໃສ່ທຸກຊ່ອງ",
+    "Cancel success": "ຍົກເລີກຄວາມສໍາເລັດ",
+    "Update KYC fail": "ອັບເດດ KYC ລົ້ມເຫລວ",
+    "Are you sure you want to proceed?": "ທ່ານແນ່ໃຈບໍ່ວ່າຕ້ອງການດຳເນີນການຕໍ່?",
+    "Your transaction has been created": "ການເຮັດທຸລະກໍາຂອງທ່ານໄດ້ຖືກສ້າງຂື້ນ",
+
     "LOGIN": "ເຂົ້າ​ສູ່​ລະ​ບົບ",
     "Vietnamese": "ຫວຽດນາມ",
     "REGISTER": "ລົງທະບຽນ",

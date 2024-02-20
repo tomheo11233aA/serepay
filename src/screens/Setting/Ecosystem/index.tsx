@@ -1,4 +1,4 @@
-import { View, SafeAreaView } from 'react-native'
+import { View, SafeAreaView, Alert } from 'react-native'
 import React, { useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
 import { colors } from '@themes/colors'
@@ -50,7 +50,7 @@ const Ecosystem = () => {
             setNameBanking(value);
             setValue('bankName', value);
         } catch (error) {
-            console.log(error)
+            Alert.alert(t('Error'), t('Something went wrong'));
         } finally {
             setIsLoading(false);
         }

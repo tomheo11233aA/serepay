@@ -53,7 +53,7 @@ const SearchBox: React.FC<Props> = ({ coin, type }) => {
                 setLoading(false)
             })
                 .catch(error => {
-                    console.log(error)
+                    Alert.alert(t('Error'), t('Something went wrong'))
                     setLoading(false)
                 })
         } else {
@@ -75,7 +75,7 @@ const SearchBox: React.FC<Props> = ({ coin, type }) => {
             await AsyncStorage.setItem('myAmount', amount?.toString() ?? '')
             navigate(screens.TRANSACTION)
         } catch (error) {
-            console.log(error)
+            Alert.alert(t('Error'), t('Something went wrong'))
         }
     }
 

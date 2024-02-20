@@ -24,6 +24,7 @@ import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-nat
 import Safe from '@reuse/Safe'
 import Txt from '@commom/Txt'
 import LottieView from 'lottie-react-native'
+import { Alert } from 'react-native'
 
 type Props = {
     style?: any
@@ -56,7 +57,7 @@ const Coins: React.FC<Props> = ({ style }) => {
             navigate(screens.DEPOSIT, { symbol, address: 'USDT.BEP20' })
             // }
         } catch (error) {
-            console.log(error)
+            Alert.alert(t('Error'), t('Something went wrong'))
         } finally {
             setLoadingStates(prev => ({ ...prev, [symbol]: false }))
         }

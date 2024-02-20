@@ -96,7 +96,7 @@ const CreateBuyAds = () => {
             }
             const res = await companyAddAds(body);
             if (res?.status) {
-                Alert.alert('Success', 'Create new sell advertisement success', [
+                Alert.alert(t('Success'), t('Create new sell advertisement success'), [
                     {
                         text: 'OK',
                         // onPress: () => goBack()

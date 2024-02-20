@@ -83,11 +83,10 @@ const FormKYC = () => {
                 dispatch(fetchUserInfo())
                 navigate(screens.SETTING)
             } catch (error: any) {
-                Alert.alert(error?.response?.data?.message ?? 'Update KYC fail')
+                Alert.alert(t(error?.response?.data?.message) ?? t('Update KYC fail'))
             }
         } catch (error: any) {
-            Alert.alert(error ?? 'Update KYC fail')
-            console.log("error", error)
+            Alert.alert(t(error) ?? t('Update KYC fail'))
         } finally {
             setIsLoading(false)
         }
