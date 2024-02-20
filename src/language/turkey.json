@@ -22,6 +22,7 @@
     "Update KYC fail": "KYC güncellemesi başarısız",
     "Are you sure you want to proceed?": "Devam etmek istediğinizden emin misiniz?",
     "Your transaction has been created": "İşleminiz oluşturuldu",
+    "Transfer" : "Transfer",
 
     "The email does not exist in the system.": "E-posta sistemde mevcut değil.",
     "Email is not define": "E-posta tanımlı değil",

@@ -31,7 +31,7 @@ const Tab = ({ t, route }: Props) => {
         }
     }
 
-    const tabs = ['Wallet', 'Aliases']
+    const tabs = ['Wallet', 'Transfer']
     const scrollToTop = () => {
         scrollViewRef.current?.scrollTo({ y: 0, animated: true });
     }
