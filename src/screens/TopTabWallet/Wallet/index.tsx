@@ -70,7 +70,7 @@ const Wallet = () => {
   const transferPrice = useMemo(() => {
     return totalValueInUSD * selectedRate.rate;
   }, [totalValueInUSD, selectedRate]);
-//
+  //
   const displayCurrency = useMemo(() => {
     if (currencyCode) {
       const transferPriceRounded = currencyCode === 'VND' ? Math.round(transferPrice) : transferPrice;
@@ -98,9 +98,8 @@ const Wallet = () => {
           </Txt>
         </Box>
         <Box marginTop={10} row justifyCenter alignCenter style={{ alignSelf: 'center' }}>
-          <Txt color={'white'} size={30} marginLeft={10}
-            justify
-          >
+          <Icon size={30} source={require('@images/wallet/dollar.png')} />
+          <Txt color={'white'} size={30} marginLeft={10} justify>
             {displayCurrency}
           </Txt>
         </Box>
