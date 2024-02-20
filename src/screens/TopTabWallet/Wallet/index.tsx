@@ -70,7 +70,7 @@ const Wallet = () => {
   const transferPrice = useMemo(() => {
     return totalValueInUSD * selectedRate.rate;
   }, [totalValueInUSD, selectedRate]);
-
+//
   const displayCurrency = useMemo(() => {
     if (currencyCode) {
       const transferPriceRounded = currencyCode === 'VND' ? Math.round(transferPrice) : transferPrice;
