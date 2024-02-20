@@ -73,8 +73,9 @@ const Wallet = () => {
 
   const displayCurrency = useMemo(() => {
     if (currencyCode) {
+      const transferPriceRounded = currencyCode === 'VND' ? Math.round(transferPrice) : transferPrice;
       const [valueFormattedWithSymbol, valueFormattedWithoutSymbol] = formatCurrency({
-        amount: Number(roundCoin(transferPrice)),
+        amount: Number(roundCoin(transferPriceRounded)),
         code: currencyCode,
       });
       return `${valueFormattedWithoutSymbol} ${currencyCode}`;
