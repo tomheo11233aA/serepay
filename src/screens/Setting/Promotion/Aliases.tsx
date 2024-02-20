@@ -37,6 +37,10 @@ import { heightPercentageToDP as hp } from 'react-native-responsive-screen'
 import QRCode from 'react-native-qrcode-svg'
 import { Modal, Portal } from 'react-native-paper'
 import { forwardRef } from 'react'
+import { userInfoUserSelector } from '@redux/selector/userSelector'
+import { navigate } from '@utils/navigationRef'
+import { screens } from '@contants/screens'
+
 
 interface Props {
     route?: WithdrawProps['route'];
@@ -59,6 +63,8 @@ const Aliases: React.FC<Props> = ({ route }) => {
     const coinList = useAppSelector(coinListSelector)
     const [qrData, setQrData] = useState('');
     const [visible, setVisible] = useState(false);
+    const userInfo = useAppSelector(userInfoUserSelector)
+
 
     const { handleSubmit, formState: { errors }, setValue } = useForm({
         resolver: yupResolver(aliasesSchema)
@@ -144,6 +150,20 @@ const Aliases: React.FC<Props> = ({ route }) => {
     };
     const hideModal = () => setVisible(false);
 
+    if (userInfo?.enabled_twofa === 0) {
+        return (
+            <View style={{ justifyContent: 'center', alignItems: 'center', flex: 1, height: 500 }}>
+                <Txt fontFamily={fonts.LR} size={16} bold>{t('Please enable 2FA to use this feature')}</Txt>
+                <Btn
+                    onPress={() => navigate(screens.SETTING_STACK, {
+                        screen: screens.TWO_FACTOR_AUTHENTICATION,
+                    })}
+                    marginTop={20} height={50} width={200} radius={5} backgroundColor={colors.lviolet}>
+                    <Txt color={'white'} size={18} bold fontFamily={fonts.LR}>{t('Enable 2FA')}</Txt>
+                </Btn>
+            </View>
+        )
+    }
     return (
         <View>
             <Portal>
@@ -164,7 +184,7 @@ const Aliases: React.FC<Props> = ({ route }) => {
                 </Modal>
             </Portal>
             <View>
-                <Text style={{ fontFamily: fonts.LR, color: 'black', marginTop: 20, fontSize: 18 }}>{t('User Name')}</Text>
+                <Text style={{ fontFamily: fonts.LR, color: 'black', marginTop: 20, fontSize: 18, lineHeight: 20 }}>{t('User Name')}</Text>
                 <WalletCoinInput
                     placeholder={t('Enter user name')}
                     onChangeText={handleChangeUserName}
@@ -174,7 +194,7 @@ const Aliases: React.FC<Props> = ({ route }) => {
                 {errors.userName && <Txt size={12} color={colors.red} style={{ zIndex: -1 }} marginTop={7} bold>
                     {t(`${errors.userName?.message}`)}
                 </Txt>}
-                <Text style={{ fontFamily: fonts.LR, color: 'black', marginTop: 20, fontSize: 18 }}>{t('Amount of')} {route?.params?.symbol}</Text>
+                <Text style={{ fontFamily: fonts.LR, color: 'black', marginTop: 20, fontSize: 18, lineHeight: 20 }}>{t('Amount of')} {route?.params?.symbol}</Text>
                 <WalletCoinInput
                     placeholder={t('Enter amount')}
                     onChangeText={handleChangeAmount}
@@ -189,10 +209,10 @@ const Aliases: React.FC<Props> = ({ route }) => {
                     {t(`${errors.amount?.message}`)}
                 </Txt>}
                 <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
-                    <Text style={{ fontFamily: fonts.LR, color: 'black', marginTop: 20, fontSize: 18 }}>{t('Max available:')}</Text>
-                    <Text style={{ fontFamily: fonts.LR, color: 'black', marginTop: 20, fontSize: 18 }}>{roundCoin(maxAvailable)} {route?.params?.symbol}</Text>
+                    <Text style={{ fontFamily: fonts.LR, color: 'black', marginTop: 20, fontSize: 18, lineHeight: 20 }}>{t('Max available:')}</Text>
+                    <Text style={{ fontFamily: fonts.LR, color: 'black', marginTop: 20, fontSize: 18, lineHeight: 20 }}>{roundCoin(maxAvailable)} {route?.params?.symbol}</Text>
                 </View>
-                <Text style={{ fontFamily: fonts.LR, color: 'black', marginTop: 20, fontSize: 18, marginBottom: 5 }}>
+                <Text style={{ fontFamily: fonts.LR, color: 'black', marginTop: 20, fontSize: 18, marginBottom: 5, lineHeight: 20 }}>
                     {t('Message')}
                 </Text>
                 <WalletCoinInput
@@ -210,7 +230,7 @@ const Aliases: React.FC<Props> = ({ route }) => {
                 >
                     <View style={{ flexDirection: 'row', alignItems: 'center', marginTop: 20 }}>
                         <Icon source={require('@images/setting/eye-review.png')} tintColor={colors.gray5} marginRight={10} style={{ tintColor: 'black' }} />
-                        <Txt fontFamily={fonts.LR} size={16} bold>{t('Quick send')}</Txt>
+                        <Txt line fontFamily={fonts.LR} size={16} bold lineHeight={18}>{t('Quick send')}</Txt>
                     </View>
                 </TouchableOpacity>
                 <Btn
