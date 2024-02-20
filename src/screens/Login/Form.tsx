@@ -141,7 +141,7 @@ const Form = ({ t }: Props) => {
                 </Txt>
             </Btn>
             <Txt color={colors.red} marginTop={20}>
-                {txtError}
+                {t(txtError)}
             </Txt>
 
 

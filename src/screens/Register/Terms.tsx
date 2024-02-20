@@ -3,19 +3,27 @@ import Txt from '@commom/Txt'
 import { colors } from '@themes/colors'
 import { TFunction } from 'i18next'
 import React from 'react'
+import { Checkbox } from 'react-native-paper';
 
 interface Props {
     t: TFunction<"translation", undefined>
 }
 
 const Terms = ({ t }: Props) => {
+    const [checked, setChecked] = React.useState(false);
     return (
         <Box alignStart marginTop={10} width={'100%'} row>
-            <Box
+            {/* <Box
                 width={15}
                 height={15}
                 borderWidth={1}
                 borderColor={colors.gray2}
+            /> */}
+            <Checkbox
+                status={checked ? 'checked' : 'unchecked'}
+                onPress={() => {
+                    setChecked(!checked);
+                }}
             />
             <Txt marginLeft={5}>
                 {t('Do you agree with')}

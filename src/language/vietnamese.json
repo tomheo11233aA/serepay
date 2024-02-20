@@ -22,7 +22,10 @@
     "Update KYC fail": "Cập nhật KYC thất bại",
     "Are you sure you want to proceed?": "Bạn có chắc chắn muốn tiếp tục?",
     "Your transaction has been created": "Giao dịch của bạn đã được tạo",
-    
+
+    "The email does not exist in the system.": "Email không tồn tại trong hệ thống.",
+    "Email is not define": "Email không được xác định",
+    "Already have an account? ": "Đã có tài khoản? ",
 
     "LOGIN": "Đăng nhập",
     "Vietnamese": "Việt Nam",

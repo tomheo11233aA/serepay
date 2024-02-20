@@ -13,7 +13,6 @@ import AxiosInstance from '../../helper/AxiosInstance'
 import { Alert } from 'react-native'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import Spinner from 'react-native-loading-spinner-overlay'
-
 interface Props {
     t: TFunction<"translation", undefined>
 }
@@ -21,11 +20,11 @@ interface Props {
 const Form = ({ t }: Props) => {
     const [security, setSecurity] = useState<boolean>(true)
     const [isLoading, setIsLoading] = useState<boolean>(false)
-    const [userName, setUserName] = useState<string>('testuser1')
+    const [userName, setUserName] = useState<string>('')
     const [password, setPassword] = useState<string>('')
     const [rePassword, setRePassword] = useState<string>('')
-    const [email, setEmail] = useState<string>('testuser1@gmail.com')
-    const [ref, setRef] = useState<string>('67d5497458ce') // người giới thiệu mình không đổi được
+    const [email, setEmail] = useState<string>('')
+    const [ref, setRef] = useState<string>('67d5497458ce')
     const [country, setCountry] = useState<string>('Vietnam')
     const [tokenRecaptcha, setTokenRecaptcha] = useState<string>('anything')
     const [firstName, setFirstName] = useState<string>('')
@@ -60,23 +59,6 @@ const Form = ({ t }: Props) => {
             setIsLoading(false)
         }
     }
-
-    // const verifyEmail = async () => {
-    //     setIsLoading(true)
-    //     const axiosInstance = AxiosInstance()
-    //     try {
-    //         const token = await AsyncStorage.getItem('tokenVerifyEmail')
-    //         const response = await axiosInstance.get(`api/user/verifyEmail/${token}`)
-    //         if (response.status) {
-    //             navigate(screens.LOGIN)
-    //         }
-    //         await AsyncStorage.removeItem('tokenVerifyEmail')
-    //     } catch (error: any) {
-    //         setTxtError(error.response.data.message)
-    //     } finally {
-    //         setIsLoading(false)
-    //     }
-    // }
     return (
         <Box width={'100%'} paddingHorizontal={40} alignCenter>
             <Spinner
@@ -159,6 +141,7 @@ const Form = ({ t }: Props) => {
                 borderColor={colors.gray}
                 iconOne={require('@images/unAuth/message.png')}
                 value={ref}
+                readonly
                 onChangeText={(text: string) => setRef(text)}
             />
             <SelectCountry t={t} />
@@ -187,19 +170,6 @@ const Form = ({ t }: Props) => {
                 </Txt>
 
             </Btn>
-
-            {/* <Btn
-                onPress={verifyEmail}
-                radius={5}
-                height={45}
-                marginTop={20}
-                width={'100%'}
-                backgroundColor={colors.darkViolet}
-            >
-                <Txt color={'white'} bold>
-                    {t('Verify Email')}
-                </Txt>
-            </Btn> */}
 
             <Btn
                 onPress={() => navigate(screens.LOGIN)}

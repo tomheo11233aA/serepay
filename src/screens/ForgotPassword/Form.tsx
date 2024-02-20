@@ -35,7 +35,7 @@ const Form = ({ t }: Props) => {
                 Alert.alert(t('Notification'), t('Please check your email to get your password back'))
             }
         } catch (error: any) {
-            setTxtError(t(error.response.message))
+            setTxtError(t(error.response.data.message))
         } finally {
             setIsLoading(false)
         }
