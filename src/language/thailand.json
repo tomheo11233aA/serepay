@@ -23,6 +23,13 @@
     "Are you sure you want to proceed?": "คุณแน่ใจหรือว่าต้องการดำเนินการต่อ?",
     "Your transaction has been created": "ธุรกรรมของคุณถูกสร้างขึ้นแล้ว",
 
+    "The email does not exist in the system.": "อีเมลไม่มีอยู่ในระบบ",
+    "Email is not define": "อีเมลไม่ได้ถูกกำหนด",
+    "Already have an account? ": "มีบัญชีอยู่แล้ว?",
+    "User does not exist !": "ไม่มีผู้ใช้อยู่!",
+    "You must accept the terms and conditions": "คุณต้องยอมรับข้อกำหนดและเงื่อนไข",
+    "Please check your email to verify your account": "โปรดตรวจสอบอีเมลของคุณเพื่อยืนยันบัญชีของคุณ",
+
     "LOGIN": "เข้าสู่ระบบ",
     "Vietnamese": "เวียดนาม",
     "REGISTER": "ลงทะเบียน",

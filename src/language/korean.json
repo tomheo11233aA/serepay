@@ -23,6 +23,13 @@
     "Are you sure you want to proceed?": "계속하시겠습니까?",
     "Your transaction has been created": "귀하의 거래가 생성되었습니다",
 
+    "The email does not exist in the system.": "이메일이 시스템에 존재하지 않습니다.",
+    "Email is not define": "이메일이 정의되지 않았습니다",
+    "Already have an account? ": "이미 계정이 있나요?",
+    "User does not exist !": "사용자가 존재하지 않습니다 !",
+    "You must accept the terms and conditions": "당신은 약관에 동의해야만합니다",
+    "Please check your email to verify your account": "계정을 확인하려면 이메일을 확인하세요",
+
     "LOGIN": "로그인",
     "Vietnamese": "베트남어",
     "REGISTER": "등록하다",

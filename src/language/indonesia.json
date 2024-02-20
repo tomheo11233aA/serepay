@@ -23,6 +23,13 @@
     "Are you sure you want to proceed?": "Apakah kamu yakin ingin melanjutkan?",
     "Your transaction has been created": "Transaksi Anda telah dibuat",
 
+    "The email does not exist in the system.": "Emailnya tidak ada di sistem.",
+    "Email is not define": "Email tidak ditentukan",
+    "Already have an account? ": "Sudah memiliki akun? ",
+    "User does not exist !": "Pengguna tidak ada !",
+    "You must accept the terms and conditions": "Anda harus menerima syarat dan ketentuan",
+    "Please check your email to verify your account": "Silakan periksa email Anda untuk memverifikasi akun Anda",
+
     "LOGIN": "GABUNG",
     "Vietnamese": "Orang Vietnam",
     "REGISTER": "DAFTAR",

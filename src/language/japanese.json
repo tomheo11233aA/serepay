@@ -23,6 +23,13 @@
     "Are you sure you want to proceed?": "「続行してもよろしいですか?」",
     "Your transaction has been created": "「トランザクションが作成されました」",
 
+    "The email does not exist in the system.": "「メールはシステムに存在しません。」",
+    "Email is not define": "「メールアドレスが定義されていません」",
+    "Already have an account? ": "すでにアカウントをお持ちですか？ ",
+    "User does not exist !": "ユーザーは存在しません ！",
+    "You must accept the terms and conditions": "あなたは利用規約に同意する必要があります",
+    "Please check your email to verify your account": "「アカウントを確認するにはメールを確認してください。」",
+
     "LOGIN": "ログイン",
     "Vietnamese": "ベトナム語",
     "REGISTER": "登録する",

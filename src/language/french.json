@@ -23,6 +23,13 @@
     "Are you sure you want to proceed?": "Êtes-vous sur de vouloir continuer?",
     "Your transaction has been created": "Votre transaction a été créée",
 
+    "The email does not exist in the system.": "L'e-mail n'existe pas dans le système.",
+    "Email is not define": "L'e-mail n'est pas défini",
+    "Already have an account? ": "Vous avez déjà un compte? ",
+    "User does not exist !": "L'utilisateur n'existe pas !",
+    "You must accept the terms and conditions": "Vous devez accepter les Termes et Conditions",
+    "Please check your email to verify your account": "Veuillez vérifier votre courrier électronique pour vérifier votre compte",
+
     "Email or password is incorrect!": "L'e-mail ou le mot de passe est incorrect !",
     "LOGIN": "SE CONNECTER",
     "Vietnamese": "Vietnamien",

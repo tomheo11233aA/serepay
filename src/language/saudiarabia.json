@@ -23,6 +23,13 @@
     "Are you sure you want to proceed?": "هل انت متأكد انك تريد المتابعة؟",
     "Your transaction has been created": "تم إنشاء معاملتك",
 
+    "The email does not exist in the system.": "البريد الإلكتروني غير موجود في النظام.",
+    "Email is not define": "لم يتم تعريف البريد الإلكتروني",
+    "Already have an account? ": "هل لديك حساب؟ ",
+    "User does not exist !": "المستخدم غير موجود !",
+    "You must accept the terms and conditions": "يجب عليك قبول الأحكام والشروط",
+    "Please check your email to verify your account": "يرجى التحقق من بريدك الإلكتروني للتحقق من حسابك",
+
     "LOGIN": "تسجيل الدخول",
     "Vietnamese": "الفيتنامية",
     "REGISTER": "يسجل",

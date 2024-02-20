@@ -23,6 +23,13 @@
     "Are you sure you want to proceed?": "אתה בטוח שאתה רוצה להמשיך?",
     "Your transaction has been created": "העסקה שלך נוצרה",
 
+    "The email does not exist in the system.": "המייל לא קיים במערכת.",
+    "Email is not define": "אימייל אינו מוגדר",
+    "Already have an account? ": "כבר יש לך חשבון? ",
+    "User does not exist !": "משתמש לא קיים !",
+    "You must accept the terms and conditions": "עליך לקבל את התנאים וההגבלות",
+    "Please check your email to verify your account": "אנא בדוק את האימייל שלך כדי לאמת את החשבון שלך",
+
     "LOGIN": "התחברות",
     "Vietnamese": "וייטנאמי",
     "REGISTER": "הירשם",

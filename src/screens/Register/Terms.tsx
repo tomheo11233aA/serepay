@@ -7,18 +7,14 @@ import { Checkbox } from 'react-native-paper';
 
 interface Props {
     t: TFunction<"translation", undefined>
+    checked: boolean
+    setChecked: (value: boolean) => void
 }
 
-const Terms = ({ t }: Props) => {
-    const [checked, setChecked] = React.useState(false);
+const Terms = ({ t, checked, setChecked }: Props) => {
+    console.log('checked', checked)
     return (
         <Box alignStart marginTop={10} width={'100%'} row>
-            {/* <Box
-                width={15}
-                height={15}
-                borderWidth={1}
-                borderColor={colors.gray2}
-            /> */}
             <Checkbox
                 status={checked ? 'checked' : 'unchecked'}
                 onPress={() => {

@@ -23,6 +23,13 @@
     "Are you sure you want to proceed?": "តើអ្នកប្រាកដជាចង់បន្ត?",
     "Your transaction has been created": "ប្រតិបត្តិការរបស់អ្នកត្រូវបានបង្កើត",
 
+    "The email does not exist in the system.": "អ៊ីមែលមិនមាននៅក្នុងប្រព័ន្ធទេ",
+    "Email is not define": "អ៊ីមែលមិនត្រូវបានកំណត់",
+    "Already have an account? ": "មានគណនីរួចហើយ?",
+    "User does not exist !": "អ្នកប្រើប្រាស់មិនមានទេ!",
+    "You must accept the terms and conditions": "អ្នកត្រូវតែទទួលយកលក្ខខណ្ឌ",
+    "Please check your email to verify your account": "សូមពិនិត្យអ៊ីមែលរបស់អ្នក ដើម្បីផ្ទៀងផ្ទាត់គណនីរបស់អ្នក",
+
     "Email or password is incorrect!": "អ៊ីមែល ឬ ពាក្យសម្ងាត់ មិនត្រឹមត្រូវ!",
     "LOGIN": "ចូល",
     "Vietnamese": "វៀតណាម",

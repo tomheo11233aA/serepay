@@ -23,6 +23,13 @@
     "Are you sure you want to proceed?": "你确定要继续吗？",
     "Your transaction has been created": "您的交易已创建",
 
+    "The email does not exist in the system.": "系统中不存在该电子邮件。",
+    "Email is not define": "电子邮件未定义",
+    "Already have an account? ": "已有账户？",
+    "User does not exist !": "用户不存在 ！",
+    "You must accept the terms and conditions": "您必须接受条款和条件",
+    "Please check your email to verify your account": "请检查您的电子邮件以验证您的帐户",
+
     "Email or password is incorrect!": "电子邮件或密码不正确！",
     "LOGIN": "登录",
     "Vietnamese": "越南语",

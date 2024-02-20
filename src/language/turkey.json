@@ -23,6 +23,13 @@
     "Are you sure you want to proceed?": "Devam etmek istediğinizden emin misiniz?",
     "Your transaction has been created": "İşleminiz oluşturuldu",
 
+    "The email does not exist in the system.": "E-posta sistemde mevcut değil.",
+    "Email is not define": "E-posta tanımlı değil",
+    "Already have an account? ": "Zaten hesabınız var mı? ",
+    "User does not exist !": "Kullanıcı yok !:",
+    "You must accept the terms and conditions": "Şartları ve koşulları kabul etmelisiniz",
+    "Please check your email to verify your account": "Hesabınızı doğrulamak için lütfen e-postanızı kontrol edin",
+
     "LOGIN": "GİRİŞ YAPMAK",
     "Vietnamese": "Vietnam",
     "REGISTER": "KAYIT OLMAK",

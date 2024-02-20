@@ -23,6 +23,13 @@
     "Are you sure you want to proceed?": "Вы уверены, что хотите продолжить?",
     "Your transaction has been created": "«Ваша транзакция создана»",
 
+    "The email does not exist in the system.": "«Электронная почта не существует в системе».",
+    "Email is not define": "«Электронная почта не определена»",
+    "Already have an account? ": "«Уже есть аккаунт?»",
+    "User does not exist !": "Пользователь не существует !",
+    "You must accept the terms and conditions": "Вы должны согласиться с Правилами и Условиями",
+    "Please check your email to verify your account": "«Пожалуйста, проверьте свою электронную почту, чтобы подтвердить свою учетную запись»",
+
     "LOGIN": "АВТОРИЗОВАТЬСЯ",
     "Vietnamese": "Вьетнамский",
     "REGISTER": "РЕГИСТР",

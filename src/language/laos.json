@@ -23,6 +23,13 @@
     "Are you sure you want to proceed?": "ທ່ານແນ່ໃຈບໍ່ວ່າຕ້ອງການດຳເນີນການຕໍ່?",
     "Your transaction has been created": "ການເຮັດທຸລະກໍາຂອງທ່ານໄດ້ຖືກສ້າງຂື້ນ",
 
+    "The email does not exist in the system.": "ອີເມລ໌ບໍ່ມີຢູ່ໃນລະບົບ.",
+    "Email is not define": "ອີເມວບໍ່ໄດ້ກໍານົດ",
+    "Already have an account? ": "ມີບັນຊີແລ້ວບໍ?",
+    "User does not exist !": "ຜູ້ໃຊ້ບໍ່ມີຢູ່!",
+    "You must accept the terms and conditions": "ທ່ານຕ້ອງຍອມຮັບຂໍ້ກໍານົດແລະເງື່ອນໄຂ",
+    "Please check your email to verify your account": "ກະລຸນາກວດເບິ່ງອີເມວຂອງທ່ານເພື່ອຢືນຢັນບັນຊີຂອງທ່ານ",
+
     "LOGIN": "ເຂົ້າ​ສູ່​ລະ​ບົບ",
     "Vietnamese": "ຫວຽດນາມ",
     "REGISTER": "ລົງທະບຽນ",

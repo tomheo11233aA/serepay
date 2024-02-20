@@ -23,6 +23,13 @@
     "Are you sure you want to proceed?": "Είστε βέβαιοι ότι θέλετε να συνεχίσετε;",
     "Your transaction has been created": "Η συναλλαγή σας δημιουργήθηκε",
 
+    "The email does not exist in the system.": "Το email δεν υπάρχει στο σύστημα.",
+    "Email is not define": "Το email δεν είναι καθορισμένο",
+    "Already have an account? ": "Εχετε ήδη λογαριασμό? ",
+    "User does not exist !": "Ο χρήστης δεν υπάρχει !",
+    "You must accept the terms and conditions": "Πρέπει να αποδεχτείτε τους όρους και προϋποθέσεις",
+    "Please check your email to verify your account": "Ελέγξτε το email σας για να επαληθεύσετε τον λογαριασμό σας",
+
     "Email or password is incorrect!": "Το email ή ο κωδικός πρόσβασης είναι εσφαλμένος!",
     "LOGIN": "ΣΥΝΔΕΣΗ",
     "Vietnamese": "Βιετναμέζικο",
