@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react'
+import React, { useMemo, useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useTranslation } from 'react-i18next'
 import Box from '@commom/Box'
@@ -11,6 +11,8 @@ import { fetchUserInfo, fetchUserWallet } from '@redux/slice/userSlice'
 import { fetchListExchange } from '../../../redux/slice/exchangeRateSlice'
 import { userWalletUserSelector, userInfoUserSelector, coinListSelector, selectedRateSelector } from '@redux/selector/userSelector'
 import { heightPercentageToDP as hp } from 'react-native-responsive-screen'
+import { formatCurrency, getSupportedCurrencies } from "react-native-format-currency";
+import { roundCoin } from '@screens/Swap/MakePrice'
 
 const Wallet = () => {
   const { t } = useTranslation()
@@ -19,12 +21,23 @@ const Wallet = () => {
   const userInfo = useSelector(userInfoUserSelector)
   const coins = useSelector(coinListSelector)
   const selectedRate = useSelector(selectedRateSelector)
+  const [supportedCurrencies, setSupportedCurrencies] = useState<any>([]);
 
-  React.useEffect(() => {
+  useEffect(() => {
     dispatch(fetchUserWallet())
     dispatch(fetchUserInfo())
     dispatch(fetchListExchange())
   }, [dispatch])
+  useEffect(() => {
+    const loadSupportedCurrencies = async () => {
+      const currencies = await getSupportedCurrencies();
+      setSupportedCurrencies(currencies.map(currency => currency.code));
+    };
+    loadSupportedCurrencies();
+  }, []);
+  const currencyCode = useMemo(() => {
+    return supportedCurrencies.includes(selectedRate.title) ? selectedRate.title : null;
+  }, [supportedCurrencies, selectedRate.title]);
 
   const coinMap = useMemo(() => {
     const map = new Map();
@@ -58,6 +71,18 @@ const Wallet = () => {
     return totalValueInUSD * selectedRate.rate;
   }, [totalValueInUSD, selectedRate]);
 
+  const displayCurrency = useMemo(() => {
+    if (currencyCode) {
+      const [valueFormattedWithSymbol, valueFormattedWithoutSymbol] = formatCurrency({
+        amount: Number(roundCoin(transferPrice)),
+        code: currencyCode,
+      });
+      return `${valueFormattedWithoutSymbol} ${currencyCode}`;
+    } else {
+      return `${transferPrice.toLocaleString()} ${selectedRate.title}`;
+    }
+  }, [transferPrice, currencyCode]);
+
   return (
     <Box flex={1} marginTop={50}>
       <Box alignCenter>
@@ -67,17 +92,15 @@ const Wallet = () => {
         <Box marginTop={10} row justifyCenter alignCenter>
           <Icon size={30} source={require('@images/wallet/bitcoin.png')} />
           <Txt color={'white'} size={30} marginLeft={10}>
-            {/* {totalValueInBTC.toFixed(8)} */}
             {totalValueInBTC.toLocaleString('en-US', { maximumFractionDigits: 8 })}
             {' BTC'}
           </Txt>
         </Box>
         <Box marginTop={10} row justifyCenter alignCenter style={{ alignSelf: 'center' }}>
-          <Icon size={30} source={require('@images/wallet/dollar.png')} />
           <Txt color={'white'} size={30} marginLeft={10}
             justify
           >
-            {transferPrice.toLocaleString('en-US', { maximumFractionDigits: 2})} {selectedRate.title}
+            {displayCurrency}
           </Txt>
         </Box>
       </Box>
