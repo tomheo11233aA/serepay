@@ -1,5 +1,17 @@
 {
   "translation": {
+    "Transfer success": "Transfert réussi",
+    "Coin: ": "« Pièce : »",
+    "Note: ": "Note: ",
+    "From User: ": "« De l'utilisateur : »",
+    "From To: ": "De à: ",
+    "Final Amount: ": "Le montant final: ",
+    "Transfer To UserName": "Transférer vers le nom d'utilisateur",
+    "Do you want to exchange": "Voulez-vous échanger",
+    "for": "pour",
+    "Successful coin conversion! ": "« Conversion de pièces réussie ! »",
+    "Insufficient balance": "Solde insuffisant",
+
     "Email or password is incorrect!": "L'e-mail ou le mot de passe est incorrect !",
     "LOGIN": "SE CONNECTER",
     "Vietnamese": "Vietnamien",

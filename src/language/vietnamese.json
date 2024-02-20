@@ -1,9 +1,17 @@
 {
     "translation": {
+        "Transfer success": "Chuyển tiền thành công",
+        "Coin: ": "Loại tiền: ",
+        "Note: ": "Ghi chú: ",
+        "From User: ": "Từ người dùng: ",
+        "From To: ": "Từ đến: ",
+        "Final Amount:" : "Số tiền cuối cùng:",
+        "Transfer To UserName": "Chuyển đến Tên người dùng",
         "Do you want to exchange": "Bạn có muốn quy đổi",
         "for": "sang",
         "Successful coin conversion! ": "Quy đổi tiền điện tử thành công! ",
         "Insufficient balance!": "Số dư không đủ!",
+
         "LOGIN": "Đăng nhập",
         "Vietnamese": "Việt Nam",
         "REGISTER": "Đăng ký",

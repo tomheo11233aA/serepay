@@ -1,5 +1,17 @@
 {
   "translation": {
+    "Transfer success": "स्थानांतरण सफल",
+    "Coin: ": "सिक्का:",
+    "Note: ": "टिप्पणी: ",
+    "From User: ": "उपयोगकर्ता से:",
+    "From To: ": "से: ",
+    "Final Amount: ": "अंतिम राशि: ",
+    "Transfer To UserName": "उपयोगकर्ता नाम पर स्थानांतरण",
+    "Do you want to exchange": "क्या आप विनिमय करना चाहते हैं",
+    "for": "के लिए",
+    "Successful coin conversion! ": "सफल सिक्का रूपांतरण!",
+    "Insufficient balance": "अपर्याप्त शेषराशि",
+
     "LOGIN": "लॉग इन करें",
     "Vietnamese": "वियतनामी",
     "REGISTER": "पंजीकरण करवाना",

@@ -1,5 +1,17 @@
 {
   "translation": {
+    "Transfer success": "ការផ្ទេរជោគជ័យ",
+    "Coin: ": "កាក់៖",
+    "Note: ": "ចំណាំ៖",
+    "From User: ": "ពីអ្នកប្រើប្រាស់៖",
+    "From To: ": "ពី៖",
+    "Final Amount: ": "ចំនួនចុងក្រោយ៖",
+    "Transfer To UserName": "ផ្ទេរទៅឈ្មោះអ្នកប្រើប្រាស់",
+    "Do you want to exchange": "ចង់ដូរទេ",
+    "for": "សម្រាប់",
+    "Successful coin conversion! ": "ការបម្លែងកាក់ជោគជ័យ!",
+    "Insufficient balance": "សមតុល្យមិនគ្រប់គ្រាន់",
+
     "Email or password is incorrect!": "អ៊ីមែល ឬ ពាក្យសម្ងាត់ មិនត្រឹមត្រូវ!",
     "LOGIN": "ចូល",
     "Vietnamese": "វៀតណាម",

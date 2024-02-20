@@ -1,5 +1,17 @@
 {
   "translation": {
+    "Transfer success": "Transfer başarılı",
+    "Coin: ": "Para: ",
+    "Note: ": "Not: ",
+    "From User: ": "Kullanıcıdan: ",
+    "From To: ": "Kimden: ",
+    "Final Amount: ": "Son Tutar: ",
+    "Transfer To UserName": "Kullanıcı Adına Transfer",
+    "Do you want to exchange": "Değişim yapmak ister misiniz",
+    "for": "için",
+    "Successful coin conversion! ": "Başarılı para dönüşümü! ",
+    "Insufficient balance": "Yetersiz bakiye",
+
     "LOGIN": "GİRİŞ YAPMAK",
     "Vietnamese": "Vietnam",
     "REGISTER": "KAYIT OLMAK",

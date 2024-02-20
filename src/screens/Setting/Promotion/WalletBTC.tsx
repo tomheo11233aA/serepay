@@ -39,7 +39,7 @@ const WalletBTC: React.FC<Props> = ({ route }) => {
     const balanceKey = `${route?.params?.symbol.toLocaleLowerCase()}_balance`;
     const maxAvailable = userWallet?.[balanceKey] || 0;
     const [isLoading, setIsLoading] = React.useState(false);
-    const [history, setHistory] = React.useState<[]>([]);
+    const [history, setHistory] = React.useState<any[]>([]);
     const { handleSubmit, formState: { errors }, setValue } = useForm({
         resolver: yupResolver(walletSchema)
     });
@@ -67,6 +67,7 @@ const WalletBTC: React.FC<Props> = ({ route }) => {
                 setValue('note', '')
                 setValue('amount', '')
                 dispatch(fetchUserWallet())
+                Alert.alert(t('Success'), t('Transfer success'))
             }
         } catch (error: any) {
             Alert.alert(t('Error'), t(error?.response?.data?.message) ?? t('Something went wrong'))
@@ -77,15 +78,16 @@ const WalletBTC: React.FC<Props> = ({ route }) => {
     }
     const loadMoreData = async () => {
         const data: IHistoryWidthdraw = {
-            page: page,
-            limit: '5',
-            symbol: route?.params?.symbol ?? 'BTC',
+            page: 1,
+            limit: '1000',
+            symbol: route?.params?.symbol ?? 'USDT',
         }
         if (!isLoading) {
             setIsLoading(true);
             const response = await getHistoryWidthdraw(data);
             if (Array.isArray(response?.data?.array)) {
-                setHistory(response.data.array);
+                // setHistory(response.data.array);
+                setHistory(prevData => [...prevData, ...response.data.array]);
             } else {
                 console.error('response.data.array is not an array:', response?.data?.array);
             }
@@ -93,33 +95,33 @@ const WalletBTC: React.FC<Props> = ({ route }) => {
             setIsLoading(false);
         }
     };
-    const loadPreviousData = async () => {
-        if (page > 1) {
-            const newPage = page - 1;
-            const data: IHistoryWidthdraw = {
-                page: newPage,
-                limit: '5',
-                symbol: route?.params?.symbol ?? 'BTC',
-            }
-            setIsLoading(true);
-            const response = await getHistoryWidthdraw(data);
-            if (Array.isArray(response?.data?.array)) {
-                setHistory(response.data.array);
-            } else {
-                console.error('response.data.array is not an array:', response?.data?.array);
-            }
-            setPage(newPage);
-            setIsLoading(false);
-        } else {
-            // console.log('page is 1, cannot load previous data');
-        }
-    }
-    const handleLoadMore = () => {
-        loadMoreData();
-    }
-    const handleLoadPrevious = () => {
-        loadPreviousData();
-    }
+    // const loadPreviousData = async () => {
+    //     if (page > 1) {
+    //         const newPage = page - 1;
+    //         const data: IHistoryWidthdraw = {
+    //             page: newPage,
+    //             limit: '5',
+    //             symbol: route?.params?.symbol ?? 'USDT',
+    //         }
+    //         setIsLoading(true);
+    //         const response = await getHistoryWidthdraw(data);
+    //         if (Array.isArray(response?.data?.array)) {
+    //             setHistory(response.data.array);
+    //         } else {
+    //             console.error('response.data.array is not an array:', response?.data?.array);
+    //         }
+    //         setPage(newPage);
+    //         setIsLoading(false);
+    //     } else {
+    //         // console.log('page is 1, cannot load previous data');
+    //     }
+    // }
+    // const handleLoadMore = () => {
+    //     loadMoreData();
+    // }
+    // const handleLoadPrevious = () => {
+    //     loadPreviousData();
+    // }
     useEffect(() => {
         loadMoreData();
     }, []);
@@ -128,14 +130,14 @@ const WalletBTC: React.FC<Props> = ({ route }) => {
         <>
             <View style={{ marginTop: 20 }}>
                 <View style={{ flexDirection: 'row', justifyContent: 'flex-start' }}>
-                    <View style={{ padding: 8, backgroundColor: colors.gray2, borderRadius: 5 }}>
+                    {/* <View style={{ padding: 8, backgroundColor: colors.gray2, borderRadius: 5 }}>
                         <Text style={{ fontFamily: fonts.LR, color: 'black' }}>TRC20</Text>
                     </View>
                     <View style={{ padding: 8, backgroundColor: colors.gray2, borderRadius: 5, marginHorizontal: 10 }}>
                         <Text style={{ fontFamily: fonts.LR, color: 'black' }}>ERC20</Text>
-                    </View>
-                    <View style={{ padding: 8, backgroundColor: colors.gray2, borderRadius: 5 }}>
-                        <Text style={{ fontFamily: fonts.LR, color: 'black' }}>BEP20</Text>
+                    </View> */}
+                    <View style={{ padding: 8, backgroundColor: colors.violet, borderRadius: 5 }}>
+                        <Text style={{ fontFamily: fonts.LR, color: 'white' }}>BEP20</Text>
                     </View>
                 </View>
                 <Text style={{ fontFamily: fonts.LR, color: 'black', marginTop: 20, fontSize: 18 }}>{t('Address')}</Text>
@@ -208,7 +210,7 @@ const WalletBTC: React.FC<Props> = ({ route }) => {
                         />
                     </View>
                 ) : (
-                    <View style={{ alignSelf: 'center', width: '100%' }}>
+                    <View style={{ alignSelf: 'center', width: '100%', marginBottom: hp(20) }}>
                         {history.length > 0 ? (
                             history.map((item: any, index: number) => {
                                 const coin = coinList.find((coin) => coin?.name === item?.coin_key.toUpperCase())
@@ -220,22 +222,22 @@ const WalletBTC: React.FC<Props> = ({ route }) => {
                                         </View>
                                         <View style={{ backgroundColor: colors.gray5, padding: 7, borderBottomLeftRadius: 10, borderBottomRightRadius: 10 }}>
                                             <View style={{ flexDirection: 'row', alignContent: 'center' }}>
-                                                <Txt fontFamily={fonts.LR} size={16}>Coin: </Txt>
+                                                <Txt fontFamily={fonts.LR} size={16}>{t('Coin: ')} </Txt>
                                                 <Txt fontFamily={fonts.LR} size={16}>{item?.coin_key.toUpperCase()}</Txt>
                                             </View>
                                             <View style={{ flexDirection: 'row', alignContent: 'center', marginTop: 10, alignItems: 'center' }}>
-                                                <Txt fontFamily={fonts.LR} size={16}>Status: </Txt>
+                                                <Txt fontFamily={fonts.LR} size={16}>{t('Status: ')}</Txt>
 
                                                 {item?.status === 2 ? (
-                                                    <Txt fontFamily={fonts.LR} size={16} color={'orange'}>Pending</Txt>
+                                                    <Txt fontFamily={fonts.LR} size={16} color={'orange'}>{t('Pending')}</Txt>
                                                 ) : item?.status === 1 ? (
-                                                    <Txt fontFamily={fonts.LR} size={16} color={colors.green}>Success</Txt>
+                                                    <Txt fontFamily={fonts.LR} size={16} color={colors.green}>{t('Success')}</Txt>
                                                 ) : (
-                                                    <Txt fontFamily={fonts.LR} size={16} color={colors.red}>Reject</Txt>
+                                                    <Txt fontFamily={fonts.LR} size={16} color={colors.red}>{t('Reject')}</Txt>
                                                 )}
                                             </View>
                                             <View style={{ flexDirection: 'row', alignContent: 'center', marginTop: 10, alignItems: 'center', marginBottom: 10 }}>
-                                                <Txt fontFamily={fonts.LR} size={16}>Note: </Txt>
+                                                <Txt fontFamily={fonts.LR} size={16}>{t('Note: ')}</Txt>
                                                 <Txt fontFamily={fonts.LR} size={16}>{item?.note}</Txt>
                                             </View>
                                             <View style={{ flexDirection: 'row', alignContent: 'center', alignItems: 'center', marginBottom: 10 }}>
@@ -243,8 +245,8 @@ const WalletBTC: React.FC<Props> = ({ route }) => {
                                                 <Txt marginLeft={5} color={colors.green} fontFamily={fonts.OSB} size={16}> {item?.amount}</Txt>
                                                 <Icon marginLeft={5} size={15} source={{ uri: `${keys.HOSTING_API}${coin?.image}` }} />
                                             </View>
-                                            <View style={{ flexDirection: 'row', alignContent: 'center', alignItems: 'center', marginBottom: 7 }}>
-                                                <Txt fontFamily={fonts.LR} size={16}>To Address: </Txt>
+                                            <View style={{ flexDirection: 'row', alignContent: 'center', marginBottom: 7 }}>
+                                                <Txt fontFamily={fonts.LR} size={16}>{t('To Address: ')}</Txt>
                                                 <Txt fontFamily={fonts.LR} size={16}>{item?.to_address}</Txt>
                                             </View>
                                         </View>
@@ -262,7 +264,7 @@ const WalletBTC: React.FC<Props> = ({ route }) => {
                                 <Txt center fontFamily={fonts.AS} size={16} bold>{t('No data')}</Txt>
                             </>
                         )}
-                        <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+                        {/* <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
                             {page > 0 && (
                                 <Btn
                                     onPress={handleLoadPrevious}
@@ -287,7 +289,7 @@ const WalletBTC: React.FC<Props> = ({ route }) => {
                                 <Txt color={'white'} size={18} bold fontFamily={fonts.LR}>{t('Next page')}</Txt>
                             </Btn>
 
-                        </View>
+                        </View> */}
                     </View>
                 )}
             </View>

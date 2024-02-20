@@ -1,5 +1,17 @@
 {
   "translation": {
+    "Transfer success": "«Успешный трансфер»",
+    "Coin: ": "«Монета:»",
+    "Note: ": "Примечание:",
+    "From User: ": "От пользователя:",
+    "From To: ": "От до:",
+    "Final Amount: ": "«Окончательная сумма:»",
+    "Transfer To UserName": "«Перенос на имя пользователя»",
+    "Do you want to exchange": "«Хотите обменять»",
+    "for": "для",
+    "Successful coin conversion! ": "«Успешная конвертация монет!»",
+    "Insufficient balance": "Недостаточный баланс",
+
     "LOGIN": "АВТОРИЗОВАТЬСЯ",
     "Vietnamese": "Вьетнамский",
     "REGISTER": "РЕГИСТР",

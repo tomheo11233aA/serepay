@@ -1,5 +1,17 @@
 {
   "translation": {
+    "Transfer success": "„Sukces transferowy",
+    "Coin: ": "Moneta:",
+    "Note: ": "Notatka:",
+    "From User: ": "„Od użytkownika:",
+    "From To: ": "„Od do:",
+    "Final Amount: ": "Końcowa kwota:",
+    "Transfer To UserName": "„Przenieś do nazwy użytkownika",
+    "Do you want to exchange": "„Chcesz się wymienić",
+    "for": "Do",
+    "Successful coin conversion! ": "„Udana konwersja monet!",
+    "Insufficient balance": "Niewystarczająca ilość środków",
+
     "LOGIN": "ZALOGUJ SIE",
     "Vietnamese": "Wietnamski",
     "REGISTER": "REJESTR",

@@ -1,5 +1,17 @@
 {
   "translation": {
+    "Transfer success": "Επιτυχία μεταγραφής",
+    "Coin: ": "Κέρμα: ",
+    "Note: ": "Σημείωση: ",
+    "From User: ": "Από χρήστη:",
+    "From To: ": "Από προς: ",
+    "Final Amount: ": "Τελικό ποσό:",
+    "Transfer To UserName": "Μεταφορά στο όνομα χρήστη",
+    "Do you want to exchange": "Θες να ανταλλάξουμε",
+    "for": "Για",
+    "Successful coin conversion! ": "Επιτυχής μετατροπή νομισμάτων!",
+    "Insufficient balance": "Ανεπαρκές υπόλοιπο",
+
     "Email or password is incorrect!": "Το email ή ο κωδικός πρόσβασης είναι εσφαλμένος!",
     "LOGIN": "ΣΥΝΔΕΣΗ",
     "Vietnamese": "Βιετναμέζικο",

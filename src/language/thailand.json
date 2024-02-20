@@ -1,5 +1,17 @@
 {
   "translation": {
+    "Transfer success": "โอนสำเร็จ",
+    "Coin: ": "เหรียญ:",
+    "Note: ": "บันทึก:",
+    "From User: ": "จากผู้ใช้:",
+    "From To: ": "จากการ:",
+    "Final Amount: ": "จำนวนเงินสุดท้าย:",
+    "Transfer To UserName": "โอนไปยังชื่อผู้ใช้",
+    "Do you want to exchange": "อยากแลกไหม",
+    "for": "สำหรับ",
+    "Successful coin conversion! ": "การแปลงเหรียญสำเร็จ!",
+    "Insufficient balance": "ยอดเงินไม่เพียงพอ",
+
     "LOGIN": "เข้าสู่ระบบ",
     "Vietnamese": "เวียดนาม",
     "REGISTER": "ลงทะเบียน",

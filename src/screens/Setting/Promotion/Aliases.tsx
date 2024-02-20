@@ -225,7 +225,7 @@ const Aliases: React.FC<Props> = ({ route }) => {
             <View style={{ justifyContent: 'center', marginTop: 20, zIndex: -1 }}>
                 <Txt paddingHorizontal={20} fontFamily={fonts.AS} size={16} bold style={{ marginBottom: 10 }}>{t('History')}</Txt>
                 {isLoading ? (
-                    <View style={{ justifyContent: 'center', alignItems: 'center', marginTop: 50 }}>
+                    <View style={{ justifyContent: 'center', alignItems: 'center', marginBottom: hp(20) }}>
                         <LottieView
                             source={require('@lottie/loading.json')}
                             autoPlay
@@ -246,7 +246,7 @@ const Aliases: React.FC<Props> = ({ route }) => {
                                         </View>
                                         <View style={{ backgroundColor: colors.gray5, padding: 7, borderBottomLeftRadius: 10, borderBottomRightRadius: 10 }}>
                                             <View style={{ flexDirection: 'row', alignContent: 'center', marginBottom: 7 }}>
-                                                <Txt fontFamily={fonts.LR} size={16}>Coin: </Txt>
+                                                <Txt fontFamily={fonts.LR} size={16}>{t('Coin: ')}</Txt>
                                                 <Txt fontFamily={fonts.LR} size={16}>{item?.coin_key.toUpperCase()}</Txt>
                                             </View>
                                             <View style={{ flexDirection: 'row', alignContent: 'center', alignItems: 'center', marginBottom: 7 }}>
@@ -255,19 +255,19 @@ const Aliases: React.FC<Props> = ({ route }) => {
                                                 <Icon marginLeft={5} size={15} source={{ uri: `${keys.HOSTING_API}${coin?.image}` }} />
                                             </View>
                                             <View style={{ flexDirection: 'row', alignContent: 'center' }}>
-                                                <Txt fontFamily={fonts.LR} size={16}>Type: </Txt>
-                                                <Txt fontFamily={fonts.LR} size={16}>{item?.type_exchange}</Txt>
+                                                <Txt fontFamily={fonts.LR} size={16}>{t('Type: ')}</Txt>
+                                                <Txt fontFamily={fonts.LR} size={16}>{t(item?.type_exchange)}</Txt>
                                             </View>
                                             <View style={{ flexDirection: 'row', alignContent: 'center', marginTop: 7, alignItems: 'center' }}>
-                                                <Txt fontFamily={fonts.LR} size={16}>Note: </Txt>
+                                                <Txt fontFamily={fonts.LR} size={16}>{t('Note: ')}</Txt>
                                                 <Txt fontFamily={fonts.LR} size={16}>{item?.note}</Txt>
                                             </View>
                                             <View style={{ flexDirection: 'row', alignContent: 'center', marginTop: 7, alignItems: 'center' }}>
-                                                <Txt fontFamily={fonts.LR} size={16}>From User: </Txt>
+                                                <Txt fontFamily={fonts.LR} size={16}>{t('From User: ')}</Txt>
                                                 <Txt fontFamily={fonts.LR} size={16}>{item?.address_form}</Txt>
                                             </View>
                                             <View style={{ flexDirection: 'row', alignContent: 'center', marginTop: 7, alignItems: 'center', marginBottom: 7 }}>
-                                                <Txt fontFamily={fonts.LR} size={16}>From To: </Txt>
+                                                <Txt fontFamily={fonts.LR} size={16}>{t('From To: ')}</Txt>
                                                 <Txt fontFamily={fonts.LR} size={16}>{item?.address_to}</Txt>
                                             </View>
                                         </View>

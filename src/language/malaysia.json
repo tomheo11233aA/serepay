@@ -1,5 +1,17 @@
 {
   "translation": {
+    "Transfer success": "Kejayaan pemindahan",
+    "Coin: ": "Syiling: ",
+    "Note: ": "Catatan: ",
+    "From User: ": "Daripada Pengguna: ",
+    "From To: ": "Daripada kepada: ",
+    "Final Amount: ": "Jumlah Akhir: ",
+    "Transfer To UserName": "Pindahkan Kepada Nama Pengguna",
+    "Do you want to exchange": "Awak nak tukar",
+    "for": "untuk",
+    "Successful coin conversion! ": "Penukaran syiling yang berjaya! ",
+    "Insufficient balance": "Baki tidak mencukupi",
+
     "LOGIN": "LOG MASUK",
     "Vietnamese": "Vietnam",
     "REGISTER": "DAFTAR",

@@ -1,5 +1,17 @@
 {
   "translation": {
+    "Transfer success": "转账成功",
+    "Coin: ": "硬币： ",
+    "Note: ": "笔记： ",
+    "From User: ": "来自用户：",
+    "From To: ": "从到： ",
+    "Final Amount: ": "最终金额：",
+    "Transfer To UserName": "转移到用户名",
+    "Do you want to exchange": "你要交换吗",
+    "for": "为了",
+    "Successful coin conversion! ": "兑换金币成功！",
+    "Insufficient balance": "余额不足",
+
     "Email or password is incorrect!": "电子邮件或密码不正确！",
     "LOGIN": "登录",
     "Vietnamese": "越南语",

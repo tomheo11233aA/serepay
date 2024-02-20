@@ -1,5 +1,17 @@
 {
   "translation": {
+    "Transfer success": "Overdracht succes",
+    "Coin: ": "Munt: ",
+    "Note: ": "Opmerking: ",
+    "From User: ": "Van gebruiker: ",
+    "From To: ": "Van naar: ",
+    "Final Amount: ": "Eindbedrag: ",
+    "Transfer To UserName": "Overbrengen naar gebruikersnaam",
+    "Do you want to exchange": "Wil je ruilen",
+    "for": "voor",
+    "Successful coin conversion! ": "Succesvolle muntconversie! ",
+    "Insufficient balance": "Onvoldoende saldo",
+
     "LOGIN": "LOG IN",
     "Vietnamese": "Vietnamees",
     "REGISTER": "REGISTER",

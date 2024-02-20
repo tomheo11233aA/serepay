@@ -1,5 +1,17 @@
 {
   "translation": {
+    "Transfer success": "전송 성공",
+    "Coin: ": "동전: ",
+    "Note: ": "메모: ",
+    "From User: ": "사용자로부터: ",
+    "From To: ": "에서부터: ",
+    "Final Amount: ": "최종 금액: ",
+    "Transfer To UserName": "사용자 이름으로 전송",
+    "Do you want to exchange": "교환하시겠습니까?",
+    "for": "을 위한",
+    "Successful coin conversion! ": "코인 변환 성공!",
+    "Insufficient balance": "잔액 불충분",
+
     "LOGIN": "로그인",
     "Vietnamese": "베트남어",
     "REGISTER": "등록하다",
