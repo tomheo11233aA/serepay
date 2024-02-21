@@ -69,13 +69,29 @@ const Options = ({ t }: Props) => {
                         backgroundColor: 'white',
                         marginHorizontal: 20,
                         marginVertical: 10,
-                        borderRadius: 7,
+                        borderRadius: 20,
                     }}>
                     <Box
                         width={'100%'}
                         paddingVertical={20}
                         borderColor={colors.gray3}
                     >
+                        <Txt
+                            fontFamily={fonts.IBMPM}
+                            paddingHorizontal={20}
+                            size={18}
+                        >
+                            {t('Select Rate')}
+                        </Txt>
+                        <Txt
+                            fontFamily={fonts.IBMPM}
+                            paddingHorizontal={20}
+                            size={14}
+                            color={colors.gray2}
+                        >
+                            {t('Select the rate you want to swap')}
+                        </Txt>
+
                         {sortedexExchangeRate.map((item) => (
                             <Btn
                                 key={item.id}
@@ -83,7 +99,7 @@ const Options = ({ t }: Props) => {
                                 width={'90%'}
                                 justifySpaceAround
                                 alignSelf={'center'}
-                                borderWidth={0.3}
+                                borderBottomWidth={0.3}
                                 marginTop={7}
                                 borderColor={colors.gray2}
                                 borderTopLeftRadius={4}
@@ -95,7 +111,7 @@ const Options = ({ t }: Props) => {
                                 <Txt paddingVertical={5} fontFamily={fonts.IBMPM} center>
                                     {item.title}
                                 </Txt>
-                                <Txt fontFamily={fonts.IBMPM} center>
+                                <Txt fontFamily={fonts.IBMPM} bold center>
                                     {item.rate}
                                 </Txt>
                             </Btn>
