@@ -12,6 +12,9 @@
     "Successful coin conversion! ": "兑换金币成功！",
     "Insufficient balance": "余额不足",
 
+    "Select Rate": "选择汇率",
+    "Select the rate you want to swap": "选择您想交换的汇率",
+
     "Cancel failed": "取消失败",
     "Notification": "通知",
     "Please check your email to get your password back": "请检查您的电子邮件以找回密码",
@@ -29,7 +32,7 @@
     "User does not exist !": "用户不存在 ！",
     "You must accept the terms and conditions": "您必须接受条款和条件",
     "Please check your email to verify your account": "请检查您的电子邮件以验证您的帐户",
-    "Transfer" : "转账",
+    "Transfer": "转账",
 
     "Email or password is incorrect!": "电子邮件或密码不正确！",
     "LOGIN": "登录",

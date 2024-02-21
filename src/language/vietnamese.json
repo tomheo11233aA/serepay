@@ -29,7 +29,10 @@
     "User does not exist !": "Người dùng không tồn tại !",
     "You must accept the terms and conditions": "Bạn phải chấp nhận các điều khoản và điều kiện",
     "Please check your email to verify your account": "Vui lòng kiểm tra email để xác minh tài khoản của bạn",
-    "Transfer" : "Chuyển tiền",
+    "Transfer": "Chuyển tiền",
+
+    "Select Rate": "Chọn tỷ giá",
+    "Select the rate you want to swap": "Chọn tỷ giá bạn muốn quy đổi",
 
     "LOGIN": "Đăng nhập",
     "Vietnamese": "Việt Nam",

@@ -12,6 +12,9 @@
     "Successful coin conversion! ": "सफल सिक्का रूपांतरण!",
     "Insufficient balance": "अपर्याप्त शेषराशि",
 
+    "Select Rate": "दर चुनें",
+    "Select the rate you want to swap": "वह दर चुनें जिसे आप बदलना चाहते हैं",
+
     "Cancel failed": "रद्द करना विफल",
     "Notification": "अधिसूचना",
     "Please check your email to get your password back": "कृपया अपना पासवर्ड वापस पाने के लिए अपना ईमेल जांचें",
@@ -29,7 +32,7 @@
     "User does not exist !": "उपभोगकर्ता मौजूद नहीं !",
     "You must accept the terms and conditions": "आपको हमारे नियमों और शर्तों को मानना ​​होगा",
     "Please check your email to verify your account": "कृपया अपना खाता सत्यापित करने के लिए अपना ईमेल जांचें",
-    "Transfer" : "स्थानांतरण",
+    "Transfer": "स्थानांतरण",
 
     "LOGIN": "लॉग इन करें",
     "Vietnamese": "वियतनामी",

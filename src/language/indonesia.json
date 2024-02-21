@@ -12,6 +12,9 @@
     "Successful coin conversion! ": "Konversi koin berhasil!",
     "Insufficient balance": "Saldo tidak mencukupi",
 
+    "Select Rate": "Pilih Kurs",
+    "Select the rate you want to swap": "Pilih kurs yang ingin Anda tukar",
+
     "Cancel failed": "Pembatalan gagal",
     "Notification": "Pemberitahuan",
     "Please check your email to get your password back": "Silakan periksa email Anda untuk mendapatkan kembali kata sandi Anda",
@@ -29,7 +32,7 @@
     "User does not exist !": "Pengguna tidak ada !",
     "You must accept the terms and conditions": "Anda harus menerima syarat dan ketentuan",
     "Please check your email to verify your account": "Silakan periksa email Anda untuk memverifikasi akun Anda",
-    "Transfer" : "Transfer",
+    "Transfer": "Transfer",
 
     "LOGIN": "GABUNG",
     "Vietnamese": "Orang Vietnam",

@@ -12,6 +12,9 @@
     "Successful coin conversion! ": "Conversione della moneta riuscita!",
     "Insufficient balance": "Equilibrio insufficiente",
 
+    "Select Rate": "Seleziona il tasso",
+    "Select the rate you want to swap": "Seleziona il tasso che vuoi scambiare",
+
     "Cancel failed": "Annullamento non riuscito",
     "Notification": "Notifica",
     "Please check your email to get your password back": "Controlla la tua email per recuperare la password",

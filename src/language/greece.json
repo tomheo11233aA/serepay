@@ -12,6 +12,9 @@
     "Successful coin conversion! ": "Επιτυχής μετατροπή νομισμάτων!",
     "Insufficient balance": "Ανεπαρκές υπόλοιπο",
 
+    "Select Rate": "Επιλέξτε τον ρυθμό",
+    "Select the rate you want to swap": "Επιλέξτε τον ρυθμό που θέλετε να ανταλλάξετε",
+
     "Cancel failed": "Η ακύρωση απέτυχε",
     "Notification": "Γνωστοποίηση",
     "Please check your email to get your password back": "Παρακαλώ ελέγξτε το email σας για να λάβετε πίσω τον κωδικό πρόσβασής σας",
@@ -29,7 +32,7 @@
     "User does not exist !": "Ο χρήστης δεν υπάρχει !",
     "You must accept the terms and conditions": "Πρέπει να αποδεχτείτε τους όρους και προϋποθέσεις",
     "Please check your email to verify your account": "Ελέγξτε το email σας για να επαληθεύσετε τον λογαριασμό σας",
-    "Transfer" : "Μεταφορά",
+    "Transfer": "Μεταφορά",
 
     "Email or password is incorrect!": "Το email ή ο κωδικός πρόσβασης είναι εσφαλμένος!",
     "LOGIN": "ΣΥΝΔΕΣΗ",

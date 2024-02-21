@@ -11,7 +11,10 @@
     "for": "untuk",
     "Successful coin conversion! ": "Penukaran syiling yang berjaya! ",
     "Insufficient balance": "Baki tidak mencukupi",
-    "Transfer" : "Pindahkan",
+    "Transfer": "Pindahkan",
+
+    "Select Rate": "Pilih Kadar",
+    "Select the rate you want to swap": "Pilih kadar yang anda ingin tukar",
 
     "Cancel failed": "Gagal batal",
     "Notification": "Pemberitahuan",

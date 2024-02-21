@@ -12,6 +12,9 @@
     "Successful coin conversion! ": "„Erfolgreiche Münzumwandlung!",
     "Insufficient balance": "Mangelhaftes Gleichgewicht",
 
+    "Select Rate": "„Kurs auswählen",
+    "Select the rate you want to swap": "Wählen Sie den Kurs aus, den Sie tauschen möchten",
+
     "Cancel failed": "„Abbrechen fehlgeschlagen",
     "Notification": "Benachrichtigung",
     "Please check your email to get your password back": "„Bitte überprüfen Sie Ihre E-Mails, um Ihr Passwort zurückzubekommen.",
@@ -29,7 +32,7 @@
     "User does not exist !": "Benutzer existiert nicht !",
     "You must accept the terms and conditions": "Du musst die Geschäftsbedingungen akzeptieren",
     "Please check your email to verify your account": "„Bitte überprüfen Sie Ihre E-Mails, um Ihr Konto zu bestätigen.",
-    "Transfer" : "Übertragen",
+    "Transfer": "Übertragen",
 
     "Email or password is incorrect!": "E-Mail oder Passwort ist falsch!",
     "LOGIN": "ANMELDUNG",

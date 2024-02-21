@@ -11,7 +11,10 @@
     "for": "voor",
     "Successful coin conversion! ": "Succesvolle muntconversie! ",
     "Insufficient balance": "Onvoldoende saldo",
-    "Transfer" : "Overdracht",
+    "Transfer": "Overdracht",
+
+    "Select Rate": "Selecteer tarief",
+    "Select the rate you want to swap": "Selecteer de koers die u wilt ruilen",
 
     "Cancel failed": "Annuleren mislukt",
     "Notification": "Kennisgeving",

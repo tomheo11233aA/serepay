@@ -12,6 +12,9 @@
     "Successful coin conversion! ": "ការបម្លែងកាក់ជោគជ័យ!",
     "Insufficient balance": "សមតុល្យមិនគ្រប់គ្រាន់",
 
+    "Select Rate": "ជ្រើសរើសអត្រា",
+    "Select the rate you want to swap": "ជ្រើសរើសអត្រាប្តូរដែលអ្នកចង់ប្តូរ",
+
     "Cancel failed": "បោះបង់បានបរាជ័យ",
     "Notification": "សេចក្តីជូនដំណឹង",
     "Please check your email to get your password back": "សូមពិនិត្យអ៊ីមែលរបស់អ្នក ដើម្បីយកពាក្យសម្ងាត់របស់អ្នកមកវិញ",
@@ -24,7 +27,7 @@
     "Your transaction has been created": "ប្រតិបត្តិការរបស់អ្នកត្រូវបានបង្កើត",
 
     "The email does not exist in the system.": "អ៊ីមែលមិនមាននៅក្នុងប្រព័ន្ធទេ",
-    "Transfer" : "ផ្ទេរ",
+    "Transfer": "ផ្ទេរ",
     "Email is not define": "អ៊ីមែលមិនត្រូវបានកំណត់",
     "Already have an account? ": "មានគណនីរួចហើយ?",
     "User does not exist !": "អ្នកប្រើប្រាស់មិនមានទេ!",

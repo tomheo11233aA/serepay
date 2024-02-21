@@ -22,7 +22,10 @@
     "Update KYC fail": "การอัปเดต KYC ล้มเหลว",
     "Are you sure you want to proceed?": "คุณแน่ใจหรือว่าต้องการดำเนินการต่อ?",
     "Your transaction has been created": "ธุรกรรมของคุณถูกสร้างขึ้นแล้ว",
-    "Transfer" : "โอน",
+    "Transfer": "โอน",
+    
+    "Select Rate": "เลือกราคา",
+    "Select the rate you want to swap": "เลือกราคาที่คุณต้องการแลกเปลี่ยน",
 
     "The email does not exist in the system.": "อีเมลไม่มีอยู่ในระบบ",
     "Email is not define": "อีเมลไม่ได้ถูกกำหนด",

@@ -11,7 +11,10 @@
     "for": "para",
     "Successful coin conversion! ": "¡Conversión de moneda exitosa!",
     "Insufficient balance": "Saldo insuficiente",
-    "Transfer" : "Transferir",
+    "Transfer": "Transferir",
+
+    "Select Rate": "Seleccionar tasa",
+    "Select the rate you want to swap": "Seleccione la tasa que desea intercambiar",
 
     "Cancel failed": "Cancelar falló",
     "Notification": "Notificación",

@@ -12,6 +12,9 @@
     "Successful coin conversion! ": "「コイン変換成功！」",
     "Insufficient balance": "残高不足",
 
+    "Select Rate": "レートを選択",
+    "Select the rate you want to swap": "スワップしたいレートを選択してください",
+
     "Cancel failed": "「キャンセルに失敗しました」",
     "Notification": "通知",
     "Please check your email to get your password back": "「パスワードを取り戻すためにメールを確認してください。」",
@@ -29,7 +32,7 @@
     "User does not exist !": "ユーザーは存在しません ！",
     "You must accept the terms and conditions": "あなたは利用規約に同意する必要があります",
     "Please check your email to verify your account": "「アカウントを確認するにはメールを確認してください。」",
-    "Transfer" : "転送",
+    "Transfer": "転送",
 
     "LOGIN": "ログイン",
     "Vietnamese": "ベトナム語",
