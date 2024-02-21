@@ -92,7 +92,8 @@ const Transaction = () => {
     }, [dispatch]);
     useEffect(() => {
         if (item) {
-            if (item.side === 'sell') {                // setAmount(myAmount.toString());
+            if (item.side === 'sell') {
+                // setAmount(myAmount.toString());
                 const coin = coins.find(coin => coin?.name === item.symbol);
                 if (coin) {
                     const rateDollar = exchangeRate.find((item) => item.title === 'VND')?.rate ?? 1;
@@ -160,18 +161,32 @@ const Transaction = () => {
         const fetchData = async () => {
             const itemString = await AsyncStorage.getItem('adsItem');
             if (itemString) {
-                setItem(JSON.parse(itemString));
+                const itemParsed = JSON.parse(itemString);
+                setItem(itemParsed);
+                fetchMyAmount(itemParsed);
             }
         }
 
-        const fetchMyAmount = async () => {
+        // const fetchMyAmount = async () => {
+        //     const myAmountString = await AsyncStorage.getItem('myAmount');
+        //     if (myAmountString) {
+        //         setMyAmount(Number(myAmountString));
+        //     } else {
+        //         console.log('item click vao nut buy', item);
+        //         setMyAmount(item?.amount - item?.amountSuccess ?? 0);
+        //     }
+        // }
+        const fetchMyAmount = async (item: any) => {
             const myAmountString = await AsyncStorage.getItem('myAmount');
             if (myAmountString) {
                 setMyAmount(Number(myAmountString));
+            } else {
+                console.log('item click vao nut buy', item);
+                setMyAmount(item?.amount - item?.amountSuccess ?? 0);
             }
         }
 
-        Promise.all([fetchBanking(), fetchData(), fetchMyAmount()])
+        Promise.all([fetchBanking(), fetchData(), fetchMyAmount(item)])
             .finally(() => {
                 setTimeout(() => {
                     setLoading(false);

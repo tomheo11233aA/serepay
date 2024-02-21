@@ -54,7 +54,6 @@ const PaymentModal: React.FC<PaymentModalProps> = ({ visible, hideModal, selecte
         if (visible) {
             const fetchData = async () => {
                 const roundPay = Math.round(pay);
-                console.log('roundPay', roundPay);
                 const clearSpaceOfSelectedBankNumber = selectedBankNumber.replace(/\s/g, '');
                 const qrData = await generateQR(Number(clearSpaceOfSelectedBankNumber), selectedBankOwner, roundPay, content, acqId || '970436');
                 setQrDataUrl(qrData.data.qrDataURL);

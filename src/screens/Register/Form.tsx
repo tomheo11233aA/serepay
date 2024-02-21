@@ -53,7 +53,6 @@ const Form = ({ t }: Props) => {
                 Referral: ref,
                 tokenRecaptcha: tokenRecaptcha
             })
-            console.log(response)
             if (response.status) {
                 Alert.alert(t('Success'), t('Please check your email to verify your account'))
                 await AsyncStorage.setItem('tokenVerifyEmail', response.data)

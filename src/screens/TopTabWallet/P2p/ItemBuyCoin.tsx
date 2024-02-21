@@ -22,6 +22,7 @@ const ItemBuyCoin = ({ user, t, adType }: Props) => {
     const handleItemClick = async (item: any) => {
         try {
             await AsyncStorage.setItem('adsItem', JSON.stringify(item))
+            await AsyncStorage.removeItem('myAmount')
             navigate(screens.TRANSACTION)
         } catch (error) {
             Alert.alert(t('Error'), t('Something went wrong'))

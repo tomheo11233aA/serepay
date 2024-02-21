@@ -12,7 +12,6 @@ interface Props {
 }
 
 const Terms = ({ t, checked, setChecked }: Props) => {
-    console.log('checked', checked)
     return (
         <Box alignStart marginTop={10} width={'100%'} row>
             <Checkbox
