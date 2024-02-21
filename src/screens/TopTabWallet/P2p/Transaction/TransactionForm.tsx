@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { View, Text, TouchableOpacity } from 'react-native';
 import { colors } from '@themes/colors';
 import Input from '@commom/Input';
@@ -39,6 +39,26 @@ const TransactionForm: React.FC<TransactionFormProps> = ({
     setMaxReceiveAmount,
 }) => {
     const { t } = useTranslation()
+    const [formattedAmount, setFormattedAmount] = useState('');
+    const [formattedReceiveAmount, setFormattedReceiveAmount] = useState('');
+
+    useEffect(() => {
+        const numberAmount = parseFloat(amount.replace(/,/g, ''));
+        if (!isNaN(numberAmount)) {
+            setFormattedAmount(numberAmount.toLocaleString('en-US', { maximumFractionDigits: 2 }));
+        } else {
+            setFormattedAmount('');
+        }
+    }, [amount]);
+
+    useEffect(() => {
+        const numberAmount = parseFloat(receiveAmount.replace(/,/g, ''));
+        if (!isNaN(numberAmount)) {
+            setFormattedReceiveAmount(numberAmount.toLocaleString('en-US', { maximumFractionDigits: 2 }));
+        } else {
+            setFormattedReceiveAmount('');
+        }
+    }, [receiveAmount]);
     return (
         <View style={{ padding: 10, backgroundColor: colors.gray8, borderRadius: 5, marginTop: 10 }}>
             <View style={{ justifyContent: 'space-between' }}>
@@ -47,7 +67,8 @@ const TransactionForm: React.FC<TransactionFormProps> = ({
                     <Input
                         height={40}
                         backgroundColor={'white'}
-                        value={amount}
+                        // value={amount}
+                        value={formattedAmount}
                         onChangeText={setAmount}
                         radius={3}
                         coin={item.side === 'buy' ? coin?.name : 'VND'}
@@ -62,7 +83,8 @@ const TransactionForm: React.FC<TransactionFormProps> = ({
                 <View style={{ flex: 1 }}>
                     <Text style={{ fontFamily: fonts.AS }}>{t('To receive')}</Text>
                     <Input
-                        value={receiveAmount}
+                        // value={receiveAmount}
+                        value={formattedReceiveAmount}
                         height={40}
                         backgroundColor={colors.gray7}
                         readonly
