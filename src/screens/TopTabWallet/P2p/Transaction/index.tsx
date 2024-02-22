@@ -93,7 +93,6 @@ const Transaction = () => {
     useEffect(() => {
         if (item) {
             if (item.side === 'sell') {
-                // setAmount(myAmount.toString());
                 const coin = coins.find(coin => coin?.name === item.symbol);
                 if (coin) {
                     const rateDollar = exchangeRate.find((item) => item.title === 'VND')?.rate ?? 1;
@@ -102,13 +101,6 @@ const Transaction = () => {
                     setAmount(amountVND.toString());
                 }
             } else {
-                // const coin = coins.find(coin => coin?.name === item.symbol);
-                // if (coin) {
-                //     const rateDollar = exchangeRate.find((item) => item.title === 'VND')?.rate ?? 1;
-                //     const coinPrice = coin.price ?? 0;
-                //     const amountVND = myAmount * coinPrice * rateDollar;
-                //     setAmount(amountVND.toPrecision(8));
-                // }
                 setAmount(myAmount.toString());
             }
         }
@@ -167,15 +159,6 @@ const Transaction = () => {
             }
         }
 
-        // const fetchMyAmount = async () => {
-        //     const myAmountString = await AsyncStorage.getItem('myAmount');
-        //     if (myAmountString) {
-        //         setMyAmount(Number(myAmountString));
-        //     } else {
-        //         console.log('item click vao nut buy', item);
-        //         setMyAmount(item?.amount - item?.amountSuccess ?? 0);
-        //     }
-        // }
         const fetchMyAmount = async (item: any) => {
             const myAmountString = await AsyncStorage.getItem('myAmount');
             if (myAmountString) {
