@@ -208,7 +208,7 @@ const CreateBuyAds = () => {
                         </Box>
 
                         <Box marginTop={20} style={{ alignItem: 'center' }}>
-                            <Txt size={20} fontFamily={fonts.LR} lineHeight={25}>{t('Contact Infomation ')}</Txt>
+                            <Txt size={20} fontFamily={fonts.LR} lineHeight={25}>{t('Contact Information ')}</Txt>
                             <BuyAdvertisementInput
                                 placeholder={t('Enter contact information')}
                                 maxLength={100}

@@ -76,13 +76,14 @@ const CreateBuyAds = () => {
     }, [selectedCoin, coins])
 
     const handleBuyAds = useCallback(async (data: any) => {
-        const { amount, amountMinimum } = data;
+        const { amount, amountMinimum, contact } = data;
         try {
             const body: ICompanyAddAds = {
                 amount: amount,
                 amountMinimum: amountMinimum,
                 symbol: selectedCoin?.name || 'USDT',
                 side: 'buy',
+                contact: contact
             }
             const res = await companyAddAds(body);
             if (res?.status) {
@@ -106,6 +107,7 @@ const CreateBuyAds = () => {
 
     const amountInputRef = useRef<any>(null);
     const amountMinimumInputRef = useRef<any>(null);
+    const contactInputRef = useRef<any>(null);
 
     return (
         <LinearGradient
@@ -125,7 +127,6 @@ const CreateBuyAds = () => {
                 <CoinModal
                     visible={visible}
                     hideModal={hideModal}
-                    // handleChooseCoin={handleChooseCoin}
                     t={t}
                 />
                 <Box
@@ -181,12 +182,27 @@ const CreateBuyAds = () => {
                                 placeholder={t('Enter minimum amount')}
                                 maxLength={100}
                                 onChangeText={(value: number) => setValue('amountMinimum', value)}
-                                returnKeyType={'done'}
+                                returnKeyType={'next'}
                                 ref={amountMinimumInputRef}
+                                onSubmitEditing={() => contactInputRef.current.focus()}
                                 keyboardType={'numeric'}
                             />
-                            {errors.amount && <Txt size={12} color={colors.red} style={{ zIndex: -1 }} marginTop={7} bold>
+                            {errors.amountMinimum && <Txt size={12} color={colors.red} style={{ zIndex: -1 }} marginTop={7} bold>
                                 {errors.amountMinimum?.message && t(errors.amountMinimum.message)}
+                            </Txt>}
+                        </Box>
+
+                        <Box marginTop={20} style={{ alignItem: 'center' }}>
+                            <Txt size={20} fontFamily={fonts.LR} lineHeight={25}>{t('Contact Information ')}</Txt>
+                            <BuyAdvertisementInput
+                                placeholder={t('Enter contact information')}
+                                maxLength={100}
+                                onChangeText={(value: string) => setValue('contact', value)}
+                                returnKeyType={'done'}
+                                ref={contactInputRef}
+                            />
+                            {errors.contact && <Txt size={12} color={colors.red} style={{ zIndex: -1 }} marginTop={7} bold>
+                                {errors.contact?.message && t(errors.contact.message)}
                             </Txt>}
                         </Box>
                     </SafeAreaView>
