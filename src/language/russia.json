@@ -12,10 +12,10 @@
     "Successful coin conversion! ": "«Успешная конвертация монет!»",
     "Insufficient balance": "Недостаточный баланс",
     "Transfer": "Перенос",
-
+    "Minimum amount must be less than amount": "Минимальная сумма должна быть меньше суммы",
     "Select Rate": "Выберите тариф",
     "Select the rate you want to swap": "Выберите тариф, который вы хотите поменять",
-
+    "Or scan the QR code below to make the payment": "Или отсканируйте QR-код ниже, чтобы произвести оплату",
     "Cancel failed": "«Отмена не удалась»",
     "Notification": "Уведомление",
     "Please check your email to get your password back": "«Пожалуйста, проверьте свою электронную почту, чтобы вернуть пароль»",

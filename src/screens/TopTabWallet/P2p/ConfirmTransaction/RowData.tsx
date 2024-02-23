@@ -79,8 +79,13 @@ const RowData: React.FC<RowDataProps> = ({
 
                     <Text style={{ color: 'black', fontFamily: fonts.AS, marginLeft: 5 }}>{t('Email: ')}</Text>
                     <Text style={{ color: 'green', fontWeight: 'bold', fontFamily: fonts.AS }}>
-                        {/* {item.email} */}
                         {item.userid === profileId ? item.emailAds : item.email}
+                    </Text>
+
+                    <Text style={{ color: 'black', fontFamily: fonts.AS, marginLeft: 5 }}>{t('Contact: ')}
+                        <Text style={{ color: 'green', fontFamily: fonts.AS, marginLeft: 5, fontWeight: 'bold' }}>
+                            {item.contact}
+                        </Text>
                     </Text>
                 </View>
             </View>

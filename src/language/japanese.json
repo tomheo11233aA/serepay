@@ -11,10 +11,10 @@
     "for": "のために",
     "Successful coin conversion! ": "「コイン変換成功！」",
     "Insufficient balance": "残高不足",
-
+    "Minimum amount must be less than amount": "最小金額は金額より少なくなければなりません",
     "Select Rate": "レートを選択",
     "Select the rate you want to swap": "スワップしたいレートを選択してください",
-
+    "Or scan the QR code below to make the payment": "または,以下の QR コードをスキャンして支払いを行ってください",
     "Cancel failed": "「キャンセルに失敗しました」",
     "Notification": "通知",
     "Please check your email to get your password back": "「パスワードを取り戻すためにメールを確認してください。」",

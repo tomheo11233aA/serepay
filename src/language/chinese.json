@@ -11,10 +11,10 @@
     "for": "为了",
     "Successful coin conversion! ": "兑换金币成功！",
     "Insufficient balance": "余额不足",
-
+    "Minimum amount must be less than amount": "最低金额必须小于金额",
     "Select Rate": "选择汇率",
     "Select the rate you want to swap": "选择您想交换的汇率",
-
+    "Or scan the QR code below to make the payment": "或扫描下面的二维码进行付款",
     "Cancel failed": "取消失败",
     "Notification": "通知",
     "Please check your email to get your password back": "请检查您的电子邮件以找回密码",

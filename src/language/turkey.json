@@ -11,7 +11,8 @@
     "for": "için",
     "Successful coin conversion! ": "Başarılı para dönüşümü! ",
     "Insufficient balance": "Yetersiz bakiye",
-
+    "Minimum amount must be less than amount": "Minimum tutar miktarından az olmalıdır",
+    "Or scan the QR code below to make the payment": "Veya ödemeyi yapmak için aşağıdaki QR kodunu tarayın",
     "Cancel failed": "İptal başarısız oldu",
     "Notification": "Bildiri",
     "Please check your email to get your password back": "Şifrenizi geri almak için lütfen e-postanızı kontrol edin",

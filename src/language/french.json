@@ -11,10 +11,10 @@
     "for": "pour",
     "Successful coin conversion! ": "« Conversion de pièces réussie ! »",
     "Insufficient balance": "Solde insuffisant",
-
+    "Minimum amount must be less than amount": "Le montant minimum doit être inférieur au montant",
     "Select Rate": "Sélectionnez le taux",
     "Select the rate you want to swap": "Sélectionnez le taux que vous souhaitez échanger",
-
+    "Or scan the QR code below to make the payment": "Ou scannez le code QR ci-dessous pour effectuer le paiement",
     "Cancel failed": "L'annulation a échoué",
     "Notification": "Notification",
     "Please check your email to get your password back": "Veuillez vérifier votre courrier électronique pour récupérer votre mot de passe",

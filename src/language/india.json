@@ -11,10 +11,10 @@
     "for": "के लिए",
     "Successful coin conversion! ": "सफल सिक्का रूपांतरण!",
     "Insufficient balance": "अपर्याप्त शेषराशि",
-
+    "Minimum amount must be less than amount": "न्यूनतम राशि राशि से कम होनी चाहिए",
     "Select Rate": "दर चुनें",
     "Select the rate you want to swap": "वह दर चुनें जिसे आप बदलना चाहते हैं",
-
+    "Or scan the QR code below to make the payment": "या नीचे दिए गए QR कोड को स्कैन करके भुगतान करें",
     "Cancel failed": "रद्द करना विफल",
     "Notification": "अधिसूचना",
     "Please check your email to get your password back": "कृपया अपना पासवर्ड वापस पाने के लिए अपना ईमेल जांचें",

@@ -12,10 +12,10 @@
     "Successful coin conversion! ": "ການແປງຫຼຽນທີ່ປະສົບຜົນສໍາເລັດ! ",
     "Insufficient balance": "ຍອດເງິນບໍ່ພຽງພໍ",
     "Transfer": "ໂອນ",
-
+    "Minimum amount must be less than amount": "ຈໍານວນຕ່ຳຫາຈໍານວນສູງສຸດ",
     "Select Rate": "ເລືອກອັດຕາ",
     "Select the rate you want to swap": "ເລືອກອັດຕາທີ່ທ່ານຕ້ອງການການປ່ຽນ",
-
+    "Or scan the QR code below to make the payment": "ຫຼືສະແກນລະຫັດ QR ຂ້າມິດຕໍ່ລຸ່ມນີ້ເພື່ອຈ່າຍເງິນ",
     "Cancel failed": "ຍົກເລີກບໍ່ສຳເລັດ",
     "Notification": "ແຈ້ງການ",
     "Please check your email to get your password back": "ກະລຸນາກວດເບິ່ງອີເມວຂອງທ່ານເພື່ອເອົາລະຫັດຜ່ານຂອງທ່ານຄືນ",

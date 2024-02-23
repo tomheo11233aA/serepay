@@ -11,10 +11,10 @@
     "for": "ל",
     "Successful coin conversion! ": "המרת מטבעות מוצלחת!",
     "Insufficient balance": "איזון לא מספיק",
-
+    "Minimum amount must be less than amount": "הכמות המינימלית חייבת להיות פחותה מהכמות",
     "Select Rate": "בחר שער",
     "Select the rate you want to swap": "בחר את השער שבו אתה רוצה להחליף",
-
+    "Or scan the QR code below to make the payment": "או סרוק את קוד ה-QR למטה כדי לבצע את התשלום",
     "Cancel failed": "הביטול נכשל",
     "Notification": "הוֹדָעָה",
     "Please check your email to get your password back": "אנא בדוק את האימייל שלך כדי להחזיר את הסיסמה שלך",

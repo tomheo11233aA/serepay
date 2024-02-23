@@ -28,21 +28,6 @@ const Coins: React.FC<Props> = ({ t, style, isShowHeader, onCoinSelected }) => {
     return (
         <Box>
             <Scroll style={style} showsVerticalScrollIndicator={false}>
-                {/* {isShowHeader && (
-                    <Box
-                        row
-                        alignCenter
-                        padding={20}
-                        justifySpaceBetween
-                    >
-                        <Txt bold size={16} color={colors.darkGreen}>
-                            {t('Coin')}
-                        </Txt>
-                        <Txt bold size={16} color={colors.darkGreen}>
-                            {t('24h Volume')}
-                        </Txt>
-                    </Box>
-                )} */}
                 {coins.map((coin) => {
                     const volume = roundDecimalValues(userWallet?.[`${coin?.symbolWallet?.toLowerCase()}_balance`] || 0, coin.price);
                     return (

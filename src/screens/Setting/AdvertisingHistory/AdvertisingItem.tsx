@@ -118,7 +118,7 @@ const TransactionItem = ({ item, side, isPending }: TransactionItemProps) => {
                 )}
             </Box>
             <Box justifyCenter>
-                {item.type === 1 && (
+                {/* {item.type === 1 && (
                     <Btn backgroundColor={colors.red} padding={5} radius={5} onPress={() => {
                         Alert.alert(
                             t('Confirmation'),
@@ -160,7 +160,7 @@ const TransactionItem = ({ item, side, isPending }: TransactionItemProps) => {
                     }} >
                         <Txt fontFamily={fonts.OSB} color={'white'}>{t('Cancel')}</Txt>
                     </Btn>
-                )}
+                )} */}
                 {item.type === 2 && (
                     <Btn
                         backgroundColor={colors.red}

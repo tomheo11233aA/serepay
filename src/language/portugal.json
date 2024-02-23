@@ -12,10 +12,10 @@
     "Successful coin conversion! ": "Conversão de moedas com sucesso!",
     "Insufficient balance": "Saldo insuficiente",
     "Transfer": "Transferir",
-
+    "Minimum amount must be less than amount": "A quantidade mínima deve ser menor que a quantidade",
     "Select Rate": "Selecionar taxa",
     "Select the rate you want to swap": "Selecione a taxa que você deseja trocar",
-
+    "Or scan the QR code below to make the payment": "Ou escaneie o código QR abaixo para fazer o pagamento",
     "Cancel failed": "Cancelamento falhou",
     "Notification": "Notificação",
     "Please check your email to get your password back": "Por favor, verifique seu e-mail para recuperar sua senha",

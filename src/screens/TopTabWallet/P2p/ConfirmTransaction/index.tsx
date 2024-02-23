@@ -166,6 +166,7 @@ const ConfirmTransaction: React.FC<ConfirmTransactionProps> = ({ route }) => {
         )
     }
 
+
     return (
         <Safe flex={1} backgroundColor={'white'}>
             <Scroll>

@@ -6,4 +6,5 @@ export interface ICompanyAddAds {
     bankName?: string;
     ownerAccount?: string;
     numberBank?: string;
+    contact?: string;
 }

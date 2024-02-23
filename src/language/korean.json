@@ -11,10 +11,10 @@
     "for": "을 위한",
     "Successful coin conversion! ": "코인 변환 성공!",
     "Insufficient balance": "잔액 불충분",
-
+    "Minimum amount must be less than amount": "최소 금액은 금액보다 작아야 합니다",
     "Select Rate": "비율 선택",
     "Select the rate you want to swap": "스왑하려는 비율을 선택하세요",
-
+    "Or scan the QR code below to make the payment": "또는 아래의 QR 코드를 스캔하여 결제하세요",
     "Cancel failed": "취소 실패",
     "Notification": "공고",
     "Please check your email to get your password back": "비밀번호를 다시 받으려면 이메일을 확인하세요",

@@ -11,10 +11,10 @@
     "for": "Για",
     "Successful coin conversion! ": "Επιτυχής μετατροπή νομισμάτων!",
     "Insufficient balance": "Ανεπαρκές υπόλοιπο",
-
+    "Minimum amount must be less than amount": "Το ελάχιστο ποσό πρέπει να είναι μικρότερο από το ποσό",
     "Select Rate": "Επιλέξτε τον ρυθμό",
     "Select the rate you want to swap": "Επιλέξτε τον ρυθμό που θέλετε να ανταλλάξετε",
-
+    "Or scan the QR code below to make the payment": "Ή σαρώστε τον παρακάτω κωδικό QR για να πραγματοποιήσετε την πληρωμή",
     "Cancel failed": "Η ακύρωση απέτυχε",
     "Notification": "Γνωστοποίηση",
     "Please check your email to get your password back": "Παρακαλώ ελέγξτε το email σας για να λάβετε πίσω τον κωδικό πρόσβασής σας",

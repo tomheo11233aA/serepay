@@ -12,10 +12,10 @@
     "Successful coin conversion! ": "تحويل العملة الناجح!",
     "Insufficient balance": "الرصيد غير كاف",
     "Transfer": "نقل",
-
+    "Minimum amount must be less than amount": "يجب أن يكون المبلغ الأدنى أقل من المبلغ",
     "Select Rate": "اختر السعر",
     "Select the rate you want to swap": "حدد السعر الذي تريد تبديله",
-
+    "Or scan the QR code below to make the payment": "أو امسح رمز الاستجابة السريعة أدناه لإجراء الدفع",
     "Cancel failed": "فشل الإلغاء",
     "Notification": "إشعار",
     "Please check your email to get your password back": "الرجاء التحقق من بريدك الإلكتروني لاستعادة كلمة المرور الخاصة بك",

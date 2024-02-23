@@ -38,7 +38,6 @@ const CreateBuyAds = () => {
     const config = useAppSelector(configSelector);
     const [myValue, setMyValue] = React.useState(0);
     const [, setSelectedBank] = React.useState(null);
-    // const [logo, setLogo] = React.useState('');
     const [, setNameBanking] = React.useState('')
     const { handleSubmit, formState: { errors }, setValue } = useForm({
         resolver: yupResolver(sellAdvertisementSchema)
@@ -83,23 +82,23 @@ const CreateBuyAds = () => {
     }, [selectedCoin, coins])
 
     const handleBuyAds = useCallback(async (data: any) => {
-        const { amount, amountMinimum, bankName, ownerAccount, numberBank } = data;
+        const { amount, amountMinimum, bankName, ownerAccount, numberBank, contact } = data;
         try {
             const body: ICompanyAddAds = {
                 amount: amount,
                 amountMinimum: amountMinimum,
-                symbol: selectedCoin?.name || 'BTC',
+                symbol: selectedCoin?.name || 'USDT',
                 side: 'sell',
                 bankName: bankName,
                 ownerAccount: ownerAccount,
                 numberBank: numberBank,
+                contact: contact,
             }
             const res = await companyAddAds(body);
             if (res?.status) {
                 Alert.alert(t('Success'), t('Create new sell advertisement success'), [
                     {
                         text: 'OK',
-                        // onPress: () => goBack()
                         onPress: () => {
                             dispatch(fetchListAdsSell())
                             dispatch(fetchListAdsSellPendding())
@@ -115,6 +114,7 @@ const CreateBuyAds = () => {
 
     const amountInputRef = useRef<any>(null);
     const amountMinimumInputRef = useRef<any>(null);
+    const contactInputRef = useRef<any>(null);
     const fullNameInputRef = useRef<any>(null);
     const accountNumberInputRef = useRef<any>(null);
 
@@ -142,7 +142,6 @@ const CreateBuyAds = () => {
                 <CoinModal
                     visible={visible}
                     hideModal={hideModal}
-                    // handleChooseCoin={handleChooseCoin}
                     t={t}
                 />
                 <Box
@@ -199,12 +198,27 @@ const CreateBuyAds = () => {
                                 maxLength={100}
                                 onChangeText={(value: number) => setValue('amountMinimum', value)}
                                 returnKeyType={'next'}
-                                onSubmitEditing={() => fullNameInputRef?.current?.focus()}
+                                onSubmitEditing={() => contactInputRef?.current?.focus()}
                                 ref={amountMinimumInputRef}
                                 keyboardType={'numeric'}
                             />
-                            {errors.amount && <Txt size={12} color={colors.red} style={{ zIndex: -1 }} marginTop={7} bold>
+                            {errors.amountMinimum && <Txt size={12} color={colors.red} style={{ zIndex: -1 }} marginTop={7} bold>
                                 {errors.amountMinimum?.message && t(errors.amountMinimum?.message)}
+                            </Txt>}
+                        </Box>
+
+                        <Box marginTop={20} style={{ alignItem: 'center' }}>
+                            <Txt size={20} fontFamily={fonts.LR} lineHeight={25}>{t('Contact Infomation ')}</Txt>
+                            <BuyAdvertisementInput
+                                placeholder={t('Enter contact information')}
+                                maxLength={100}
+                                onChangeText={(value: string) => setValue('contact', value)}
+                                returnKeyType={'next'}
+                                onSubmitEditing={() => fullNameInputRef?.current?.focus()}
+                                ref={contactInputRef}
+                            />
+                            {errors.contact && <Txt size={12} color={colors.red} style={{ zIndex: -1 }} marginTop={7} bold>
+                                {errors.contact?.message && t(errors.contact?.message)}
                             </Txt>}
                         </Box>
                         <Txt size={20} marginTop={20} fontFamily={fonts.LR} lineHeight={25}>{t('Payment Details')}</Txt>

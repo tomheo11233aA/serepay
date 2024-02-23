@@ -10,7 +10,7 @@ import { useTranslation } from 'react-i18next';
 import Txt from '@commom/Txt';
 import { fonts } from '@themes/fonts';
 import Img from '@commom/Img';
-import QRCode from 'react-native-qrcode-svg';
+import { ActivityIndicator } from 'react-native';
 
 interface PaymentModalProps {
     visible: boolean;
@@ -34,7 +34,6 @@ const generateQR = async (accountNo: number, accountName: string, amount: number
         body: JSON.stringify({
             accountNo: accountNo,
             accountName: accountName,
-            // acqId: 970415,
             acqId: acqId,
             amount: amount,
             addInfo: addInfo,
@@ -49,14 +48,17 @@ const generateQR = async (accountNo: number, accountName: string, amount: number
 const PaymentModal: React.FC<PaymentModalProps> = ({ visible, hideModal, selectedBankName, selectedBankNumber, selectedBankOwner, content, side, amount, pay, acqId }) => {
     const { t } = useTranslation();
     const [qrDataUrl, setQrDataUrl] = useState('');
+    const [isLoading, setIsLoading] = useState(false);
 
     useEffect(() => {
         if (visible) {
+            setIsLoading(true);
             const fetchData = async () => {
                 const roundPay = Math.round(pay);
                 const clearSpaceOfSelectedBankNumber = selectedBankNumber.replace(/\s/g, '');
                 const qrData = await generateQR(Number(clearSpaceOfSelectedBankNumber), selectedBankOwner, roundPay, content, acqId || '970436');
                 setQrDataUrl(qrData.data.qrDataURL);
+                setIsLoading(false);
             }
             fetchData();
         }
@@ -221,8 +223,15 @@ const PaymentModal: React.FC<PaymentModalProps> = ({ visible, hideModal, selecte
                     }}>
                     {t('Or scan the QR code below to make the payment')}
                 </Txt>
-                <View style={{ alignItems: 'center' }}>
+                {/* <View style={{ alignItems: 'center' }}>
                     {qrDataUrl !== '' && <Img source={{ uri: qrDataUrl }} style={{ width: 150, height: 150 }} />}
+                </View> */}
+                <View style={{ alignItems: 'center' }}>
+                    {isLoading ? (
+                        <ActivityIndicator size="large" color="#0000ff" /> // Hiển thị spinner khi đang tải
+                    ) : (
+                        qrDataUrl !== '' && <Img source={{ uri: qrDataUrl }} style={{ width: 150, height: 150 }} />
+                    )}
                 </View>
 
                 <Btn
