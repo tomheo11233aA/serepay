@@ -7,7 +7,7 @@ import Btn from '@commom/Btn';
 import Countdown from './Countdown';
 import { fonts } from '@themes/fonts';
 import { useAppSelector } from "@hooks/redux";
-import { userInfoUserSelector } from "@redux/selector/userSelector";
+import { userInfoUserSelector, exchangeRateSelector } from "@redux/selector/userSelector";
 import { bankSelector } from '@redux/selector/userSelector';
 
 type RowDataProps = {
@@ -43,7 +43,18 @@ const RowData: React.FC<RowDataProps> = ({
 }) => {
     const banks = useAppSelector(bankSelector);
     const userInfo = useAppSelector(userInfoUserSelector);
+    const exchangeRate = useAppSelector(exchangeRateSelector);
+    const vndRate = exchangeRate.find((rate) => rate.title === 'VND');
     const [profileId, setProfileId] = useState<number | null>(null);
+    const [_side, _setSide] = useState<string | null>(null);
+
+    useEffect(() => {
+        if (userInfo?.id === item.userid) {
+            _setSide('sell');
+        } else {
+            _setSide('buy');
+        }
+    }, [userInfo]);
     useEffect(() => {
         if (userInfo) {
             setProfileId(userInfo.id)
@@ -64,7 +75,7 @@ const RowData: React.FC<RowDataProps> = ({
     }, [bank]);
     if (header.data === 'code') {
         return (
-            <Text style={{ color: 'black', flexShrink: 1, fontFamily: fonts.AS, marginLeft: 5 }}>{item.code}</Text>
+            <Text style={{ color: colors.green2, flexShrink: 1, fontFamily: fonts.AS, marginLeft: 5 }}>{item.code}</Text>
         );
     }
     if (header.data === 'userName') {
@@ -72,18 +83,18 @@ const RowData: React.FC<RowDataProps> = ({
             <View style={{ alignItems: 'center' }}>
                 <View style={{ flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'flex-start' }}>
                     <Text style={{ color: 'black', fontFamily: fonts.AS, marginLeft: 5 }}>{t('If you need assistance, please contact the ')}
-                        <Text style={{ color: 'green', fontFamily: fonts.AS, marginLeft: 5, fontWeight: 'bold' }}>
+                        <Text style={{ color: colors.green2, fontFamily: fonts.AS, marginLeft: 5, fontWeight: 'bold' }}>
                             {item.userid === profileId ? item.userNameAds : item.userName}
                         </Text>
                     </Text>
 
                     <Text style={{ color: 'black', fontFamily: fonts.AS, marginLeft: 5 }}>{t('Email: ')}</Text>
-                    <Text style={{ color: 'green', fontWeight: 'bold', fontFamily: fonts.AS }}>
+                    <Text style={{ color: colors.green2, fontWeight: 'bold', fontFamily: fonts.AS }}>
                         {item.userid === profileId ? item.emailAds : item.email}
                     </Text>
 
                     <Text style={{ color: 'black', fontFamily: fonts.AS, marginLeft: 5 }}>{t('Contact: ')}
-                        <Text style={{ color: 'green', fontFamily: fonts.AS, marginLeft: 5, fontWeight: 'bold' }}>
+                        <Text style={{ color: colors.green2, fontFamily: fonts.AS, marginLeft: 5, fontWeight: 'bold' }}>
                             {item.contact}
                         </Text>
                     </Text>
@@ -128,22 +139,41 @@ const RowData: React.FC<RowDataProps> = ({
     }
     if (header.data === 'side') {
         return (
-            <Text style={{ color: 'black', flexShrink: 1, fontFamily: fonts.AS, marginLeft: 5 }}>{item.amount + ' ' + item.symbol}</Text>
+            <Text style={{ color: 'black', flexShrink: 1, fontFamily: fonts.AS, marginLeft: 5 }}>
+                <Text style={{ color: _side === 'buy' ? colors.green2 : '#ff0000', flexShrink: 1, fontFamily: fonts.AS, marginLeft: 5 }}>
+                    {item.amount}
+                </Text>
+                {' ' + item.symbol}
+            </Text>
         );
     }
     if (header.data === 'rate') {
         return (
-            <Text style={{ color: 'black', flexShrink: 1, fontFamily: fonts.AS, marginLeft: 5 }}>{item.rate}</Text>
+            <Text style={{ color: '#ff0000', flexShrink: 1, fontFamily: fonts.AS, marginLeft: 5 }}>{item.rate}</Text>
         );
     }
     if (header.data === 'amount') {
         return (
-            <Text style={{ color: 'black', flexShrink: 1, fontFamily: fonts.AS, marginLeft: 5 }}>{item.pay.toFixed(3)}</Text>
+            <Text style={{ color: '#ff0000', flexShrink: 1, fontFamily: fonts.AS, marginLeft: 5 }}>{'₫' + Math.round(item.pay).toLocaleString('en-US')}
+                <Text style={{ color: 'black', flexShrink: 1, fontFamily: fonts.AS, marginLeft: 5 }}>
+                    {t(' Including transaction fee: 0 VND and transfer fee: ')}
+                    {
+                        _side === 'buy'
+                            ? vndRate
+                                ? <Text style={{ color: '#ff0000', flexShrink: 1, fontFamily: fonts.AS }}>{(Math.round(item.pay - item.amount * (item.rate * vndRate.rate)).toLocaleString('en-US') + ' VND')}</Text>
+                                : 'vndRate is undefined'
+                            : vndRate
+                                ? (Math.round(item.amount * (item.rate * vndRate.rate) - item.pay).toLocaleString('en-US') + ' VND')
+                                : 'vndRate is undefined'
+                    }
+                    {' '}
+                </Text>
+            </Text>
         );
     }
     if (header.data === 'created_at') {
         return (
-            <Text style={{ color: colors.green, fontWeight: 'bold', marginLeft: 5, flexShrink: 1, fontFamily: fonts.AS }}>
+            <Text style={{ color: colors.green2, fontWeight: 'bold', marginLeft: 5, flexShrink: 1, fontFamily: fonts.AS }}>
                 {date}
             </Text>
         );

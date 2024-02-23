@@ -236,7 +236,7 @@ const ConfirmTransaction: React.FC<ConfirmTransactionProps> = ({ route }) => {
                                             />
                                         ]}
                                         style={{ ...styles.row, ...(index % 2 ? styles.rowAlternate : {}) }}
-                                        textStyle={{ margin: 6, flexShrink: 1, fontWeight: 'bold' }}
+                                        textStyle={{ margin: 6, flexShrink: 1, fontWeight: 'bold', fontFamily: fonts.AS, color: 'black'}}
                                         widthArr={columnWidthRatios.map(ratio => adjustedWidth * ratio)}
                                     />
                                 ))

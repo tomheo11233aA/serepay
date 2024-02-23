@@ -31,10 +31,12 @@
     "The email does not exist in the system.": "«Электронная почта не существует в системе».",
     "Email is not define": "«Электронная почта не определена»",
     "Already have an account? ": "«Уже есть аккаунт?»",
+    "Contact is required": "«Контакт обязателен»",
     "User does not exist !": "Пользователь не существует !",
     "You must accept the terms and conditions": "Вы должны согласиться с Правилами и Условиями",
     "Please check your email to verify your account": "«Пожалуйста, проверьте свою электронную почту, чтобы подтвердить свою учетную запись»",
-
+    "Amount must be a number": "«Сумма должна быть числом»",
+    "Minimum amount must be a number": "«Минимальная сумма должна быть числом»",
     "LOGIN": "АВТОРИЗОВАТЬСЯ",
     "Vietnamese": "Вьетнамский",
     "REGISTER": "РЕГИСТР",

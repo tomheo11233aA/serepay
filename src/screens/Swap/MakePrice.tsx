@@ -16,13 +16,15 @@ import { keys } from '@contants/keys'
 import { getBalanceOfChoosedCoin } from '../../helper/function/getBalanceOfChoosedCoin'
 import { userWalletUserSelector } from '@redux/selector/userSelector'
 import { useCoinSocket } from '../../helper/useCoinSocket'
-import { calculateConversionRate } from '../../helper/function/calculateConversionRate'
+import { calculateConversionRate, checkPriceOfCoins } from '../../helper/function/calculateConversionRate'
 import LottieView from 'lottie-react-native';
 import { fetchUserWallet } from '@redux/slice/userSlice'
 import { useAppDispatch } from '@hooks/redux'
 import { AppDispatch } from '@redux/store/store'
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen'
 import AsyncStorage from '@react-native-async-storage/async-storage'
+import { roundDecimalValues } from '@helper/function/roundCoin'
+
 interface Props {
     t: any;
 }
@@ -54,10 +56,13 @@ const MakePrice = ({ t }: Props) => {
     const hideModal = useCallback(() => setVisible(false), [])
     const [isChoosingForSymbolTo, setIsChoosingForSymbolTo] = useState(false)
     const [isLoading, setIsLoading] = useState<boolean>(false)
+    const [priceOfCoins, setPriceOfCoins] = useState<number>(0)
     useEffect(() => {
         const conversionRate = calculateConversionRate(symbolForm, symbolTo, coins)
+        const checkPrice = checkPriceOfCoins(symbolTo, coins)
+        setPriceOfCoins(checkPrice)
         const amountTo = parseFloat(amountForm) * Number(conversionRate);
-        setAmountTo(amountTo.toLocaleString())
+        setAmountTo(roundDecimalValues(amountTo, checkPrice))
     }, [amountForm, symbolForm, symbolTo, coins])
 
     const swapSymbol = useCallback(() => {
@@ -172,12 +177,11 @@ const MakePrice = ({ t }: Props) => {
             <ItemConver
                 symbol={symbolTo}
                 iconConvert={true}
-                // title={`Amount of ${symbolTo}`}
                 title={t('Amount of') + ` ${symbolTo}`}
                 icon={iconTo ? { uri: `${keys.HOSTING_API}${iconTo}` } : require('@images/wallet/eth.png')}
                 readonly={true}
                 changeCoin={showModalForSymbolTo}
-                value={amountTo}
+                value={amountTo === 'NaN' ? '0' : amountTo}
                 swapSymbol={swapSymbol}
             />
             <Box
@@ -187,7 +191,7 @@ const MakePrice = ({ t }: Props) => {
                 <Txt
                     marginTop={10}
                     color={'#999999'}>
-                    {`1 ${symbolForm} = ${roundCoin(parseFloat(calculateConversionRate(symbolForm, symbolTo, coins)))} ${symbolTo}`}
+                    {`1 ${symbolForm} = ${roundDecimalValues(calculateConversionRate(symbolForm, symbolTo, coins), priceOfCoins)} ${symbolTo}`}
                 </Txt>
             </Box>
 

@@ -34,7 +34,9 @@
     "You must accept the terms and conditions": "Devi accettare i termini e le condizioni",
     "Please check your email to verify your account": "Controlla la tua email per verificare il tuo account",
     "Transfer": "Trasferimento",
-
+    "Contact is required": "Il contatto è obbligatorio",
+    "Amount must be a number": "L'importo deve essere un numero",
+    "Minimum amount must be a number": "L'importo minimo deve essere un numero",
     "LOGIN": "LOGIN",
     "Vietnamese": "Vietnamita",
     "REGISTER": "REGISTRATI",

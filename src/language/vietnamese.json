@@ -11,10 +11,11 @@
     "for": "sang",
     "Successful coin conversion! ": "Quy đổi tiền điện tử thành công! ",
     "Insufficient balance!": "Số dư không đủ!",
-
+    "Amount must be a number": "Số lượng phải là số",
+    "Minimum amount must be a number": "Số lượng tối thiểu phải là số",
     "Contact Information ": "Thông tin liên hệ ",
     "Enter contact information": "Nhập thông tin liên hệ",
-    
+    "Contact is required": "Thông tin liên hệ là bắt buộc",
     "Cancel failed": "Hủy thất bại",
     "Notification": "Thông báo",
     "Please check your email to get your password back": "Vui lòng kiểm tra email để lấy lại mật khẩu của bạn",

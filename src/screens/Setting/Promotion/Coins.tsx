@@ -2,7 +2,7 @@ import Box from '@commom/Box'
 import Icon from '@commom/Icon'
 import Scroll from '@commom/Scroll'
 import { colors } from '@themes/colors'
-import React, { useCallback, useEffect } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 import { useSelector } from 'react-redux';
 import { coinListSelector } from '@redux/selector/userSelector'
 import { keys } from '@contants/keys'
@@ -13,7 +13,7 @@ import { userWalletUserSelector } from '@redux/selector/userSelector'
 import { IUserWallet } from '@models/user'
 import { selectedRateSelector } from '@redux/selector/userSelector'
 import { fonts } from '@themes/fonts'
-import { roundDecimalValues } from '../../../helper/function/roundCoin'
+import { roundDecimalValues } from '@helper/function/roundCoin'
 import { View, Text } from 'react-native'
 import { useTranslation } from 'react-i18next'
 import { createWalletApi } from '@utils/userCallApi'
@@ -25,6 +25,7 @@ import Safe from '@reuse/Safe'
 import Txt from '@commom/Txt'
 import LottieView from 'lottie-react-native'
 import { Alert } from 'react-native'
+import { calculateConversionRate, checkPriceOfCoins } from '@helper/function/calculateConversionRate'
 
 type Props = {
     style?: any
@@ -39,6 +40,7 @@ const Coins: React.FC<Props> = ({ style }) => {
     const [loadingStates, setLoadingStates] = React.useState<Record<string, boolean>>({})
     const [loadingWithdraw, setLoadingWithdraw] = React.useState<Record<string, boolean>>({})
     const [isLoadingCoins, setIsLoadingCoins] = React.useState(true);
+    const [priceOfCoins, setPriceOfCoins] = useState<number>(0)
 
     useEffect(() => {
         const timer = setTimeout(() => {
@@ -51,11 +53,7 @@ const Coins: React.FC<Props> = ({ style }) => {
     const handleDeposit = useCallback(async (symbol: string) => {
         setLoadingStates(prev => ({ ...prev, [symbol]: true }))
         try {
-            // const res = await createWalletApi(symbol)
-            // if (res?.data) {
-            // navigate(screens.DEPOSIT, { symbol, address: res?.data?.address })
             navigate(screens.DEPOSIT, { symbol, address: 'USDT.BEP20' })
-            // }
         } catch (error) {
             Alert.alert(t('Error'), t('Something went wrong'))
         } finally {
@@ -96,7 +94,9 @@ const Coins: React.FC<Props> = ({ style }) => {
             <Scroll style={style} showsVerticalScrollIndicator={false}>
                 {coins.map((coin) => {
                     const priceOfCoin = coin.price * selectedRate.rate
-                    const ownedCoin = roundDecimalValues(userWallet?.[`${coin?.symbolWallet?.toLowerCase()}_balance`] || 0, coin.price);
+                    const checkPrice = checkPriceOfCoins(coin.name, coins)
+                    const ownedCoin = roundDecimalValues(userWallet?.[`${coin?.symbolWallet?.toLowerCase()}_balance`] || 0, checkPrice);
+                    // console.log(userWallet?.[`${coin?.symbolWallet?.toLowerCase()}_balance`] === 0)
                     return (
                         <View key={coin.id} style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', padding: hp('2%'), backgroundColor: 'white', borderRadius: wp('2.5%'), marginBottom: hp('1%') }}>
                             <View style={{ flexDirection: 'row', alignItems: 'center' }}>
@@ -123,7 +123,11 @@ const Coins: React.FC<Props> = ({ style }) => {
                                     </Text>
                                     <View style={{ flexDirection: 'row', alignItems: 'center' }}>
                                         <Text style={{ fontFamily: fonts.FSCR, fontSize: wp('4%'), color: colors.black3 }}>
-                                            {t('You have')} {ownedCoin} {coin.symbolWallet}
+                                            {t('You have')}
+                                            {' '} 
+                                            {userWallet?.[`${coin?.symbolWallet?.toLowerCase()}_balance`] === 0 ? '0' : ownedCoin}
+                                            {' '}
+                                            {coin.name}
                                         </Text>
                                         <Icon
                                             marginLeft={5}

@@ -34,7 +34,9 @@
     "User does not exist !": "Gebruiker bestaat niet !",
     "You must accept the terms and conditions": "U moet de voorwaarden accepteren",
     "Please check your email to verify your account": "Controleer uw e-mail om uw account te verifiëren",
-
+    "Amount must be a number": "Bedrag moet een nummer zijn",
+    "Minimum amount must be a number": "Minimumbedrag moet een nummer zijn",
+    "Contact is required": "Contact is vereist",
     "LOGIN": "LOG IN",
     "Vietnamese": "Vietnamees",
     "REGISTER": "REGISTER",

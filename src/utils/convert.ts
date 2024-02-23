@@ -1,7 +1,7 @@
 export const convertLanguage = (lng: string) => {
     if (lng == 'vn') {
         return {
-            title: 'Vietnamese',
+            title: 'Tiếng Việt',
             value: 'en',
             image: require('@images/unAuth/vietnam.png'),
         }

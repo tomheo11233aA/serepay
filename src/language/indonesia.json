@@ -34,7 +34,9 @@
     "You must accept the terms and conditions": "Anda harus menerima syarat dan ketentuan",
     "Please check your email to verify your account": "Silakan periksa email Anda untuk memverifikasi akun Anda",
     "Transfer": "Transfer",
-
+    "Contact is required": "Kontak diperlukan",
+    "Amount must be a number": "Jumlah harus berupa angka",
+    "Minimum amount must be a number": "Jumlah minimum harus berupa angka",
     "LOGIN": "GABUNG",
     "Vietnamese": "Orang Vietnam",
     "REGISTER": "DAFTAR",

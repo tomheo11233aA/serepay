@@ -34,8 +34,10 @@
     "User does not exist !": "Usuário não existe !",
     "You must accept the terms and conditions": "Você deve aceitar os Termos e Condições",
     "Please check your email to verify your account": "Por favor, verifique seu e-mail para verificar sua conta",
-
+    "Amount must be a number": "A quantidade deve ser um número",
+    "Minimum amount must be a number": "A quantidade mínima deve ser um número",
     "LOGIN": "CONECTE-SE",
+    "Contact is required": "Contato é obrigatório",
     "Vietnamese": "Vietnamita",
     "REGISTER": "REGISTRO",
     "HELLO": "OLÁ",

@@ -34,9 +34,11 @@
     "You must accept the terms and conditions": "Πρέπει να αποδεχτείτε τους όρους και προϋποθέσεις",
     "Please check your email to verify your account": "Ελέγξτε το email σας για να επαληθεύσετε τον λογαριασμό σας",
     "Transfer": "Μεταφορά",
-
+    "Amount must be a number": "Το ποσό πρέπει να είναι ένας αριθμός",
+    "Minimum amount must be a number": "Το ελάχιστο ποσό πρέπει να είναι ένας αριθμός",
     "Email or password is incorrect!": "Το email ή ο κωδικός πρόσβασης είναι εσφαλμένος!",
     "LOGIN": "ΣΥΝΔΕΣΗ",
+    "Contact is required": "Η επικοινωνία απαιτείται",
     "Vietnamese": "Βιετναμέζικο",
     "REGISTER": "ΚΑΝΩ ΕΓΓΡΑΦΗ",
     "HELLO": "ΓΕΙΑ ΣΑΣ",

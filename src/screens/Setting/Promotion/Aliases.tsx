@@ -16,7 +16,6 @@ import { WithdrawProps } from './Withdraw'
 
 // Utility and helper function imports
 import { historytransfer, transferToUsername } from '@utils/userCallApi'
-import { roundDecimalValues } from '../../../helper/function/roundCoin'
 import { keys } from '@contants/keys'
 
 // Component imports

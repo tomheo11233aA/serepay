@@ -34,10 +34,12 @@
     "User does not exist !": "ຜູ້ໃຊ້ບໍ່ມີຢູ່!",
     "You must accept the terms and conditions": "ທ່ານຕ້ອງຍອມຮັບຂໍ້ກໍານົດແລະເງື່ອນໄຂ",
     "Please check your email to verify your account": "ກະລຸນາກວດເບິ່ງອີເມວຂອງທ່ານເພື່ອຢືນຢັນບັນຊີຂອງທ່ານ",
-
+    "Amount must be a number": "ຈໍານວນຕ່ຳຫາຈໍານວນສູງສຸດ",
+    "Minimum amount must be a number": "ຈໍານວນຕ່ຳຫາຈໍານວນສູງສຸດ",
     "LOGIN": "ເຂົ້າ​ສູ່​ລະ​ບົບ",
     "Vietnamese": "ຫວຽດນາມ",
     "REGISTER": "ລົງທະບຽນ",
+    "Contact is required": "ຕ້ອງມີການຕິດຕໍ່",
     "HELLO": "ສະບາຍດີ",
     "Ecosystem": "ລະບົບນິເວດ",
     "Promotion": "ການສົ່ງເສີມ",

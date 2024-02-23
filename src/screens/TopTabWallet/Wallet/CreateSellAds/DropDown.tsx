@@ -41,6 +41,7 @@ const Dropdown: FC<Props> = ({ onChange, myContainerStyle }) => {
             setItems(formattedData);
             if (formattedData.length > 0) {
                 setValue(formattedData[1].value);
+                onChange(formattedData[1].value);
             }
         }
     }, []);

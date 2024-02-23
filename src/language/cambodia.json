@@ -34,7 +34,8 @@
     "User does not exist !": "អ្នកប្រើប្រាស់មិនមានទេ!",
     "You must accept the terms and conditions": "អ្នកត្រូវតែទទួលយកលក្ខខណ្ឌ",
     "Please check your email to verify your account": "សូមពិនិត្យអ៊ីមែលរបស់អ្នក ដើម្បីផ្ទៀងផ្ទាត់គណនីរបស់អ្នក",
-
+    "Amount must be a number": "ចំនួនត្រូវតិចជាមួយលេខ",
+    "Minimum amount must be a number": "ចំនួនអប្បបរមាត្រូវតិចជាមួយលេខ",
     "Email or password is incorrect!": "អ៊ីមែល ឬ ពាក្យសម្ងាត់ មិនត្រឹមត្រូវ!",
     "LOGIN": "ចូល",
     "Vietnamese": "វៀតណាម",
@@ -42,6 +43,7 @@
     "HELLO": "សួស្តី",
     "Ecosystem": "ប្រព័ន្ធអេកូ",
     "Promotion": "ការផ្សព្វផ្សាយ",
+    "Contact is required": "ទំនាក់ទំនងត្រូវបានទំនងផុតកំណត់",
     "Listing": "ការចុះបញ្ជី",
     "History": "ប្រវត្តិសាស្រ្ត",
     "Security 12 characters": "សន្តិសុខ 12 តួអក្សរ",

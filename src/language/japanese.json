@@ -34,7 +34,9 @@
     "You must accept the terms and conditions": "あなたは利用規約に同意する必要があります",
     "Please check your email to verify your account": "「アカウントを確認するにはメールを確認してください。」",
     "Transfer": "転送",
-
+    "Contact is required": "連絡先が必要です",
+    "Amount must be a number": "金額は数字でなければなりません",
+    "Minimum amount must be a number": "最小金額は数字でなければなりません",
     "LOGIN": "ログイン",
     "Vietnamese": "ベトナム語",
     "REGISTER": "登録する",

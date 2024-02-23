@@ -63,7 +63,6 @@ const Coins: React.FC<Props> = ({ t, style, isShowHeader, onCoinSelected }) => {
                                 </Box>
                             </Box>
                             <Txt bold color={colors.darkGreen}>
-                                {/* {`${Number(volume)} ${coin.symbolWallet}`} */}
                                 {`${Number(volume) < 0.0001 ? Number(volume) : volume.toLocaleString()} ${coin.symbolWallet}`}
                             </Txt>
                         </Btn>

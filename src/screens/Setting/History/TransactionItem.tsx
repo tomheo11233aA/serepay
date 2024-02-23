@@ -7,13 +7,15 @@ import { colors } from '@themes/colors';
 import { Transaction } from './All';
 import { socket } from '../../../helper/AxiosInstance';
 import { useTranslation } from 'react-i18next';
-
+import { userInfoUserSelector } from '@redux/selector/userSelector';
+import { useAppSelector } from '@hooks/redux';
 interface TransactionItemProps {
     item: Transaction;
 }
 
 const TransactionItem: React.FC<TransactionItemProps> = ({ item }) => {
     const { t } = useTranslation()
+    const userInfo = useAppSelector(userInfoUserSelector);
     const renderAction = (typeP2p: number, typeUser: number, idP2p: number) => {
         if (typeP2p === 2) {
             return (
@@ -82,7 +84,20 @@ const TransactionItem: React.FC<TransactionItemProps> = ({ item }) => {
 
     return (
         <View style={{ padding: 10, backgroundColor: colors.gray3, marginBottom: 20, borderRadius: 10, paddingVertical: 15 }}>
-            <Text style={{ fontWeight: 'bold', color: 'black' }}>{item.email} ({item.userName})</Text>
+            {item.typeUser === 1 || item.typeUser === 2 && item.userid === userInfo?.id ? (
+                <Text style={{ fontWeight: 'bold', color: colors.red }}>
+                    {t('You bought from')}
+                    {'\n'}
+                    {item.email} {item.userName}
+                </Text>
+            ) : (
+                <Text style={{ fontWeight: 'bold', color: colors.green }}>
+                    {t('You sold to')}
+                    {'\n'}
+                    {item.emailAds}
+                    ({item.userNameAds})
+                </Text>
+            )}
 
             <View style={{ marginTop: 10 }}>
                 <View style={{ flexDirection: 'row' }}>
@@ -93,7 +108,7 @@ const TransactionItem: React.FC<TransactionItemProps> = ({ item }) => {
                 <View style={{ flexDirection: 'row' }}>
                     <Text style={{ flex: 1, color: 'black' }}>{item.amount}</Text>
                     <Text style={{ flex: 1, color: 'black' }}>{item.symbol}</Text>
-                    <Text style={{ flex: 1, color: 'black' }}>{item.rate}</Text>
+                    <Text style={{ flex: 1, color: 'black' }}>{item.rate.toLocaleString('en-US', { maximumFractionDigits: 3 })}</Text>
                 </View>
             </View>
 
@@ -103,7 +118,7 @@ const TransactionItem: React.FC<TransactionItemProps> = ({ item }) => {
                     <Text style={{ fontWeight: 'bold', flex: 1, color: 'black' }}>{t('Created at')}</Text>
                 </View>
                 <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
-                    <Text style={{ flex: 1, color: 'black' }}>{item.pay}</Text>
+                    <Text style={{ flex: 1, color: 'black' }}>{`₫` + Math.round(item.pay).toLocaleString('en-US')}</Text>
                     <Text style={{ flex: 1, color: 'black' }}>{item.created_at}</Text>
                 </View>
             </View>

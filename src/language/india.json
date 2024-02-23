@@ -34,9 +34,11 @@
     "You must accept the terms and conditions": "आपको हमारे नियमों और शर्तों को मानना ​​होगा",
     "Please check your email to verify your account": "कृपया अपना खाता सत्यापित करने के लिए अपना ईमेल जांचें",
     "Transfer": "स्थानांतरण",
-
+    "Amount must be a number": "राशि एक संख्या होनी चाहिए",
+    "Minimum amount must be a number": "न्यूनतम राशि एक संख्या होनी चाहिए",
     "LOGIN": "लॉग इन करें",
     "Vietnamese": "वियतनामी",
+    "Contact is required": "संपर्क आवश्यक है",
     "REGISTER": "पंजीकरण करवाना",
     "HELLO": "नमस्ते",
     "Ecosystem": "पारिस्थितिकी तंत्र",

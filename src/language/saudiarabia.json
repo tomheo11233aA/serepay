@@ -32,9 +32,11 @@
     "Email is not define": "لم يتم تعريف البريد الإلكتروني",
     "Already have an account? ": "هل لديك حساب؟ ",
     "User does not exist !": "المستخدم غير موجود !",
+    "Contact is required": "الاتصال مطلوب",
     "You must accept the terms and conditions": "يجب عليك قبول الأحكام والشروط",
     "Please check your email to verify your account": "يرجى التحقق من بريدك الإلكتروني للتحقق من حسابك",
-
+    "Amount must be a number": "يجب أن يكون المبلغ رقمًا",
+    "Minimum amount must be a number": "يجب أن يكون المبلغ الأدنى رقمًا",
     "LOGIN": "تسجيل الدخول",
     "Vietnamese": "الفيتنامية",
     "REGISTER": "يسجل",
