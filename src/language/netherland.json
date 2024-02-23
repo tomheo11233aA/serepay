@@ -26,7 +26,8 @@
     "Update KYC fail": "Update KYC mislukt",
     "Are you sure you want to proceed?": "Weet je zeker dat je verder wilt gaan?",
     "Your transaction has been created": "Uw transactie is aangemaakt",
-
+    "Contact Information ": "Contactgegevens ",
+    "Enter contact information": "Voer contactgegevens in",
     "The email does not exist in the system.": "De e-mail bestaat niet in het systeem.",
     "Email is not define": "E-mail is niet gedefinieerd",
     "Already have an account? ": "Heeft u al een account?",

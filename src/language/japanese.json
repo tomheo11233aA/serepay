@@ -25,7 +25,8 @@
     "Update KYC fail": "「KYCの更新に失敗しました」",
     "Are you sure you want to proceed?": "「続行してもよろしいですか?」",
     "Your transaction has been created": "「トランザクションが作成されました」",
-
+    "Contact Information ": "連絡先情報 ",
+    "Enter contact information": "連絡先情報を入力してください",
     "The email does not exist in the system.": "「メールはシステムに存在しません。」",
     "Email is not define": "「メールアドレスが定義されていません」",
     "Already have an account? ": "すでにアカウントをお持ちですか？ ",

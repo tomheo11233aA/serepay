@@ -25,7 +25,8 @@
     "Update KYC fail": "עדכון KYC נכשל",
     "Are you sure you want to proceed?": "אתה בטוח שאתה רוצה להמשיך?",
     "Your transaction has been created": "העסקה שלך נוצרה",
-
+    "Contact Information ": "פרטי התקשרות ",
+    "Enter contact information": "הזן את פרטי ההתקשרות",
     "The email does not exist in the system.": "המייל לא קיים במערכת.",
     "Email is not define": "אימייל אינו מוגדר",
     "Already have an account? ": "כבר יש לך חשבון? ",

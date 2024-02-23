@@ -25,7 +25,8 @@
     "Update KYC fail": "अपडेट केवाईसी विफल",
     "Are you sure you want to proceed?": "क्या आप सुनिश्चित रूप से आगे बढ़ना चाहते हैं?",
     "Your transaction has been created": "आपका लेनदेन बन गया है",
-
+    "Contact Information ": "संपर्क जानकारी ",
+    "Enter contact information": "संपर्क जानकारी दर्ज करें",
     "The email does not exist in the system.": "ईमेल सिस्टम में मौजूद नहीं है।",
     "Email is not define": "ईमेल परिभाषित नहीं है",
     "Already have an account? ": "क्या आपके पास पहले से एक खाता मौजूद है? ",

@@ -25,7 +25,8 @@
     "Update KYC fail": "Aggiornamento KYC non riuscito",
     "Are you sure you want to proceed?": "Sei sicuro di voler procedere?",
     "Your transaction has been created": "La tua transazione è stata creata",
-
+    "Contact Information ": "Informazioni di contatto ",
+    "Enter contact information": "Inserisci informazioni di contatto",
     "The email does not exist in the system.": "L'e-mail non esiste nel sistema.",
     "Email is not define": "L'e-mail non è definita",
     "Already have an account? ": "Hai già un account? ",

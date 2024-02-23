@@ -26,7 +26,8 @@
     "Update KYC fail": "«Обновление KYC не удалось»",
     "Are you sure you want to proceed?": "Вы уверены, что хотите продолжить?",
     "Your transaction has been created": "«Ваша транзакция создана»",
-
+    "Contact Information ": "«Контактная информация»",
+    "Enter contact information": "«Введите контактную информацию»",
     "The email does not exist in the system.": "«Электронная почта не существует в системе».",
     "Email is not define": "«Электронная почта не определена»",
     "Already have an account? ": "«Уже есть аккаунт?»",

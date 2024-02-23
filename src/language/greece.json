@@ -25,7 +25,8 @@
     "Update KYC fail": "Αποτυχία ενημέρωσης KYC",
     "Are you sure you want to proceed?": "Είστε βέβαιοι ότι θέλετε να συνεχίσετε;",
     "Your transaction has been created": "Η συναλλαγή σας δημιουργήθηκε",
-
+    "Contact Information ": "Στοιχεία επικοινωνίας",
+    "Enter contact information": "Εισαγάγετε πληροφορίες επικοινωνίας",
     "The email does not exist in the system.": "Το email δεν υπάρχει στο σύστημα.",
     "Email is not define": "Το email δεν είναι καθορισμένο",
     "Already have an account? ": "Εχετε ήδη λογαριασμό? ",

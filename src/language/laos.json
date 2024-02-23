@@ -26,7 +26,8 @@
     "Update KYC fail": "ອັບເດດ KYC ລົ້ມເຫລວ",
     "Are you sure you want to proceed?": "ທ່ານແນ່ໃຈບໍ່ວ່າຕ້ອງການດຳເນີນການຕໍ່?",
     "Your transaction has been created": "ການເຮັດທຸລະກໍາຂອງທ່ານໄດ້ຖືກສ້າງຂື້ນ",
-
+    "Contact Information ": "ຂໍ້ມູນການຕິດຕໍ່",
+    "Enter contact information": "ກະລຸນາຕື່ມຂໍ້ມູນການຕິດຕໍ່",
     "The email does not exist in the system.": "ອີເມລ໌ບໍ່ມີຢູ່ໃນລະບົບ.",
     "Email is not define": "ອີເມວບໍ່ໄດ້ກໍານົດ",
     "Already have an account? ": "ມີບັນຊີແລ້ວບໍ?",
