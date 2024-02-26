@@ -308,3 +308,11 @@ export const createWalletBEP20 = function (data : any) {
     console.log(error);
   }
 }
+
+export const updatePassword = function (data : any) {
+  try {
+    return axiosService.post("/api/user/updatepassword", data);
+  } catch (error) {
+    console.log(error);
+  }
+}

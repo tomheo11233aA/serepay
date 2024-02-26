@@ -83,7 +83,8 @@ const List = ({ t }: Props) => {
     },
     {
       title: 'Change password',
-      icon: require('@images/setting/wifi.png')
+      icon: require('@images/setting/wifi.png'),
+      onClick: () => navigate(screens.CHANGE_PASSWORD)
     },
     {
       title: 'KYC',

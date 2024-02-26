@@ -7,9 +7,9 @@ import React from 'react'
 import Main from './Main'
 import Transaction from '@screens/TopTabWallet/P2p/Transaction'
 import ConfirmTransaction from '@screens/TopTabWallet/P2p/ConfirmTransaction'
+import ChangePassword from '@screens/ChangePassword'
 
 const Stack = createNativeStackNavigator()
-
 const Container = () => {
     return (
         <NavigationContainer ref={navigationRef}>
@@ -18,6 +18,7 @@ const Container = () => {
                 <Stack.Screen name={screens.MAIN} component={Main} />
                 <Stack.Screen name={screens.TRANSACTION} component={Transaction} />
                 <Stack.Screen name={screens.CONFIRM_TRANSACTION} component={ConfirmTransaction as React.FC} />
+                <Stack.Screen name={screens.CHANGE_PASSWORD} component={ChangePassword} />
             </Stack.Navigator>
         </NavigationContainer>
     )
