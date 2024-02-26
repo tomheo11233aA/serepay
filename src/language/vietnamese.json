@@ -24,6 +24,7 @@
     "Confirmation": "Xác nhận",
     "Cancel success": "Hủy thành công",
     "Update KYC fail": "Cập nhật KYC thất bại",
+    "Congrats! You have successfully turned on 2FA. If you want to turn off 2FA, please enter the OTP code below.": "Chúc mừng! Bạn đã bật 2FA thành công. Nếu bạn muốn tắt 2FA, vui lòng nhập mã OTP bên dưới.",
     "Are you sure you want to proceed?": "Bạn có chắc chắn muốn tiếp tục?",
     "Your transaction has been created": "Giao dịch của bạn đã được tạo",
     "Minimum amount must be less than amount": "Số lượng tối thiểu phải nhỏ hơn số lượng",

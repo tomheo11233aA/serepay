@@ -9,6 +9,7 @@
     "Transfer To UserName": "Trasferisci a nomeutente",
     "Do you want to exchange": "Vuoi scambiare",
     "for": "per",
+    "Congrats! You have successfully turned on 2FA. If you want to turn off 2FA, please enter the OTP code below.": "Congratulazioni! Hai attivato correttamente 2FA. Se vuoi disattivare 2FA, inserisci il codice OTP di seguito.",
     "Successful coin conversion! ": "Conversione della moneta riuscita!",
     "Insufficient balance": "Equilibrio insufficiente",
     "Minimum amount must be less than amount": "L'importo minimo deve essere inferiore all'importo",

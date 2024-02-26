@@ -12,6 +12,7 @@
     "Successful coin conversion! ": "تحويل العملة الناجح!",
     "Insufficient balance": "الرصيد غير كاف",
     "Transfer": "نقل",
+    "Congrats! You have successfully turned on 2FA. If you want to turn off 2FA, please enter the OTP code below.": "تهانينا! لقد قمت بتشغيل 2FA بنجاح. إذا كنت ترغب في إيقاف 2FA, يرجى إدخال رمز OTP أدناه.",
     "Minimum amount must be less than amount": "يجب أن يكون المبلغ الأدنى أقل من المبلغ",
     "Select Rate": "اختر السعر",
     "Select the rate you want to swap": "حدد السعر الذي تريد تبديله",

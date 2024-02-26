@@ -18,6 +18,7 @@
     "Please check your email to get your password back": "Şifrenizi geri almak için lütfen e-postanızı kontrol edin",
     "Password and rePassword not match": "Şifre ve rePassword eşleşmiyor",
     "Confirmation": "Onayla",
+    "Congrats! You have successfully turned on 2FA. If you want to turn off 2FA, please enter the OTP code below.": "Tebrikler! 2FA'yı başarıyla açtınız. 2FA'yı kapatmak istiyorsanız lütfen aşağıdaki OTP kodunu girin.",
     "Please fill all fields": "Lütfen tüm alanları doldurun",
     "Cancel success": "Başarıyı iptal et",
     "Update KYC fail": "KYC güncellemesi başarısız",

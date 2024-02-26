@@ -11,7 +11,7 @@
     "for": "สำหรับ",
     "Successful coin conversion! ": "การแปลงเหรียญสำเร็จ!",
     "Insufficient balance": "ยอดเงินไม่เพียงพอ",
-
+    "Congrats! You have successfully turned on 2FA. If you want to turn off 2FA, please enter the OTP code below.": "ยินดีด้วย! คุณได้เปิด 2FA สำเร็จแล้ว หากคุณต้องการปิด 2FA โปรดป้อนรหัส OTP ด้านล่าง",
     "Cancel failed": "การยกเลิกล้มเหลว",
     "Notification": "การแจ้งเตือน",
     "Please check your email to get your password back": "โปรดตรวจสอบอีเมลของคุณเพื่อรับรหัสผ่านคืน",

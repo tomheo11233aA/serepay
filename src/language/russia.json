@@ -12,6 +12,7 @@
     "Successful coin conversion! ": "«Успешная конвертация монет!»",
     "Insufficient balance": "Недостаточный баланс",
     "Transfer": "Перенос",
+    "Congrats! You have successfully turned on 2FA. If you want to turn off 2FA, please enter the OTP code below.": "«Поздравляем! Вы успешно включили 2FA. Если вы хотите отключить 2FA, введите код OTP ниже.»",
     "Minimum amount must be less than amount": "Минимальная сумма должна быть меньше суммы",
     "Select Rate": "Выберите тариф",
     "Select the rate you want to swap": "Выберите тариф, который вы хотите поменять",

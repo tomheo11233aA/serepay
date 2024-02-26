@@ -9,6 +9,7 @@
     "Transfer To UserName": "ໂອນໄປຫາຊື່ຜູ້ໃຊ້",
     "Do you want to exchange": "ເຈົ້າຕ້ອງການແລກປ່ຽນ",
     "for": "ສໍາລັບ",
+    "Congrats! You have successfully turned on 2FA. If you want to turn off 2FA, please enter the OTP code below.": "ຊົມເຊີຍ! ທ່ານໄດ້ເປີດ 2FA ສຳເລັດ. ຖ້າທ່ານຕ້ອງປິດ 2FA, ກະລຸນາໃສ່ລະຫັດ OTP ຂ້າມິດຕໍ່ລຸ່ມນີ້.",
     "Successful coin conversion! ": "ການແປງຫຼຽນທີ່ປະສົບຜົນສໍາເລັດ! ",
     "Insufficient balance": "ຍອດເງິນບໍ່ພຽງພໍ",
     "Transfer": "ໂອນ",

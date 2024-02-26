@@ -9,6 +9,7 @@
     "Transfer To UserName": "「ユーザー名に転送」",
     "Do you want to exchange": "「交換しませんか？」",
     "for": "のために",
+    "Congrats! You have successfully turned on 2FA. If you want to turn off 2FA, please enter the OTP code below.": "おめでとうございます！2FA を正常にオンにしました。2FA をオフにする場合は,以下の OTP コードを入力してください。",
     "Successful coin conversion! ": "「コイン変換成功！」",
     "Insufficient balance": "残高不足",
     "Minimum amount must be less than amount": "最小金額は金額より少なくなければなりません",
