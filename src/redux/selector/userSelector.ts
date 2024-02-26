@@ -22,6 +22,8 @@ export const configSelector = (state: RootState) => state.config.data
 
 export const config2Selector = (state: RootState) => state.config.data2
 
+export const config3Selector = (state: RootState) => state.config.data3
+
 export const selectedRateSelector = (state: RootState) => state.user.selectedRate
 
 export const socketConnectedSelector = (state: RootState) => state.coin.connected

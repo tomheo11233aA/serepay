@@ -16,13 +16,15 @@ interface IConfigState {
     status: 'idle' | 'loading' | 'succeeded' | 'failed';
     error: string | null;
     data2?: any;
+    data3?: any;
 }
 
 const initialState: IConfigState = {
     data: [],
     status: 'idle',
     error: null,
-    data2: []
+    data2: [],
+    data3: []
 };
 
 export const fetchConfig = createAsyncThunk('config/fetchConfig', async (data: IExchangeRateDisparity) => {
@@ -37,6 +39,18 @@ export const fetchConfig2 = createAsyncThunk('config/fetchConfig2', async () => 
             'Content-Type': 'application/json'
         },
         body: JSON.stringify({ "name": "exchangeRateSell" })
+    });
+    const json = await response.json();
+    return json.data;
+});
+
+export const fetchConfig3 = createAsyncThunk('config/fetchConfig3', async () => {
+    const response = await fetch('https://serepay.net/api/p2pBank/getConfig', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ "name": "exchangeRate" })
     });
     const json = await response.json();
     return json.data;
@@ -62,6 +76,11 @@ const configSlice = createSlice({
         builder.addCase(fetchConfig2.fulfilled, (state, action: PayloadAction<IConfig[]>) => {
             state.status = 'succeeded';
             state.data2 = action.payload;
+        });
+
+        builder.addCase(fetchConfig3.fulfilled, (state, action: PayloadAction<IConfig[]>) => {
+            state.status = 'succeeded';
+            state.data3 = action.payload;
         });
     }
 });

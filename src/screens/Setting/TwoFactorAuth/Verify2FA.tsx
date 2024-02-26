@@ -1,19 +1,17 @@
 import React, { useState } from 'react';
 import Btn from '@commom/Btn';
 import { turnOn2FA } from '@utils/userCallApi';
-import Box from '@commom/Box';
 import Txt from '@commom/Txt';
 import { colors } from '@themes/colors';
-import Safe from '@reuse/Safe';
 import { useTranslation } from 'react-i18next';
 import Input from '@commom/Input';
 import Icon from '@commom/Icon';
 import LinearGradient from 'react-native-linear-gradient';
-import { goBack, navigate } from '@utils/navigationRef';
+import { navigate } from '@utils/navigationRef';
 import { screens } from '@contants/screens';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import LottieView from 'lottie-react-native';
-import { View, Text, TouchableOpacity, TextInput } from 'react-native';
+import { View, Text, TouchableOpacity } from 'react-native';
+import { BOTTOM_TAB_HEIGHT } from '@utils/responsive';
 
 const Verify2FA = () => {
     const [code, setCode] = useState('');
@@ -99,11 +97,10 @@ const Verify2FA = () => {
 
                 </View>
                 <View style={{
-                    flexDirection: 'row', flex: 1,
+                    flexDirection: 'row',
                     height: '20%',
                     justifyContent: 'flex-end',
-                    paddingBottom: 20,
-                    marginTop: 350
+                    marginBottom: BOTTOM_TAB_HEIGHT
                 }}>
                     <Btn
                         onPress={() => {

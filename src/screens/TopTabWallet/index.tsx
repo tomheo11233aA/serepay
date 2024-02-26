@@ -65,7 +65,6 @@ const TopTabWallet = () => {
         <LinearGradient
             style={{
                 flex: 1,
-                marginBottom: Platform.OS === 'ios' ? 0 : hp('10%'),
             }}
             end={{ x: 1, y: 0.5 }}
             start={{ x: 0, y: 0.5 }}

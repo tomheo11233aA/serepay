@@ -84,11 +84,11 @@ const TransactionItem: React.FC<TransactionItemProps> = ({ item }) => {
 
     return (
         <View style={{ padding: 10, backgroundColor: colors.gray3, marginBottom: 20, borderRadius: 10, paddingVertical: 15 }}>
-            {item.typeUser === 1 || item.typeUser === 2 && item.userid === userInfo?.id ? (
+            {/* {item.typeUser === 1 || item.typeUser === 2 && item.userid === userInfo?.id ? (
                 <Text style={{ fontWeight: 'bold', color: colors.red }}>
                     {t('You bought from')}
                     {'\n'}
-                    {item.email} {item.userName}
+                    {item.email} ({item.userName})
                 </Text>
             ) : (
                 <Text style={{ fontWeight: 'bold', color: colors.green }}>
@@ -97,9 +97,9 @@ const TransactionItem: React.FC<TransactionItemProps> = ({ item }) => {
                     {item.emailAds}
                     ({item.userNameAds})
                 </Text>
-            )}
+            )} */}
 
-            <View style={{ marginTop: 10 }}>
+            <View style={{}}>
                 <View style={{ flexDirection: 'row' }}>
                     <Text style={{ fontWeight: 'bold', flex: 1, color: 'black' }}>{t('Amount')}</Text>
                     <Text style={{ fontWeight: 'bold', flex: 1, color: 'black' }}>{t('Coin')}</Text>

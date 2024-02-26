@@ -91,7 +91,7 @@ const P2p = () => {
         <Note t={t} />
         <ScrollView
           style={{ flex: 1, 
-            marginBottom: hp(8),
+            marginBottom: hp(18),
           }}
           showsVerticalScrollIndicator={false}>
           <BuyCoin t={t} type={'buy'} selectedCoin={selectedCoin} />

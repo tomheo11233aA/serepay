@@ -1,5 +1,5 @@
 import { Text, View, StyleSheet } from 'react-native'
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import Safe from '@reuse/Safe'
 import Scroll from '@commom/Scroll'
 import { colors } from '@themes/colors'
@@ -60,22 +60,33 @@ const ConfirmTransaction: React.FC<ConfirmTransactionProps> = ({ route }) => {
     const { t } = useTranslation();
     const [fakeLoading, setFakeLoading] = React.useState<boolean>(false)
     const [p2pInfoData, setP2pInfoData] = React.useState<any[]>([]);
-    const [type] = React.useState<string>('');
     const windowWidth = Dimensions.get('window').width;
     const borderWidth = 1;
     const adjustedWidth = windowWidth - 2 * (padding + borderWidth);
     const columnWidthRatios = [0.33, 0.67];
+    const [_side, _setSide] = useState<string | null>(null);
     const tableHead = [
         { title: t('Transaction Code'), data: 'code' },
         { title: t('Trader'), data: 'userName' },
         { title: t('Status'), data: 'typeP2p' },
         { title: t('Payment'), data: 'pay' },
-        { title: t('You are ') + (type === 'sell' ? t('buying') : t('selling')), data: 'side' },
+        { title: t('You are ') + (_side === 'buy' ? t('selling') : t('buying')), data: 'side' },
         { title: t('Exchange rate'), data: 'rate' },
         { title: t('Amount'), data: 'amount' },
         { title: t('Time'), data: 'created_at' },
         { title: t('Note'), data: 'content' }
     ];
+
+    useEffect(() => {
+        p2pInfoData.map((item: any) => {
+            if (userInfo?.id === item.userid) {
+                _setSide('sell');
+            } else {
+                _setSide('buy');
+            }
+        })
+    }, [p2pInfoData])
+
     useEffect(() => {
         const fetchData = async () => {
             try {
@@ -236,7 +247,7 @@ const ConfirmTransaction: React.FC<ConfirmTransactionProps> = ({ route }) => {
                                             />
                                         ]}
                                         style={{ ...styles.row, ...(index % 2 ? styles.rowAlternate : {}) }}
-                                        textStyle={{ margin: 6, flexShrink: 1, fontWeight: 'bold', fontFamily: fonts.AS, color: 'black'}}
+                                        textStyle={{ margin: 6, flexShrink: 1, fontWeight: 'bold', fontFamily: fonts.AS, color: 'black' }}
                                         widthArr={columnWidthRatios.map(ratio => adjustedWidth * ratio)}
                                     />
                                 ))

@@ -58,6 +58,9 @@ const ItemConver = ({
                 marginTop={10}
                 borderWidth={1}
                 borderColor={'#eaeaea'}
+                style={{
+                    alignItems: 'center'
+                }}
             >
                 <Input
                     flex={1}

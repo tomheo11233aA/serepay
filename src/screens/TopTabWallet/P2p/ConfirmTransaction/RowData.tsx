@@ -1,4 +1,4 @@
-import { Text, View } from 'react-native'
+import { Text, View, ActivityIndicator } from 'react-native'
 import React, { useState, useEffect } from 'react'
 import { colors } from '@themes/colors';
 import LottieView from 'lottie-react-native';
@@ -47,19 +47,21 @@ const RowData: React.FC<RowDataProps> = ({
     const vndRate = exchangeRate.find((rate) => rate.title === 'VND');
     const [profileId, setProfileId] = useState<number | null>(null);
     const [_side, _setSide] = useState<string | null>(null);
-
+    const [isLoading, setIsLoading] = useState<boolean>(true)
     useEffect(() => {
         if (userInfo?.id === item.userid) {
             _setSide('sell');
         } else {
             _setSide('buy');
         }
-    }, [userInfo]);
+    }, [userInfo, item]);
+
     useEffect(() => {
         if (userInfo) {
             setProfileId(userInfo.id)
         }
     }, [userInfo]);
+
     const date = moment(item.created_at).format('DD/MM/YYYY HH:mm:ss');
     const id = item.id;
     useEffect(() => {
@@ -106,12 +108,8 @@ const RowData: React.FC<RowDataProps> = ({
         return (
             <View style={{ marginRight: 20 }}>
                 <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-                    <LottieView
-                        style={{ width: 35, height: 35 }}
-                        source={require('@lottie/smallloading.json')}
-                        autoPlay
-                        loop
-                    />
+
+                    {isLoading && <ActivityIndicator size="small" color="#0000ff" />}
                     <Text style={{ color: 'black', flexShrink: 1, fontFamily: fonts.AS, marginLeft: 5 }}>{t('Waiting for payment from the bank')}</Text>
                 </View>
                 <Countdown createdAt={item.created_at} />
@@ -140,7 +138,8 @@ const RowData: React.FC<RowDataProps> = ({
     if (header.data === 'side') {
         return (
             <Text style={{ color: 'black', flexShrink: 1, fontFamily: fonts.AS, marginLeft: 5 }}>
-                <Text style={{ color: _side === 'buy' ? colors.green2 : '#ff0000', flexShrink: 1, fontFamily: fonts.AS, marginLeft: 5 }}>
+                <Text
+                    style={{ color: _side === 'buy' ? '#ff0000' : colors.green2, flexShrink: 1, fontFamily: fonts.AS, marginLeft: 5 }}>
                     {item.amount}
                 </Text>
                 {' ' + item.symbol}
@@ -149,24 +148,25 @@ const RowData: React.FC<RowDataProps> = ({
     }
     if (header.data === 'rate') {
         return (
-            <Text style={{ color: '#ff0000', flexShrink: 1, fontFamily: fonts.AS, marginLeft: 5 }}>{item.rate}</Text>
+            <Text style={{ color: '#ff0000', flexShrink: 1, fontFamily: fonts.AS, marginLeft: 5 }}>${(item.rate).toLocaleString('en-US', { maximumFractionDigits: 2 })}</Text>
         );
     }
+
     if (header.data === 'amount') {
         return (
             <Text style={{ color: '#ff0000', flexShrink: 1, fontFamily: fonts.AS, marginLeft: 5 }}>{'₫' + Math.round(item.pay).toLocaleString('en-US')}
                 <Text style={{ color: 'black', flexShrink: 1, fontFamily: fonts.AS, marginLeft: 5 }}>
-                    {t(' Including transaction fee: 0 VND and transfer fee: ')}
+                    {' '} ({t('Including transaction fee: 0 VND and transfer fee: ')}
                     {
                         _side === 'buy'
                             ? vndRate
                                 ? <Text style={{ color: '#ff0000', flexShrink: 1, fontFamily: fonts.AS }}>{(Math.round(item.pay - item.amount * (item.rate * vndRate.rate)).toLocaleString('en-US') + ' VND')}</Text>
                                 : 'vndRate is undefined'
                             : vndRate
-                                ? (Math.round(item.amount * (item.rate * vndRate.rate) - item.pay).toLocaleString('en-US') + ' VND')
+                                ? <Text style={{ color: '#ff0000', flexShrink: 1, fontFamily: fonts.AS }}>{(Math.round(item.pay - item.amount * (item.rate * vndRate.rate)).toLocaleString('en-US') + ' VNĐ')}
+                                </Text>
                                 : 'vndRate is undefined'
-                    }
-                    {' '}
+                    })
                 </Text>
             </Text>
         );

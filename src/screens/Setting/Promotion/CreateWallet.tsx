@@ -15,9 +15,10 @@ import Clipboard from '@react-native-clipboard/clipboard';
 import { getDepositHistory } from '@utils/userCallApi';
 import { IHistoryRecharge } from '@models/WALLET/historyRecharge';
 import LottieView from 'lottie-react-native';
-import AxiosInstance from '../../../helper/AxiosInstance';
+import AxiosInstance from '@helper/AxiosInstance';
 import { colors } from '@themes/colors';
 import { Alert } from 'react-native';
+import { roundDecimalValues } from '@helper/function/roundCoin';
 
 type RootStackParamList = {
     Deposit: { symbol: string, address: string };
@@ -178,7 +179,7 @@ const CreateWallet: React.FC<DepositProps> = ({ route }) => {
                 </View>
 
                 <View style={{ justifyContent: 'center', marginTop: 20, zIndex: -1 }}>
-                    <Txt paddingHorizontal={20} fontFamily={fonts.AS} size={16} bold style={{ marginBottom: 10 }}>{t('Desposite Address')}</Txt>
+                    <Txt paddingHorizontal={20} fontFamily={fonts.AS} size={16} bold style={{ marginBottom: 10 }}>{t('Deposite Address')}</Txt>
                     <View style={{ alignSelf: 'center' }}>
                         {address ? <QRCode value={address} /> : <Txt>No address provided</Txt>}
                     </View>
@@ -220,7 +221,7 @@ const CreateWallet: React.FC<DepositProps> = ({ route }) => {
                                                 </View>
                                                 <View style={{ flexDirection: 'row', alignContent: 'center', marginTop: 10, alignItems: 'center', marginBottom: 7 }}>
                                                     <Txt fontFamily={fonts.LR} size={16}>{t('Final Amount:')}</Txt>
-                                                    <Txt marginLeft={20} color={colors.green} fontFamily={fonts.OSB} size={16}> +{item?.before_amount}</Txt>
+                                                    <Txt marginLeft={20} color={colors.green} fontFamily={fonts.OSB} size={16}> +{roundDecimalValues(item?.before_amount, 10001)}</Txt>
                                                     <Icon marginLeft={5} size={15} source={{ uri: `${keys.HOSTING_API}${coin?.image}` }} />
                                                 </View>
                                             </View>

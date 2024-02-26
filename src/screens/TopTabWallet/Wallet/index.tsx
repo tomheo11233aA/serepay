@@ -107,7 +107,8 @@ const Wallet = () => {
           </Txt>
         </Box>
       </Box>
-      <Box flex={1} marginTop={hp('2.5%')} borderTopLeftRadius={20} borderTopRightRadius={20} backgroundColor={'white'}>
+      <Box flex={1} marginTop={hp('2.5%')} borderTopLeftRadius={20} borderTopRightRadius={20} backgroundColor={'white'} marginBottom={hp(10)}
+      >
         <Options t={t} />
         <Coins
           style={{ paddingBottom: hp('20%') }}

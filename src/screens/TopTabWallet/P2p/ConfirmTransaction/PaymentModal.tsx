@@ -140,7 +140,7 @@ const PaymentModal: React.FC<PaymentModalProps> = ({ visible, hideModal, selecte
                             >
                                 {t('Account number: ')}
                             </Txt>
-                            <Txt style={{ marginBottom: 5, color: colors.green, fontWeight: 'bold' }}>{selectedBankNumber}</Txt>
+                            <Txt style={{ marginBottom: 5, color: colors.green2, fontWeight: 'bold' }}>{selectedBankNumber}</Txt>
                         </View>
                         <TouchableOpacity
                             onPress={() => {
@@ -181,7 +181,7 @@ const PaymentModal: React.FC<PaymentModalProps> = ({ visible, hideModal, selecte
                     <View style={{ flexDirection: 'row', marginBottom: 5, justifyContent: 'space-between' }}>
                         <View style={{ flexDirection: 'row', marginBottom: 5 }}>
                             <Txt fontFamily={fonts.OSB} style={{ marginBottom: 5 }}>{t('Transfer content: ')}</Txt>
-                            <Txt fontFamily={fonts.OSB} style={{ marginBottom: 5, color: colors.green, fontWeight: 'bold' }}>{content}</Txt>
+                            <Txt fontFamily={fonts.OSB} style={{ marginBottom: 5, color: colors.green2, fontWeight: 'bold' }}>{content}</Txt>
                         </View>
                         <TouchableOpacity
                             onPress={() => {
@@ -199,7 +199,7 @@ const PaymentModal: React.FC<PaymentModalProps> = ({ visible, hideModal, selecte
                     <View style={{ flexDirection: 'row', marginBottom: 5, justifyContent: 'space-between' }}>
                         <View style={{ flexDirection: 'row', marginBottom: 5 }}>
                             <Txt fontFamily={fonts.OSB} style={{ marginBottom: 5 }}>{t('With amount: ')}</Txt>
-                            <Txt style={{ marginBottom: 5, color: colors.green, fontWeight: 'bold' }}>{pay.toLocaleString()}đ</Txt>
+                            <Txt style={{ marginBottom: 5, color: colors.green2, fontWeight: 'bold' }}>₫{Math.round(pay).toLocaleString('en-US')}</Txt>
                         </View>
                         <TouchableOpacity
                             onPress={() => {

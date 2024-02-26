@@ -42,31 +42,31 @@ const AllHistory = () => {
   const notification = useAppSelector(notificationSelector);
   const navigation = useNavigation();
 
-  useEffect(() => {
-    const unsubscribe = navigation.addListener('focus', () => {
-      const loadAgain = async () => {
-        if (!loading && hasMore) {
-          setLoading(true);
-          const response = await getListHistoryP2p({ page: 1, limit: 10 });
-          if (Array.isArray(response?.data?.array)) {
-            setData(response.data.array);
-            if (response.data.array.length === 0) {
-              setHasMore(false);
-            }
-          } else {
-            console.error('response.data.array is not an array:', response?.data?.array);
-          }
-          setLoading(false);
-        }
-      }
-      setData([]);
-      setPage(2);
-      setHasMore(true);
-      loadAgain();
-      setLoading(false);
-    });
-    return unsubscribe;
-  }, [navigation]);
+  // useEffect(() => {
+  //   const unsubscribe = navigation.addListener('focus', () => {
+  //     const loadAgain = async () => {
+  //       if (!loading && hasMore) {
+  //         setLoading(true);
+  //         const response = await getListHistoryP2p({ page: 1, limit: 10 });
+  //         if (Array.isArray(response?.data?.array)) {
+  //           setData(response.data.array);
+  //           if (response.data.array.length === 0) {
+  //             setHasMore(false);
+  //           }
+  //         } else {
+  //           console.error('response.data.array is not an array:', response?.data?.array);
+  //         }
+  //         setLoading(false);
+  //       }
+  //     }
+  //     setData([]);
+  //     setPage(2);
+  //     setHasMore(true);
+  //     loadAgain();
+  //     setLoading(false);
+  //   });
+  //   return unsubscribe;
+  // }, [navigation]);
 
   useEffect(() => {
     loadMoreData();
