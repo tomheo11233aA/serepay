@@ -18,7 +18,7 @@ import { useAppSelector } from '@hooks/redux'
 import { coinListSelector } from '@redux/selector/userSelector'
 import { ICoin } from '@models/coin'
 import CoinModal from '@commom/Modal/CoinModal'
-import { configSelector } from '@redux/selector/userSelector'
+import { config2Selector } from '@redux/selector/userSelector'
 import { companyAddAds } from '@utils/userCallApi'
 import { ICompanyAddAds } from '@models/P2P/COMPANY/companyAddAds'
 import { selectedRateSelector } from '@redux/selector/userSelector'
@@ -35,7 +35,7 @@ const CreateBuyAds = () => {
     const { t } = useTranslation()
     const coins = useAppSelector(coinListSelector)
     const selectedRate = useAppSelector(selectedRateSelector)
-    const config = useAppSelector(configSelector);
+    const config2 = useAppSelector(config2Selector);
     const [myValue, setMyValue] = React.useState(0);
     const [, setSelectedBank] = React.useState(null);
     const [, setNameBanking] = React.useState('')
@@ -55,17 +55,17 @@ const CreateBuyAds = () => {
     }
 
     useEffect(() => {
-        if (config) {
-            const newValue = config.length > 0 ? config[0].value : 0;
+        if (config2) {
+            const newValue = config2.length > 0 ? config2[0].value : 0;
             setMyValue(newValue);
         }
-    }, [config])
+    }, [config2])
 
     const price = useMemo(() => {
         let price = 0;
-        price = selectedCoin && selectedCoin.price !== undefined ? selectedCoin.price + (selectedCoin.price * (myValue / 100)) : 0;
+        price = selectedCoin && selectedCoin.price !== undefined ? selectedCoin.price - (selectedCoin.price * (myValue / 100)) : 0;
         return price * selectedRate.rate;
-    }, [selectedCoin, myValue]);
+    }, [selectedCoin, myValue, selectedRate]);
 
     useEffect(() => {
         if (!selectedCoin) {
@@ -144,9 +144,12 @@ const CreateBuyAds = () => {
                     hideModal={hideModal}
                     t={t}
                 />
-                <Box
+                <Btn
+                    onPress={() => goBack()}
                     row
-                    alignCenter
+                    style={{
+                        justifyContent: 'flex-start',
+                    }}
                     paddingTop={10}
                 >
                     <TouchableOpacity onPress={() => goBack()}>
@@ -158,7 +161,7 @@ const CreateBuyAds = () => {
                     <Txt bold color={colors.violet} size={18}>
                         {`${t('Create new sell advertisement')}`}
                     </Txt>
-                </Box>
+                </Btn>
                 <Box flex={1} marginTop={20}>
                     <SafeAreaView>
                         <Txt fontFamily={fonts.LR} line lineHeight={18} onPress={() => navigate(screens.CREATE_BUY_ADS)}>{t('Do you want to buy ?')}</Txt>
@@ -174,7 +177,9 @@ const CreateBuyAds = () => {
                         </Box>
                         <Box row marginTop={20} style={{ alignItem: 'center' }}>
                             <Txt fontFamily={fonts.LR}>{t('Market Buy Price:')}</Txt>
-                            <Txt marginLeft={5} fontFamily={fonts.OSB}>{`${price.toLocaleString()} ${selectedRate.title}`}</Txt>
+                            <Txt marginLeft={5} fontFamily={fonts.OSB}>
+                                {`${selectedRate.title === 'VND' ? Math.round(price).toLocaleString() : price.toLocaleString()} ${selectedRate.title}`}
+                            </Txt>
                         </Box>
                         <Txt size={20} marginTop={20} fontFamily={fonts.LR} lineHeight={25}>{t('Amount')}</Txt>
                         <Box style={{ alignItem: 'center' }}>

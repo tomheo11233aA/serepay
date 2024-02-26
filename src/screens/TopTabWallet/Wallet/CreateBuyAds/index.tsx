@@ -19,7 +19,7 @@ import { useAppSelector } from '@hooks/redux'
 import { coinListSelector } from '@redux/selector/userSelector'
 import { ICoin } from '@models/coin'
 import CoinModal from '@commom/Modal/CoinModal'
-import { configSelector } from '@redux/selector/userSelector'
+import { config3Selector } from '@redux/selector/userSelector'
 import { companyAddAds } from '@utils/userCallApi'
 import { ICompanyAddAds } from '@models/P2P/COMPANY/companyAddAds'
 import { selectedRateSelector } from '@redux/selector/userSelector'
@@ -33,7 +33,7 @@ const CreateBuyAds = () => {
     const { t } = useTranslation()
     const coins = useAppSelector(coinListSelector)
     const selectedRate = useAppSelector(selectedRateSelector)
-    const config = useAppSelector(configSelector);
+    const config3 = useAppSelector(config3Selector);
     const [myValue, setMyValue] = React.useState(0);
     const { handleSubmit, formState: { errors }, setValue } = useForm({
         resolver: yupResolver(buyAdvertisementSchema)
@@ -48,11 +48,11 @@ const CreateBuyAds = () => {
     }, [hideModal]);
     const dispatch: AppDispatch = useAppDispatch()
     useEffect(() => {
-        if (config) {
-            const newValue = config.length > 0 ? config[0].value : 0;
+        if (config3) {
+            const newValue = config3.length > 0 ? config3[0].value : 0;
             setMyValue(newValue);
         }
-    }, [config])
+    }, [config3])
 
     const price = useMemo(() => {
         let price = 0;
@@ -129,9 +129,12 @@ const CreateBuyAds = () => {
                     hideModal={hideModal}
                     t={t}
                 />
-                <Box
+                <Btn
+                    onPress={() => goBack()}
                     row
-                    alignCenter
+                    style={{
+                        justifyContent: 'flex-start',
+                    }}
                     paddingTop={10}
                 >
                     <TouchableOpacity onPress={() => goBack()}>
@@ -143,7 +146,7 @@ const CreateBuyAds = () => {
                     <Txt bold color={colors.violet} size={18}>
                         {`${t('Create new buy advertisement')}`}
                     </Txt>
-                </Box>
+                </Btn>
                 <Box flex={1} marginTop={20}>
                     <SafeAreaView>
                         <Txt lineHeight={18} line fontFamily={fonts.LR} onPress={() => navigate(screens.CREATE_SELL_ADS)}>{t('Do you want to sell ?')}</Txt>
@@ -158,7 +161,9 @@ const CreateBuyAds = () => {
                         </Box>
                         <Box row marginTop={20} style={{ alignItem: 'center' }}>
                             <Txt fontFamily={fonts.LR}>{t('Market Buy Price:')}</Txt>
-                            <Txt marginLeft={5} fontFamily={fonts.OSB}>{`${price.toLocaleString()} ${selectedRate.title}`}</Txt>
+                            <Txt marginLeft={5} fontFamily={fonts.OSB}>
+                                {`${selectedRate.title === 'VND' ? Math.round(price).toLocaleString() : price.toLocaleString()} ${selectedRate.title}`}
+                            </Txt>
                         </Box>
                         <Txt size={20} marginTop={20} fontFamily={fonts.LR} lineHeight={25}>{t('Amount')}</Txt>
                         <Box marginTop={20} style={{ alignItem: 'center' }} >
