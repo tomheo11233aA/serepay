@@ -26,6 +26,7 @@ import { IHistoryWidthdraw } from '@models/WALLET/gethHstoryWidthDraw'
 import { useAppDispatch } from '@hooks/redux'
 import { AppDispatch } from '@redux/store/store'
 import { fetchUserWallet } from '@redux/slice/userSlice'
+import { TouchableOpacity } from 'react-native'
 
 interface Props {
     route?: WithdrawProps['route'];
@@ -125,20 +126,22 @@ const WalletBTC: React.FC<Props> = ({ route }) => {
     useEffect(() => {
         loadMoreData();
     }, []);
-
+    const [selectedToken, setSelectedToken] = React.useState<string>('BEP20');
     return (
         <>
             <View style={{ marginTop: 20 }}>
-                <View style={{ flexDirection: 'row', justifyContent: 'flex-start' }}>
-                    {/* <View style={{ padding: 8, backgroundColor: colors.gray2, borderRadius: 5 }}>
-                        <Text style={{ fontFamily: fonts.LR, color: 'black' }}>TRC20</Text>
-                    </View>
-                    <View style={{ padding: 8, backgroundColor: colors.gray2, borderRadius: 5, marginHorizontal: 10 }}>
-                        <Text style={{ fontFamily: fonts.LR, color: 'black' }}>ERC20</Text>
-                    </View> */}
+                {/* <View style={{ flexDirection: 'row', justifyContent: 'flex-start' }}>
                     <View style={{ padding: 8, backgroundColor: colors.violet, borderRadius: 5 }}>
                         <Text style={{ fontFamily: fonts.LR, color: 'white' }}>BEP20</Text>
                     </View>
+                </View> */}
+                <View style={{ flexDirection: 'row', justifyContent: 'flex-start' }}>
+                    <TouchableOpacity onPress={() => setSelectedToken('BEP20')} style={{ padding: selectedToken === 'BEP20' ? 10 : 8, backgroundColor: selectedToken === 'BEP20' ? colors.violet : colors.gray2, borderRadius: 5 }}>
+                        <Text style={{ fontFamily: fonts.LR, color: selectedToken === 'BEP20' ? 'white' : 'black' }}>BEP20</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity onPress={() => setSelectedToken('AMC20')} style={{ padding: selectedToken === 'AMC20' ? 10 : 8, backgroundColor: selectedToken === 'AMC20' ? colors.violet : colors.gray2, borderRadius: 5, marginHorizontal: 10 }}>
+                        <Text style={{ fontFamily: fonts.LR, color: selectedToken === 'AMC20' ? 'white' : 'black' }}>AMC20</Text>
+                    </TouchableOpacity>
                 </View>
                 <Text style={{ fontFamily: fonts.LR, color: 'black', marginTop: 20, fontSize: 18 }}>{t('Address')}</Text>
                 <WalletCoinInput
