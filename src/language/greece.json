@@ -30,6 +30,10 @@
     "Enter contact information": "Εισαγάγετε πληροφορίες επικοινωνίας",
     "The email does not exist in the system.": "Το email δεν υπάρχει στο σύστημα.",
     "Email is not define": "Το email δεν είναι καθορισμένο",
+    "You must keep a minimum 0.02 BNB in your wallet to secure enough gas fees for trading BEP20 tokens.": "Πρέπει να διατηρήσετε ένα ελάχιστο ποσό 0,02 BNB στο πορτοφόλι σας για να εξασφαλίσετε αρκετές χρεώσεις αερίου για διαπραγμάτευση κουπονιών BEP20.",
+    "Transaction fees or gas fees are not fixed, subject to changes depending on peak time and off peak of the blockchain networks": "Τα τέλη συναλλαγής ή τα τέλη φυσικού αερίου δεν είναι σταθερά, υπόκεινται σε αλλαγές ανάλογα με την ώρα αιχμής και εκτός αιχμής των δικτύων blockchain",
+    "Estimated completion time: 2 minutes. if you did not recieved your withdraw in 15 minutes, please contact our support team at support@serepay.net": "Εκτιμώμενος χρόνος ολοκλήρωσης: 2 λεπτά. Εάν δεν λάβατε την απόσυρσή σας σε 15 λεπτά, επικοινωνήστε με την ομάδα υποστήριξης στη διεύθυνση support@serepay.net",
+
     "Already have an account? ": "Εχετε ήδη λογαριασμό? ",
     "User does not exist !": "Ο χρήστης δεν υπάρχει !",
     "You must accept the terms and conditions": "Πρέπει να αποδεχτείτε τους όρους και προϋποθέσεις",

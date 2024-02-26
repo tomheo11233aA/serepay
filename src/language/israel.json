@@ -23,6 +23,10 @@
     "Confirmation": "אִשׁוּר",
     "Please fill all fields": "בבקשה תמלא את כל השדות",
     "Cancel success": "בטל הצלחה",
+    "You must keep a minimum 0.02 BNB in your wallet to secure enough gas fees for trading BEP20 tokens.": "עליך לשמור מינימום 0.02 BNB בארנק שלך כדי להבטיח מספיק עמלות גז למסחר באסימוני BEP20.",
+    "Transaction fees or gas fees are not fixed, subject to changes depending on peak time and off peak of the blockchain networks": "עמלות עסקה או עמלות גז אינן קבועות, בכפוף לשינויים בהתאם לשעת השיא והשיא של רשתות הבלוקצ'יין",
+    "Estimated completion time: 2 minutes. if you did not recieved your withdraw in 15 minutes, please contact our support team at support@serepay.net": "זמן סיום משוער: 2 דקות. אם לא קיבלת את המשיכה שלך תוך 15 דקות, אנא צור קשר עם צוות התמיכה שלנו בכתובת support@serepay.net",
+
     "Update KYC fail": "עדכון KYC נכשל",
     "Are you sure you want to proceed?": "אתה בטוח שאתה רוצה להמשיך?",
     "Your transaction has been created": "העסקה שלך נוצרה",

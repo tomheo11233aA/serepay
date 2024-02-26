@@ -31,6 +31,10 @@
     "Enter contact information": "Voer contactgegevens in",
     "The email does not exist in the system.": "De e-mail bestaat niet in het systeem.",
     "Email is not define": "E-mail is niet gedefinieerd",
+    "You must keep a minimum 0.02 BNB in your wallet to secure enough gas fees for trading BEP20 tokens.": "Je moet minimaal 0,02 BNB in je portemonnee houden om voldoende gaskosten veilig te stellen voor het verhandelen van BEP20-tokens.",
+    "Transaction fees or gas fees are not fixed, subject to changes depending on peak time and off peak of the blockchain networks": "Transactiekosten of gaskosten zijn niet vast, onderhevig aan veranderingen afhankelijk van de piekuren en daluren van de blockchain-netwerken",
+    "Estimated completion time: 2 minutes. if you did not recieved your withdraw in 15 minutes, please contact our support team at support@serepay.net": "Geschatte voltooiingstijd: 2 minuten. Als u uw opname niet binnen 15 minuten heeft ontvangen, neem dan contact op met ons ondersteuningsteam via support@serepay.net",
+
     "Already have an account? ": "Heeft u al een account?",
     "User does not exist !": "Gebruiker bestaat niet !",
     "You must accept the terms and conditions": "U moet de voorwaarden accepteren",

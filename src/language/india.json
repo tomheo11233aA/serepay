@@ -27,6 +27,10 @@
     "Are you sure you want to proceed?": "क्या आप सुनिश्चित रूप से आगे बढ़ना चाहते हैं?",
     "Your transaction has been created": "आपका लेनदेन बन गया है",
     "Contact Information ": "संपर्क जानकारी ",
+    "You must keep a minimum 0.02 BNB in your wallet to secure enough gas fees for trading BEP20 tokens.": "बीईपी20 टोकन के व्यापार के लिए पर्याप्त गैस शुल्क सुरक्षित करने के लिए आपको अपने वॉलेट में न्यूनतम 0.02 बीएनबी रखना होगा।",
+    "Transaction fees or gas fees are not fixed, subject to changes depending on peak time and off peak of the blockchain networks": "लेन-देन शुल्क या गैस शुल्क तय नहीं हैं, ब्लॉकचेन नेटवर्क के पीक टाइम और ऑफ पीक के आधार पर परिवर्तन के अधीन हैं",
+    "Estimated completion time: 2 minutes. if you did not recieved your withdraw in 15 minutes, please contact our support team at support@serepay.net": "अनुमानित समापन समय: 2 मिनट। यदि आपको 15 मिनट में अपना निकासी प्राप्त नहीं हुआ है, तो कृपया support@serepay.net पर हमारी सहायता टीम से संपर्क करें",
+
     "Enter contact information": "संपर्क जानकारी दर्ज करें",
     "The email does not exist in the system.": "ईमेल सिस्टम में मौजूद नहीं है।",
     "Email is not define": "ईमेल परिभाषित नहीं है",

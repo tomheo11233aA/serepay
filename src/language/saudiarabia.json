@@ -23,6 +23,10 @@
     "Password and rePassword not match": "كلمة المرور وكلمة المرور غير متطابقتين",
     "Confirmation": "تأكيد",
     "Please fill all fields": "لو سمحت أملأ كل الحقول",
+    "You must keep a minimum 0.02 BNB in your wallet to secure enough gas fees for trading BEP20 tokens.": "يجب عليك الاحتفاظ بحد أدنى 0.02 BNB في محفظتك لتأمين ما يكفي من رسوم الغاز لتداول رموز BEP20.",
+    "Transaction fees or gas fees are not fixed, subject to changes depending on peak time and off peak of the blockchain networks": "رسوم المعاملات أو رسوم الغاز ليست ثابتة، وتخضع للتغييرات اعتمادًا على وقت الذروة وخارج أوقات الذروة لشبكات blockchain",
+    "Estimated completion time: 2 minutes. if you did not recieved your withdraw in 15 minutes, please contact our support team at support@serepay.net": "الوقت المقدر للإكمال: دقيقتين. إذا لم تستلم سحبك خلال 15 دقيقة، فيرجى الاتصال بفريق الدعم لدينا على support@serepay.net",
+
     "Cancel success": "إلغاء النجاح",
     "Update KYC fail": "فشل تحديث KYC",
     "Are you sure you want to proceed?": "هل انت متأكد انك تريد المتابعة؟",

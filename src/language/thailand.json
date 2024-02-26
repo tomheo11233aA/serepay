@@ -40,6 +40,10 @@
     "LOGIN": "เข้าสู่ระบบ",
     "Vietnamese": "เวียดนาม",
     "REGISTER": "ลงทะเบียน",
+    "You must keep a minimum 0.02 BNB in your wallet to secure enough gas fees for trading BEP20 tokens.": "คุณต้องเก็บเงินขั้นต่ำ 0.02 BNB ไว้ในกระเป๋าสตางค์ของคุณเพื่อรักษาค่าธรรมเนียม gas ให้เพียงพอสำหรับการซื้อขายโทเค็น BEP20",
+    "Transaction fees or gas fees are not fixed, subject to changes depending on peak time and off peak of the blockchain networks": "ค่าธรรมเนียมการทำธุรกรรมหรือค่าธรรมเนียมก๊าซไม่คงที่ อาจมีการเปลี่ยนแปลงขึ้นอยู่กับช่วงเวลาเร่งด่วนและช่วงจุดสูงสุดของเครือข่ายบล็อคเชน",
+    "Estimated completion time: 2 minutes. if you did not recieved your withdraw in 15 minutes, please contact our support team at support@serepay.net": "เวลาดำเนินการเสร็จสิ้นโดยประมาณ: 2 นาที หากคุณไม่ได้รับการถอนเงินภายใน 15 นาที โปรดติดต่อทีมสนับสนุนของเราที่ support@serepay.net",
+
     "Your password must be at least 8 characters long and contain at least one number and one letter.": "รหัสผ่านของคุณต้องมีความยาวอย่างน้อย 8 ตัวอักษรและมีอย่างน้อยหนึ่งตัวเลขและหนึ่งตัวอักษร",
     "Current password is required": "รหัสผ่านปัจจุบันจำเป็น",
     "New password is required": "รหัสผ่านใหม่จำเป็น",

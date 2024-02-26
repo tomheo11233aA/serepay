@@ -28,6 +28,10 @@
     "Your transaction has been created": "「トランザクションが作成されました」",
     "Contact Information ": "連絡先情報 ",
     "Enter contact information": "連絡先情報を入力してください",
+    "You must keep a minimum 0.02 BNB in your wallet to secure enough gas fees for trading BEP20 tokens.": "「BEP20トークンを取引するための十分なガス料金を確保するには、ウォレットに最低0.02BNBを保持する必要があります。」",
+    "Transaction fees or gas fees are not fixed, subject to changes depending on peak time and off peak of the blockchain networks": "「取引手数料やガス料金は固定ではなく、ブロックチェーンネットワークのピーク時とオフピークに応じて変更される可能性があります。」",
+    "Estimated completion time: 2 minutes. if you did not recieved your withdraw in 15 minutes, please contact our support team at support@serepay.net": "「推定完了時間: 2 分。15 分以内に出金を受け取らなかった場合は、サポート チーム (support@serepay.net) までご連絡ください。」",
+
     "The email does not exist in the system.": "「メールはシステムに存在しません。」",
     "Email is not define": "「メールアドレスが定義されていません」",
     "Already have an account? ": "すでにアカウントをお持ちですか？ ",

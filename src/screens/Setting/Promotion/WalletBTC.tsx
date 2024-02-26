@@ -185,9 +185,9 @@ const WalletBTC: React.FC<Props> = ({ route }) => {
                     }}>{roundDecimalValues(maxAvailable, 1)} {route?.params?.symbol}</Text>
                 </View>
                 <View style={{ marginTop: 15, paddingRight: wp('3%') }}>
-                    <Warn title={t('You must keep a minimum of 20 TRX in your wallet to secure enough gas fees for trading TRC20 tokens.')} />
-                    <Warn title={t('The overhead fees are not fixed, subject to change depending on the state of the blockchain networks.')} />
-                    <Warn title={t('Estimated completion time: 2 minutes.')} />
+                    <Warn title={t('You must keep a minimum 0.02 BNB  in your wallet to secure enough gas fees for trading BEP20 tokens.')} />
+                    <Warn title={t('Transaction fees or gas fees are not fixed, subject to changes depending on peak time and off peak of the blockchain networks')} />
+                    <Warn title={t('Estimated completion time: 2 minutes. if you did not recieved your withdraw in 15 minutes, please contact our support team at support@serepay.net')} />
                 </View>
                 <Btn
                     onPress={handleSubmit(handleSend)}

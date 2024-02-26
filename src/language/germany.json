@@ -32,6 +32,10 @@
     "Email is not define": "„E-Mail ist nicht definiert",
     "Already have an account? ": "Sie haben bereits ein Konto? ",
     "User does not exist !": "Benutzer existiert nicht !",
+    "You must keep a minimum 0.02 BNB in your wallet to secure enough gas fees for trading BEP20 tokens.": "„Sie müssen mindestens 0,02 BNB in Ihrem Wallet haben, um genügend Gasgebühren für den Handel mit BEP20-Tokens zu sichern.",
+    "Transaction fees or gas fees are not fixed, subject to changes depending on peak time and off peak of the blockchain networks": "„Transaktionsgebühren oder Gasgebühren sind nicht festgelegt und können sich je nach Spitzenzeit und Nebensaison der Blockchain-Netzwerke ändern.",
+    "Estimated completion time: 2 minutes. if you did not recieved your withdraw in 15 minutes, please contact our support team at support@serepay.net": "„Geschätzte Bearbeitungszeit: 2 Minuten. Wenn Sie Ihre Auszahlung nicht innerhalb von 15 Minuten erhalten haben, kontaktieren Sie bitte unser Support-Team unter support@serepay.net.",
+
     "You must accept the terms and conditions": "Du musst die Geschäftsbedingungen akzeptieren",
     "Please check your email to verify your account": "„Bitte überprüfen Sie Ihre E-Mails, um Ihr Konto zu bestätigen.",
     "Transfer": "Übertragen",

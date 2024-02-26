@@ -30,6 +30,10 @@
     "Enter contact information": "Inserisci informazioni di contatto",
     "The email does not exist in the system.": "L'e-mail non esiste nel sistema.",
     "Email is not define": "L'e-mail non è definita",
+    "You must keep a minimum 0.02 BNB in your wallet to secure enough gas fees for trading BEP20 tokens.": "Devi mantenere un minimo di 0,02 BNB nel tuo portafoglio per assicurarti commissioni sul gas sufficienti per lo scambio di token BEP20.",
+    "Transaction fees or gas fees are not fixed, subject to changes depending on peak time and off peak of the blockchain networks": "Le commissioni di transazione o le commissioni sul gas non sono fisse, soggette a modifiche a seconda degli orari di punta e di quelli non di punta delle reti blockchain",
+    "Estimated completion time: 2 minutes. if you did not recieved your withdraw in 15 minutes, please contact our support team at support@serepay.net": "Tempo di completamento stimato: 2 minuti. Se non hai ricevuto il prelievo entro 15 minuti, contatta il nostro team di supporto all'indirizzo support@serepay.net",
+
     "Already have an account? ": "Hai già un account? ",
     "Your password must be at least 8 characters long and contain at least one number and one letter.": "La tua password deve essere lunga almeno 8 caratteri e contenere almeno un numero e una lettera.",
     "Current password is required": "È richiesta la password attuale",

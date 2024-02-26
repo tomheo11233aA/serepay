@@ -28,6 +28,10 @@
     "Are you sure you want to proceed?": "Tem certeza de que deseja continuar?",
     "Your transaction has been created": "Sua transação foi criada",
     "Contact Information ": "Informações de contato",
+    "You must keep a minimum 0.02 BNB in your wallet to secure enough gas fees for trading BEP20 tokens.": "Você deve manter um mínimo de 0,02 BNB em sua carteira para garantir taxas de gás suficientes para negociar tokens BEP20.",
+    "Transaction fees or gas fees are not fixed, subject to changes depending on peak time and off peak of the blockchain networks": "Taxas de transação ou taxas de gás não são fixas, sujeitas a alterações dependendo do horário de pico e fora de pico das redes blockchain",
+    "Estimated completion time: 2 minutes. if you did not recieved your withdraw in 15 minutes, please contact our support team at support@serepay.net": "Tempo estimado de conclusão: 2 minutos. Se você não recebeu seu saque em 15 minutos, entre em contato com nossa equipe de suporte em support@serepay.net",
+
     "Enter contact information": "Digite as informações de contato",
     "The email does not exist in the system.": "O e-mail não existe no sistema.",
     "Email is not define": "E-mail não está definido",
