@@ -43,7 +43,6 @@ const ChangePassword = () => {
                 password: currentPassword,
                 passwordNew: newPassword,
             })
-            console.log(reponse)
             if (reponse?.status) {
                 Alert.alert(
                     t('Success'),
@@ -61,7 +60,6 @@ const ChangePassword = () => {
                 )
             }
         } catch (error: any) {
-            console.log(error.response.data.message)
             Alert.alert(
                 t('Error'),
                 t(error.response.data.message)

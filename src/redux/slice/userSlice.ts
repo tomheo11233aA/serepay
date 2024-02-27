@@ -36,6 +36,7 @@ const initialState: IUserSlice = {
         win_balance: 0
     },
     selectedRate: {title: 'USD', rate: 1},
+    isTokenExpired: false
 }
 
 export const fetchUserInfo = createAsyncThunk('user/fetchUserInfo', async () => {
@@ -60,6 +61,9 @@ const userSlice = createSlice({
         },
         setSelectedRate: (state, action: PayloadAction<IRate>) => {
             state.selectedRate = action.payload
+        },
+        setIsTokenExpired: (state, action: PayloadAction<boolean>) => {
+            state.isTokenExpired = action.payload
         }
     },
     extraReducers: (builder) => {
@@ -77,7 +81,8 @@ const userSlice = createSlice({
 export const {
     setLogin,
     setLanguage,
-    setSelectedRate
+    setSelectedRate,
+    setIsTokenExpired
 } = userSlice.actions
 
 export default userSlice

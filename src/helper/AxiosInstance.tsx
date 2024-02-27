@@ -1,6 +1,8 @@
 import axios from 'axios';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import io from "socket.io-client";
+import { setIsTokenExpired } from '@redux/slice/userSlice';
+import store from '@redux/store/store';
 
 const BASE_URL = 'https://serepay.net';
 
@@ -27,7 +29,13 @@ const AxiosInstance = (contentType = 'application/json') => {
 
     axiosInstance.interceptors.response.use(
         res => res.data,
-        err => Promise.reject(err)
+        // err => Promise.reject(err)
+        err => {
+            if (err.response && err.response.status === 401) {
+                store.dispatch(setIsTokenExpired(true));
+            }
+            return Promise.reject(err);
+        }
     );
     return axiosInstance;
 };

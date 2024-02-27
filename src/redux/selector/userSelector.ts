@@ -39,3 +39,5 @@ export const listAdsSellPenddingToUserSelector = (state: RootState) => state.adv
 export const notificationSelector = (state: RootState) => state.notification.count
 
 export const bankSelector = (state: RootState) => state.bank.banks
+
+export const isTokenExpiredSelector = (state: RootState) => state.user.isTokenExpired

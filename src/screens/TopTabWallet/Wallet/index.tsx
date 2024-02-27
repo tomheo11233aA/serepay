@@ -13,8 +13,6 @@ import { userWalletUserSelector, userInfoUserSelector, coinListSelector, selecte
 import { heightPercentageToDP as hp } from 'react-native-responsive-screen'
 import { formatCurrency, getSupportedCurrencies } from "react-native-format-currency";
 import { roundCoin } from '@screens/Swap/MakePrice'
-import { checkPriceOfCoins } from '@helper/function/calculateConversionRate'
-import { roundDecimalValues } from '@helper/function/roundCoin'
 
 const Wallet = () => {
   const { t } = useTranslation()
@@ -24,7 +22,6 @@ const Wallet = () => {
   const coins = useSelector(coinListSelector)
   const selectedRate = useSelector(selectedRateSelector)
   const [supportedCurrencies, setSupportedCurrencies] = useState<any>([]);
-  const [priceOfCoins, setPriceOfCoins] = useState<number>(0)
 
   useEffect(() => {
     dispatch(fetchUserWallet())

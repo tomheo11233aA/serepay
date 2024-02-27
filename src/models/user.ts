@@ -6,6 +6,7 @@ export interface IUserSlice {
     userInfo?: IUserInfo;
     userWallet?: IUserWallet;
     selectedRate: IRate;
+    isTokenExpired: boolean;
 }
 
 export interface ILanguage {
