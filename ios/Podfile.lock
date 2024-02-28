@@ -10,13 +10,13 @@ PODS:
     - AppCenter/Crashes (~> 5.0)
     - AppCenterReactNativeShared (~> 5.0)
     - React-Core
-  - AppCenter/Analytics (5.0.3):
+  - AppCenter/Analytics (5.0.4):
     - AppCenter/Core
-  - AppCenter/Core (5.0.3)
-  - AppCenter/Crashes (5.0.3):
+  - AppCenter/Core (5.0.4)
+  - AppCenter/Crashes (5.0.4):
     - AppCenter/Core
-  - AppCenterReactNativeShared (5.0.0):
-    - AppCenter/Core (= 5.0.3)
+  - AppCenterReactNativeShared (5.0.1):
+    - AppCenter/Core (= 5.0.4)
   - Base64 (1.1.2)
   - boost (1.76.0)
   - BVLinearGradient (2.8.3):
@@ -106,6 +106,9 @@ PODS:
   - lottie-react-native (6.5.1):
     - lottie-ios (~> 4.3.3)
     - React-Core
+  - MMKV (1.3.3):
+    - MMKVCore (~> 1.3.3)
+  - MMKVCore (1.3.3)
   - OpenSSL-Universal (1.1.1100)
   - RCT-Folly (2021.07.22.00):
     - boost
@@ -409,6 +412,9 @@ PODS:
     - glog
   - react-native-image-picker (5.7.0):
     - React-Core
+  - react-native-mmkv (2.12.1):
+    - MMKV (>= 1.3.3)
+    - React-Core
   - react-native-netinfo (11.2.1):
     - React-Core
   - react-native-restart (0.0.27):
@@ -615,6 +621,7 @@ DEPENDENCIES:
   - React-jsinspector (from `../node_modules/react-native/ReactCommon/jsinspector`)
   - React-logger (from `../node_modules/react-native/ReactCommon/logger`)
   - react-native-image-picker (from `../node_modules/react-native-image-picker`)
+  - react-native-mmkv (from `../node_modules/react-native-mmkv`)
   - "react-native-netinfo (from `../node_modules/@react-native-community/netinfo`)"
   - react-native-restart (from `../node_modules/react-native-restart`)
   - react-native-safe-area-context (from `../node_modules/react-native-safe-area-context`)
@@ -664,6 +671,8 @@ SPEC REPOS:
     - JWT
     - libevent
     - lottie-ios
+    - MMKV
+    - MMKVCore
     - OpenSSL-Universal
     - SocketRocket
     - SSZipArchive
@@ -728,6 +737,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native/ReactCommon/logger"
   react-native-image-picker:
     :path: "../node_modules/react-native-image-picker"
+  react-native-mmkv:
+    :path: "../node_modules/react-native-mmkv"
   react-native-netinfo:
     :path: "../node_modules/@react-native-community/netinfo"
   react-native-restart:
@@ -790,11 +801,11 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native/ReactCommon/yoga"
 
 SPEC CHECKSUMS:
-  AppCenter: a4070ec3d4418b5539067a51f57155012e486ebd
+  AppCenter: 85c92db0759d2792a65eb61d6842d2e86611a49a
   appcenter-analytics: fbeef54afe6fa91d3803dfd31499817baa81fec0
   appcenter-core: e192ea8b373bebd3e44998882b43311078bd7dda
   appcenter-crashes: 266063788bcebd553e621344a54286395a8e2010
-  AppCenterReactNativeShared: 01df23849b1c3c6eb8c4049f54322635650e98f0
+  AppCenterReactNativeShared: 22aea9046e80c449137f4e574ae1f229616e2358
   Base64: cecfb41a004124895a7bcee567a89bae5a89d49b
   boost: 57d2868c099736d80fcd648bf211b4431e51a558
   BVLinearGradient: 880f91a7854faff2df62518f0281afb1c60d49a3
@@ -818,6 +829,8 @@ SPEC CHECKSUMS:
   libevent: 4049cae6c81cdb3654a443be001fb9bdceff7913
   lottie-ios: 3d98679b41fa6fd6aff2352b3953dbd3df8a397e
   lottie-react-native: cdeae481649c11d586084b8662f03251c4dd8249
+  MMKV: f902fb6719da13c2ab0965233d8963a59416f911
+  MMKVCore: d26e4d3edd5cb8588c2569222cbd8be4231374e9
   OpenSSL-Universal: ebc357f1e6bc71fa463ccb2fe676756aff50e88c
   RCT-Folly: 424b8c9a7a0b9ab2886ffe9c3b041ef628fd4fb1
   RCTRequired: c0569ecc035894e4a68baecb30fe6a7ea6e399f9
@@ -835,6 +848,7 @@ SPEC CHECKSUMS:
   React-jsinspector: aaed4cf551c4a1c98092436518c2d267b13a673f
   React-logger: da1ebe05ae06eb6db4b162202faeafac4b435e77
   react-native-image-picker: 3269f75c251cdcd61ab51b911dd30d6fff8c6169
+  react-native-mmkv: 124b22209aacdcd172b6ac39071b9647080f0411
   react-native-netinfo: 8a7fd3f7130ef4ad2fb4276d5c9f8d3f28d2df3d
   react-native-restart: 7595693413fe3ca15893702f2c8306c62a708162
   react-native-safe-area-context: 0ee144a6170530ccc37a0fd9388e28d06f516a89
@@ -872,4 +886,4 @@ SPEC CHECKSUMS:
 
 PODFILE CHECKSUM: 44401586dd9c147dfa95a1865717b69b97a7b554
 
-COCOAPODS: 1.12.0
+COCOAPODS: 1.15.2

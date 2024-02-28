@@ -92,7 +92,7 @@ const Wallet = () => {
         <Txt size={16} marginTop={10} color={'white'}>
           {t('HELLO')} {userInfo?.username}
         </Txt>
-        <Btn
+        {/* <Btn
           backgroundColor={'red'}
           onPress={() => {
             localStorage.clearAll()
@@ -103,7 +103,7 @@ const Wallet = () => {
               Test expired token
             </Txt>
           </Box>
-        </Btn>
+        </Btn> */}
         <Box marginTop={10} row justifyCenter alignCenter>
           <Icon size={30} source={require('@images/wallet/bitcoin.png')} />
           <Txt color={'white'} size={30} marginLeft={10}>
