@@ -55,7 +55,6 @@ const AuthNavigation = () => {
         headerShown: false,
         tabBarShowLabel: false,
         tabBarStyle: {
-          //default: height: 90
           height: hp('10%'),
           paddingTop: 10,
           borderTopWidth: 1,
