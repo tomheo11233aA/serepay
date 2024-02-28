@@ -4,10 +4,7 @@ import { isLoginUserSelector, isTokenExpiredSelector } from '@redux/selector/use
 import React, { useEffect } from 'react'
 import AuthNavigation from './AuthNavigation'
 import UnAuthNavigation from './UnAuthNavigation'
-import AsyncStorage from '@react-native-async-storage/async-storage'
-import { setLogin } from '@redux/slice/userSlice'
-import { useDispatch, useSelector } from 'react-redux'
-import { AppDispatch } from '@redux/store/store'
+import { useSelector } from 'react-redux'
 import { userInfoUserSelector } from '@redux/selector/userSelector'
 import { socket } from '../helper/AxiosInstance'
 import LottieView from "lottie-react-native";
@@ -15,22 +12,12 @@ import Btn from "@commom/Btn";
 import Txt from "@commom/Txt";
 import { fonts } from "@themes/fonts";
 import { colors } from "@themes/colors";
-import { localStorage } from "@utils/localStorage";
 
 const Main = () => {
     const isLogin = useAppSelector(isLoginUserSelector)
     const userInfo = useSelector(userInfoUserSelector)
-    const dispatch: AppDispatch = useDispatch()
     const [isConnected, setIsConnected] = React.useState(true);
     const tokenExpired = useSelector(isTokenExpiredSelector)
-
-    useEffect(() => {
-        const fetchIsLogin = () => {
-            const isLogin = localStorage.getBoolean('isLogin') ?? false
-            dispatch(setLogin(isLogin == true ? true : false))
-        }
-        fetchIsLogin()
-    }, [])
 
     useEffect(() => {
         NetInfo.fetch().then(state => {

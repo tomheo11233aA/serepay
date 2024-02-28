@@ -1,6 +1,6 @@
 import { getSize } from '@utils/responsive';
 import { isNumber } from 'lodash';
-import React from 'react';
+import React, { forwardRef } from 'react';
 import { Image, Platform, StatusBar, StyleSheet, TextInput } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { handleMargin, handlePadding, handleRound, handleSquare } from '../shared';
@@ -10,7 +10,8 @@ import Btn from '@commom/Btn';
 import Img from '@commom/Img';
 import Txt from '@commom/Txt';
 
-const Input = ({
+const Input = forwardRef<TextInput, Props>(({
+    returnKeyType,
     readonly,
     value,
     onChangeText,
@@ -96,8 +97,9 @@ const Input = ({
     borderTopRightRadius,
     borderBottomLeftRadius,
     coin,
+    onSubmitEditing,
     ...rest
-}: Props) => {
+}, ref) => {
     const insets = useSafeAreaInsets();
 
     const blockStyles = [
@@ -222,6 +224,9 @@ const Input = ({
                 textAlign={textAlign}
                 onFocus={onFocus}
                 onBlur={onBlur}
+                returnKeyType={returnKeyType}
+                onSubmitEditing={onSubmitEditing}
+                ref={ref}
             />
             {iconTwo &&
                 <Btn
@@ -254,11 +259,13 @@ const Input = ({
             }
         </Box>
     );
-};
+});
 
 export default React.memo(Input);
 
 interface Props {
+    onSubmitEditing?: any,
+    returnKeyType?: any,
     value?: any,
     onChangeText?: any,
     hint?: any,

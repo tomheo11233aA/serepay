@@ -13,8 +13,8 @@ import { userWalletUserSelector, userInfoUserSelector, coinListSelector, selecte
 import { heightPercentageToDP as hp } from 'react-native-responsive-screen'
 import { formatCurrency, getSupportedCurrencies } from "react-native-format-currency";
 import { roundCoin } from '@screens/Swap/MakePrice'
-import AsyncStorage from '@react-native-async-storage/async-storage'
 import Btn from '@commom/Btn'
+import { localStorage } from '@utils/localStorage'
 
 const Wallet = () => {
   const { t } = useTranslation()
@@ -95,7 +95,7 @@ const Wallet = () => {
         <Btn
           backgroundColor={'red'}
           onPress={() => {
-            AsyncStorage.clear()
+            localStorage.clearAll()
           }}
         >
           <Box marginTop={10} row justifyCenter alignCenter>
