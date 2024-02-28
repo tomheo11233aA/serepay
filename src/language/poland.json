@@ -29,7 +29,10 @@
     "You must keep a minimum 0.02 BNB in your wallet to secure enough gas fees for trading BEP20 tokens.": "„Musisz trzymać w portfelu co najmniej 0,02 BNB, aby zabezpieczyć wystarczające opłaty za gaz za handel tokenami BEP20.",
     "Transaction fees or gas fees are not fixed, subject to changes depending on peak time and off peak of the blockchain networks": "„Opłaty transakcyjne ani opłaty za gaz nie są stałe, mogą ulec zmianie w zależności od godzin szczytu i poza szczytem sieci blockchain",
     "Estimated completion time: 2 minutes. if you did not recieved your withdraw in 15 minutes, please contact our support team at support@serepay.net": "„Szacowany czas realizacji: 2 minuty. Jeśli nie otrzymałeś wypłaty w ciągu 15 minut, skontaktuj się z naszym zespołem wsparcia pod adresem support@serepay.net",
-
+    "Please login again!":	"Proszę, zaloguj się ponownie!",
+    "Login session has expired!":	"„Sesja logowania wygasła!",
+    "Please log in here or press OK to hide the dialog.": "„Zaloguj się tutaj lub naciśnij OK, aby ukryć okno dialogowe.",
+    
     "New password is required": "„Wymagane jest nowe hasło",
     "Password must be less than 20 characters": "„Hasło musi mieć mniej niż 20 znaków",
     "Confirm password is required": "„Potwierdź hasło jest wymagane",

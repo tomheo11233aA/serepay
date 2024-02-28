@@ -31,7 +31,11 @@
     "You must keep a minimum 0.02 BNB in your wallet to secure enough gas fees for trading BEP20 tokens.": "ທ່ານຕ້ອງຮັກສາຕໍາ່ສຸດທີ່ 0.02 BNB ໃນກະເປົາເງິນຂອງທ່ານເພື່ອຮັບປະກັນຄ່າທໍານຽມອາຍແກັສພຽງພໍສໍາລັບການຊື້ຂາຍ BEP20 tokens.",
     "Transaction fees or gas fees are not fixed, subject to changes depending on peak time and off peak of the blockchain networks": "ຄ່າທໍານຽມການເຮັດທຸລະກໍາຫຼືຄ່າທໍານຽມອາຍແກັສແມ່ນບໍ່ຄົງທີ່, ມີການປ່ຽນແປງຂຶ້ນຢູ່ກັບເວລາສູງສຸດແລະຈຸດສູງສຸດຂອງເຄືອຂ່າຍ blockchain",
     "Estimated completion time: 2 minutes. if you did not recieved your withdraw in 15 minutes, please contact our support team at support@serepay.net": "ເວລາສໍາເລັດໂດຍປະມານ: 2 ນາທີ. ຖ້າທ່ານບໍ່ໄດ້ຮັບການຖອນຕົວໃນ 15 ນາທີ, ກະລຸນາຕິດຕໍ່ທີມງານຊ່ວຍເຫຼືອຂອງພວກເຮົາທີ່ support@serepay.net",
-
+    "Please login again!":	"ກະລຸນາເຂົ້າສູ່ລະບົບອີກຄັ້ງ!",
+    "Login session has expired!":	"ເຊດຊັນການເຂົ້າສູ່ລະບົບໝົດອາຍຸແລ້ວ!",
+    "Please log in again to continue using the app.":	"ກະລຸນາເຂົ້າສູ່ລະບົບອີກຄັ້ງເພື່ອສືບຕໍ່ນຳໃຊ້ແອັບ.",
+    "Please log in here or press OK to hide the dialog.":	"ກະລຸນາເຂົ້າສູ່ລະບົບທີ່ນີ້ ຫຼືກົດ OK ເພື່ອເຊື່ອງກ່ອງໂຕ້ຕອບ.",
+    
     "Enter contact information": "ກະລຸນາຕື່ມຂໍ້ມູນການຕິດຕໍ່",
     "The email does not exist in the system.": "ອີເມລ໌ບໍ່ມີຢູ່ໃນລະບົບ.",
     "Email is not define": "ອີເມວບໍ່ໄດ້ກໍານົດ",

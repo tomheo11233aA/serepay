@@ -31,7 +31,11 @@
     "You must keep a minimum 0.02 BNB in your wallet to secure enough gas fees for trading BEP20 tokens.": "BEP20 토큰 거래에 필요한 가스 비용을 충분히 확보하려면 지갑에 최소 0.02 BNB를 보관해야 합니다.",
     "Transaction fees or gas fees are not fixed, subject to changes depending on peak time and off peak of the blockchain networks": "거래 수수료나 가스비는 고정되어 있지 않으며, 블록체인 네트워크의 피크 시간과 비 피크 시간에 따라 변경될 수 있습니다.",
     "Estimated completion time: 2 minutes. if you did not recieved your withdraw in 15 minutes, please contact our support team at support@serepay.net": "예상 완료 시간: 2분. 15분 후에도 출금을 받지 못한 경우 support@serepay.net으로 지원팀에 문의하세요.",
-
+    "Please login again!":	"다시 로그인해주세요!",
+    "Login session has expired!":	"로그인 세션이 만료되었습니다!",
+    "Please log in again to continue using the app.":	"앱을 계속 사용하려면 다시 로그인해 주세요.",
+    "Please log in here or press OK to hide the dialog.":	"대화상자를 숨기려면 여기에 로그인하거나 확인을 누르세요.",
+    
     "The email does not exist in the system.": "이메일이 시스템에 존재하지 않습니다.",
     "Email is not define": "이메일이 정의되지 않았습니다",
     "Already have an account? ": "이미 계정이 있나요?",

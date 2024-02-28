@@ -27,7 +27,11 @@
     "You must keep a minimum 0.02 BNB in your wallet to secure enough gas fees for trading BEP20 tokens.": "Anda harus menyimpan minimal 0,02 BNB di dompet Anda untuk mendapatkan biaya bahan bakar yang cukup untuk memperdagangkan token BEP20.",
     "Transaction fees or gas fees are not fixed, subject to changes depending on peak time and off peak of the blockchain networks": "Biaya transaksi atau biaya bahan bakar tidak tetap, dapat berubah tergantung pada waktu puncak dan di luar jam sibuk jaringan blockchain",
     "Estimated completion time: 2 minutes. if you did not recieved your withdraw in 15 minutes, please contact our support team at support@serepay.net": "Perkiraan waktu penyelesaian: 2 menit. jika Anda tidak menerima penarikan dalam 15 menit, silakan hubungi tim dukungan kami di support@serepay.net",
-
+    "Please login again!":	"Silakan masuk lagi!",
+    "Login session has expired!":	"Sesi login telah berakhir!",
+    "Please log in again to continue using the app.":	"Silakan masuk lagi untuk terus menggunakan aplikasi.",
+    "Please log in here or press OK to hide the dialog.":	"Silakan masuk di sini atau tekan OK untuk menyembunyikan dialog.",
+    
     "Are you sure you want to proceed?": "Apakah kamu yakin ingin melanjutkan?",
     "Your transaction has been created": "Transaksi Anda telah dibuat",
     "Contact Information ": "Informasi Kontak",

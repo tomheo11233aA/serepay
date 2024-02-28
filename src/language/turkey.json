@@ -52,7 +52,10 @@
     "You must keep a minimum 0.02 BNB in your wallet to secure enough gas fees for trading BEP20 tokens.": "BEP20 token ticareti için yeterli gas ücretini güvence altına almak amacıyla cüzdanınızda en az 0,02 BNB bulundurmalısınız.",
     "Transaction fees or gas fees are not fixed, subject to changes depending on peak time and off peak of the blockchain networks": "İşlem ücretleri veya gas ücretleri sabit değildir; blockchain ağlarının yoğun zamanlarına ve yoğun olmayan zamanlarına bağlı olarak değişikliklere tabidir",
     "Estimated completion time: 2 minutes. if you did not recieved your withdraw in 15 minutes, please contact our support team at support@serepay.net": "Tahmini tamamlanma süresi: 2 dakika. Para çekme işleminizi 15 dakika içinde almadıysanız lütfen support@serepay.net adresinden destek ekibimizle iletişime geçin",
-
+    "Please login again!":	"Lütfen tekrar giriş yapın!",
+    "Login session has expired!":	"Giriş oturumunun süresi doldu!",
+    "Please log in again to continue using the app.":	"Uygulamayı kullanmaya devam etmek için lütfen tekrar giriş yapın.",
+    "Please log in here or press OK to hide the dialog.":	"Lütfen buradan oturum açın veya iletişim kutusunu gizlemek için Tamam'a basın.",    
     "HELLO": "MERHABA",
     "Ecosystem": "Ekosistem",
     "Promotion": "Terfi",

@@ -30,7 +30,11 @@
     "You must keep a minimum 0.02 BNB in your wallet to secure enough gas fees for trading BEP20 tokens.": "बीईपी20 टोकन के व्यापार के लिए पर्याप्त गैस शुल्क सुरक्षित करने के लिए आपको अपने वॉलेट में न्यूनतम 0.02 बीएनबी रखना होगा।",
     "Transaction fees or gas fees are not fixed, subject to changes depending on peak time and off peak of the blockchain networks": "लेन-देन शुल्क या गैस शुल्क तय नहीं हैं, ब्लॉकचेन नेटवर्क के पीक टाइम और ऑफ पीक के आधार पर परिवर्तन के अधीन हैं",
     "Estimated completion time: 2 minutes. if you did not recieved your withdraw in 15 minutes, please contact our support team at support@serepay.net": "अनुमानित समापन समय: 2 मिनट। यदि आपको 15 मिनट में अपना निकासी प्राप्त नहीं हुआ है, तो कृपया support@serepay.net पर हमारी सहायता टीम से संपर्क करें",
-
+    "Please login again!":	"कृपया फिर भाग लें!",
+    "Login session has expired!":	"लॉगिन सत्र समाप्त हो गया है!",
+    "Please log in again to continue using the app.":	"कृपया ऐप का उपयोग जारी रखने के लिए फिर से लॉग इन करें।",
+    "Please log in here or press OK to hide the dialog.":	"कृपया यहां लॉग इन करें या संवाद छिपाने के लिए ओके दबाएं।",
+    
     "Enter contact information": "संपर्क जानकारी दर्ज करें",
     "The email does not exist in the system.": "ईमेल सिस्टम में मौजूद नहीं है।",
     "Email is not define": "ईमेल परिभाषित नहीं है",

@@ -31,7 +31,11 @@
     "You must keep a minimum 0.02 BNB in your wallet to secure enough gas fees for trading BEP20 tokens.": "您的钱包中必须至少保留 0.02 BNB,才能获得足够的 Gas 费来交易 BEP20 代币。",
     "Transaction fees or gas fees are not fixed, subject to changes depending on peak time and off peak of the blockchain networks": "交易费或汽油费不固定,可能会根据区块链网络的高峰时间和非高峰时间而变化",
     "Estimated completion time: 2 minutes. if you did not recieved your withdraw in 15 minutes, please contact our support team at support@serepay.net": "预计完成时间：2 分钟。如果您在 15 分钟内没有收到提款,请通过 support@serepay.net 联系我们的支持团队",
-
+    "Please login again!":	"请重新登录！",
+    "Login session has expired!":	"登录会话已过期！",
+    "Please log in again to continue using the app.":	"请重新登录以继续使用该应用程序。",
+    "Please log in here or press OK to hide the dialog.":	"请在此处登录或按确定隐藏对话框。",
+    
     "The email does not exist in the system.": "系统中不存在该电子邮件。",
     "Email is not define": "电子邮件未定义",
     "Already have an account? ": "已有账户？",

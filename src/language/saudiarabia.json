@@ -26,7 +26,11 @@
     "You must keep a minimum 0.02 BNB in your wallet to secure enough gas fees for trading BEP20 tokens.": "يجب عليك الاحتفاظ بحد أدنى 0.02 BNB في محفظتك لتأمين ما يكفي من رسوم الغاز لتداول رموز BEP20.",
     "Transaction fees or gas fees are not fixed, subject to changes depending on peak time and off peak of the blockchain networks": "رسوم المعاملات أو رسوم الغاز ليست ثابتة، وتخضع للتغييرات اعتمادًا على وقت الذروة وخارج أوقات الذروة لشبكات blockchain",
     "Estimated completion time: 2 minutes. if you did not recieved your withdraw in 15 minutes, please contact our support team at support@serepay.net": "الوقت المقدر للإكمال: دقيقتين. إذا لم تستلم سحبك خلال 15 دقيقة، فيرجى الاتصال بفريق الدعم لدينا على support@serepay.net",
-
+    "Please login again!":	"الرجاد الدخول على الحساب من جديد!",
+    "Login session has expired!":	"لقد انتهت صلاحية جلسة تسجيل الدخول!",
+    "Please log in again to continue using the app.":	"يرجى تسجيل الدخول مرة أخرى لمواصلة استخدام التطبيق.",
+    "Please log in here or press OK to hide the dialog.":	"الرجاء تسجيل الدخول هنا أو الضغط على موافق لإخفاء مربع الحوار.",
+    
     "Cancel success": "إلغاء النجاح",
     "Update KYC fail": "فشل تحديث KYC",
     "Are you sure you want to proceed?": "هل انت متأكد انك تريد المتابعة؟",
