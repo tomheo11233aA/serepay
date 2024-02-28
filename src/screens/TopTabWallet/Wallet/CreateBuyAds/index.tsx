@@ -19,7 +19,6 @@ import { useAppSelector } from '@hooks/redux'
 import { coinListSelector } from '@redux/selector/userSelector'
 import { ICoin } from '@models/coin'
 import CoinModal from '@commom/Modal/CoinModal'
-import { config3Selector } from '@redux/selector/userSelector'
 import { companyAddAds } from '@utils/userCallApi'
 import { ICompanyAddAds } from '@models/P2P/COMPANY/companyAddAds'
 import { selectedRateSelector } from '@redux/selector/userSelector'
@@ -33,7 +32,7 @@ const CreateBuyAds = () => {
     const { t } = useTranslation()
     const coins = useAppSelector(coinListSelector)
     const selectedRate = useAppSelector(selectedRateSelector)
-    const config3 = useAppSelector(config3Selector);
+    // const config3 = useAppSelector(config3Selector);
     const [myValue, setMyValue] = React.useState(0);
     const { handleSubmit, formState: { errors }, setValue } = useForm({
         resolver: yupResolver(buyAdvertisementSchema)
@@ -47,16 +46,16 @@ const CreateBuyAds = () => {
         hideModal();
     }, [hideModal]);
     const dispatch: AppDispatch = useAppDispatch()
-    useEffect(() => {
-        if (config3) {
-            const newValue = config3.length > 0 ? config3[0].value : 0;
-            setMyValue(newValue);
-        }
-    }, [config3])
+    // useEffect(() => {
+    //     if (config3) {
+    //         const newValue = config3.length > 0 ? config3[0].value : 0;
+    //         setMyValue(newValue);
+    //     }
+    // }, [config3])
 
     const price = useMemo(() => {
         let price = 0;
-        price = selectedCoin && selectedCoin.price !== undefined ? selectedCoin.price + (selectedCoin.price * (myValue / 100)) : 0;
+        price = selectedCoin && selectedCoin.price !== undefined ? selectedCoin.price : 0;
         return price * selectedRate.rate;
     }, [selectedCoin, myValue]);
 

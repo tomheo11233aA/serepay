@@ -34,7 +34,7 @@ const AxiosInstance = (contentType = 'application/json') => {
             if (err.response && err.response.status === 401) {
                 store.dispatch(setIsTokenExpired(true));
             }
-            return Promise.reject(err);
+            return Promise.reject(err.response);
         }
     );
     return axiosInstance;

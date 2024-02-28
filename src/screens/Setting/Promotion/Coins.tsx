@@ -96,7 +96,6 @@ const Coins: React.FC<Props> = ({ style }) => {
                     const priceOfCoin = coin.price * selectedRate.rate
                     const checkPrice = checkPriceOfCoins(coin.name, coins)
                     const ownedCoin = roundDecimalValues(userWallet?.[`${coin?.symbolWallet?.toLowerCase()}_balance`] || 0, checkPrice);
-                    // console.log(userWallet?.[`${coin?.symbolWallet?.toLowerCase()}_balance`] === 0)
                     return (
                         <View key={coin.id} style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', padding: hp('2%'), backgroundColor: 'white', borderRadius: wp('2.5%'), marginBottom: hp('1%') }}>
                             <View style={{ flexDirection: 'row', alignItems: 'center' }}>

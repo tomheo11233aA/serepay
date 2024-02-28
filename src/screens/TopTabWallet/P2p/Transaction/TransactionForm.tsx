@@ -10,9 +10,9 @@ import { useAppSelector } from '@hooks/redux';
 import { config2Selector, config3Selector, selectedRateSelector } from '@redux/selector/userSelector';
 
 interface TransactionFormProps {
-    amount: string;
-    setAmount: (amount: string) => void;
-    receiveAmount: string;
+    amount: string | number;
+    setAmount: (amount: string | number) => void;
+    receiveAmount: string | number;
     bankList: any[];
     setSelected: (selectedItem: any) => void;
     setBankListId: (selectedItem: any) => void;
@@ -41,34 +41,6 @@ const TransactionForm: React.FC<TransactionFormProps> = ({
     setMaxReceiveAmount,
 }) => {
     const { t } = useTranslation()
-    const config2 = useAppSelector(config2Selector);
-    const config3 = useAppSelector(config3Selector);
-    const selectedRate = useAppSelector(selectedRateSelector);
-    const [value, setValue] = React.useState(0);
-    const [value2, setValue2] = React.useState(0);
-    const [flag, setFlag] = useState<number>();
-    React.useEffect(() => {
-        if (config3) {
-            const newValue3 = config3.length > 0 ? config3[0].value : 0;
-            setValue(newValue3);
-        }
-        if (config2) {
-            const newValue2 = config2.length > 0 ? config2[0].value : 0;
-            setValue2(newValue2);
-        }
-    }, [config2, config3])
-    const price = useMemo(() => {
-        let price = 0;
-        if (item.side === 'sell') {
-            price = coin && coin.price !== undefined ? coin.price + (coin.price * (value / 100)) : 0;
-        } else {
-            price = Number(amount)
-            setFlag((coin && coin.price !== undefined ? coin.price - (coin.price * (value2 / 100)) : 0) * selectedRate.rate)
-        }
-        return item.side === 'sell' ? price * selectedRate.rate : price;
-    }, [item, value, value2, coin]);
-    const _amount = item.side === 'sell' ? price * Number(receiveAmount) : price;
-    const _receiveAmount = item.side === 'sell' ? Number(receiveAmount) : price * Number(flag);
     return (
         <View style={{ padding: 10, backgroundColor: colors.gray8, borderRadius: 5, marginTop: 10 }}>
             <View style={{ justifyContent: 'space-between' }}>
@@ -77,7 +49,10 @@ const TransactionForm: React.FC<TransactionFormProps> = ({
                     <Input
                         height={40}
                         backgroundColor={'white'}
-                        value={Math.round(_amount).toLocaleString('en-US')}
+                        value={amount.toLocaleString('en-US', { maximumFractionDigits: 2 })}
+                        onChangeText={(text: string) => {
+                            setAmount(text)
+                        }}
                         radius={3}
                         coin={item.side === 'buy' ? coin?.name : 'VND'}
                         onPress={() => {
@@ -85,13 +60,14 @@ const TransactionForm: React.FC<TransactionFormProps> = ({
                                 setMaxAmount(item.amount)
                             }
                         }}
+                        keyboardType={'numeric'}
                     />
                 </View>
                 <View style={{ padding: 5 }}></View>
                 <View style={{ flex: 1 }}>
                     <Text style={{ fontFamily: fonts.AS }}>{t('To receive')}</Text>
                     <Input
-                        value={Math.round(_receiveAmount).toLocaleString('en-US')}
+                        value={Math.round(Number(receiveAmount)).toLocaleString('en-US', { maximumFractionDigits: 2 })}
                         height={40}
                         backgroundColor={colors.gray7}
                         readonly

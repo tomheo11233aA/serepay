@@ -13,6 +13,8 @@ import { userWalletUserSelector, userInfoUserSelector, coinListSelector, selecte
 import { heightPercentageToDP as hp } from 'react-native-responsive-screen'
 import { formatCurrency, getSupportedCurrencies } from "react-native-format-currency";
 import { roundCoin } from '@screens/Swap/MakePrice'
+import AsyncStorage from '@react-native-async-storage/async-storage'
+import Btn from '@commom/Btn'
 
 const Wallet = () => {
   const { t } = useTranslation()
@@ -90,6 +92,18 @@ const Wallet = () => {
         <Txt size={16} marginTop={10} color={'white'}>
           {t('HELLO')} {userInfo?.username}
         </Txt>
+        <Btn
+          backgroundColor={'red'}
+          onPress={() => {
+            AsyncStorage.setItem('token', 'expired')
+          }}
+        >
+          <Box marginTop={10} row justifyCenter alignCenter>
+            <Txt color={'white'} size={30} marginLeft={10}>
+              Test expired token
+            </Txt>
+          </Box>
+        </Btn>
         <Box marginTop={10} row justifyCenter alignCenter>
           <Icon size={30} source={require('@images/wallet/bitcoin.png')} />
           <Txt color={'white'} size={30} marginLeft={10}>

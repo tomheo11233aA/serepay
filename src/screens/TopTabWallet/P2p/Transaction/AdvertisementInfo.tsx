@@ -15,23 +15,24 @@ const AdvertisementInfo: React.FC<AdvertisementInfoProps> = ({ item, coin }) => 
     const { t } = useTranslation()
     const selectedRate = useSelector(selectedRateSelector);
     const config2 = useSelector(config2Selector);
-    const config3 = useSelector(config3Selector);
+    // const config3 = useSelector(config3Selector);
     const [value, setValue] = React.useState(0);
     const [value2, setValue2] = React.useState(0);
     React.useEffect(() => {
-        if (config3) {
-            const newValue3 = config3.length > 0 ? config3[0].value : 0;
-            setValue(newValue3);
-        }
+        // if (config3) {
+        //     const newValue3 = config3.length > 0 ? config3[0].value : 0;
+        //     setValue(newValue3);
+        // }
         if (config2) {
             const newValue2 = config2.length > 0 ? config2[0].value : 0;
             setValue2(newValue2);
         }
-    }, [config2, config3])
+    }, [config2])
     const price = useMemo(() => {
         let price = 0;
         if (item.side === 'sell') {
-            price = coin && coin.price !== undefined ? coin.price + (coin.price * (value / 100)) : 0;
+            // price = coin && coin.price !== undefined ? coin.price + (coin.price * (value / 100)) : 0;
+            price = coin && coin.price !== undefined ? coin.price : 0;
         } else {
             price = coin && coin.price !== undefined ? coin.price - (coin.price * (value2 / 100)) : 0;
         }

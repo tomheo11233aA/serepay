@@ -14,7 +14,7 @@ const Language = () => {
                 <Icon
                     resizeMode={'contain'}
                     size={width * 40 / 100}
-                    source={require('@images/logo.png')}
+                    source={require('@images/logowhite.png')}
                 />
                 <Form />
             </Box>

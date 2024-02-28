@@ -2,11 +2,11 @@ import Box from '@commom/Box'
 import Btn from '@commom/Btn'
 import Txt from '@commom/Txt'
 import { fonts } from '@themes/fonts'
-import React, { useCallback, useEffect, useState, useMemo, memo } from 'react'
+import React, { useEffect, useState, useMemo } from 'react'
 import { ICoin } from '@models/coin'
 import { useSelector, useDispatch } from 'react-redux'
-import { configSelector, config2Selector, config3Selector } from '@redux/selector/userSelector'
-import { fetchConfig, fetchConfig2, fetchConfig3 } from '@redux/slice/getConfig'
+import { config2Selector, config3Selector } from '@redux/selector/userSelector'
+import { fetchConfig2, fetchConfig3 } from '@redux/slice/getConfig'
 import { AppDispatch } from '@redux/store/store'
 import { selectedRateSelector } from '@redux/selector/userSelector'
 import { formatCurrency, getSupportedCurrencies } from "react-native-format-currency";
@@ -29,40 +29,41 @@ const BuySellItem = ({
     onPress
 }: Props) => {
     const config2 = useSelector(config2Selector);
-    const config3 = useSelector(config3Selector);
+    // const config3 = useSelector(config3Selector);
     const selectedRate = useSelector(selectedRateSelector);
     const [supportedCurrencies, setSupportedCurrencies] = useState<any>([]);
     const dispatch = useDispatch<AppDispatch>();
-    const [value, setValue] = React.useState(0);
+    // const [value, setValue] = React.useState(0);
     const [value2, setValue2] = React.useState(0);
 
     useEffect(() => {
         dispatch(fetchConfig2())
-        dispatch(fetchConfig3())
+        // dispatch(fetchConfig3())
     }, [])
 
     useEffect(() => {
-        if (config3) {
-            const newValue3 = config3.length > 0 ? config3[0].value : 0;
-            setValue(newValue3);
-        }
+        // if (config3) {
+        //     const newValue3 = config3.length > 0 ? config3[0].value : 0;
+        //     setValue(newValue3);
+        // }
 
         if (config2) {
             const newValue2 = config2.length > 0 ? config2[0].value : 0;
             setValue2(newValue2);
         }
-    }, [config2, config3])
+    }, [config2])
 
     const price = useMemo(() => {
         let price = 0;
         if (type === 'buy') {
-            price = selectedCoin && selectedCoin.price !== undefined ? selectedCoin.price + (selectedCoin.price * (value / 100)) : 0;
+            // price = selectedCoin && selectedCoin.price !== undefined ? selectedCoin.price + (selectedCoin.price * (value / 100)) : 0;
+            price = selectedCoin && selectedCoin.price !== undefined ? selectedCoin.price : 0;
         } else {
             price = selectedCoin && selectedCoin.price !== undefined ?
                 selectedCoin.price - (selectedCoin.price * (value2 / 100)) : 0;
-        }        
+        }
         return price * selectedRate.rate;
-    }, [type, selectedCoin, value, selectedRate]);
+    }, [type, selectedCoin, selectedRate]);
     useEffect(() => {
         const loadSupportedCurrencies = async () => {
             const currencies = await getSupportedCurrencies();

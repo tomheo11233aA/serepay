@@ -12,6 +12,7 @@ import { setLogin, setIsTokenExpired } from '@redux/slice/userSlice';
 import Container from '@navigations/Container';
 import { fonts } from '@themes/fonts';
 import { colors } from '@themes/colors';
+import Box from '@commom/Box';
 
 const App = () => {
   const { t } = useTranslation()
@@ -35,10 +36,22 @@ const App = () => {
             >
               <Txt
                 fontFamily={fonts.OSB}
-                center
                 size={16}
               >
                 {t('Please login again!')}
+              </Txt>
+              <Box style={{ height: 1, backgroundColor: colors.gray2, marginVertical: 10 }} />
+              <Txt
+                fontFamily={fonts.OL}
+                size={16}
+              >
+                {t('Login session has expired!')}
+                <Txt
+                  fontFamily={fonts.OL}
+                  size={16}
+                >
+                 {'\n'}{t('Please login again to continue using the app.')}
+                </Txt>
               </Txt>
               <Btn
                 style={{ marginTop: 20, width: '100%' }}

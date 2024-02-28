@@ -23,7 +23,7 @@ const Login = () => {
             resizeMode={'contain'}
             size={width * 40 / 100}
             tintColor={colors.darkViolet}
-            source={require('@images/logo.png')}
+            source={require('@images/logowhite.png')}
           />
           <Form t={t} />
         </Box>

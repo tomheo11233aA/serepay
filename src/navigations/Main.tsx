@@ -1,6 +1,6 @@
 import NetInfo from "@react-native-community/netinfo";
 import { useAppSelector } from '@hooks/redux'
-import { isLoginUserSelector } from '@redux/selector/userSelector'
+import { isLoginUserSelector, isTokenExpiredSelector } from '@redux/selector/userSelector'
 import React, { useEffect } from 'react'
 import AuthNavigation from './AuthNavigation'
 import UnAuthNavigation from './UnAuthNavigation'
@@ -21,6 +21,7 @@ const Main = () => {
     const userInfo = useSelector(userInfoUserSelector)
     const dispatch: AppDispatch = useDispatch()
     const [isConnected, setIsConnected] = React.useState(true);
+    const tokenExpired = useSelector(isTokenExpiredSelector)
 
     useEffect(() => {
         const fetchIsLogin = async () => {
@@ -59,7 +60,7 @@ const Main = () => {
 
     return (
         <>
-            {isConnected ? (isLogin ? <AuthNavigation /> : <UnAuthNavigation />) :
+            {isConnected ? ((!tokenExpired && isLogin) ? <AuthNavigation /> : <UnAuthNavigation />) :
                 <>
                     <LottieView
                         source={require('../assets/lottie/nointernet.json')}
