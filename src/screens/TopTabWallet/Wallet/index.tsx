@@ -15,7 +15,9 @@ import { formatCurrency, getSupportedCurrencies } from "react-native-format-curr
 import { roundCoin } from '@screens/Swap/MakePrice'
 import Btn from '@commom/Btn'
 import { localStorage } from '@utils/localStorage'
+import { Dimensions } from 'react-native'
 
+const { width, height } = Dimensions.get('window')
 const Wallet = () => {
   const { t } = useTranslation()
   const dispatch: AppDispatch = useDispatch()
@@ -123,7 +125,7 @@ const Wallet = () => {
         <Options t={t} />
         <Coins
           style={{
-            paddingBottom: hp('20%')
+            paddingBottom: height * 0.25
           }}
         />
       </Box>
