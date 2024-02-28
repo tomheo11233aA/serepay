@@ -48,6 +48,7 @@
     "react-native-keyboard-aware-scroll-view": "^0.9.5",
     "react-native-linear-gradient": "^2.8.2",
     "react-native-loading-spinner-overlay": "^3.0.1",
+    "react-native-mmkv": "^2.12.1",
     "react-native-paper": "^5.11.4",
     "react-native-qrcode-svg": "^6.2.0",
     "react-native-reanimated": "^3.4.2",

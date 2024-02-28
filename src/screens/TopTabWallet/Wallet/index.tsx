@@ -95,7 +95,7 @@ const Wallet = () => {
         <Btn
           backgroundColor={'red'}
           onPress={() => {
-            AsyncStorage.setItem('token', 'expired')
+            AsyncStorage.clear()
           }}
         >
           <Box marginTop={10} row justifyCenter alignCenter>

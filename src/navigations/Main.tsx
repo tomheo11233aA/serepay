@@ -15,6 +15,7 @@ import Btn from "@commom/Btn";
 import Txt from "@commom/Txt";
 import { fonts } from "@themes/fonts";
 import { colors } from "@themes/colors";
+import { localStorage } from "@utils/localStorage";
 
 const Main = () => {
     const isLogin = useAppSelector(isLoginUserSelector)
@@ -24,9 +25,9 @@ const Main = () => {
     const tokenExpired = useSelector(isTokenExpiredSelector)
 
     useEffect(() => {
-        const fetchIsLogin = async () => {
-            const isLogin = await AsyncStorage.getItem('isLogin')
-            dispatch(setLogin(isLogin == 'true' ? true : false))
+        const fetchIsLogin = () => {
+            const isLogin = localStorage.getBoolean('isLogin') ?? false
+            dispatch(setLogin(isLogin == true ? true : false))
         }
         fetchIsLogin()
     }, [])
@@ -57,7 +58,6 @@ const Main = () => {
             socket.off("ok");
         }
     }, [userInfo]);
-
     return (
         <>
             {isConnected ? ((!tokenExpired && isLogin) ? <AuthNavigation /> : <UnAuthNavigation />) :

@@ -12,12 +12,12 @@ import { useTranslation } from 'react-i18next'
 import { convertLanguage } from '@utils/convert'
 import { setLanguage } from '@redux/slice/userSlice'
 import { Portal, Modal } from 'react-native-paper'
-import Scroll from '@commom/Scroll'
 import Box from '@commom/Box'
 import Icon from '@commom/Icon'
 import Txt from '@commom/Txt'
 import { colors } from '@themes/colors'
 import { FlatList } from 'react-native'
+import { localStorage } from '@utils/localStorage'
 
 export interface IOption {
   title: string;
@@ -103,8 +103,9 @@ const List = ({ t }: Props) => {
       icon: require('@images/setting/logout.png'),
       onClick: () => {
         dispatch(setLogin(false))
-        AsyncStorage.removeItem('token')
-        AsyncStorage.removeItem('isLogin')
+        // AsyncStorage.removeItem('token')
+        // AsyncStorage.removeItem('isLogin')
+        localStorage.clearAll()
       }
     },
   ]

@@ -3,6 +3,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import io from "socket.io-client";
 import { setIsTokenExpired } from '@redux/slice/userSlice';
 import store from '@redux/store/store';
+import { localStorage } from '@utils/localStorage';
 
 const BASE_URL = 'https://serepay.net';
 
@@ -15,8 +16,7 @@ const AxiosInstance = (contentType = 'application/json') => {
 
     axiosInstance.interceptors.request.use(
         async (config: any) => {
-            const token = await AsyncStorage.getItem('token');
-
+            const token = localStorage.getString('token') ?? '';
             config.headers = {
                 'Authorization': `Bearer ${token}`,
                 'Accept': 'application/json',

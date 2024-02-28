@@ -12,8 +12,7 @@ import React, { useState } from 'react'
 import AxiosInstance from '../../helper/AxiosInstance'
 import Spinner from 'react-native-loading-spinner-overlay'
 import AsyncStorage from '@react-native-async-storage/async-storage'
-import View from 'react-native'
-import { set } from 'lodash'
+import { localStorage } from '@utils/localStorage'
 
 interface Props {
     t: TFunction<"translation", undefined>
@@ -38,8 +37,8 @@ const Form = ({ t }: Props) => {
                 otp: otp2fa
             })
             if (response.data.status) {
-                AsyncStorage.setItem('token', response.data.token)
-                await AsyncStorage.setItem('isLogin', 'true')
+                localStorage.set('token', response.data.token)
+                localStorage.set('isLogin', true)
                 dispatch(setLogin(true))
             }
         } catch (error: any) {
