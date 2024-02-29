@@ -155,7 +155,6 @@ const RowData: React.FC<RowDataProps> = ({
             </Text>
         );
     }
-
     if (header.data === 'amount') {
         return (
             <Text style={{ color: '#ff0000', flexShrink: 1, fontFamily: fonts.AS, marginLeft: 5 }}>{'₫' + Math.round(item.pay).toLocaleString('en-US')}
