@@ -14,13 +14,21 @@ interface Props {
 const Terms = ({ t, checked, setChecked }: Props) => {
     return (
         <Box alignStart marginTop={10} width={'100%'} row>
-            <Checkbox
+            {/* <View style={{ width: 20, height: 20, borderRadius: 5, backgroundColor: colors.violet }} /> */}
+
+            <Checkbox.Android
                 status={checked ? 'checked' : 'unchecked'}
                 onPress={() => {
                     setChecked(!checked);
                 }}
+                color={colors.violet}
             />
-            <Txt marginLeft={5}>
+
+            <Txt marginLeft={5}
+                onPress={() => {
+                    setChecked(!checked);
+                }}
+            >
                 {t('Do you agree with')}
                 <Txt color={colors.violet}>{` ${t('Terms of Service')} `}</Txt>
                 {t('and')}
