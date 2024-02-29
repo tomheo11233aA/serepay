@@ -94,7 +94,7 @@ const PaymentModal: React.FC<PaymentModalProps> = ({ visible, hideModal, selecte
                         marginBottom: 5,
                         height: 20
                     }}>
-                    {t('You are')} {side} {amount} {t('through Serepay.')
+                    {t('You are')} {side} {amount} USDT {t('through Serepay.')
                     }</Txt>
 
                 <Txt

@@ -9,6 +9,7 @@ import { fonts } from '@themes/fonts';
 import { useAppSelector } from "@hooks/redux";
 import { userInfoUserSelector, exchangeRateSelector } from "@redux/selector/userSelector";
 import { bankSelector } from '@redux/selector/userSelector';
+import { selectedRateSelector } from '@redux/selector/userSelector';
 
 type RowDataProps = {
     header: any;
@@ -48,6 +49,7 @@ const RowData: React.FC<RowDataProps> = ({
     const [profileId, setProfileId] = useState<number | null>(null);
     const [_side, _setSide] = useState<string | null>(null);
     const [isLoading, setIsLoading] = useState<boolean>(true)
+    const selectedRate = useAppSelector(selectedRateSelector)
     useEffect(() => {
         if (userInfo?.id === item.userid) {
             _setSide('sell');
@@ -148,7 +150,9 @@ const RowData: React.FC<RowDataProps> = ({
     }
     if (header.data === 'rate') {
         return (
-            <Text style={{ color: '#ff0000', flexShrink: 1, fontFamily: fonts.AS, marginLeft: 5 }}>${(item.rate).toLocaleString('en-US', { maximumFractionDigits: 2 })}</Text>
+            <Text style={{ color: '#ff0000', flexShrink: 1, fontFamily: fonts.AS, marginLeft: 5 }}>
+                {selectedRate.title==='VND' ? '₫' + Math.round(item.rate * selectedRate.rate).toLocaleString('en-US') : '$' + (item.rate * selectedRate.rate).toLocaleString('en-US')}
+            </Text>
         );
     }
 
@@ -163,7 +167,7 @@ const RowData: React.FC<RowDataProps> = ({
                                 ? <Text style={{ color: '#ff0000', flexShrink: 1, fontFamily: fonts.AS }}>{(Math.round(item.pay - item.amount * (item.rate * vndRate.rate)).toLocaleString('en-US') + ' VND')}</Text>
                                 : 'vndRate is undefined'
                             : vndRate
-                                ? <Text style={{ color: '#ff0000', flexShrink: 1, fontFamily: fonts.AS }}>{(Math.round(item.pay - item.amount * (item.rate * vndRate.rate)).toLocaleString('en-US') + ' VNĐ')}
+                                ? <Text style={{ color: '#ff0000', flexShrink: 1, fontFamily: fonts.AS }}>{(Math.abs(Math.round(item.pay - item.amount * (item.rate * vndRate.rate))).toLocaleString('en-US') + ' VND')}
                                 </Text>
                                 : 'vndRate is undefined'
                     })

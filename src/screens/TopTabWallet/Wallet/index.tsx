@@ -108,14 +108,22 @@ const Wallet = () => {
         </Btn> */}
         <Box marginTop={10} row justifyCenter alignCenter>
           <Icon size={30} source={require('@images/wallet/bitcoin.png')} />
-          <Txt color={'white'} size={30} marginLeft={10}>
+          <Txt color={'white'} size={30} marginLeft={10}
+            flexGrow={1}
+            justify
+            flexShrink={1}
+          >
             {totalValueInBTC.toLocaleString('en-US', { maximumFractionDigits: 8 })}
             {' BTC'}
           </Txt>
         </Box>
-        <Box marginTop={10} row justifyCenter alignCenter style={{ alignSelf: 'center' }}>
+        <Box marginTop={10} row justifyCenter alignCenter >
           <Icon size={30} source={require('@images/wallet/dollar.png')} />
-          <Txt color={'white'} size={30} marginLeft={10} justify>
+          <Txt color={'white'} size={30} marginLeft={10}
+            flexGrow={1}
+            justify
+            flexShrink={1}
+          >
             {displayCurrency}
           </Txt>
         </Box>
