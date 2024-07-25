@@ -1,46 +1,47 @@
 import axios from 'axios';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import io from "socket.io-client";
-import { setIsTokenExpired } from '@redux/slice/userSlice';
+import io from 'socket.io-client';
+import {setIsTokenExpired} from '@redux/slice/userSlice';
 import store from '@redux/store/store';
-import { localStorage } from '@utils/localStorage';
+import {localStorage} from '@utils/localStorage';
 
-const BASE_URL = 'https://serepay.net';
+// const BASE_URL = 'https://serepay.net';
+const BASE_URL = 'https://remitano.dk-tech.vn';
 
 const AxiosInstance = (contentType = 'application/json') => {
-    const axiosInstance = axios.create({
-        // baseURL: 'https://remitano.dk-tech.vn',
-        // baseURL: 'https://serepay.net'
-        baseURL: BASE_URL
-    });
+  const axiosInstance = axios.create({
+    // baseURL: 'https://remitano.dk-tech.vn',
+    // baseURL: 'https://serepay.net'
+    baseURL: BASE_URL,
+  });
 
-    axiosInstance.interceptors.request.use(
-        async (config: any) => {
-            const token = localStorage.getString('token') ?? '';
-            config.headers = {
-                'Authorization': `Bearer ${token}`,
-                'Accept': 'application/json',
-                'Content-Type': contentType
-            }
-            return config;
-        },
-        err => Promise.reject(err)
-    );
+  axiosInstance.interceptors.request.use(
+    async (config: any) => {
+      const token = localStorage.getString('token') ?? '';
+      config.headers = {
+        Authorization: `Bearer ${token}`,
+        Accept: 'application/json',
+        'Content-Type': contentType,
+      };
+      return config;
+    },
+    err => Promise.reject(err),
+  );
 
-    axiosInstance.interceptors.response.use(
-        res => res.data,
-        // err => Promise.reject(err)
-        err => {
-            if (err.response && err.response.status === 401) {
-                store.dispatch(setIsTokenExpired(true));
-            }
-            return Promise.reject(err);
-        }
-    );
-    return axiosInstance;
+  axiosInstance.interceptors.response.use(
+    res => res.data,
+    // err => Promise.reject(err)
+    err => {
+      if (err.response && err.response.status === 401) {
+        store.dispatch(setIsTokenExpired(true));
+      }
+      return Promise.reject(err);
+    },
+  );
+  return axiosInstance;
 };
 
 export default AxiosInstance;
 export const socket = io(BASE_URL, {
-    transports: ["websocket", "polling", "flashsocket"],
+  transports: ['websocket', 'polling', 'flashsocket'],
 });

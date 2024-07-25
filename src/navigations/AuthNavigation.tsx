@@ -1,19 +1,20 @@
-import { screens } from '@contants/screens'
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
-import React from 'react'
-import WalletStack from './WalletStack'
-import SwapStack from './SwapStack'
-import SettingStack from './SettingStack'
-import Box from '@commom/Box'
-import Icon from '@commom/Icon'
-import { colors } from '@themes/colors'
-import Txt from '@commom/Txt'
-import { useTranslation } from 'react-i18next'
-import { heightPercentageToDP as hp } from 'react-native-responsive-screen'
+import React from 'react';
+import Txt from '@commom/Txt';
+import Box from '@commom/Box';
+import Icon from '@commom/Icon';
+import CardStack from './CardStack';
+import SwapStack from './SwapStack';
+import {colors} from '@themes/colors';
+import WalletStack from './WalletStack';
+import {screens} from '@contants/screens';
+import SettingStack from './SettingStack';
+import {useTranslation} from 'react-i18next';
+import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
+import {heightPercentageToDP as hp} from 'react-native-responsive-screen';
 
-const Tab = createBottomTabNavigator()
+const Tab = createBottomTabNavigator();
 const AuthNavigation = () => {
-  const { t } = useTranslation()
+  const {t} = useTranslation();
   const tabs = [
     {
       sizeIcon: 25,
@@ -33,6 +34,14 @@ const AuthNavigation = () => {
     // },
     {
       sizeIcon: 20,
+      title: 'HyperCard',
+      component: CardStack,
+      name: screens.CARD_STACK,
+      icon: require('@images/tab/card.png'),
+      icon2: require('@images/tab/card2.png'),
+    },
+    {
+      sizeIcon: 20,
       title: 'Swap',
       component: SwapStack,
       name: screens.SWAP_STACK,
@@ -47,7 +56,7 @@ const AuthNavigation = () => {
       icon: require('@images/tab/setting.png'),
       icon2: require('@images/tab/setting2.png'),
     },
-  ]
+  ];
 
   return (
     <Tab.Navigator
@@ -62,40 +71,36 @@ const AuthNavigation = () => {
           position: 'absolute',
         },
         tabBarHideOnKeyboard: true,
-      }}
-    >
-      {tabs.map((tab) => {
+      }}>
+      {tabs.map(tab => {
         return (
           <Tab.Screen
             key={tab.title}
             name={tab.name}
             component={tab.component}
             options={{
-              tabBarIcon: ({ focused }: { focused: boolean }): JSX.Element => {
+              tabBarIcon: ({focused}: {focused: boolean}): JSX.Element => {
                 return (
                   <Box alignCenter>
                     <Icon
-                      tintColor={focused ? colors.violet : 'black'}
                       marginBottom={5}
                       size={tab.sizeIcon}
-                      source={focused ? tab.icon : tab.icon2}
                       resizeMode={'contain'}
+                      source={focused ? tab.icon : tab.icon2}
+                      tintColor={focused ? colors.violet : 'black'}
                     />
-                    <Txt
-                      size={12}
-                      color={focused ? colors.violet : 'black'}
-                    >
+                    <Txt size={12} color={focused ? colors.violet : 'black'}>
                       {t(tab.title)}
                     </Txt>
                   </Box>
-                )
-              }
+                );
+              },
             }}
           />
-        )
+        );
       })}
     </Tab.Navigator>
-  )
-}
+  );
+};
 
-export default AuthNavigation
+export default AuthNavigation;
