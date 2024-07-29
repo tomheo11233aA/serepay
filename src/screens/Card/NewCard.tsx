@@ -1,16 +1,12 @@
 import Box from '@commom/Box';
-import Img from '@commom/Img';
 import Txt from '@commom/Txt';
-import Btn from '@commom/Btn';
 import {useState} from 'react';
 import {fonts} from '@themes/fonts';
-import Scroll from '@commom/Scroll';
 import {colors} from '@themes/colors';
+import ItemNewCard from './ItemNewCard';
 import {screens} from '@contants/screens';
 import {useTranslation} from 'react-i18next';
 import {navigate} from '@utils/navigationRef';
-import {Marquee} from '@animatereactnative/marquee';
-import ItemNewCard from './ItemNewCard';
 
 const NewCard = () => {
   const {t} = useTranslation();
@@ -65,7 +61,13 @@ const NewCard = () => {
         <Txt size={16} fontFamily={fonts.OSB}>
           {t('New card')}
         </Txt>
-        <Txt size={14} fontFamily={fonts.OL} color={colors.gray2}>
+        <Txt
+          size={14}
+          fontFamily={fonts.OL}
+          color={colors.gray2}
+          onPress={() => {
+            navigate(screens.NEW_CARD_MORE);
+          }}>
           {t('More')}
         </Txt>
       </Box>

@@ -2,7 +2,9 @@ import Box from '@commom/Box';
 import Img from '@commom/Img';
 import Txt from '@commom/Txt';
 import {fonts} from '@themes/fonts';
+import {screens} from '@contants/screens';
 import {useTranslation} from 'react-i18next';
+import {navigate} from '@utils/navigationRef';
 import {
   Gift,
   User,
@@ -12,32 +14,38 @@ import {
   QuoteUpCircle,
   ArrowRotateRight,
 } from 'iconsax-react-native';
+import Btn from '@commom/Btn';
 
 const HeaderMenu = () => {
   const menu = [
     {
       title: 'Personal Data',
       bakcgroundColor: '#e1edff',
+      callback: () => navigate(screens.PERSONAL_DATA),
       icon: <User size={12} variant="Bold" color="#006eff" />,
     },
     {
       title: 'Quick Link',
       bakcgroundColor: '#def4ed',
+      callback: () => navigate(screens.QUICK_LINK),
       icon: <LinkSquare size={12} variant="Bold" color="#01a775" />,
     },
     {
       title: 'Commission rebate',
       bakcgroundColor: '#def4ed',
+      callback: () => navigate(screens.COMMISTION_REBATE),
       icon: <Coin1 size={12} variant="Bold" color="#01a775" />,
     },
     {
       title: 'Feedback',
       bakcgroundColor: '#e1edff',
+      callback: () => navigate(screens.FEEDBACK),
       icon: <Message size={12} variant="Bold" color="#006eff" />,
     },
     {
       title: 'Hyper rebate',
       bakcgroundColor: '#ffecdc',
+      callback: () => navigate(screens.HYPER_REBATE),
       icon: <Gift size={12} variant="Bold" color="#ff7300" />,
     },
   ];
@@ -86,7 +94,12 @@ const HeaderMenu = () => {
 
       <Box wrap row marginTop={20} justifySpaceBetween>
         {menu.map((item, index) => (
-          <Box key={index} alignCenter marginBottom={30} paddingHorizontal={10}>
+          <Btn
+            key={index}
+            alignCenter
+            marginBottom={30}
+            paddingHorizontal={10}
+            onPress={item.callback}>
             <Box
               width={25}
               height={25}
@@ -100,7 +113,7 @@ const HeaderMenu = () => {
             <Txt size={10} marginTop={10} fontFamily={fonts.OL} center>
               {t(item.title)}
             </Txt>
-          </Box>
+          </Btn>
         ))}
       </Box>
     </Box>
