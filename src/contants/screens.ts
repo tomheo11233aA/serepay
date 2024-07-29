@@ -1,11 +1,13 @@
 export const screens = {
   AD: 'AD',
   KYC: 'KYC',
+  VIP: 'VIP',
   MAIN: 'Main',
   SWAP: 'Swap',
   CARD: 'Card',
   HELLO: 'Hello',
   LOGIN: 'Login',
+  AGENT: 'Agent',
   WALLET: 'Wallet',
   SETTING: 'Setting',
   DEPOSIT: 'Deposit',

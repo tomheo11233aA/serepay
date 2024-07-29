@@ -1,9 +1,9 @@
+import FAQ from '../FAQ';
 import Box from '@commom/Box';
-import Scroll from '@commom/Scroll';
 import Header from './Header';
 import Txt from '@commom/Txt';
 import {fonts} from '@themes/fonts';
-import FAQ from '../FAQ';
+import Scroll from '@commom/Scroll';
 
 const Feedback = () => {
   return (
