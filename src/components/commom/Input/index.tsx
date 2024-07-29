@@ -196,7 +196,7 @@ const Input = forwardRef<TextInput, Props>(
         width={width}
         height={height}
         marginTop={marginTop}
-        paddingHorizontal={10}
+        // paddingHorizontal={10}
         marginBottom={marginBottom}
         style={blockStyles}
         {...rest}>
@@ -218,7 +218,7 @@ const Input = forwardRef<TextInput, Props>(
             color: 'black',
             fontFamily: font,
             fontSize: fontSize,
-            marginHorizontal: 10,
+            // marginHorizontal: 10,
             fontWeight: fontWeight,
           }}
           value={value}
