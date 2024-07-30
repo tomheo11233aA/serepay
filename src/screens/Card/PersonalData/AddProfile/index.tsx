@@ -8,8 +8,10 @@ import {fonts} from '@themes/fonts';
 import Scroll from '@commom/Scroll';
 import {colors} from '@themes/colors';
 import {height} from '@utils/responsive';
-import {Modalize} from 'react-native-modalize';
 import {ArrowRight2} from 'iconsax-react-native';
+import signature from '@images/Card/signature.svg';
+import Signature from 'react-native-signature-canvas';
+import BottomSheet, {BottomSheetRefProps} from '@commom/BottomSheet';
 
 const Field = ({
   hint,
@@ -77,10 +79,15 @@ const SelectField = ({label, value, onPress, hint}: SelectFieldProps) => {
 };
 
 const AddProfile = () => {
-  const modalizeGenderRef = useRef<Modalize>(null);
+  const ref = useRef<BottomSheetRefProps>(null);
 
-  const openGenderModal = () => {
-    modalizeGenderRef.current?.open;
+  const handleOpenGender = () => {
+    const isActive = ref?.current?.isActive();
+    if (isActive) {
+      ref?.current?.scrollTo(0);
+    } else {
+      ref?.current?.scrollTo(-200);
+    }
   };
 
   return (
@@ -112,26 +119,26 @@ const AddProfile = () => {
             value="Male"
             label="Gender"
             hint="Select the gender"
-            onPress={openGenderModal}
+            onPress={handleOpenGender}
           />
 
           <SelectField
             value=""
             label="Residence"
             hint="Select the country"
-            onPress={openGenderModal}
+            onPress={() => {}}
           />
 
           <SelectField
             value=""
             label="Date of birth"
-            onPress={openGenderModal}
+            onPress={() => {}}
             hint="Select date of birth"
           />
 
           <SelectField
             value=""
-            onPress={openGenderModal}
+            onPress={() => {}}
             label="ID issuance country"
             hint="Select the ID issuance country"
           />
@@ -139,7 +146,7 @@ const AddProfile = () => {
           <SelectField
             value="Passport"
             label="Document type"
-            onPress={openGenderModal}
+            onPress={() => {}}
             hint="Select the document type"
           />
 
@@ -152,7 +159,7 @@ const AddProfile = () => {
 
           <SelectField
             value=""
-            onPress={openGenderModal}
+            onPress={() => {}}
             label="Expiration date"
             hint="Select the expiration date"
           />
@@ -203,6 +210,8 @@ const AddProfile = () => {
 
         {/* TODO: Chữ ký */}
       </Scroll>
+
+      <BottomSheet ref={ref}></BottomSheet>
       <Btn
         radius={5}
         padding={10}
