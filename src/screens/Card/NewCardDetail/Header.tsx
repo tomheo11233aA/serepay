@@ -4,6 +4,7 @@ import {fonts} from '@themes/fonts';
 import {goBack} from '@utils/navigationRef';
 import {useTranslation} from 'react-i18next';
 import {ArrowLeft, ExportCircle} from 'iconsax-react-native';
+import {colors} from '@themes/colors';
 
 const Header = () => {
   const {t} = useTranslation();
@@ -14,11 +15,11 @@ const Header = () => {
       paddingTop={20}
       justifySpaceBetween
       paddingHorizontal={20}>
-      <ArrowLeft size={20} onPress={goBack} color="#000" />
-      <Txt fontFamily={fonts.OSB} size={20}>
+      <ArrowLeft size={20} onPress={goBack} color="#fff" />
+      <Txt fontFamily={fonts.OSB} size={20} color={colors.yellow}>
         {t('HyperCard')}
       </Txt>
-      <ExportCircle size={20} color="#000" />
+      <ExportCircle size={20} color="#fff" />
     </Box>
   );
 };

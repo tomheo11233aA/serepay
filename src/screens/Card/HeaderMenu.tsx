@@ -15,6 +15,7 @@ import {
   ArrowRotateRight,
 } from 'iconsax-react-native';
 import Btn from '@commom/Btn';
+import {colors} from '@themes/colors';
 
 const HeaderMenu = () => {
   const menu = [
@@ -55,31 +56,37 @@ const HeaderMenu = () => {
       paddingTop={10}
       paddingVertical={10}
       paddingHorizontal={15}
-      backgroundColor={'#fff'}>
+      backgroundColor={colors.boxColor}>
       <Box row justifySpaceBetween>
-        <Txt size={20} fontFamily={fonts.OSB} color={'#000'}>
+        <Txt size={20} fontFamily={fonts.OSB} color={colors.yellow}>
           {t('HyperCard')}
         </Txt>
 
         <Box row alignCenter>
-          <QuoteUpCircle color={'#000'} size={20} />
+          <QuoteUpCircle color={'#fff'} size={20} />
           <Box width={20} />
-          <ArrowRotateRight color={'#000'} size={20} />
+          <ArrowRotateRight color={'#fff'} size={20} />
         </Box>
       </Box>
 
       <Box row marginTop={30} alignCenter>
         <Txt
           size={15}
+          color={'#fff'}
           paddingRight={10}
           fontFamily={fonts.OSB}
           style={{
             borderRightWidth: 1,
+            borderColor: '#fff',
           }}>
           {t('Must-have')}
         </Txt>
 
-        <Txt size={12} fontFamily={fonts.OL} paddingHorizontal={10}>
+        <Txt
+          size={12}
+          color={'#fff'}
+          fontFamily={fonts.OL}
+          paddingHorizontal={10}>
           {t('People are using')}
         </Txt>
       </Box>
@@ -110,7 +117,12 @@ const HeaderMenu = () => {
               backgroundColor={item.bakcgroundColor}>
               {item.icon}
             </Box>
-            <Txt size={10} marginTop={10} fontFamily={fonts.OL} center>
+            <Txt
+              size={10}
+              marginTop={10}
+              fontFamily={fonts.OL}
+              center
+              color={'#fff'}>
               {t(item.title)}
             </Txt>
           </Btn>

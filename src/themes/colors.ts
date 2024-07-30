@@ -26,4 +26,7 @@ export const colors = {
   red: '#e75559',
   blue: '#3b5998',
   green2: '#00c925',
-}
+  yellow: '#f4e096',
+  boxColor: '#282c3c',
+  backgroundColor: '#212529',
+};

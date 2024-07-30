@@ -215,7 +215,7 @@ const Input = forwardRef<TextInput, Props>(
         <TextInput
           style={{
             flex: 1,
-            color: 'black',
+            color: color,
             fontFamily: font,
             fontSize: fontSize,
             marginHorizontal: 10,

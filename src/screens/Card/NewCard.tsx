@@ -56,9 +56,9 @@ const NewCard = () => {
       marginTop={10}
       paddingVertical={10}
       paddingHorizontal={15}
-      backgroundColor={'#fff'}>
+      backgroundColor={colors.boxColor}>
       <Box row alignCenter justifySpaceBetween>
-        <Txt size={16} fontFamily={fonts.OSB}>
+        <Txt size={16} fontFamily={fonts.OSB} color={colors.yellow}>
           {t('New card')}
         </Txt>
         <Txt

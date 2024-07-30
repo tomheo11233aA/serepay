@@ -28,15 +28,16 @@ const InfoCard = ({
   const {t} = useTranslation();
   return (
     <Box row marginTop={15} justifySpaceBetween>
-      <Txt size={12} fontFamily={fonts.OL} flex color={colors.gray4}>
+      <Txt size={12} fontFamily={fonts.OL} flex color={'#fff'}>
         {t(title)}
       </Txt>
       <Txt
-        right
         flex
+        right
         size={12}
-        fontFamily={isBold ? fonts.OSB : fonts.OL}
-        numberOfLines={2}>
+        numberOfLines={2}
+        color={colors.gray2}
+        fontFamily={isBold ? fonts.OSB : fonts.OL}>
         {t(value)}
       </Txt>
     </Box>
@@ -52,7 +53,7 @@ const NewCardDetail = () => {
   const [activeSections, setActiveSections] = useState<number[]>([]);
   const renderHeader = (section: any, _: any, isActive: any) => (
     <Box row alignCenter marginTop={30} justifySpaceBetween>
-      <Txt size={14} fontFamily={fonts.OSB}>
+      <Txt size={14} fontFamily={fonts.OSB} color={'white'}>
         {t(section.title)}
       </Txt>
       {isActive ? (
@@ -64,7 +65,7 @@ const NewCardDetail = () => {
   );
   const renderContent = (section: any) => (
     <Box marginTop={10}>
-      <Txt size={12} fontFamily={fonts.OL}>
+      <Txt size={12} fontFamily={fonts.OL} color={'white'}>
         {t(section.content)}
       </Txt>
     </Box>
@@ -75,7 +76,7 @@ const NewCardDetail = () => {
   }
 
   return (
-    <Box backgroundColor={'#fff'} flex paddingBottom={15}>
+    <Box backgroundColor={colors.boxColor} flex paddingBottom={15}>
       <Header />
       <Scroll
         paddingBottom={50}
@@ -151,19 +152,23 @@ const NewCardDetail = () => {
         </Box>
 
         <Box marginTop={30}>
-          <Txt size={16} fontFamily={fonts.OSB}>
+          <Txt size={16} fontFamily={fonts.OSB} color={colors.yellow}>
             {t('Application')}
           </Txt>
-          <Txt size={12} marginTop={5} fontFamily={fonts.OL}>
+          <Txt size={12} marginTop={5} fontFamily={fonts.OL} color={'white'}>
             {t('1. Applicants must be over 18 years old')}
           </Txt>
-          <Txt size={12} marginTop={5} fontFamily={fonts.OL}>
+          <Txt size={12} marginTop={5} fontFamily={fonts.OL} color={'white'}>
             {t(
               '2. Each passport can only apply for one card of each type at most',
             )}
           </Txt>
 
-          <Txt size={16} fontFamily={fonts.OSB} marginTop={30}>
+          <Txt
+            size={16}
+            fontFamily={fonts.OSB}
+            marginTop={30}
+            color={colors.yellow}>
             {t('Charges')}
           </Txt>
 
@@ -198,7 +203,11 @@ const NewCardDetail = () => {
               value="Apple Pay/Pinduoduo/Alipay/WeChat/Amazon/Shopee, etc."
             />
 
-            <Txt size={16} fontFamily={fonts.OSB} marginTop={30}>
+            <Txt
+              size={16}
+              fontFamily={fonts.OSB}
+              marginTop={30}
+              color={colors.yellow}>
               {t('Restricted countries of application')}
             </Txt>
             <InfoCard
@@ -206,10 +215,14 @@ const NewCardDetail = () => {
               value="Iraq/Korea Democratic People's Republic/China/Sudan"
             />
 
-            <Txt size={16} fontFamily={fonts.OSB} marginTop={30}>
+            <Txt
+              size={16}
+              fontFamily={fonts.OSB}
+              marginTop={30}
+              color={colors.yellow}>
               {t('Supported platforms')}
             </Txt>
-            <Txt size={12} marginTop={10} fontFamily={fonts.OL}>
+            <Txt size={12} marginTop={10} fontFamily={fonts.OL} color={'white'}>
               {t(
                 'Support cross-border payments and advertising expenditure, including Apple Pay, PayPal, Ads, TikTok ads, etc.',
               )}
@@ -219,7 +232,7 @@ const NewCardDetail = () => {
 
         <Box marginTop={30}>
           <Box row alignCenter justifySpaceBetween>
-            <Txt size={16} fontFamily={fonts.OSB}>
+            <Txt size={16} fontFamily={fonts.OSB} color={colors.yellow}>
               {t('FAQ')}
             </Txt>
             <Txt size={14} fontFamily={fonts.OL} color={colors.gray2}>
@@ -237,8 +250,12 @@ const NewCardDetail = () => {
           />
         </Box>
       </Scroll>
-      <Btn marginHorizontal={10} padding={15} backgroundColor={'#006eff'}>
-        <Txt size={13} color={'#fff'} fontFamily={fonts.OL}>
+      <Btn
+        marginHorizontal={10}
+        padding={15}
+        borderColor={colors.yellow}
+        borderWidth={1}>
+        <Txt size={13} color={colors.yellow} fontFamily={fonts.OL}>
           {t('Apply now')}
         </Txt>
       </Btn>

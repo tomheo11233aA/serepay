@@ -4,10 +4,11 @@ import Header from './Header';
 import Txt from '@commom/Txt';
 import {fonts} from '@themes/fonts';
 import Scroll from '@commom/Scroll';
+import { colors } from '@themes/colors';
 
 const Feedback = () => {
   return (
-    <Box backgroundColor={'#fff'} flex paddingBottom={15}>
+    <Box backgroundColor={colors.boxColor} flex paddingBottom={15}>
       <Header />
       <Scroll
         flex
@@ -17,8 +18,8 @@ const Feedback = () => {
         paddingVertical={10}
         paddingHorizontal={15}
         showsVerticalScrollIndicator={false}>
-        <Txt fontFamily={fonts.OL}>
-          If you encounter anh issues, please let us know through the feedback.
+        <Txt fontFamily={fonts.OL} color={'#fff'}>
+          If you encounter any issues, please let us know through the feedback.
         </Txt>
       </Scroll>
       <Scroll flex paddingHorizontal={15} showsVerticalScrollIndicator={false}>

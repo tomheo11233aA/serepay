@@ -14,7 +14,7 @@ const FAQ = () => {
   const [activeSections, setActiveSections] = useState<number[]>([]);
   const renderHeader = (section: any, _: any, isActive: any) => (
     <Box row alignCenter marginTop={30} justifySpaceBetween>
-      <Txt size={14} fontFamily={fonts.OSB}>
+      <Txt size={14} fontFamily={fonts.OSB} color={'#fff'}>
         {t(section.title)}
       </Txt>
       {isActive ? (
@@ -26,7 +26,7 @@ const FAQ = () => {
   );
   const renderContent = (section: any) => (
     <Box marginTop={10}>
-      <Txt size={12} fontFamily={fonts.OL}>
+      <Txt size={12} fontFamily={fonts.OL} color={'#fff'}>
         {t(section.content)}
       </Txt>
     </Box>
@@ -36,9 +36,9 @@ const FAQ = () => {
       marginTop={10}
       paddingVertical={10}
       paddingHorizontal={15}
-      backgroundColor={'#fff'}>
+      backgroundColor={colors.boxColor}>
       <Box row alignCenter justifySpaceBetween>
-        <Txt size={16} fontFamily={fonts.OSB}>
+        <Txt size={16} fontFamily={fonts.OSB} color={colors.yellow}>
           {t('FAQ')}
         </Txt>
         <Txt size={14} fontFamily={fonts.OL} color={colors.gray2}>

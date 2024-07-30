@@ -14,8 +14,8 @@ const Header = () => {
       paddingTop={10}
       justifySpaceBetween
       paddingHorizontal={20}>
-      <ArrowLeft size={18} onPress={goBack} color="#000" />
-      <Txt fontFamily={fonts.OSB} size={16}>
+      <ArrowLeft size={18} onPress={goBack} color="#fff" />
+      <Txt fontFamily={fonts.OSB} color={'#fff'} size={20}>
         {t('Profile')}
       </Txt>
       <Box width={18} />

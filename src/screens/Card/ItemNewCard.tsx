@@ -44,12 +44,12 @@ const ItemNewCard: React.FC<Props> = ({
           <Box>
             {item.title.length > mqTextLength ? (
               <Marquee spacing={20} speed={0.5}>
-                <Txt size={14} fontFamily={fonts.OSB}>
+                <Txt size={14} fontFamily={fonts.OSB} color={'#fff'}>
                   {item.title}
                 </Txt>
               </Marquee>
             ) : (
-              <Txt size={14} fontFamily={fonts.OSB}>
+              <Txt size={14} fontFamily={fonts.OSB} color={'#fff'}>
                 {item.title}
               </Txt>
             )}

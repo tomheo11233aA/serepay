@@ -8,7 +8,7 @@ import Animated, {
   useSharedValue,
   useAnimatedStyle,
 } from 'react-native-reanimated';
-import {TouchableWithoutFeedback} from 'react-native';
+import { colors } from '@themes/colors';
 
 const {height: SCREEN_HEIGHT} = Dimensions.get('window');
 
@@ -75,44 +75,18 @@ const BottomSheet = React.forwardRef<BottomSheetRefProps, BottomSheetProps>(
       };
     });
 
-    const rBackdropStyle = useAnimatedStyle(() => {
-      return {
-        opacity: interpolate(
-          translateY.value,
-          [0, MAX_TRANSLATE_Y],
-          [0, 0.5],
-          Extrapolation.CLAMP,
-        ),
-      };
-    });
-
-    const handleClose = useCallback(() => {
-      scrollTo(0);
-    }, [scrollTo]);
-
     return (
-      <>
-        <TouchableWithoutFeedback onPress={handleClose}>
-          <Animated.View style={[styles.backdrop, rBackdropStyle]} />
-        </TouchableWithoutFeedback>
-        <GestureDetector gesture={gesture}>
-          <Animated.View
-            style={[styles.bottomSheetContainer, rBottomSheetStyle]}>
-            <View style={styles.line} />
-            {children}
-          </Animated.View>
-        </GestureDetector>
-      </>
+      <GestureDetector gesture={gesture}>
+        <Animated.View style={[styles.bottomSheetContainer, rBottomSheetStyle]}>
+          <View style={styles.line} />
+          {children}
+        </Animated.View>
+      </GestureDetector>
     );
   },
 );
 
 const styles = StyleSheet.create({
-  backdrop: {
-    ...StyleSheet.absoluteFillObject,
-    backgroundColor: 'rgba(0, 0, 20, 5)',
-    zIndex: -1,
-  },
   bottomSheetContainer: {
     zIndex: 1,
     elevation: 5,
@@ -121,7 +95,7 @@ const styles = StyleSheet.create({
     top: SCREEN_HEIGHT,
     position: 'absolute',
     height: SCREEN_HEIGHT,
-    backgroundColor: 'white',
+    backgroundColor: colors.backgroundColor,
   },
   line: {
     width: 75,

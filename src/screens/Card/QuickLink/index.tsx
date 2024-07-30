@@ -9,7 +9,7 @@ import Btn from '@commom/Btn';
 
 const QuickLink = () => {
   return (
-    <Box backgroundColor={'#fff'} flex paddingBottom={15}>
+    <Box backgroundColor={colors.boxColor} flex paddingBottom={15}>
       <Header />
       <Scroll
         paddingBottom={50}
@@ -17,11 +17,11 @@ const QuickLink = () => {
         paddingHorizontal={15}
         showsVerticalScrollIndicator={false}>
         <Box marginTop={20}>
-          <Txt fontFamily={fonts.OSB}>
+          <Txt fontFamily={fonts.OSB} color={colors.yellow}>
             What is the quick card linking service?
           </Txt>
 
-          <Txt fontFamily={fonts.OL} marginTop={10}>
+          <Txt fontFamily={fonts.OL} marginTop={10} color={'#fff'}>
             Quick card linking service is launched for HyperCard physical or
             virtual card users to link the account number with card number.
             After the card number linking is submitted, the KYC is required to
@@ -32,36 +32,50 @@ const QuickLink = () => {
         </Box>
 
         <Box marginTop={20}>
-          <Txt fontFamily={fonts.OSB}>Link card number</Txt>
+          <Txt fontFamily={fonts.OSB} color={colors.yellow}>
+            Link card number
+          </Txt>
           <Input
             fontSize={14}
             marginTop={10}
+            color={'#fff'}
             font={fonts.OSB}
             borderBottomWidth={1}
+            hintColor={colors.gray2}
             borderColor={colors.gray}
             hint={'Please enter the card number'}
           />
         </Box>
 
         <Box marginTop={20}>
-          <Txt fontFamily={fonts.OSB}>Envelope number</Txt>
+          <Txt fontFamily={fonts.OSB} color={colors.yellow}>
+            Envelope number
+          </Txt>
           <Input
             fontSize={14}
+            color={'#fff'}
             marginTop={10}
             font={fonts.OSB}
             borderBottomWidth={1}
+            hintColor={colors.gray2}
             borderColor={colors.gray}
             hint={'Please enter the envelope number'}
           />
         </Box>
 
         <Box marginTop={30} row alignCenter justifySpaceBetween>
-          <Txt fontFamily={fonts.OSB}>Linking card name</Txt>
-          <Txt fontFamily={fonts.OSB}>--</Txt>
+          <Txt fontFamily={fonts.OSB} color={colors.yellow}>
+            Linking card name
+          </Txt>
+          <Txt fontFamily={fonts.OSB} color={'#fff'}>
+            --
+          </Txt>
         </Box>
 
         <Box marginTop={40} row alignCenter justifySpaceBetween>
-          <Txt fontFamily={fonts.OSB}>Instruction</Txt>
+          <Txt fontFamily={fonts.OSB} color={colors.yellow}>
+            Instruction
+          </Txt>
           <Txt fontFamily={fonts.OSB} color={'#006eff'}>
             Turtorial
           </Txt>
@@ -71,7 +85,11 @@ const QuickLink = () => {
           <Txt fontFamily={fonts.OL} color={colors.gray2} size={14}>
             ● Quick card linking instructions:{' '}
           </Txt>
-          <Txt fontFamily={fonts.OL} color={colors.gray2} size={14} marginTop={10}>
+          <Txt
+            fontFamily={fonts.OL}
+            color={colors.gray2}
+            size={14}
+            marginTop={10}>
             {'\t'} 1. No fee is charged for the quick card linking service, and
             it cannot be changed after the linking is successful. {'\n'}
             {'\t'} 2. The mailer number is unique and relevant. After receiving
@@ -84,9 +102,10 @@ const QuickLink = () => {
         radius={5}
         padding={10}
         width={'95%'}
+        borderWidth={1}
         alignSelf={'center'}
-        backgroundColor={'#006eff'}>
-        <Txt fontFamily={fonts.OL} color={'white'}>
+        borderColor={colors.yellow}>
+        <Txt fontFamily={fonts.OL} color={colors.yellow}>
           Submit
         </Txt>
       </Btn>

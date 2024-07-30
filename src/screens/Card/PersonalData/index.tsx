@@ -6,25 +6,30 @@ import {colors} from '@themes/colors';
 import Btn from '@commom/Btn';
 import {navigate} from '@utils/navigationRef';
 import {screens} from '@contants/screens';
+import {useTranslation} from 'react-i18next';
 
 const PersonalData = () => {
+  const {t} = useTranslation();
   return (
-    <Box backgroundColor={'#fff'} flex paddingBottom={15}>
+    <Box backgroundColor={colors.boxColor} flex paddingBottom={15}>
       <Header />
       <Box flex alignCenter justifyCenter>
-        <Txt fontFamily={fonts.OL}>You have not gilled in any profile</Txt>
+        <Txt fontFamily={fonts.OL} color={'#fff'}>
+          {t('You have not gilled in any profile')}
+        </Txt>
         <Txt size={12} color={colors.gray2} fontFamily={fonts.OL}>
-          You can click the button below to add profile
+          {t('You can click the button below to add profile')}
         </Txt>
       </Box>
       <Btn
         radius={5}
         padding={10}
         width={'95%'}
+        borderWidth={1}
         alignSelf={'center'}
-        backgroundColor={'#006eff'}
+        borderColor={colors.yellow}
         onPress={() => navigate(screens.ADD_PROFILE)}>
-        <Txt fontFamily={fonts.OL} color={'white'}>
+        <Txt fontFamily={fonts.OL} color={colors.yellow}>
           Add Profile
         </Txt>
       </Btn>
